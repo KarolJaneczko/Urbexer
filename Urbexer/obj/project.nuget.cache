@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5clF52Bb5R13eKYLyKMnR9YSNOoPCBZM3YrL8C3KS+1wraCOjD3bGbhxSX4DYwRaRY1Eqfe4Kl0Zoa1x0qP9SA==",
+  "dgSpecHash": "y16p45HMUsY9xUaNjhS5BSSkxwDk9FEhu3qcteIHNJdXWOccsqGNIPsp0WwV+GEBLMUUNfWZ0UhkpH3h7iJSPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer\\Urbexer.csproj",
+  "projectFilePath": "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer\\Urbexer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\karol\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\karol\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",

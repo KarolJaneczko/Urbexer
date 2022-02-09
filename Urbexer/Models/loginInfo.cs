@@ -16,9 +16,7 @@ namespace Urbexer.Models {
         public void setIsLoggedIn(bool isLoggedIn) {
             this.isLoggedIn = isLoggedIn;
         }
-        public bool getIsLoggedIn() {
-            return this.isLoggedIn;
-        }
+        public bool getIsLoggedIn() => this.isLoggedIn;
         public void setLogin(string login) {
             this.login = login;
         }

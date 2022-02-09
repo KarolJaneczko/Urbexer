@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XsO88CFv7Rj4f5G3BcJfFLugLCBcMj8iW2YqIUFTVEUVAz4rI9qAwzpXdYvGDF8eGLVF1akKRi2M6Z4RqxEnfg==",
+  "dgSpecHash": "z9yINomR3uHiup+p7IU4qKhgBWKtvIN8iNMJT8m1yvR54DNd5npR/r/AQ50AILQWDJtVO04iBWdFdsaiyW0+9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer.Android\\Urbexer.Android.csproj",
+  "projectFilePath": "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer.Android\\Urbexer.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\karol\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\karol\\.nuget\\packages\\xamarin.androidx.activity\\1.2.4.1\\xamarin.androidx.activity.1.2.4.1.nupkg.sha512",
