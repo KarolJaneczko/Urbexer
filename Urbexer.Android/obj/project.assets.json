@@ -3172,20 +3172,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\karol\\.nuget\\packages\\": {}
+    "C:\\Users\\karol\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer.Android\\Urbexer.Android.csproj",
+      "projectUniqueName": "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer.Android\\Urbexer.Android.csproj",
       "projectName": "Urbexer.Android",
-      "projectPath": "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer.Android\\Urbexer.Android.csproj",
+      "projectPath": "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer.Android\\Urbexer.Android.csproj",
       "packagesPath": "C:\\Users\\karol\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer.Android\\obj\\",
+      "outputPath": "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3198,8 +3203,8 @@
       "frameworks": {
         "monoandroid12.0": {
           "projectReferences": {
-            "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer\\Urbexer.csproj": {
-              "projectPath": "C:\\Users\\karol\\Desktop\\Urbexer\\Urbexer\\Urbexer.csproj"
+            "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer\\Urbexer.csproj": {
+              "projectPath": "C:\\Users\\karol\\Source\\Repos\\Urbexer\\Urbexer\\Urbexer.csproj"
             }
           }
         }
