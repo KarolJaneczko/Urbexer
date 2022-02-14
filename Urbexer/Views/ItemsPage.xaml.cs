@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
     public partial class ItemsPage : ContentPage {
-        ItemsViewModel _viewModel;
+        readonly ItemsViewModel _viewModel;
         public ItemsPage() {
             InitializeComponent();
             BindingContext = _viewModel = new ItemsViewModel();

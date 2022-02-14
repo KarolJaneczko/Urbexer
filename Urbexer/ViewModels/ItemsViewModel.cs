@@ -7,12 +7,15 @@ using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+
     public class ItemsViewModel : BaseViewModel {
+
         private Item _selectedItem;
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
+
         public ItemsViewModel() {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
@@ -20,6 +23,7 @@ namespace Urbexer.ViewModels {
             ItemTapped = new Command<Item>(OnItemSelected);
             AddItemCommand = new Command(OnAddItem);
         }
+
         async Task ExecuteLoadItemsCommand() {
             IsBusy = true;
             try {
@@ -36,10 +40,12 @@ namespace Urbexer.ViewModels {
                 IsBusy = false;
             }
         }
+
         public void OnAppearing() {
             IsBusy = true;
             SelectedItem = null;
         }
+
         public Item SelectedItem {
             get => _selectedItem;
             set {
@@ -47,9 +53,11 @@ namespace Urbexer.ViewModels {
                 OnItemSelected(value);
             }
         }
+
         private async void OnAddItem(object obj) {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
+
         async void OnItemSelected(Item item) {
             if (item == null)
                 return;

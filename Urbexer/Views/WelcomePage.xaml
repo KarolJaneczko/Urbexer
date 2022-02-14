@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Urbexer.Views.WelcomePage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Content>
+        <ContentView BackgroundColor="Gray">
+            <StackLayout x:Name="RelativeWelcomeLayout" x:FieldModifier="public" VerticalOptions="End" HorizontalOptions="Center" BackgroundColor="#00FBC1BC">
+                <StackLayout x:Name="WelcomeLayout" x:FieldModifier="public">
+                <Label Text="Witaj!" 
+                       FontSize="Large" 
+                       HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Button VerticalOptions="Center" 
+                        FontAttributes="Bold"  
+                        Text="Zaloguj się" 
+                        Command="{Binding WelcomeSignInCommand}" 
+                        BackgroundColor="#ef233c"
+                        CornerRadius="20"/>
+                <Button VerticalOptions="Center" 
+                        FontAttributes="Bold"  
+                        Text="Zarejestruj się" 
+                        Command="{Binding WelcomeSignUpCommand}" 
+                        BackgroundColor="#ef233c"
+                        CornerRadius="20"/>
+                </StackLayout>
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>

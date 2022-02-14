@@ -1,4 +1,5 @@
 ﻿using System;
+using Urbexer;
 using Urbexer.Services;
 using Urbexer.Views;
 using Xamarin.Forms;
@@ -12,7 +13,7 @@ namespace Urbexer {
             MainPage = new AppShell();
         }
         protected override void OnStart() {
-            Shell.Current.GoToAsync("//LoginPage");
+            Shell.Current.GoToAsync($"//{nameof(WelcomePage)}");
         }
         protected override void OnSleep() {
         }
