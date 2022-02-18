@@ -2,14 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Urbexer.Views.WelcomePage"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Content>
-        <ContentView BackgroundColor="Gray">
-            <StackLayout x:Name="RelativeWelcomeLayout" x:FieldModifier="public" VerticalOptions="End" HorizontalOptions="Center" BackgroundColor="#00FBC1BC">
+        <Grid BackgroundColor ="Gray">
+            <o:VideoPlayer x:Name="BackgroundVideo" AutoPlay="True" DisplayControls="False" Volume="0"/>
+            <StackLayout x:Name="StackWelcomeLayout" x:FieldModifier="public" VerticalOptions="End" HorizontalOptions="Center" BackgroundColor="#00FBC1BC">
                 <StackLayout x:Name="WelcomeLayout" x:FieldModifier="public">
                 <Label Text="Witaj!" 
                        FontSize="Large" 
@@ -18,17 +20,17 @@
                 <Button VerticalOptions="Center" 
                         FontAttributes="Bold"  
                         Text="Zaloguj się" 
-                        Command="{Binding WelcomeSignInCommand}" 
+                        Clicked="WelcomeSignInPressed"
                         BackgroundColor="#ef233c"
                         CornerRadius="20"/>
                 <Button VerticalOptions="Center" 
                         FontAttributes="Bold"  
                         Text="Zarejestruj się" 
-                        Command="{Binding WelcomeSignUpCommand}" 
+                        Clicked="WelcomeSignUpPressed" 
                         BackgroundColor="#ef233c"
                         CornerRadius="20"/>
                 </StackLayout>
             </StackLayout>
-        </ContentView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
