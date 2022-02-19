@@ -95,5 +95,6 @@
     -->
     <TabBar>
         <ShellContent Route="WelcomePage" ContentTemplate="{DataTemplate local:WelcomePage}" />
+        <ShellContent Route="SignInPage" ContentTemplate="{DataTemplate local:SignInPage}" />
     </TabBar>
 </Shell>

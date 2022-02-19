@@ -5,7 +5,7 @@
              xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Urbexer.Views.WelcomePage"
+             x:Class="Urbexer.Views.SignInPage"
              Shell.NavBarIsVisible="False">
 
     
@@ -29,33 +29,7 @@
                   Margin="30,30,30,100"
                   RowSpacing="20" 
                   VerticalOptions="End">
-                <CarouselView x:Name="cvOnboarding" 
-                              IndicatorView="LandingIndicator"
-                              ItemsSource= "{Binding Onboardings}"
-                              VerticalOptions="End">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Spacing="20">
-                                
-                            <Label Text="{Binding Heading}"
-                                   TextColor="white"
-                                   FontSize="24" 
-                                   FontAttributes="Bold" 
-                                   WidthRequest="300" 
-                                   HorizontalOptions="Start"/>
-                            <Label Text="{Binding Caption}"
-                                   Margin="20,0,0,0"
-                                   TextColor="White" 
-                                   FontSize="12" 
-                                   FontAttributes="Bold"
-                                   WidthRequest="250" 
-                                   HorizontalOptions="Start"/>
-
-                            </StackLayout>
-
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+               
                 <IndicatorView x:Name="LandingIndicator" 
                                Grid.Row="1" 
                                IndicatorsShape="Circle"
@@ -66,21 +40,14 @@
                                  Orientation="Vertical" 
                                  Spacing="30" VerticalOptions="End">
                         <Button Text="Logowanie" 
-                                Clicked="WelcomeSignInPressed"
+                                Command="{Binding WelcomeSignInCommand}" 
                                 HeightRequest="50" 
                                 WidthRequest="200"
                                 BackgroundColor="#ef233c"
                                 TextColor="White" 
                                 CornerRadius="25" 
                                 FontAttributes="Bold"/>
-                        <Button Text="Rejestracja"                               
-                                Clicked="WelcomeSignUpPressed"
-                                HeightRequest="50" 
-                                WidthRequest="200"
-                                BackgroundColor="white"
-                                TextColor="black" 
-                                CornerRadius="25" 
-                                FontAttributes="Bold"/>
+                       
                     </StackLayout>
             </Grid>
         </Grid>
