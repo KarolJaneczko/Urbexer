@@ -13,6 +13,7 @@
             <o:VideoPlayer x:Name="BackgroundVideo" 
                            AutoPlay="True"
                            DisplayControls="False"
+                           Source="https://i.imgur.com/UIe3Oue.mp4"
                            Repeat="True" 
                            Volume="0"/>
             <BoxView>
