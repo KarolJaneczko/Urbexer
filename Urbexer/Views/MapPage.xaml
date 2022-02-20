@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.MapPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    x:DataType="viewmodels:MapViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MapViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <maps:Map
+            x:Name="map"
+            IsShowingUser="True"
+            ItemsSource="{Binding Locations}"
+            MapClicked="map_MapClicked"
+            MapType="Hybrid">
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:Location">
+                    <maps:Pin
+                        Address="{Binding Address}"
+                        Label="{Binding Description}"
+                        Position="{Binding Position}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
+    </Grid>
+</ContentPage>

@@ -82,6 +82,9 @@
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Mapa">
+        <ShellContent x:Name="Map" Route="MapPage" ContentTemplate="{DataTemplate local:MapPage}"/>
+    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Wyloguj się" StyleClass="MenuItemLayoutStyle" Clicked="ClickedLogout"> </MenuItem>

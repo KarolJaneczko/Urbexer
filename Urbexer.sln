@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Urbexer.Android", "Urbexer.Android\Urbexer.Android.csproj", "{8EF463D8-AD18-4477-833C-C1D3B9A05A3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Urbexer", "Urbexer\Urbexer.csproj", "{A158CA77-497C-497B-A6A3-37396EEC5908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Urbexer", "Urbexer\Urbexer.csproj", "{A158CA77-497C-497B-A6A3-37396EEC5908}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
