@@ -85,6 +85,9 @@
     <FlyoutItem Title="Mapa">
         <ShellContent x:Name="Map" Route="MapPage" ContentTemplate="{DataTemplate local:MapPage}"/>
     </FlyoutItem>
+    <FlyoutItem Title="Lista lokacji">
+        <ShellContent x:Name="LocationList" Route="LocationListPage" ContentTemplate="{DataTemplate local:LocationListPage}"/>
+    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Wyloguj się" StyleClass="MenuItemLayoutStyle" Clicked="ClickedLogout"> </MenuItem>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -13,11 +13,14 @@ namespace Urbexer.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
+        MapViewModel viewmodel;
         public MapPage()
         {
             InitializeComponent();
 
-            
+            viewmodel = new MapViewModel();
+            BindingContext = viewmodel;
+
             // Konstruowanie mapy
             //Position position = new Position(36.9628066, -122.0194722);
             Position position = new Position(37.79752, -122.40183);
@@ -140,42 +143,48 @@ namespace Urbexer.Views
             map.MapElements.Add(circle);
             */
 
-            //GeoCoder_Test(false);
-            //GeoCoder_Test(true);
-            
+            Map_JumpTo_Address("Toruń");
         }
-
         private void map_MapClicked(object sender, MapClickedEventArgs e)
         {
+            /*
             // Zmiana pozycji ekranu bez zmieniania poziomu zooma
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(e.Position.Latitude, e.Position.Longitude),
                 map.VisibleRegion.Radius));
+            */
+            Map_MoveTo_Position(e.Position);
         }
 
-        /*
-        private async void GeoCoder_Test(bool reverse = false)
+        // 
+        public void Map_MoveTo_Position(Position position)
         {
-            Geocoder geoCoder = new Geocoder();
-            string output;
-            if (reverse)
-            {
-                // Zamiana adresu na współrzędne
-                IEnumerable<Position> approximateLocations = await geoCoder.GetPositionsForAddressAsync("Pacific Ave, San Francisco, California");
-                Position position = approximateLocations.FirstOrDefault();
-                string coordinates = $"{position.Latitude}, {position.Longitude}";
-                output = coordinates;
-            }
-            else
-            {
-                // Zamiana współrzędnych na adres
-                Position position = new Position(37.8044866, -122.4324132);
-                IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
-                string address = possibleAddresses.FirstOrDefault();
-                output = address;
-            }
-            Console.WriteLine(output);
+            if (map == null || map.VisibleRegion == null) return;
+            // Zmiana pozycji ekranu bez zmieniania poziomu zooma
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(
+                new Position(position.Latitude, position.Longitude),
+                map.VisibleRegion.Radius));
         }
-        */
+        public async void Map_MoveTo_Address(string address)
+        {
+            Geocoder geocoder = new Geocoder();
+            IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
+            Map_MoveTo_Position(possiblePositions.FirstOrDefault());
+        }
+
+        // Reinstance the map in another position
+        public void Map_JumpTo_Position(Position position)
+        {
+            float radius = 0.5f;
+            MapSpan mapspan = MapSpan.FromCenterAndRadius(
+                position, Distance.FromKilometers(radius));
+            map.MoveToRegion(mapspan);
+        }
+        public async void Map_JumpTo_Address(string address)
+        {
+            Geocoder geocoder = new Geocoder();
+            IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
+            Map_JumpTo_Position(possiblePositions.FirstOrDefault());
+        }
     }
 }

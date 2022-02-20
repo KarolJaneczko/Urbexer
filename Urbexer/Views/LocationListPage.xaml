@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.LocationListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    x:DataType="viewmodels:MapViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MapViewModel />
+    </ContentPage.BindingContext>
+
+    <ListView HasUnevenRows="True" ItemsSource="{Binding Locations}">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="models:Location">
+                <ViewCell>
+                    <Grid Padding="5" VerticalOptions="FillAndExpand">
+                        <Frame
+                            Padding="3"
+                            CornerRadius="10"
+                            VerticalOptions="CenterAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <!--  może jakieś zdjęcie?  -->
+                                <StackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding Description}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Address}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
