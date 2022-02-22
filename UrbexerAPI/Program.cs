@@ -43,6 +43,7 @@ builder.Services.AddAuthentication(option =>
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<BazaDbContext>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IUrbexService, UrbexService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<Uzytkownik>, PasswordHasher<Uzytkownik>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
