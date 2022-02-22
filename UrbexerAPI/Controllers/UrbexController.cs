@@ -11,7 +11,7 @@ namespace APIpz.Controllers
     {
         private readonly BazaDbContext _dbContext;
         private readonly IUrbexService _urbexService;
-        public UrbexController(BazaDbContext dbContext, ILogger logger, IUrbexService urbexService)
+        public UrbexController(BazaDbContext dbContext, IUrbexService urbexService)
         {
             _dbContext = dbContext;
             _urbexService = urbexService;
@@ -22,6 +22,13 @@ namespace APIpz.Controllers
         {
             var wynik = _urbexService.GetAll();
             return Ok(wynik);
+        }
+
+        [HttpPut("dodajodwiedzone")]
+        public ActionResult DodajOdwiedzone([FromBody] DodajOdwiedzoneDto dto)
+        {
+            
+            return Ok();
         }
     }
 }

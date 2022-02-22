@@ -10,6 +10,8 @@ namespace APIpz.Services
     {
         List<Miejsce> GetAll();
 
+       // void DodajOdwiedzone(DodajOdwiedzoneDto dto);
+
     }
     public class UrbexService : IUrbexService
     {
@@ -29,6 +31,13 @@ namespace APIpz.Services
             return wynik;
         }
 
+        //void DodajOdwiedzone(DodajOdwiedzoneDto dto)
+        //{
+        //    var urbex = _context.Miejsca.FirstOrDefault(u => u.Nazwa == dto.NazwaUrbexu);
+        //    _context.Attach(urbex);
+        //    _context.Uzytkownik.
+
+        //}
 
     }
 }
