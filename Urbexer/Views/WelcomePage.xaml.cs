@@ -27,20 +27,20 @@ namespace Urbexer.Views {
             };
             timer.Elapsed += (s, e) => {
                 Device.BeginInvokeOnMainThread(() => {
-                      if (cvOnboarding.Position == 4) {
-                          cvOnboarding.Position = 0;
-                          return;
-                      }
-                      cvOnboarding.Position += 1;
-                  });
+                    if (cvOnboarding.Position == 4) {
+                        cvOnboarding.Position = 0;
+                        return;
+                    }
+                    cvOnboarding.Position += 1;
+                });
             };
         }
 
         public void WelcomeSignInPressed(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//SignInPage");
+            Shell.Current.GoToAsync("//HomePage");
         }
         public void WelcomeSignUpPressed(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//SignInPage");
+            Shell.Current.GoToAsync("//ItemsPage");
         }
     }
 }
