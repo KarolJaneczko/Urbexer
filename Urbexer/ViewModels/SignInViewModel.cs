@@ -4,5 +4,6 @@ using System.Text;
 
 namespace Urbexer.ViewModels {
     internal class SignInViewModel {
+        public SignInViewModel() { }
     }
 }
