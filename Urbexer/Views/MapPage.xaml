@@ -4,30 +4,39 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
     xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
     x:DataType="viewmodels:MapViewModel">
 
-     <!--
+    <!--
     <ContentPage.BindingContext>
         <viewmodels:MapViewModel/>
     </ContentPage.BindingContext>
     -->
     <Grid>
-        <maps:Map
-            x:Name="map"
-            IsShowingUser="True"
-            ItemsSource="{Binding Locations}"
-            MapClicked="map_MapClicked"
-            MapType="Hybrid">
-            <maps:Map.ItemTemplate>
-                <DataTemplate x:DataType="models:Location">
-                    <maps:Pin
-                        Address="{Binding Address}"
-                        Label="{Binding Description}"
-                        Position="{Binding Position}" />
-                </DataTemplate>
-            </maps:Map.ItemTemplate>
-        </maps:Map>
+        <StackLayout Orientation="Vertical">
+            <!--  końcowo chciałbym żeby pasek wyszukiwania był na mapie, a nie nad nią, do tego pewnie użyje AbsoluteLayout  -->
+            <StackLayout Orientation="Horizontal">
+                <!--  pole wyszukiwania z przyciskiem lupy, wersja beta  -->
+                <Entry HorizontalOptions="FillAndExpand" WidthRequest="100" />
+                <ImageButton HorizontalOptions="End" Source="icon_about.png" />
+                <!--  przycisk do wyszukiwania, tymczasowa ikona  -->
+            </StackLayout>
+            <maps:Map
+                x:Name="map"
+                IsShowingUser="True"
+                ItemsSource="{Binding Locations}"
+                MapClicked="map_MapClicked"
+                MapType="Hybrid">
+                <maps:Map.ItemTemplate>
+                    <DataTemplate x:DataType="models:Location">
+                        <maps:Pin
+                            Address="{Binding Address}"
+                            Label="{Binding Description}"
+                            Position="{Binding Position}" />
+                    </DataTemplate>
+                </maps:Map.ItemTemplate>
+            </maps:Map>
+        </StackLayout>
     </Grid>
 </ContentPage>
