@@ -14,20 +14,22 @@ namespace Urbexer.Views {
         public WelcomePage() {
             InitializeComponent();
             this.BindingContext = new WelcomeViewModel();
+            Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             AnimatedInfoCarousel();
 
-            BackgroundVideo.MinimumWidthRequest = DeviceDisplay.MainDisplayInfo.Width;
+            BackgroundVideo.MinimumWidthRequest = DeviceDisplay.MainDisplayInfo.Width;          
             BackgroundVideo.MinimumHeightRequest = DeviceDisplay.MainDisplayInfo.Height;
-            LandingIndicator.Padding = new Thickness(25, 125, 25, 0);
+            buttons.Margin = new Thickness(25, 0, 25, 50);
         }
         private void AnimatedInfoCarousel() {
-            timer = new Timer(3000) {
+            timer = new Timer(5000) {
                 AutoReset = true,
                 Enabled = true
             };
             timer.Elapsed += (s, e) => {
                 Device.BeginInvokeOnMainThread(() => {
-                      if (cvOnboarding.Position == 4) {
+                      if (cvOnboarding.Position == 2) {
                           cvOnboarding.Position = 0;
                           return;
                       }
@@ -35,12 +37,16 @@ namespace Urbexer.Views {
                   });
             };
         }
+        
+        public void GoToSignInPage(object sender, System.EventArgs e)
+        {
+             Shell.Current.GoToAsync(nameof(SignInPage));          
+        }
+        public void GoToRegisterPage(object sender, System.EventArgs e)
+        {
+            Shell.Current.GoToAsync(nameof(RegisterPage));
+        }
 
-        public void WelcomeSignInPressed(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//SignInPage");
-        }
-        public void WelcomeSignUpPressed(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//SignInPage");
-        }
     }
+  
 }

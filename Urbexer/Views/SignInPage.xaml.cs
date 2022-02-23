@@ -1,36 +1,45 @@
-﻿using Urbexer.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using Urbexer.Models;
+using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using Octane.Xamarin.Forms.VideoPlayer;
-using System.IO;
-using System;
-using System.Timers;
 
 namespace Urbexer.Views {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignInPage : ContentPage {
+        
         public SignInPage() {
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            var vm = new SignInPageModel();
+            this.BindingContext = vm;
+            vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Błąd", "Niepoprawny login lub hasło", "OK");
             InitializeComponent();
-            this.BindingContext = new SignInViewModel();
-          //  AnimatedInfoCarousel();
 
-           //WelcomeLayout.WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 4;
-           // WelcomeLayout.Padding = new Thickness(DeviceDisplay.MainDisplayInfo.Width * 0.01, DeviceDisplay.MainDisplayInfo.Width * 0.05,
-           //     DeviceDisplay.MainDisplayInfo.Width * 0.01, DeviceDisplay.MainDisplayInfo.Width * 0.01);
+            Email.Completed += (object sender, EventArgs e) =>
+            {
+                Password.Focus();
+            };
 
-            BackgroundVideo.MinimumWidthRequest = DeviceDisplay.MainDisplayInfo.Width;
-            BackgroundVideo.MinimumHeightRequest = DeviceDisplay.MainDisplayInfo.Height;
-            BackgroundVideo.Source = VideoSource.FromUri("https://i.imgur.com/UIe3Oue.mp4");
+            Password.Completed += (object sender, EventArgs e) =>
+            {
+                vm.SubmitCommand.Execute(null);
+            };
         }
-
-       
-
-        public void WelcomeSignInPressed(object sender, System.EventArgs e) {
+        public void SignedInPressed(object sender, System.EventArgs e)
+        {
             Shell.Current.GoToAsync("//AboutPage");
         }
-        public void WelcomeSignUpPressed(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//AboutPage");
+        public void GoToSignUp(object sender, System.EventArgs e)
+        {
+            Shell.Current.GoToAsync(nameof(RegisterPage));
         }
+        public void GoBack(object sender, System.EventArgs e)
+        {
+            Shell.Current.GoToAsync("//WelcomePage");
+        }
+
+
     }
+    
 }

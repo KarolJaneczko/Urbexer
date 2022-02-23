@@ -8,47 +8,91 @@
              x:Class="Urbexer.Views.SignInPage"
              Shell.NavBarIsVisible="False">
 
-    
-        <Grid>
-            <o:VideoPlayer x:Name="BackgroundVideo" 
+
+    <Grid>
+        <o:VideoPlayer x:Name="BackgroundVideo"
                            AutoPlay="True"
                            DisplayControls="False"
+                           Source="https://i.imgur.com/OxhpWeK.mp4"
                            Repeat="True" 
                            Volume="0"/>
-            <BoxView>
-                <BoxView.Background>
-                    <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                        <GradientStop Color="Transparent" Offset="0"/>
-                        <GradientStop Color="black" Offset="0.9"/>
-                        <GradientStop Color="black" Offset="1.2"/>
-                    </LinearGradientBrush>
-                </BoxView.Background>
-            </BoxView>
-            <Grid RowDefinitions="Auto, Auto, Auto" 
-                  HeightRequest="280" 
-                  Margin="30,30,30,100"
-                  RowSpacing="20" 
-                  VerticalOptions="End">
-               
-                <IndicatorView x:Name="LandingIndicator" 
-                               Grid.Row="1" 
-                               IndicatorsShape="Circle"
-                               IndicatorColor="White" 
-                               SelectedIndicatorColor="#ef233c"/>
-                    <StackLayout Grid.Row="2" 
-                                 Margin="25,0,25,0"
-                                 Orientation="Vertical" 
-                                 Spacing="30" VerticalOptions="End">
-                        <Button Text="Logowanie" 
-                                Command="{Binding WelcomeSignInCommand}" 
-                                HeightRequest="50" 
-                                WidthRequest="200"
-                                BackgroundColor="#ef233c"
-                                TextColor="White" 
-                                CornerRadius="25" 
-                                FontAttributes="Bold"/>
-                       
+        <StackLayout x:Name="BackgroundLogo"
+                    Padding="64"            
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Center">
+
+            <Image Source="app_logo.png" 
+                   WidthRequest="128" 
+                   HeightRequest="128"/>
+
+        </StackLayout>
+        <BoxView>
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                    <GradientStop Color="Transparent" Offset="0"/>
+                    <GradientStop Color="black" Offset="0.8"/>
+                    <GradientStop Color="black" Offset="1.6"/>
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <StackLayout Margin="30,200,30,0">
+
+            <Frame BackgroundColor="#cfffffff"
+                       HeightRequest="500"
+                       CornerRadius="25"
+                       HorizontalOptions="FillAndExpand"
+                       HasShadow="True"
+                       BorderColor="black">
+                <StackLayout>
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <Label Text="ZALOGUJ SIĘ" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
                     </StackLayout>
-            </Grid>
-        </Grid>
+
+                    <StackLayout Margin="0,25,0,50" Spacing="20">
+                        <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Frame BackgroundColor="#ef233c" CornerRadius="50"  HeightRequest="40" WidthRequest="40" Padding="0" Margin="5">
+                                    <Image Source="email_icon.png" Aspect="AspectFill" Margin="0"/>
+                                </Frame>
+                                <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" PlaceholderColor="#ef233c" Keyboard="Email"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Frame BackgroundColor="#ef233c" CornerRadius="50" HeightRequest="40" WidthRequest="40" Padding="0" Margin="5">
+                                    <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
+                                </Frame>
+                                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <Button Command="{Binding SubmitCommand}"                                      
+                    Text="ZALOGUJ"                                                       
+                    BorderColor="Black"                           
+                    BackgroundColor="#ef233c"
+                    TextColor="White" 
+                    CornerRadius="25" 
+                    FontAttributes="Bold"/>
+                    
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Nie masz jeszcze konta?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        <Button  Text="Zarejestruj się" TextColor="#ef233c" BackgroundColor="Transparent" FontAttributes="Bold" Clicked="GoToSignUp"/>
+                    </StackLayout>
+                    <StackLayout Margin=" 0,100,0,0">
+                        <Grid>
+                            <BoxView BackgroundColor="Black" HeightRequest="1" Margin="20" HorizontalOptions="CenterAndExpand" WidthRequest="120" />
+                            <Frame BackgroundColor="#ef233c" CornerRadius="50" HorizontalOptions="Center" HeightRequest="35" WidthRequest="50" Padding="0" Margin="0">
+                                <ImageButton Source="back_icon.png" Margin="0" WidthRequest="30" HeightRequest="30" VerticalOptions="FillAndExpand" Clicked="GoBack" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="50"/>
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </Grid>
+    
 </ContentPage>
