@@ -8,11 +8,11 @@
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
     x:DataType="viewmodels:MapViewModel">
 
-    <!--
+
     <ContentPage.BindingContext>
-        <viewmodels:MapViewModel/>
+        <viewmodels:MapViewModel />
     </ContentPage.BindingContext>
-    -->
+
     <AbsoluteLayout>
         <maps:Map
             x:Name="Map"
@@ -38,14 +38,46 @@
         <Frame
             Margin="0"
             Padding="0"
-            AbsoluteLayout.LayoutBounds="0.5,0.015,0.96,0.07"
-            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="5,5,0.96,0.07"
+            AbsoluteLayout.LayoutFlags="SizeProportional"
             CornerRadius="20"
+            HasShadow="True"
             IsClippedToBounds="True">
             <SearchBar
                 Margin="5"
                 Background="White"
                 HorizontalOptions="Fill" />
+        </Frame>
+        <Frame
+            x:Name="LocationInfo"
+            x:DataType="models:Location"
+            AbsoluteLayout.LayoutBounds="0.5,0.98,0.96,0.2"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="White"
+            CornerRadius="20">
+            <StackLayout Orientation="Horizontal">
+                <Image
+                    HorizontalOptions="Start"
+                    Source="{Binding Thumbnail}"
+                    WidthRequest="100" />
+                <StackLayout VerticalOptions="Center">
+                    <Label Text="{Binding Description}" VerticalOptions="Center" />
+                    <Label Text="{Binding Address}" VerticalOptions="Center" />
+                    <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                    <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                    <Label Text="test" />
+                </StackLayout>
+            </StackLayout>
+            <!--
+            <Frame
+            x:Key="LocationCard"
+            Margin="5"
+            Padding="3"
+            CornerRadius="10"
+            VerticalOptions="FillAndExpand">
+
+            </Frame>
+            -->
         </Frame>
 
     </AbsoluteLayout>

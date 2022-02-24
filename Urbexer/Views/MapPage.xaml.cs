@@ -8,19 +8,38 @@ using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using Urbexer.Services;
 
 namespace Urbexer.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
-        MapViewModel viewmodel;
+        // Pokazuje kartę z informacjami o lokacji w zależności od id. -1 chowa karte.
+        private int currentPinId = -1;
+        public int CurrentPinId { 
+            get 
+            { return currentPinId; } 
+            set 
+            { 
+                currentPinId = value;
+                if (value <= -1)
+                {
+                    currentPinId = -1;
+                    LocationInfo.IsVisible = false;
+                    return;
+                }
+
+                // Pokaż odpowiednią karte lokacji
+                LocationInfo.IsVisible = true;
+                LocationInfo.BindingContext = LocationService.GetLocationById(value);
+            } 
+        }
         public MapPage()
         {
             InitializeComponent();
+            CurrentPinId = 1;
 
-            viewmodel = new MapViewModel();
-            BindingContext = viewmodel;
 
             // Konstruowanie mapy
             //Position position = new Position(36.9628066, -122.0194722);
@@ -41,108 +60,6 @@ namespace Urbexer.Views
                 Position = position
             };
             Map.Pins.Add(pin);
-
-            Position mshqposition = new Position(47.6368678, -122.137305);
-            Pin mshqpin = new Pin
-            {
-                Label = "Microsoft",
-                Address = "Siedziba Microsoft",
-                Type = PinType.Place,
-                Position = mshqposition
-            };
-            Map.Pins.Add(pin);
-            
-            // Pinezki z customowych zachowaniem przy klikaniu na nie
-            Pin boardwalkPin = new Pin
-            {
-                Position = new Position(36.9641949, -122.0177232),
-                Label = "Boardwalk",
-                Address = "Santa Cruz",
-                Type = PinType.Place
-            };
-            boardwalkPin.MarkerClicked += async (s, args) =>
-            {
-                args.HideInfoWindow = true;
-                string pinName = ((Pin)s).Label;
-                await DisplayAlert("Pin Clicked", $"{pinName} was clicked.", "Ok");
-            };
-
-            Pin wharfPin = new Pin
-            {
-                Position = new Position(36.9571571, -122.0173544),
-                Label = "Wharf",
-                Address = "Santa Cruz",
-                Type = PinType.Place
-            };
-            wharfPin.InfoWindowClicked += async (s, args) =>
-            {
-                string pinName = ((Pin)s).Label;
-                await DisplayAlert("Info Window Clicked", $"The info window was clicked for {pinName}.", "Ok");
-            };
-            
-            Map.Pins.Add(boardwalkPin);
-            Map.Pins.Add(wharfPin);
-
-            /*
-            // Rysowanie polygonów
-            Polygon polygon = new Polygon
-            {
-                StrokeWidth = 8,
-                StrokeColor = Color.FromHex("#1BA1E2"),
-                //FillColor = Color.Transparent,
-                FillColor = Color.FromHex("#881BA1E2"),
-                Geopath =
-                {
-                    // ostatni punkt się automatycznie połączy z pierwszym
-                    new Position(47.6368678, -122.137305),
-                    new Position(47.6368894, -122.134655),
-                    new Position(47.6359424, -122.134655),
-                    new Position(47.6359496, -122.1325521),
-                    new Position(47.6424124, -122.1325199),
-                    new Position(47.642463,  -122.1338932),
-                    new Position(47.6406414, -122.1344833),
-                    new Position(47.6384943, -122.1361248),
-                    new Position(47.6372943, -122.1376912)
-                }
-            };
-            map.MapElements.Add(polygon);
-            */
-
-            /*
-            // Rysowanie polylinii/linii
-            Polyline polyline = new Polyline
-            {
-                StrokeColor = Color.Blue,
-                StrokeWidth = 12,
-                Geopath =
-                {
-                    new Position(47.6381401, -122.1317367),
-                    new Position(47.6381473, -122.1350841),
-                    new Position(47.6382847, -122.1353094),
-                    new Position(47.6384582, -122.1354703),
-                    new Position(47.6401136, -122.1360819),
-                    new Position(47.6403883, -122.1364681),
-                    new Position(47.6407426, -122.1377019),
-                    new Position(47.6412558, -122.1404056),
-                    new Position(47.6414148, -122.1418647),
-                    new Position(47.6414654, -122.1432702)
-                }
-            };
-            map.MapElements.Add(polyline);
-            */
-
-            /*
-            // Rysowanie koła
-            Circle circle = new Circle
-            {
-                Center = new Position(37.79752, -122.40183),
-                Radius = new Distance(250),
-                StrokeColor = Color.FromHex("#88FF0000"),
-                StrokeWidth = 8,
-                FillColor = Color.FromHex("#88FFC0CB")
-            };
-            map.MapElements.Add(circle);
-            */
 
             Map_JumpTo_Address("Toruń");
         }
@@ -190,9 +107,9 @@ namespace Urbexer.Views
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e)
         {
-            e.HideInfoWindow = true;
+            //e.HideInfoWindow = true;
             DataPin pin = sender as DataPin;
-            
+            CurrentPinId = pin.LocationId;
         }
     }
 }

@@ -1,13 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Urbexer.Views" xmlns:models="clr-namespace:Urbexer.Models"
-       Title="Urbexer"
-       x:Class="Urbexer.AppShell">
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Urbexer.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Urbexer.Views"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    Title="Urbexer">
 
     <!--
-    Hierarchia warstwy wizualnej aplikacji w pliku .xaml jest dostępna w linku poniżej:
-    https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+        Hierarchia warstwy wizualnej aplikacji w pliku .xaml jest dostępna w linku poniżej:
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
     <Shell.Resources>
         <ResourceDictionary>
@@ -18,21 +20,24 @@
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarTitleColor" Value="White" />
             </Style>
-            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
-            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+            <Style BasedOn="{StaticResource BaseStyle}" TargetType="TabBar" />
+            <Style BasedOn="{StaticResource BaseStyle}" TargetType="FlyoutItem" />
 
             <!--
-            Default Styles for all Flyout Items
-            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
+                Default Styles for all Flyout Items
+                https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="White" />
             </Style>
-            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+            <Style
+                ApplyToDerivedTypes="True"
+                Class="FlyoutItemLayoutStyle"
+                TargetType="Layout">
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -53,9 +58,12 @@
             </Style>
 
             <!--
-            Custom Style you can apply to any Flyout Item
+                Custom Style you can apply to any Flyout Item
             -->
-            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+            <Style
+                ApplyToDerivedTypes="True"
+                Class="MenuItemLayoutStyle"
+                TargetType="Layout">
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -69,62 +77,49 @@
                 </Setter>
             </Style>
 
-            <DataTemplate x:Key="LocationCard" x:DataType="models:Location">
-                <ViewCell>
-                    <Grid Padding="5" VerticalOptions="FillAndExpand">
-                        <Frame
-                            Padding="3"
-                            CornerRadius="10"
-                            VerticalOptions="CenterAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Image
-                                    HorizontalOptions="Start"
-                                    Source="{Binding Thumbnail}"
-                                    WidthRequest="100" />
-                                <StackLayout VerticalOptions="Center">
-                                    <Label Text="{Binding Description}" VerticalOptions="Center" />
-                                    <Label Text="{Binding Address}" VerticalOptions="Center" />
-                                    <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
-                                    <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
-                                </StackLayout>
-                            </StackLayout>
-                        </Frame>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
+
         </ResourceDictionary>
     </Shell.Resources>
 
-    <!-- 
+    <!--
         When the Flyout is visible this defines the content to display in the flyout.
-        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
+        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
     </FlyoutItem>
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" Route="ItemsPage" />
     </FlyoutItem>
     <FlyoutItem Title="Mapa">
-        <ShellContent x:Name="Map" Route="MapPage" ContentTemplate="{DataTemplate local:MapPage}"/>
+        <ShellContent
+            x:Name="Map"
+            ContentTemplate="{DataTemplate local:MapPage}"
+            Route="MapPage" />
     </FlyoutItem>
     <FlyoutItem Title="Lista lokacji">
-        <ShellContent x:Name="LocationList" Route="LocationListPage" ContentTemplate="{DataTemplate local:LocationListPage}"/>
+        <ShellContent
+            x:Name="LocationList"
+            ContentTemplate="{DataTemplate local:LocationListPage}"
+            Route="LocationListPage" />
     </FlyoutItem>
 
-    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Wyloguj się" StyleClass="MenuItemLayoutStyle" Clicked="ClickedLogout"> </MenuItem>
+    <!--  When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+    <MenuItem
+        Clicked="ClickedLogout"
+        StyleClass="MenuItemLayoutStyle"
+        Text="Wyloguj się" />
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
-        the flyout menu won't be available. This is useful for creating areas of the application where 
-        you don't want users to be able to navigate away from. If you would like to navigate to this 
-        content you can do so by calling 
+        the flyout menu won't be available. This is useful for creating areas of the application where
+        you don't want users to be able to navigate away from. If you would like to navigate to this
+        content you can do so by calling
         await Shell.Current.GoToAsync("//LoginPage");
     -->
     <TabBar>
-        <ShellContent Route="WelcomePage" ContentTemplate="{DataTemplate local:WelcomePage}" />
-        <ShellContent Route="SignInPage" ContentTemplate="{DataTemplate local:SignInPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:WelcomePage}" Route="WelcomePage" />
+        <ShellContent ContentTemplate="{DataTemplate local:SignInPage}" Route="SignInPage" />
     </TabBar>
 </Shell>

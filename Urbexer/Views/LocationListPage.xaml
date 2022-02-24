@@ -11,6 +11,31 @@
         <viewmodels:MapViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <DataTemplate x:Key="LocationCard">
+            <ViewCell>
+                <Frame
+                    Margin="5"
+                    Padding="3"
+                    CornerRadius="10"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout x:DataType="models:Location" Orientation="Horizontal">
+                        <Image
+                            HorizontalOptions="Start"
+                            Source="{Binding Thumbnail}"
+                            WidthRequest="100" />
+                        <StackLayout VerticalOptions="Center">
+                            <Label Text="{Binding Description}" VerticalOptions="Center" />
+                            <Label Text="{Binding Address}" VerticalOptions="Center" />
+                            <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                            <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
     <ListView
         HasUnevenRows="True"
         ItemTemplate="{DynamicResource LocationCard}"
