@@ -26,9 +26,11 @@
             VerticalOptions="Fill">
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="models:Location">
-                    <maps:Pin
+                    <models:DataPin
                         Address="{Binding Address}"
                         Label="{Binding Description}"
+                        LocationId="{Binding Id}"
+                        MarkerClicked="Pin_MarkerClicked"
                         Position="{Binding Position}" />
                 </DataTemplate>
             </maps:Map.ItemTemplate>
@@ -36,7 +38,7 @@
         <Frame
             Margin="0"
             Padding="0"
-            AbsoluteLayout.LayoutBounds="0.5,0.015,0.96,0.1"
+            AbsoluteLayout.LayoutBounds="0.5,0.015,0.96,0.07"
             AbsoluteLayout.LayoutFlags="All"
             CornerRadius="20"
             IsClippedToBounds="True">
@@ -45,5 +47,6 @@
                 Background="White"
                 HorizontalOptions="Fill" />
         </Frame>
+
     </AbsoluteLayout>
 </ContentPage>

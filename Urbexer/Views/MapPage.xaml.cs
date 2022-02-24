@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Urbexer.Models;
 using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -187,5 +188,11 @@ namespace Urbexer.Views
             Map_JumpTo_Position(possiblePositions.FirstOrDefault());
         }
 
+        private void Pin_MarkerClicked(object sender, PinClickedEventArgs e)
+        {
+            e.HideInfoWindow = true;
+            DataPin pin = sender as DataPin;
+            
+        }
     }
 }
