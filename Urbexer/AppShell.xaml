@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Urbexer.Views"
+       xmlns:local="clr-namespace:Urbexer.Views" xmlns:models="clr-namespace:Urbexer.Models"
        Title="Urbexer"
        x:Class="Urbexer.AppShell">
 
@@ -68,6 +68,30 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+
+            <DataTemplate x:Key="LocationCard" x:DataType="models:Location">
+                <ViewCell>
+                    <Grid Padding="5" VerticalOptions="FillAndExpand">
+                        <Frame
+                            Padding="3"
+                            CornerRadius="10"
+                            VerticalOptions="CenterAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Image
+                                    HorizontalOptions="Start"
+                                    Source="{Binding Thumbnail}"
+                                    WidthRequest="100" />
+                                <StackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding Description}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Address}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
         </ResourceDictionary>
     </Shell.Resources>
 

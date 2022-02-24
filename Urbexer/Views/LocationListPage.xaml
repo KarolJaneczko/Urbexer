@@ -11,9 +11,10 @@
         <viewmodels:MapViewModel />
     </ContentPage.BindingContext>
 
-    <ListView HasUnevenRows="True" ItemsSource="{Binding Locations}">
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="models:Location">
+    <!--
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="LocationCard" x:DataType="models:Location">
                 <ViewCell>
                     <Grid Padding="5" VerticalOptions="FillAndExpand">
                         <Frame
@@ -21,7 +22,10 @@
                             CornerRadius="10"
                             VerticalOptions="CenterAndExpand">
                             <StackLayout Orientation="Horizontal">
-                                <!--  może jakieś zdjęcie?  -->
+                                <Image
+                                    HorizontalOptions="Start"
+                                    Source="{Binding Thumbnail}"
+                                    WidthRequest="100" />
                                 <StackLayout VerticalOptions="Center">
                                     <Label Text="{Binding Description}" VerticalOptions="Center" />
                                     <Label Text="{Binding Address}" VerticalOptions="Center" />
@@ -33,6 +37,12 @@
                     </Grid>
                 </ViewCell>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    -->
+
+    <ListView
+        HasUnevenRows="True"
+        ItemTemplate="{DynamicResource LocationCard}"
+        ItemsSource="{Binding Locations}" />
 </ContentPage>

@@ -13,6 +13,8 @@ namespace Urbexer.Models
         public string Description { get; set; }
         public Position Position { get; set; }
 
+        public string Thumbnail { get; set; }
+
         // Funkcje do generowania współrzędnych z adresu
         public void Position_From_Address()
         {
