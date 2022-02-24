@@ -13,8 +13,8 @@ namespace Urbexer {
             MainPage = new AppShell();
         }
         protected override void OnStart() {
-            Shell.Current.GoToAsync($"//{nameof(LocationListPage)}");
-            //Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+            //Shell.Current.GoToAsync($"//{nameof(LocationListPage)}");
+            Shell.Current.GoToAsync($"//{nameof(MapPage)}");
             //Shell.Current.GoToAsync($"//{nameof(WelcomePage)}");
         }
         protected override void OnSleep() {

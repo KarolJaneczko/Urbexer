@@ -29,7 +29,7 @@ namespace Urbexer.Views
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01); 
             //Map map = new Map(mapSpan);
             mapSpan = MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.444));
-            map.MoveToRegion(mapSpan);
+            Map.MoveToRegion(mapSpan);
 
             // Przykładowa prosta pinezka
             Pin pin = new Pin
@@ -39,7 +39,7 @@ namespace Urbexer.Views
                 Type = PinType.Place,
                 Position = position
             };
-            map.Pins.Add(pin);
+            Map.Pins.Add(pin);
 
             Position mshqposition = new Position(47.6368678, -122.137305);
             Pin mshqpin = new Pin
@@ -49,7 +49,7 @@ namespace Urbexer.Views
                 Type = PinType.Place,
                 Position = mshqposition
             };
-            map.Pins.Add(pin);
+            Map.Pins.Add(pin);
             
             // Pinezki z customowych zachowaniem przy klikaniu na nie
             Pin boardwalkPin = new Pin
@@ -79,8 +79,8 @@ namespace Urbexer.Views
                 await DisplayAlert("Info Window Clicked", $"The info window was clicked for {pinName}.", "Ok");
             };
             
-            map.Pins.Add(boardwalkPin);
-            map.Pins.Add(wharfPin);
+            Map.Pins.Add(boardwalkPin);
+            Map.Pins.Add(wharfPin);
 
             /*
             // Rysowanie polygonów
@@ -145,7 +145,7 @@ namespace Urbexer.Views
 
             Map_JumpTo_Address("Toruń");
         }
-        private void map_MapClicked(object sender, MapClickedEventArgs e)
+        private void Map_MapClicked(object sender, MapClickedEventArgs e)
         {
             /*
             // Zmiana pozycji ekranu bez zmieniania poziomu zooma
@@ -159,11 +159,11 @@ namespace Urbexer.Views
         // 
         public void Map_MoveTo_Position(Position position)
         {
-            if (map == null || map.VisibleRegion == null) return;
+            if (Map == null || Map.VisibleRegion == null) return;
             // Zmiana pozycji ekranu bez zmieniania poziomu zooma
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(position.Latitude, position.Longitude),
-                map.VisibleRegion.Radius));
+                Map.VisibleRegion.Radius));
         }
         public async void Map_MoveTo_Address(string address)
         {
@@ -178,7 +178,7 @@ namespace Urbexer.Views
             float radius = 0.5f;
             MapSpan mapspan = MapSpan.FromCenterAndRadius(
                 position, Distance.FromKilometers(radius));
-            map.MoveToRegion(mapspan);
+            Map.MoveToRegion(mapspan);
         }
         public async void Map_JumpTo_Address(string address)
         {
@@ -186,5 +186,6 @@ namespace Urbexer.Views
             IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
             Map_JumpTo_Position(possiblePositions.FirstOrDefault());
         }
+
     }
 }
