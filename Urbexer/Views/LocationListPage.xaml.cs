@@ -16,11 +16,5 @@ namespace Urbexer.Views
         {
             InitializeComponent();
         }
-
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var listView = sender as ListView;
-            listView.SelectedItem = null;
-        }
     }
 }
