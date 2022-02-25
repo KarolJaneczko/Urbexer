@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms.Maps;
 using System.ComponentModel;
+using Xamarin.CommunityToolkit.ObjectModel;
+using Urbexer.Services;
 
 namespace Urbexer.Models
 {
@@ -14,6 +16,27 @@ namespace Urbexer.Models
         public Position Position { get; set; }
         public int Id { get; set; }
         public string Thumbnail { get; set; }
+        public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
+
+        public Location(int id)
+        {
+            string[] strings = LocationService.GetImagesById(id);
+            ImageLinks = new ObservableRangeCollection<ImageLink>();
+            foreach (string s in strings)
+            {
+                ImageLinks.Add(new ImageLink { Link = s });
+            }
+        }
+        public Location()
+        {
+            int id = 0;
+            string[] strings = LocationService.GetImagesById(id);
+            ImageLinks = new ObservableRangeCollection<ImageLink>();
+            foreach (string s in strings)
+            {
+                ImageLinks.Add(new ImageLink { Link = s });
+            }
+        }
 
         // Funkcje do generowania współrzędnych z adresu
         public void Position_From_Address()
@@ -41,6 +64,12 @@ namespace Urbexer.Models
             Geocoder geocoder = new Geocoder();
             IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
             Address = possibleAddresses.FirstOrDefault();
+        }
+
+        
+        public class ImageLink
+        {
+            public string Link { get; set; }
         }
     }
 }
