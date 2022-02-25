@@ -6,10 +6,13 @@ using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Urbexer.Views {
-    public partial class SignInPage : ContentPage {
+namespace Urbexer.Views
+{
+    public partial class SignInPage : ContentPage
+    {
         
-        public SignInPage() {
+        public SignInPage()
+        {
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             var vm = new SignInPageModel();
             this.BindingContext = vm;
@@ -26,10 +29,8 @@ namespace Urbexer.Views {
                 vm.SubmitCommand.Execute(null);
             };
         }
-        public void SignedInPressed(object sender, System.EventArgs e)
-        {
-            Shell.Current.GoToAsync("//AboutPage");
-        }
+        
+
         public void GoToSignUp(object sender, System.EventArgs e)
         {
             Shell.Current.GoToAsync(nameof(RegisterPage));
@@ -40,6 +41,7 @@ namespace Urbexer.Views {
         }
 
 
+
     }
-    
+
 }

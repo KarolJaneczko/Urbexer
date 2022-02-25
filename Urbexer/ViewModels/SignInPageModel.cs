@@ -33,18 +33,27 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
+     
+        
         public ICommand SubmitCommand { protected set; get; }
+       
         public SignInPageModel()
         {
             SubmitCommand = new Command(OnSubmit);
+         
         }
+        
         public void OnSubmit()
         {
             if (email != "urbexer@gmail.com" || password != "tajne")
             {
                 DisplayInvalidLoginPrompt();
             }
-            else Shell.Current.GoToAsync("//AboutPage");
+            else Shell.Current.GoToAsync("//HomePage");
+        }
+        public void showPassword()
+        {
+            
         }
 
     }

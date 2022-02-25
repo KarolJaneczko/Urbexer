@@ -10,22 +10,20 @@
 
 
     <Grid>
-        <o:VideoPlayer x:Name="BackgroundVideo"
-                           AutoPlay="True"
-                           DisplayControls="False"
-                           Source="https://i.imgur.com/OxhpWeK.mp4"
-                           Repeat="True" 
-                           Volume="0"/>
-        <StackLayout x:Name="BackgroundLogo"
-                    Padding="64"            
-                    VerticalOptions="Start" 
-                    HorizontalOptions="Center">
-
-            <Image Source="app_logo.png" 
-                   WidthRequest="128" 
-                   HeightRequest="128"/>
-
-        </StackLayout>
+        <Image Source="background_image4" Aspect="AspectFill"/>
+        <Frame Padding="0"
+                   HeightRequest="125"
+                   WidthRequest="125"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                BackgroundColor="Transparent"
+                   CornerRadius="25"
+                  
+                   Margin="0,50,0, 600">
+            
+            <Image Source="app_logo.png"
+                                 Aspect="AspectFill"/>
+        </Frame>
         <BoxView>
             <BoxView.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -45,15 +43,7 @@
                        HasShadow="True"
                        BorderColor="black">
                 <StackLayout>
-                    
-                        
-                            
-                        
-                            <Label Text="Załóż konto" TextColor="Black" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
-
-                        
-                    
-
+                    <Label Text="Załóż konto" TextColor="Black" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                     <StackLayout Margin="0,15,0,10" Spacing="0" >
                         <Label Text="Login" TextDecorations="None"/> 
                         <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0,0,0,5" HorizontalOptions="FillAndExpand">
@@ -61,20 +51,17 @@
                                 <Frame BackgroundColor="#ef233c" CornerRadius="50"  HeightRequest="35" WidthRequest="35" Padding="0" Margin="5">
                                     <Image Source="login_icon.png" Aspect="AspectFill" Margin="0"/>
                                 </Frame>
-                                <Entry x:Name="Login"  Placeholder="Login" PlaceholderColor="#ef233c" TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
-
-
+                                <Entry x:Name="Login"  Placeholder="Login" PlaceholderColor="#ef233c" TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
                             </StackLayout>
                         </Frame>
                         <Label Text="Email"/>
                         <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0,0,0,5" HorizontalOptions="FillAndExpand">
-                            
                             <StackLayout Orientation="Horizontal">
                                 <Frame BackgroundColor="#ef233c" CornerRadius="50"  HeightRequest="35" WidthRequest="35" Padding="0" Margin="5">
                                     <Image Source="email_icon.png" Aspect="AspectFill" Margin="0"/>
                                     
                                 </Frame>
-                                <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" PlaceholderColor="#ef233c" TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+                                <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" PlaceholderColor="#ef233c" TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
                                
 
                             </StackLayout>
@@ -85,7 +72,7 @@
                                 <Frame BackgroundColor="#ef233c" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" Margin="5">
                                     <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
                                 </Frame>
-                                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+                                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
                             </StackLayout>
                         </Frame>
                         <Label Text="Powtórz Hasło"/>
@@ -94,7 +81,7 @@
                                 <Frame BackgroundColor="#ef233c" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" Margin="5">
                                     <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
                                 </Frame>
-                                <Entry x:Name="RepeatPassword" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+                                <Entry x:Name="RepeatPassword" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
 
                             </StackLayout>
                         </Frame>
@@ -114,8 +101,9 @@
                     </StackLayout>
                     
                     <StackLayout>
-                        <Grid> 
-                            <BoxView BackgroundColor="Black" HeightRequest="1" Margin="20" HorizontalOptions="CenterAndExpand" WidthRequest="120" />
+                        
+                        <Grid>
+                            <BoxView BackgroundColor="#ef233c" HeightRequest="1" Margin="20" HorizontalOptions="CenterAndExpand" WidthRequest="120" />
                             <Frame BackgroundColor="#ef233c" CornerRadius="50" HorizontalOptions="Center" HeightRequest="35" WidthRequest="50" Padding="0" Margin="0">
                             <ImageButton Source="back_icon.png" Margin="0" WidthRequest="30" HeightRequest="30" VerticalOptions="FillAndExpand" Clicked="GoBack" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="50"/>
                             </Frame>
