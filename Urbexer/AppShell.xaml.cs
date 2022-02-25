@@ -12,7 +12,7 @@ namespace Urbexer {
             Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
         }
         private async void ClickedLogout(object sender, EventArgs e) {
-            await Shell.Current.GoToAsync("//WelcomePage");
+            await Shell.Current.GoToAsync(nameof(WelcomePage));
             LoginInfo.IsLoggedIn = false;
         }
     }

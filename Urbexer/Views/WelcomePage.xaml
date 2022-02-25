@@ -10,29 +10,47 @@
 
     
         <Grid>
-           
-            <o:VideoPlayer x:Name="BackgroundVideo"
+            
+        <CarouselView x:Name="backOnboarding" 
+                              IndicatorView="LandingIndicatorBackGround"
+                              ItemsSource= "{Binding Onboardings}"
+                              VerticalOptions="End">
+        <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                </DataTemplate>
+        </CarouselView.ItemTemplate>
+            </CarouselView>
+        <IndicatorView x:Name="LandingIndicatorBackGround"                             
+                               IndicatorsShape="Square"                              
+                               SelectedIndicatorColor="Transparent"/>
+        <!--<o:VideoPlayer x:Name="BackgroundVideo"
                            AutoPlay="True"
                            DisplayControls="False"
                            Source="https://i.imgur.com/OxhpWeK.mp4/"
                            Repeat="True" 
-                           Volume="0"/>
-            
-        <StackLayout x:Name="BackgroundLogo"
-                    Padding="64"            
-                    VerticalOptions="Start" 
-                    HorizontalOptions="Center">
+                           Volume="0"/>-->
 
-          <Image Source="app_logo.png" 
-                   WidthRequest="128" 
-                   HeightRequest="128"/>
-            
-        </StackLayout>
+
+
+        <Frame Padding="0"
+                   HeightRequest="125"
+                   WidthRequest="125"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   CornerRadius="25"
+                   
+               BackgroundColor="Transparent"
+                   Margin="0,50,0, 600">
+                        <Image Source="app_logo.png"
+                                 Aspect="AspectFill"/>
+        </Frame>
+    
         <BoxView>
                 <BoxView.Background>
                     <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
                         <GradientStop Color="Transparent" Offset="0"/>
-                        <GradientStop Color="black" Offset="0.5"/>
+                        <GradientStop Color="black" Offset="0.6"/>
                         <GradientStop Color="black" Offset="1.8"/>
                     </LinearGradientBrush>
                 </BoxView.Background>
@@ -49,9 +67,10 @@
                     <CarouselView.ItemTemplate>
                         
                         <DataTemplate>
+                            
                         <StackLayout x:Name="captions"
                                 Margin="0,50,0,0">
-                                
+                           
                             <Label Text="{Binding Heading}"
                                    TextColor="white"
                                    FontSize="28" 
@@ -65,7 +84,7 @@
                                    FontAttributes="Bold"
                                    WidthRequest="200" 
                                    HorizontalOptions="Start"/>
-
+                            
 
                         </StackLayout>
 
