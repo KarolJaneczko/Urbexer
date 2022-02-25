@@ -24,7 +24,8 @@ namespace Urbexer.Services
 
         private static Location GetTestLocation(int id)
         {
-            string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
+            string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/942607881671442432/2Q.png";
+            //string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
 
             switch (id)
             {

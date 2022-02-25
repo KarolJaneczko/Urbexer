@@ -6,6 +6,9 @@ using Urbexer.Models;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms.Maps;
 using Urbexer.Services;
+using System.Threading.Tasks;
+using Urbexer.Views;
+using Xamarin.Forms;
 
 namespace Urbexer.ViewModels
 {
@@ -13,9 +16,12 @@ namespace Urbexer.ViewModels
     {
         public ObservableRangeCollection<Location> Locations { get; set; }
 
+        public AsyncCommand<Location> CardSelectedCommand { get; }
         public MapViewModel()
         {
             Initialize();
+
+            CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
         }
 
         private async void Initialize()
@@ -27,6 +33,14 @@ namespace Urbexer.ViewModels
                 LocationService.GetLocationById(2),
                 LocationService.GetLocationById(3),
             };
+        }
+
+        async Task CardSelected(Location location)
+        {
+            if (location.Id < 0) return;
+
+            var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";
+            await Shell.Current.GoToAsync(route);
         }
     }
 }
