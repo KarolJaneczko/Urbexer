@@ -9,11 +9,18 @@ namespace Urbexer.Services
 {
     public class LocationService
     {
+        public static Location GetLocationById(int id)
+        {
+            var location = GetTestLocation(id);
+            return location;
+        }
+        /*
         public static async Task<Location> GetLocationById(int id)
         {
             var location = GetTestLocation(id);
             return location;
         }
+        */
 
         private static Location GetTestLocation(int id)
         {

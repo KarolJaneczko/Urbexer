@@ -22,10 +22,10 @@ namespace Urbexer.ViewModels
         {
             Locations = new ObservableRangeCollection<Location>
             {
-                await LocationService.GetLocationById(0),
-                await LocationService.GetLocationById(1),
-                await LocationService.GetLocationById(2),
-                await LocationService.GetLocationById(3),
+                LocationService.GetLocationById(0),
+                LocationService.GetLocationById(1),
+                LocationService.GetLocationById(2),
+                LocationService.GetLocationById(3),
             };
         }
     }

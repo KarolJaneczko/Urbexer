@@ -8,11 +8,6 @@
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
     x:DataType="viewmodels:MapViewModel">
 
-
-    <ContentPage.BindingContext>
-        <viewmodels:MapViewModel />
-    </ContentPage.BindingContext>
-
     <AbsoluteLayout>
         <maps:Map
             x:Name="Map"
@@ -24,9 +19,15 @@
             MapClicked="Map_MapClicked"
             MapType="Hybrid"
             VerticalOptions="Fill">
+
+            <maps:Map.BindingContext>
+                <viewmodels:MapViewModel />
+            </maps:Map.BindingContext>
+
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="models:Location">
                     <models:DataPin
+                        x:Name="DataPin"
                         Address="{Binding Address}"
                         Label="{Binding Description}"
                         LocationId="{Binding Id}"
@@ -65,7 +66,6 @@
                     <Label Text="{Binding Address}" VerticalOptions="Center" />
                     <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
                     <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
-                    <Label Text="test" />
                 </StackLayout>
             </StackLayout>
             <!--

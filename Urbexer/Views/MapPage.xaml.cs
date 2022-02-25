@@ -38,8 +38,7 @@ namespace Urbexer.Views
         public MapPage()
         {
             InitializeComponent();
-            CurrentPinId = 1;
-
+            CurrentPinId = -1;
 
             // Konstruowanie mapy
             //Position position = new Position(36.9628066, -122.0194722);
