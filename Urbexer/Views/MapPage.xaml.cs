@@ -41,7 +41,6 @@ namespace Urbexer.Views
             CurrentPinId = -1;
 
             // Konstruowanie mapy
-            //Position position = new Position(36.9628066, -122.0194722);
             Position position = new Position(37.79752, -122.40183);
             // MapSpan to obszar mapy o danej pozycji(position) pokazujący obszar obejmujący
             // daną wysokość(0.01) i długość(0.01) geograficzną

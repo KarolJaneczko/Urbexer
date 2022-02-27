@@ -4,6 +4,8 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
+// DataPin służy jako pinezka na mapie która dodatkowo może mieć zbindowane id lokacji
+
 namespace Urbexer.Models
 {
     public class DataPin : Xamarin.Forms.Maps.Pin

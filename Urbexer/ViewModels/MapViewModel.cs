@@ -35,9 +35,10 @@ namespace Urbexer.ViewModels
             };
         }
 
+        // Przenosi do strony lokacji o odpowiednim id. Używane w komendzie CardSelectedCommand.
         async Task CardSelected(Location location)
         {
-            if (location.Id < 0) return;
+            if (location.Id < 0) return; // Id powinno być nieujemne.
 
             var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";
             await Shell.Current.GoToAsync(route);

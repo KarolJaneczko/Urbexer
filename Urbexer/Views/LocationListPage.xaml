@@ -8,6 +8,8 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:DataType="viewmodels:MapViewModel">
 
+    <!--  Strona wyświetlające karty lokacji w liście.  -->
+
     <ContentPage.BindingContext>
         <viewmodels:MapViewModel />
     </ContentPage.BindingContext>

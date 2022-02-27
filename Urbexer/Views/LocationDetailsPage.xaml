@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
     Title="{Binding Description}">
+
+    <!--  Strona wyświetlania po kliknięciu w karte lokacji. Wyświetla szczegóły dotyczące danej lokacji.  -->
+
     <ContentPage.Content>
         <ScrollView VerticalOptions="Start">
             <StackLayout>
-                <!--  wstawić tutaj carouselview czy coś i więcej zdjęć  -->
                 <CarouselView
                     x:Name="ImageCarousel"
                     HeightRequest="250"
@@ -23,42 +25,8 @@
                 <StackLayout x:DataType="models:Location" VerticalOptions="FillAndExpand">
                     <Label Text="{Binding Description}" />
                     <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
-                    <Label Text="{Binding Address}" />
                     <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
-                    <!--  wstawić tutaj miejsce na potencjalne przyszłe recenzje  -->
+                    <!--  wstawić tutaj miejsce na recenzje?  -->
                 </StackLayout>
             </StackLayout>
         </ScrollView>
