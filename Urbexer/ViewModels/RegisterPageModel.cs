@@ -7,12 +7,8 @@ using Xamarin.Forms;
 using System.ComponentModel;
 
 namespace Urbexer.ViewModels {
-
     public class RegisterPageModel : BaseViewModel {
-        public RegisterPageModel()
-        {           
+        public RegisterPageModel() {           
         }
-     
     }
-    
 }

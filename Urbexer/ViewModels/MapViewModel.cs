@@ -10,6 +10,5 @@ namespace Urbexer.ViewModels {
     public class MapViewModel : BaseViewModel {
         public MapViewModel() {
         }
-
     }
 }
