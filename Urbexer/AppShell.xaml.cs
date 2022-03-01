@@ -13,10 +13,10 @@ namespace Urbexer {
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(LocationDetailsPage), typeof(LocationDetailsPage));
+            Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
         }
         private async void ClickedLogout(object sender, EventArgs e) {
-            await Shell.Current.GoToAsync("//WelcomePage");
-            LoginInfo.IsLoggedIn = false;
+            await Shell.Current.GoToAsync(nameof(WelcomePage));
         }
     }
 }

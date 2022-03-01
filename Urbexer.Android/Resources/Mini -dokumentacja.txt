@@ -1,4 +1,0 @@
-﻿Wtyczki użyte w projekcie, do zainstalowania przez NuGet:
-https://github.com/adamfisher/Xamarin.Forms.VideoPlayer
-
-Prawa do materiałów użytych w filmie: -

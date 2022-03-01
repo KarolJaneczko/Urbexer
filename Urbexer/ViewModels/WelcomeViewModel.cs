@@ -6,58 +6,29 @@ using System.Text;
 using Urbexer.Views;
 using Xamarin.Forms;
 
-namespace Urbexer.ViewModels
-{
+namespace Urbexer.ViewModels {
+    public class WelcomeViewModel : BaseViewModel {
 
-    public class WelcomeViewModel : BaseViewModel
-    {
-
-        public Command WelcomeSignInCommand { get; }
-        public Command WelcomeRegisterCommand { get; }
         public List<Onboarding> Onboardings { get; set; }
-
-
-        public WelcomeViewModel()
-        {
-            WelcomeSignInCommand = new Command(WelcomeSignInPressed);
-            WelcomeRegisterCommand = new Command(WelcomeRegisterPressed);
+        public WelcomeViewModel() {
             Onboardings = GetOnboarding();
-
-
         }
-
-        private List<Onboarding> GetOnboarding()
-        {
-            return new List<Onboarding>
-            {
-                new Onboarding {Heading = "Heading1", Caption = "Caption1"},
-                new Onboarding {Heading = "Heading2", Caption = "Caption2"},
-                new Onboarding {Heading = "Heading3", Caption = "Caption3"},
-                new Onboarding {Heading = "Heading4", Caption = "Caption4"},
-                new Onboarding {Heading = "Heading5", Caption = "Caption5"}
-                
+        private List<Onboarding> GetOnboarding() {
+            return new List<Onboarding> {
+                new Onboarding {Heading = "Eksploruj opuszczone lokacje", Caption = "Przygoda na całe życie", Image ="background_image1"},
+                new Onboarding {Heading = "Rywalizuj z innymi", Caption = "Zostań najlepszym z eksploatorów", Image ="background_image2"},
+                new Onboarding {Heading = "Odczuj dreszcz emocji", Caption = "Podziel się wrażeniami z innymi", Image ="background_image3"}
             };
         }
-
-
-        public async void WelcomeSignInPressed(object obj)
-        {
-            Shell.Current.GoToAsync("//SignInPage");
-        }
-        public async void WelcomeRegisterPressed(object obj)
-        {
-
-        }
-
     }
-    public class Onboarding
-    {
-
+    public class Onboarding {
         public string Heading { get; set; }
         public string Caption { get; set; }
-
+        public string Image { get; set; }
     }
 
+
 }
+
 
 
