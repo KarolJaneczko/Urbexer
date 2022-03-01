@@ -7,48 +7,38 @@ using System.IO;
 using System;
 using System.Timers;
 
-namespace Urbexer.Views
-{
+namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class WelcomePage : ContentPage
-    {
+    public partial class WelcomePage : ContentPage {
         Timer timer;
-        public WelcomePage()
-        {
+        public WelcomePage() {
             InitializeComponent();
             this.BindingContext = new WelcomeViewModel();
             Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             AnimatedInfoCarousel();
 
-            //BackgroundVideo.MinimumWidthRequest = DeviceDisplay.MainDisplayInfo.Width;
-            //BackgroundVideo.MinimumHeightRequest = DeviceDisplay.MainDisplayInfo.Height;
             buttons.Margin = new Thickness(25, 0, 25, 50);
         }
-        private void AnimatedInfoCarousel()
-        {
-            timer = new Timer(3500)
-            {
+        private void AnimatedInfoCarousel() {
+            timer = new Timer(3500) {
                 AutoReset = true,
                 Enabled = true
             };
-            timer.Elapsed += (s, e) =>
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    if (cvOnboarding.Position == 2 )
-                    {
+            timer.Elapsed += (s, e) => {
+                Device.BeginInvokeOnMainThread(() => {
+                    if (cvOnboarding.Position == 2) {
                         cvOnboarding.Position = 0;
                         backOnboarding.Position = 0;
                         return;
                     }
                     cvOnboarding.Position += 1;
-                    if(backOnboarding.Position == 1)
-                    { backOnboarding.Position = 2;
+                    if (backOnboarding.Position == 1) {
+                        backOnboarding.Position = 2;
                         return;
                     }
-                    if(backOnboarding.Position == 2)
-                    { backOnboarding.Position = 0;
+                    if (backOnboarding.Position == 2) {
+                        backOnboarding.Position = 0;
                         return;
                     }
                     backOnboarding.Position += 1;
@@ -56,12 +46,10 @@ namespace Urbexer.Views
             };
         }
 
-        public void GoToSignInPage(object sender, System.EventArgs e)
-        {
+        public void GoToSignInPage(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(SignInPage));
         }
-        public void GoToRegisterPage(object sender, System.EventArgs e)
-        {
+        public void GoToRegisterPage(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(RegisterPage));
         }
 

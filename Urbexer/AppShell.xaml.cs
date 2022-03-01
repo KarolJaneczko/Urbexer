@@ -13,7 +13,6 @@ namespace Urbexer {
         }
         private async void ClickedLogout(object sender, EventArgs e) {
             await Shell.Current.GoToAsync(nameof(WelcomePage));
-            LoginInfo.IsLoggedIn = false;
         }
     }
 }
