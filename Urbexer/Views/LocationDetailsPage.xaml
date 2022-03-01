@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.LocationDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    Title="{Binding Description}">
+
+    <!--  Strona wyświetlania po kliknięciu w karte lokacji. Wyświetla szczegóły dotyczące danej lokacji.  -->
+
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="Start">
+            <StackLayout>
+                <CarouselView
+                    x:Name="ImageCarousel"
+                    HeightRequest="250"
+                    ItemsSource="{Binding ImageLinks}"
+                    VerticalOptions="Start">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Link}" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <StackLayout x:DataType="models:Location" VerticalOptions="FillAndExpand">
+                    <Label Text="{Binding Description}" />
+                    <Label Text="{Binding Address}" />
+                    <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
+                    <!--  wstawić tutaj miejsce na recenzje?  -->
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
