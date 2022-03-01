@@ -24,7 +24,7 @@ namespace Urbexer.ViewModels
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
         }
 
-        private async void Initialize()
+        private  void Initialize()
         {
             Locations = new ObservableRangeCollection<Location>
             {

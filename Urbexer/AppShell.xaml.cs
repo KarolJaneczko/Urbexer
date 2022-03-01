@@ -10,8 +10,7 @@ namespace Urbexer {
         public AppShell() {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+         
             Routing.RegisterRoute(nameof(LocationDetailsPage), typeof(LocationDetailsPage));
             Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
         }
