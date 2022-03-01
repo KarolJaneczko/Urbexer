@@ -5,9 +5,11 @@ using System.Windows.Input;
 using Urbexer.Models;
 using Xamarin.Forms;
 using System.ComponentModel;
+using Urbexer.Views;
 
 namespace Urbexer.ViewModels {
-    public class SignInPageModel : BaseViewModel {
+
+    public class SignInPageViewModel : BaseViewModel {
 
         public Action DisplayInvalidLoginPrompt;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -29,8 +31,9 @@ namespace Urbexer.ViewModels {
             }
         }
         public ICommand SubmitCommand { protected set; get; }
-
-        public SignInPageModel() {
+       
+        public SignInPageViewModel()
+        {
             SubmitCommand = new Command(OnSubmit);
         }
 
@@ -38,11 +41,14 @@ namespace Urbexer.ViewModels {
             if (email != "urbexer@gmail.com" || password != "tajne") {
                 DisplayInvalidLoginPrompt();
             }
-            else Shell.Current.GoToAsync("//HomePage");
-        }
-        public void ShowPassword() {
 
+            else
+            {
+                Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+                Shell.Current.GoToAsync(nameof(HomePage));
+            }
         }
+  
 
     }
 
