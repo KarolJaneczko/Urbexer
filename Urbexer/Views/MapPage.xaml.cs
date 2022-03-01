@@ -17,11 +17,12 @@ namespace Urbexer.Views
     {
         // Pokazuje kartę z informacjami o lokacji w zależności od id. -1 chowa karte.
         private int currentPinId = -1;
-        public int CurrentPinId { 
-            get 
-            { return currentPinId; } 
-            set 
-            { 
+        public int CurrentPinId
+        {
+            get
+            { return currentPinId; }
+            set
+            {
                 currentPinId = value;
                 if (value <= -1)
                 {
@@ -33,7 +34,7 @@ namespace Urbexer.Views
                 // Pokaż odpowiednią karte lokacji
                 LocationInfo.IsVisible = true;
                 LocationInfo.BindingContext = LocationService.GetLocationById(value);
-            } 
+            }
         }
         public MapPage()
         {
@@ -44,7 +45,7 @@ namespace Urbexer.Views
             Position position = new Position(37.79752, -122.40183);
             // MapSpan to obszar mapy o danej pozycji(position) pokazujący obszar obejmujący
             // daną wysokość(0.01) i długość(0.01) geograficzną
-            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01); 
+            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             //Map map = new Map(mapSpan);
             mapSpan = MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.444));
             Map.MoveToRegion(mapSpan);

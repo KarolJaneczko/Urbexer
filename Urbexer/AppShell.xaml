@@ -57,6 +57,21 @@
             <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
         </Tab>
     </FlyoutItem>
+    <FlyoutItem Title="Mapa">
+        <Tab Title="Szukaj" Icon="MapIcon1">
+            <ShellContent
+            x:Name="Map"
+            ContentTemplate="{DataTemplate local:MapPage}"
+            Route="MapPage" />
+        </Tab>
+        <Tab Title="Lista lokacji" Icon="SearchIcon1">
+        <ShellContent
+            x:Name="LocationList"
+            ContentTemplate="{DataTemplate local:LocationListPage}"
+            Route="LocationListPage" />
+        </Tab>
+    </FlyoutItem>
+
 
 
     <MenuItem Text="Wyloguj się" IconImageSource="LogoutIcon1.png" Clicked="ClickedLogout"></MenuItem>

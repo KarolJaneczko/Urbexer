@@ -10,7 +10,7 @@ namespace Urbexer.Views {
     public partial class SignInPage : ContentPage {
         public SignInPage() {
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
-            var vm = new SignInPageModel();
+            var vm = new SignInPageViewModel();
             this.BindingContext = vm;
             vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Błąd", "Niepoprawny login lub hasło", "OK");
             InitializeComponent();
