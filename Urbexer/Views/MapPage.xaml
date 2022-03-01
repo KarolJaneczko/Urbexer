@@ -1,26 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage
+    x:Class="Urbexer.Views.MapPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Urbexer.Views.MapPage">
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    x:DataType="viewmodels:MapViewModel">
 
+    <!--  Strona mapy  -->
     
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    <AbsoluteLayout>
+        <maps:Map
+            x:Name="Map"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Fill"
+            IsShowingUser="True"
+            ItemsSource="{Binding Locations}"
+            MapClicked="Map_MapClicked"
+            MapType="Hybrid"
+            VerticalOptions="Fill">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
-                </ContentView>
-            </StackLayout>
+            <maps:Map.BindingContext>
+                <viewmodels:MapViewModel />
+            </maps:Map.BindingContext>
+
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="models:Location">
+                    <models:DataPin
+                        x:Name="DataPin"
+                        Address="{Binding Address}"
+                        Label="{Binding Description}"
+                        LocationId="{Binding Id}"
+                        MarkerClicked="Pin_MarkerClicked"
+                        Position="{Binding Position}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
+        <Frame
+            Margin="0"
+            Padding="0"
+            AbsoluteLayout.LayoutBounds="5,5,0.96,0.07"
+            AbsoluteLayout.LayoutFlags="SizeProportional"
+            CornerRadius="20"
+            HasShadow="True"
+            IsClippedToBounds="True">
+            <SearchBar
+                Margin="5"
+                Background="White"
+                HorizontalOptions="Fill" />
+        </Frame>
+        <Frame
+            x:Name="LocationInfo"
+            x:DataType="models:Location"
+            AbsoluteLayout.LayoutBounds="0.5,0.98,0.96,0.2"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="White"
+            CornerRadius="20">
+            <StackLayout Orientation="Horizontal">
+                <Image
+                    HorizontalOptions="Start"
+                    Source="{Binding Thumbnail}"
+                    WidthRequest="100" />
+                <StackLayout VerticalOptions="Center">
+                    <Label Text="{Binding Description}" VerticalOptions="Center" />
+                    <Label Text="{Binding Address}" VerticalOptions="Center" />
+                    <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                    <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
@@ -41,7 +88,17 @@
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
             </StackLayout>
-        </ScrollView>
-    </Grid>
+            <!--
+            <Frame
+            x:Key="LocationCard"
+            Margin="5"
+            Padding="3"
+            CornerRadius="10"
+            VerticalOptions="FillAndExpand">
 
+            </Frame>
+            -->
+        </Frame>
+
+    </AbsoluteLayout>
 </ContentPage>
