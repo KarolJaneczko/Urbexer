@@ -6,8 +6,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Urbexer"
              mc:Ignorable="d"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.TabBarIsVisible="False"
+              Shell.FlyoutBehavior="Disabled"
              x:Class="Urbexer.Views.SignInPage"
              Shell.NavBarIsVisible="False">
+            
 
 
     <Grid>
@@ -83,11 +87,12 @@
                     BackgroundColor="#ef233c"
                     TextColor="White" 
                     CornerRadius="25" 
+                   
                     FontAttributes="Bold"/>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Nie masz jeszcze konta?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                        <Button  Text="Zarejestruj się" TextColor="#ef233c" BackgroundColor="Transparent" FontAttributes="Bold" Clicked="GoToSignUp"/>
+                        <Button  Text="Zarejestruj się" TextColor="#ef233c" BackgroundColor="Transparent" FontAttributes="Bold"  Clicked="GoToSignUp"/>
                     </StackLayout>
                     <StackLayout Margin=" 0,0,0,0" Spacing="50">
                         <Grid>

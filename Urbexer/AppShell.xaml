@@ -3,92 +3,67 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Urbexer.Views"
        Title="Urbexer"
-       x:Class="Urbexer.AppShell"
-       FlyoutBackgroundColor="Black"
+       x:Class="Urbexer.AppShell"       
        xmlns:sys="clr-namespace:System;assembly=netstandard">
+
 
     <Shell.Resources>
         <ResourceDictionary>
+            <Color x:Key="SelectedColor">#ef233c</Color>
+            <Color x:Key="WhiteColor">White</Color>
+            <Color x:Key="GrayColor">Gray</Color>
+            <Color x:Key="BlackColor">Black</Color>
+            
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="Black" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="Black" />
-                <Setter Property="Shell.DisabledColor" Value="Black" />
-                <Setter Property="Shell.UnselectedColor" Value="Black" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="Black" />
-                <Setter Property="Shell.TabBarForegroundColor" Value=" #ef233c"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+              
+                <!--góra-->
+               
+                <!--ikona menu-->
+                
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource GrayColor}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource SelectedColor}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource SelectedColor}"/>
             </Style>
-            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
-            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
-
-            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="White"></Setter>
-            </Style>
-
-            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="Black" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Selected">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#ef233c" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
-            </Style>
-
-            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
-            </Style>
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Strona główna" Icon="HomePageIcon1.png">
-        <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <ContentView BackgroundColor="{StaticResource SelectedColor}" HeightRequest="140">
+                <Image Source="app_logo.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </ContentView>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+   
+    
+    <FlyoutItem Title="Profil" Icon="ProfileIcon1.png" FlyoutDisplayOptions="AsSingleItem">
+        <Tab Title="Podgląd" Icon="homepage_icon">
+            <ShellContent ContentTemplate="{DataTemplate local:MapPage}" />
+        </Tab>
+        <Tab Title="Edytuj" Icon="MapIcon1">
+            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+        </Tab>
+        <Tab Title="Edytuj" Icon="MapIcon1">
+            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+        </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Profil" Icon="ProfileIcon1.png">
-        <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Mapa" Icon="MapIcon1.png">
-        <ShellContent Route="MapPage" ContentTemplate="{DataTemplate local:MapPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Przeglądaj" Icon="SearchIcon1.png">
-        <ShellContent Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="O aplikacji" Icon="InfoIcon1.png">
-        <ShellContent Route="InfoPage" ContentTemplate="{DataTemplate local:InfoPage}" />
+    <FlyoutItem Title="Mapa" Icon="MapIcon1.png" FlyoutDisplayOptions="AsSingleItem">
+        <Tab Title="Podgląd" Icon="homepage_icon">
+            <ShellContent ContentTemplate="{DataTemplate local:InfoPage}" />
+        </Tab>
+        <Tab Title="Szukaj" Icon="MapIcon1">
+            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+        </Tab>
     </FlyoutItem>
 
-    <MenuItem Text="Wyloguj się" StyleClass="MenuItemLayoutStyle" IconImageSource="LogoutIcon1.png" Clicked="ClickedLogout"></MenuItem>
-    <TabBar>
-        <ShellContent Route="WelcomePage" ContentTemplate="{DataTemplate local:WelcomePage}" />
-    </TabBar>
+
+    <MenuItem Text="Wyloguj się" IconImageSource="LogoutIcon1.png" Clicked="ClickedLogout"></MenuItem>
+   
+            <!--<ShellContent Route="WelcomePage" ContentTemplate="{DataTemplate local:WelcomePage}" />-->
+            <!--<ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />-->
+     
 
     <Shell.FlyoutFooter>
         <StackLayout>

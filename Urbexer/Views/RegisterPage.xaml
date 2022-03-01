@@ -6,7 +6,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Urbexer.Views.RegisterPage"
-             Shell.NavBarIsVisible="False">
+             Shell.FlyoutItemIsVisible="False"
+              Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
 
 
     <Grid>
