@@ -1,0 +1,2 @@
+INSERT INTO `miejsce` (`Id`, `Nazwa`, `Trudnosc`, `Doswiadczenie`, `UzytkownikId`, `Adres`, `Miejsce_KategoriaId`, `WspolrzedneLAT`, `WspolrzedneLNG`, `ZdjecieId`) VALUES (1, 'Wiadukt kolejowy', NULL, NULL, NULL, NULL, '1', 53.4338, 17.7232, NULL);
+INSERT INTO `miejsce` (`Id`, `Nazwa`, `Trudnosc`, `Doswiadczenie`, `UzytkownikId`, `Adres`, `Miejsce_KategoriaId`, `WspolrzedneLAT`, `WspolrzedneLNG`, `ZdjecieId`) VALUES (2, 'Hotel', NULL, NULL, NULL, NULL, '2', 49.6086, 19.9729, NULL);
