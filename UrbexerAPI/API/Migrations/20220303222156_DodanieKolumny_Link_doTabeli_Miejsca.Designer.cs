@@ -3,6 +3,7 @@ using System;
 using APIpz.entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIpz.Migrations
 {
     [DbContext(typeof(BazaDbContext))]
-    partial class BazaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220303222156_DodanieKolumny_Link_doTabeli_Miejsca")]
+    partial class DodanieKolumny_Link_doTabeli_Miejsca
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
