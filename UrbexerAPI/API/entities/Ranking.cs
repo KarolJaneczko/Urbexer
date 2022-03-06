@@ -1,4 +1,4 @@
-﻿namespace APIpz.entities
+﻿namespace APIpz.Entities
 {
     public class Ranking
     {

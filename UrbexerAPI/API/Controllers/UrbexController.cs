@@ -1,4 +1,4 @@
-﻿using APIpz.entities;
+﻿using APIpz.Entities;
 using APIpz.Models;
 using APIpz.Services;
 using Microsoft.AspNetCore.Mvc;

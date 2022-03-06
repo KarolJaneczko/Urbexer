@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace APIpz.entities
+namespace APIpz.Entities
 {
     public class BazaDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var serverVersion = new MariaDbServerVersion(new Version(10, 6));
-            optionsBuilder.UseMySql("server=localhost;port=3306;database=Urbex;user=root;password=urbex", serverVersion);
+            //var serverVersion = new MariaDbServerVersion(new Version(10, 6));
+            //optionsBuilder.UseMySql("server=localhost;port=3306;database=Urbex;user=root;password=urbex", serverVersion);
+            optionsBuilder.UseSqlServer("Server=tcp:urbexdbserver.database.windows.net,1433;Initial Catalog=UrbexDB;Persist Security Info=False;User ID=urbexadmin;Password=Zespol0wka!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         public DbSet<Uzytkownik> Uzytkownik { get; set; }

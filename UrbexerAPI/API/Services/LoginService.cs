@@ -1,4 +1,4 @@
-﻿using APIpz.entities;
+﻿using APIpz.Entities;
 using APIpz.Exceptions;
 using APIpz.Middleware;
 using APIpz.Models;
@@ -34,7 +34,7 @@ namespace APIpz.Services
             _emailSender = emailSender;
 
         }
-        public async Task  RegisterUser(RegisterUserDto dto)
+        public async Task RegisterUser(RegisterUserDto dto)
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var kod = new char[8];

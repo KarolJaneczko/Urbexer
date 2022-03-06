@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APIpz.entities
+namespace APIpz.Entities
 {
     public class Zdjecie
     {

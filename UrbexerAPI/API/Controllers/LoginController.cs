@@ -1,4 +1,4 @@
-﻿using APIpz.entities;
+﻿using APIpz.Entities;
 using APIpz.Models;
 using APIpz.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +9,9 @@ namespace APIpz.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly BazaDbContext _dbContext;
         private readonly ILoginService _loginService;
-        public LoginController(BazaDbContext dbContext, ILoginService loginService)
+        public LoginController(ILoginService loginService)
         {
-            _dbContext = dbContext;
             _loginService = loginService;
         }
         [HttpPost("register")]

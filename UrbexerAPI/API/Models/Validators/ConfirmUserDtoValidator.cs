@@ -1,4 +1,4 @@
-﻿using APIpz.entities;
+﻿using APIpz.Entities;
 using FluentValidation;
 
 

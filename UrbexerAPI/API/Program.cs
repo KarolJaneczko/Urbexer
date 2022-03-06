@@ -1,5 +1,5 @@
 using APIpz;
-using APIpz.entities;
+using APIpz.Entities;
 using APIpz.Middleware;
 using APIpz.Models;
 using APIpz.Models.Validators;

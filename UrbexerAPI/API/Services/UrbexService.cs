@@ -1,4 +1,4 @@
-﻿using APIpz.entities;
+﻿using APIpz.Entities;
 using APIpz.Exceptions;
 using APIpz.Middleware;
 using APIpz.Models;
