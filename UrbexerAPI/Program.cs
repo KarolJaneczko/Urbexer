@@ -1,4 +1,5 @@
 using APIpz;
+using APIpz.Authorization;
 using APIpz.entities;
 using APIpz.Middleware;
 using APIpz.Models;
@@ -6,6 +7,7 @@ using APIpz.Models.Validators;
 using APIpz.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
@@ -38,10 +40,11 @@ builder.Services.AddAuthentication(option =>
 });
 
 
-    // Add services to the container.
-
+// Add services to the container.
+builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<BazaDbContext>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUrbexService, UrbexService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
@@ -53,7 +56,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 //Configure the HTTP request pipeline.

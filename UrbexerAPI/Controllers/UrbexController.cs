@@ -1,7 +1,9 @@
 ﻿using APIpz.entities;
 using APIpz.Models;
 using APIpz.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace APIpz.Controllers
 {
@@ -11,7 +13,7 @@ namespace APIpz.Controllers
     {
         private readonly BazaDbContext _dbContext;
         private readonly IUrbexService _urbexService;
-        public UrbexController(BazaDbContext dbContext, IUrbexService urbexService)
+        public UrbexController(BazaDbContext dbContext, IUrbexService urbexService, IAuthorizationService authorizationService)
         {
             _dbContext = dbContext;
             _urbexService = urbexService;
@@ -28,6 +30,7 @@ namespace APIpz.Controllers
         public ActionResult DodajOdwiedzone([FromBody] DodajOdwiedzoneDto dto)
         {
             
+            _urbexService.DodajOdwiedzone(dto);
             return Ok();
         }
     }

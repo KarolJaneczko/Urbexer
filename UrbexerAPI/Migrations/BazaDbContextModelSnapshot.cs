@@ -35,9 +35,6 @@ namespace APIpz.Migrations
                     b.Property<int?>("Trudnosc")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UzytkownikId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Wojewodztwo")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -47,9 +44,28 @@ namespace APIpz.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UzytkownikId");
-
                     b.ToTable("Miejsca");
+                });
+
+            modelBuilder.Entity("APIpz.entities.Odwiedzony", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("OdwiedzonePrzezId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OdwiedzonyUrbexId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OdwiedzonePrzezId");
+
+                    b.HasIndex("OdwiedzonyUrbexId");
+
+                    b.ToTable("Odwiedzone");
                 });
 
             modelBuilder.Entity("APIpz.entities.Opis", b =>
@@ -153,11 +169,23 @@ namespace APIpz.Migrations
                     b.ToTable("Zdjecia");
                 });
 
-            modelBuilder.Entity("APIpz.entities.Miejsce", b =>
+            modelBuilder.Entity("APIpz.entities.Odwiedzony", b =>
                 {
-                    b.HasOne("APIpz.entities.Uzytkownik", null)
-                        .WithMany("Odwiedzone")
-                        .HasForeignKey("UzytkownikId");
+                    b.HasOne("APIpz.entities.Uzytkownik", "OdwiedzonePrzez")
+                        .WithMany()
+                        .HasForeignKey("OdwiedzonePrzezId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("APIpz.entities.Miejsce", "OdwiedzonyUrbex")
+                        .WithMany()
+                        .HasForeignKey("OdwiedzonyUrbexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OdwiedzonePrzez");
+
+                    b.Navigation("OdwiedzonyUrbex");
                 });
 
             modelBuilder.Entity("APIpz.entities.Opis", b =>
@@ -199,8 +227,6 @@ namespace APIpz.Migrations
 
             modelBuilder.Entity("APIpz.entities.Uzytkownik", b =>
                 {
-                    b.Navigation("Odwiedzone");
-
                     b.Navigation("Opisy");
 
                     b.Navigation("Wyprawy");

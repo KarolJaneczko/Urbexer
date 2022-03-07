@@ -23,7 +23,7 @@ namespace APIpz.entities
         public bool CzyKontoAktywne { get; set; }
         public string KodPotwierdzajacyRejestracje { get; set; }
 
-        public virtual List<Miejsce>? Odwiedzone { get; set; }
+       // public virtual List<Miejsce>? Odwiedzone { get; set; }
 
         public virtual List<Opis>? Opisy { get; set; }
 

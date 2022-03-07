@@ -15,6 +15,7 @@ namespace APIpz.entities
         public DbSet<Opis> Opisy { get; set; }
         public DbSet<Wyprawa> Wyprawy { get; set; }
         public DbSet<Zdjecie> Zdjecia { get; set; }
+        public DbSet<Odwiedzony> Odwiedzone { get; set; }
     }
     //protected override void OnModelCreating(ModelBuilder modelbuilder)
     //{
