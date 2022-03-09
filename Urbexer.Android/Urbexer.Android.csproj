@@ -140,16 +140,16 @@
     <AndroidResource Include="Resources\drawable\back_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background_image1.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\background_image1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background_image2.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\background_image2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background_image3.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\background_image3.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background_image4.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\background_image4.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\email_icon.png" />
