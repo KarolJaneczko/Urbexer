@@ -18,7 +18,7 @@
             AbsoluteLayout.LayoutFlags="All"
             HorizontalOptions="Fill"
             IsShowingUser="True"
-            ItemsSource="{Binding Locations}"
+            ItemsSource="{Binding LocationsFiltered}"
             MapClicked="Map_MapClicked"
             MapType="Hybrid"
             VerticalOptions="Fill">
@@ -32,7 +32,7 @@
                     <models:DataPin
                         x:Name="DataPin"
                         Address="{Binding Address}"
-                        Label="{Binding Description}"
+                        Label="{Binding Name}"
                         LocationId="{Binding Id}"
                         MarkerClicked="Pin_MarkerClicked"
                         Position="{Binding Position}" />
@@ -68,7 +68,7 @@
                     Source="{Binding Thumbnail}"
                     WidthRequest="100" />
                 <StackLayout VerticalOptions="Center">
-                    <Label Text="{Binding Description}" VerticalOptions="Center" />
+                    <Label Text="{Binding Name}" VerticalOptions="Center" />
                     <Label Text="{Binding Address}" VerticalOptions="Center" />
                     <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
                     <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />

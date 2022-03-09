@@ -9,22 +9,35 @@ using Urbexer.Services;
 using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace Urbexer.ViewModels
 {
     public class MapViewModel
     {
-        public ObservableRangeCollection<Location> Locations { get; set; }
+        public ObservableRangeCollection<Location> Locations { get; set; } // Przechowuje wszystkie wczytane lokacje
+        public ObservableRangeCollection<Location> LocationsFiltered { get; set; } // Przechowuje wyświetlane lokacje
 
         public AsyncCommand<Location> CardSelectedCommand { get; }
+        //public Command<string> FilterLocationByNameCommand { get; }
         public MapViewModel()
         {
-            Initialize();
+            LocationsFiltered = new ObservableRangeCollection<Location> { };
+            InitializeTest();
+
+            // Na początek wyświetlaj wszystkie lokacje
+            foreach (var location in Locations)
+            {
+                LocationsFiltered.Add(location);
+            }
+            //LocationsFiltered = Locations;
 
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
+            //FilterLocationByNameCommand = new Command<string>(FilterLocationsByName);
         }
 
-        private  void Initialize()
+        // Testowa funkcja do zapełnienia mapy
+        private void InitializeTest()
         {
             Locations = new ObservableRangeCollection<Location>
             {
@@ -43,5 +56,27 @@ namespace Urbexer.ViewModels
             var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";
             await Shell.Current.GoToAsync(route);
         }
+
+        public ICommand FilterLocationsByNameCommand => new Command<string>(async (string query) =>
+        {
+
+            if (string.IsNullOrEmpty(query))
+            {
+                foreach (var location in Locations)
+                {
+                    LocationsFiltered.Add(location);
+                }
+                return;
+            }
+
+            LocationsFiltered.Clear();
+            foreach (var location in Locations)
+            {
+                if (location.Name.ToLower().Contains(query.ToLower()))
+                {
+                    LocationsFiltered.Add(location);
+                }
+            }
+        });
     }
 }

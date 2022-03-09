@@ -23,7 +23,7 @@
                     </CarouselView.ItemTemplate>
                 </CarouselView>
                 <StackLayout x:DataType="models:Location" VerticalOptions="FillAndExpand">
-                    <Label Text="{Binding Description}" />
+                    <Label Text="{Binding Name}" />
                     <Label Text="{Binding Address}" />
                     <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
                     <!--  wstawić tutaj miejsce na recenzje?  -->
