@@ -25,12 +25,7 @@ namespace Urbexer.ViewModels
             LocationsFiltered = new ObservableRangeCollection<Location> { };
             InitializeTest();
 
-            // Na początek wyświetlaj wszystkie lokacje
-            foreach (var location in Locations)
-            {
-                LocationsFiltered.Add(location);
-            }
-            //LocationsFiltered = Locations;
+            ClearFilter();
 
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
             //FilterLocationByNameCommand = new Command<string>(FilterLocationsByName);
@@ -48,6 +43,14 @@ namespace Urbexer.ViewModels
             };
         }
 
+        private void ClearFilter()
+        {
+            foreach (var location in Locations)
+            {
+                LocationsFiltered.Add(location);
+            }
+        }
+
         // Przenosi do strony lokacji o odpowiednim id. Używane w komendzie CardSelectedCommand.
         async Task CardSelected(Location location)
         {
@@ -62,10 +65,7 @@ namespace Urbexer.ViewModels
 
             if (string.IsNullOrEmpty(query))
             {
-                foreach (var location in Locations)
-                {
-                    LocationsFiltered.Add(location);
-                }
+                ClearFilter();
                 return;
             }
 
