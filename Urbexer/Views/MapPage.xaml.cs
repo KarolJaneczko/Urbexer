@@ -110,5 +110,11 @@ namespace Urbexer.Views
             DataPin pin = sender as DataPin;
             CurrentPinId = pin.LocationId;
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var route = $"{nameof(LocationDetailsPage)}?LocationId={currentPinId}";
+            Shell.Current.GoToAsync(route);
+        }
     }
 }

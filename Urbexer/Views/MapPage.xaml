@@ -6,6 +6,7 @@
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:DataType="viewmodels:MapViewModel">
 
     <!--  Strona mapy  -->
@@ -59,6 +60,9 @@
             BackgroundColor="White"
             CornerRadius="20">
             <StackLayout Orientation="Horizontal">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </StackLayout.GestureRecognizers>
                 <Image
                     HorizontalOptions="Start"
                     Source="{Binding Thumbnail}"
