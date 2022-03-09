@@ -43,15 +43,23 @@
         </DataTemplate>
     </ContentPage.Resources>
 
-    <ListView
-        HasUnevenRows="True"
-        ItemTemplate="{DynamicResource LocationCard}"
-        ItemsSource="{Binding Locations}">
-        <ListView.Behaviors>
-            <xct:EventToCommandBehavior
-                Command="{Binding CardSelectedCommand}"
-                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
-                EventName="ItemSelected" />
-        </ListView.Behaviors>
-    </ListView>
+    <StackLayout>
+        <SearchBar
+            Margin="5"
+            Background="White"
+            HorizontalOptions="Fill" />
+        <ListView
+            HasUnevenRows="True"
+            ItemTemplate="{DynamicResource LocationCard}"
+            ItemsSource="{Binding Locations}"
+            VerticalOptions="StartAndExpand">
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior
+                    Command="{Binding CardSelectedCommand}"
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
+                    EventName="ItemSelected" />
+            </ListView.Behaviors>
+        </ListView>
+    </StackLayout>
+
 </ContentPage>
