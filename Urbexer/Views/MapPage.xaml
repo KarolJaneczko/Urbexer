@@ -6,6 +6,7 @@
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:DataType="viewmodels:MapViewModel">
 
     <!--  Strona mapy  -->
@@ -17,7 +18,7 @@
             AbsoluteLayout.LayoutFlags="All"
             HorizontalOptions="Fill"
             IsShowingUser="True"
-            ItemsSource="{Binding Locations}"
+            ItemsSource="{Binding LocationsFiltered}"
             MapClicked="Map_MapClicked"
             MapType="Hybrid"
             VerticalOptions="Fill">
@@ -31,7 +32,7 @@
                     <models:DataPin
                         x:Name="DataPin"
                         Address="{Binding Address}"
-                        Label="{Binding Description}"
+                        Label="{Binding Name}"
                         LocationId="{Binding Id}"
                         MarkerClicked="Pin_MarkerClicked"
                         Position="{Binding Position}" />
@@ -59,12 +60,15 @@
             BackgroundColor="White"
             CornerRadius="20">
             <StackLayout Orientation="Horizontal">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </StackLayout.GestureRecognizers>
                 <Image
                     HorizontalOptions="Start"
                     Source="{Binding Thumbnail}"
                     WidthRequest="100" />
                 <StackLayout VerticalOptions="Center">
-                    <Label Text="{Binding Description}" VerticalOptions="Center" />
+                    <Label Text="{Binding Name}" VerticalOptions="Center" />
                     <Label Text="{Binding Address}" VerticalOptions="Center" />
                     <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
                     <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />

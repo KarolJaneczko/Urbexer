@@ -32,7 +32,7 @@
                             Source="{Binding Thumbnail}"
                             WidthRequest="100" />
                         <StackLayout VerticalOptions="Center">
-                            <Label Text="{Binding Description}" VerticalOptions="Center" />
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
                             <Label Text="{Binding Address}" VerticalOptions="Center" />
                             <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
                             <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
@@ -43,15 +43,26 @@
         </DataTemplate>
     </ContentPage.Resources>
 
-    <ListView
-        HasUnevenRows="True"
-        ItemTemplate="{DynamicResource LocationCard}"
-        ItemsSource="{Binding Locations}">
-        <ListView.Behaviors>
-            <xct:EventToCommandBehavior
-                Command="{Binding CardSelectedCommand}"
-                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
-                EventName="ItemSelected" />
-        </ListView.Behaviors>
-    </ListView>
+    <StackLayout>
+        <SearchBar
+            x:Name="SearchBar"
+            Margin="5"
+            Background="White"
+            HorizontalOptions="Fill"
+            SearchCommand="{Binding FilterLocationsByNameCommand}"
+            SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
+        <ListView
+            HasUnevenRows="True"
+            ItemTemplate="{DynamicResource LocationCard}"
+            ItemsSource="{Binding LocationsFiltered}"
+            VerticalOptions="StartAndExpand">
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior
+                    Command="{Binding CardSelectedCommand}"
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
+                    EventName="ItemSelected" />
+            </ListView.Behaviors>
+        </ListView>
+    </StackLayout>
+
 </ContentPage>
