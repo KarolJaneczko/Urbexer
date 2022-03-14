@@ -10,22 +10,16 @@ using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.Forms;
 
-namespace Urbexer.ViewModels
-{
-    public class MapViewModel
-    {
+namespace Urbexer.ViewModels {
+    public class MapViewModel {
         public ObservableRangeCollection<Location> Locations { get; set; }
 
         public AsyncCommand<Location> CardSelectedCommand { get; }
-        public MapViewModel()
-        {
+        public MapViewModel() {
             Initialize();
-
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
         }
-
-        private  void Initialize()
-        {
+        private void Initialize() {
             Locations = new ObservableRangeCollection<Location>
             {
                 LocationService.GetLocationById(0),
@@ -34,10 +28,8 @@ namespace Urbexer.ViewModels
                 LocationService.GetLocationById(3),
             };
         }
-
-        // Przenosi do strony lokacji o odpowiednim id. Używane w komendzie CardSelectedCommand.
-        async Task CardSelected(Location location)
-        {
+        // Przenosi do strony lokacji o odpowiednim ID - używane w komendzie CardSelectedCommand.
+        async Task CardSelected(Location location) {
             if (location.Id < 0) return; // Id powinno być nieujemne.
 
             var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";

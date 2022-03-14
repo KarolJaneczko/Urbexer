@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Urbexer.Models;
 using Xamarin.Forms;
@@ -8,7 +6,6 @@ using System.ComponentModel;
 using Urbexer.Views;
 
 namespace Urbexer.ViewModels {
-
     public class SignInPageViewModel : BaseViewModel {
 
         public Action DisplayInvalidLoginPrompt;
@@ -22,7 +19,6 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("Email"));
             }
         }
-
         public string Password {
             get { return password; }
             set {
@@ -31,25 +27,47 @@ namespace Urbexer.ViewModels {
             }
         }
         public ICommand SubmitCommand { protected set; get; }
-       
-        public SignInPageViewModel()
-        {
+        public SignInPageViewModel() {
             SubmitCommand = new Command(OnSubmit);
         }
 
-        public void OnSubmit() {
-            if (email != "urbexer@gmail.com" || password != "tajne") {
-                DisplayInvalidLoginPrompt();
-            }
+        public async void OnSubmit() {
+            try {
+                ValidateEmail(email);
+                ValidatePassword(password);
 
-            else
-            {
-                Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-                Shell.Current.GoToAsync(nameof(HomePage));
+
+                if (email != "urbexer@gmail.com" || password != "tajne") {
+                    await App.Current.MainPage.DisplayAlert("Test Title", "Test", "OK");
+                    
+                }
+
+                else {
+                    Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+                    //Shell.Current.GoToAsync(nameof(HomePage));
+                }
+            }
+            catch (AppException exception) {
+                switch (exception.type) {
+                    case AppExceptionTypeEnum.EmptyField:
+                        DisplayError("Błąd przy wprowadzaniu danych.", exception.message);
+                        break;
+                }
             }
         }
-  
 
+        private void ValidateEmail(string email) {
+            if (string.IsNullOrEmpty(email)) {
+                throw new AppException("Email nie może być pusty.", AppExceptionTypeEnum.EmptyField);
+            }
+        }
+        private void ValidatePassword(string password) {
+            if (string.IsNullOrEmpty(password)) {
+                throw new AppException("Hasło nie może być puste.", AppExceptionTypeEnum.EmptyField);
+            }
+        }
+        private async void DisplayError(string title, string message) {
+            await App.Current.MainPage.DisplayAlert(title, message, "OK");
+        }
     }
-
 }

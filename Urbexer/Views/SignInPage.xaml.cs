@@ -12,7 +12,6 @@ namespace Urbexer.Views {
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             var vm = new SignInPageViewModel();
             this.BindingContext = vm;
-            vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Błąd", "Niepoprawny login lub hasło", "OK");
             InitializeComponent();
 
             Email.Completed += (object sender, EventArgs e) => {

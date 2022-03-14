@@ -9,8 +9,6 @@ namespace Urbexer {
     public partial class AppShell : Xamarin.Forms.Shell {
         public AppShell() {
             InitializeComponent();
-
-         
             Routing.RegisterRoute(nameof(LocationDetailsPage), typeof(LocationDetailsPage));
             Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
         }

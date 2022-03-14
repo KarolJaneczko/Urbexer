@@ -8,21 +8,14 @@ using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
     public partial class RegisterPage : ContentPage {
-        
-        public RegisterPage()
-        {
+        public RegisterPage() {
             InitializeComponent();
         }
-          
-        public void GoToSignIn(object sender, System.EventArgs e)
-        {
+        public void GoToSignIn(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(SignInPage));
         }
-        public void GoBack(object sender, System.EventArgs e)
-        {
+        public void GoBack(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync("//WelcomePage");
         }
-
     }
-    
 }
