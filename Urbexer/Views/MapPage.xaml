@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.MapPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="viewmodels:MapViewModel">
+
+    <!--  Strona mapy  -->
+
+    <AbsoluteLayout>
+        <maps:Map
+            x:Name="Map"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Fill"
+            IsShowingUser="True"
+            ItemsSource="{Binding LocationsFiltered}"
+            MapClicked="Map_MapClicked"
+            MapType="Hybrid"
+            VerticalOptions="Fill">
+
+            <maps:Map.BindingContext>
+                <viewmodels:MapViewModel />
+            </maps:Map.BindingContext>
+
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="models:Location">
+                    <models:DataPin
+                        x:Name="DataPin"
+                        Address="{Binding Address}"
+                        Label="{Binding Name}"
+                        LocationId="{Binding Id}"
+                        MarkerClicked="Pin_MarkerClicked"
+                        Position="{Binding Position}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
+        <Frame
+            Margin="0"
+            Padding="0"
+            AbsoluteLayout.LayoutBounds="5,5,0.96,0.07"
+            AbsoluteLayout.LayoutFlags="SizeProportional"
+            CornerRadius="20"
+            HasShadow="True"
+            IsClippedToBounds="True">
+            <SearchBar
+                Margin="5"
+                Background="White"
+                HorizontalOptions="Fill" />
+        </Frame>
+        <Frame
+            x:Name="LocationInfo"
+            x:DataType="models:Location"
+            AbsoluteLayout.LayoutBounds="0.5,0.98,0.96,0.2"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="White"
+            CornerRadius="20">
+            <StackLayout Orientation="Horizontal">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </StackLayout.GestureRecognizers>
+                <Image
+                    HorizontalOptions="Start"
+                    Source="{Binding Thumbnail}"
+                    WidthRequest="100" />
+                <StackLayout VerticalOptions="Center">
+                    <Label Text="{Binding Name}" VerticalOptions="Center" />
+                    <Label Text="{Binding Address}" VerticalOptions="Center" />
+                    <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                    <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+            <!--
+            <Frame
+            x:Key="LocationCard"
+            Margin="5"
+            Padding="3"
+            CornerRadius="10"
+            VerticalOptions="FillAndExpand">
+
+            </Frame>
+            -->
+        </Frame>
+
+    </AbsoluteLayout>
+</ContentPage>

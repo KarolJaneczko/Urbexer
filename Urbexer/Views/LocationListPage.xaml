@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.LocationListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="viewmodels:MapViewModel">
+
+    <!--  Strona wyświetlające karty lokacji w liście.  -->
+
+    <ContentPage.BindingContext>
+        <viewmodels:MapViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+        </ResourceDictionary>
+
+        <DataTemplate x:Key="LocationCard">
+            <ViewCell>
+                <Frame
+                    Margin="5"
+                    Padding="3"
+                    CornerRadius="10"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout x:DataType="models:Location" Orientation="Horizontal">
+                        <Image
+                            HorizontalOptions="Start"
+                            Source="{Binding Thumbnail}"
+                            WidthRequest="100" />
+                        <StackLayout VerticalOptions="Center">
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Label Text="{Binding Address}" VerticalOptions="Center" />
+                            <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                            <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <SearchBar
+            x:Name="SearchBar"
+            Margin="5"
+            Background="White"
+            HorizontalOptions="Fill"
+            SearchCommand="{Binding FilterLocationsByNameCommand}"
+            SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
+        <ListView
+            HasUnevenRows="True"
+            ItemTemplate="{DynamicResource LocationCard}"
+            ItemsSource="{Binding LocationsFiltered}"
+            VerticalOptions="StartAndExpand">
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior
+                    Command="{Binding CardSelectedCommand}"
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
+                    EventName="ItemSelected" />
+            </ListView.Behaviors>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

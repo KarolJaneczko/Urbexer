@@ -5,84 +5,128 @@
              xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Urbexer.Views.WelcomePage"
-             Shell.NavBarIsVisible="False">
+             Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             x:Class="Urbexer.Views.WelcomePage">
 
-    
-        <Grid>
-            <o:VideoPlayer x:Name="BackgroundVideo" 
+
+
+    <Grid>
+
+        <CarouselView x:Name="backOnboarding" 
+                              IndicatorView="LandingIndicatorBackGround"
+                              ItemsSource= "{Binding Onboardings}"
+                              VerticalOptions="End">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <IndicatorView x:Name="LandingIndicatorBackGround"                             
+                               IndicatorsShape="Square"                              
+                               SelectedIndicatorColor="Transparent"/>
+        <!--<o:VideoPlayer x:Name="BackgroundVideo"
                            AutoPlay="True"
                            DisplayControls="False"
-                           Source="https://i.imgur.com/UIe3Oue.mp4"
+                           Source="https://i.imgur.com/OxhpWeK.mp4/"
                            Repeat="True" 
-                           Volume="0"/>
-            <BoxView>
-                <BoxView.Background>
-                    <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                        <GradientStop Color="Transparent" Offset="0"/>
-                        <GradientStop Color="black" Offset="0.9"/>
-                        <GradientStop Color="black" Offset="1.2"/>
-                    </LinearGradientBrush>
-                </BoxView.Background>
-            </BoxView>
-            <Grid RowDefinitions="Auto, Auto, Auto" 
-                  HeightRequest="280" 
-                  Margin="30,30,30,100"
-                  RowSpacing="20" 
+                           Volume="0"/>-->
+
+
+
+        <Frame Padding="0"
+                   HeightRequest="125"
+                   WidthRequest="125"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   CornerRadius="25"
+                   
+               BackgroundColor="Transparent"
+                   Margin="0,50,0, 600">
+            <Image Source="app_logo.png"
+                                 Aspect="AspectFill"/>
+        </Frame>
+
+        <BoxView>
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                    <GradientStop Color="Transparent" Offset="0"/>
+                    <GradientStop Color="black" Offset="0.6"/>
+                    <GradientStop Color="black" Offset="1.8"/>
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <Grid RowDefinitions="Auto, Auto, Auto" 
+                  HeightRequest="360"
+                  Margin="30,30,30,0"
+                  RowSpacing="30" 
                   VerticalOptions="End">
-                <CarouselView x:Name="cvOnboarding" 
+            <CarouselView x:Name="cvOnboarding" 
                               IndicatorView="LandingIndicator"
                               ItemsSource= "{Binding Onboardings}"
                               VerticalOptions="End">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Spacing="20">
-                                
+                <CarouselView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <StackLayout x:Name="captions"
+                                Margin="0,50,0,0">
+
                             <Label Text="{Binding Heading}"
                                    TextColor="white"
-                                   FontSize="24" 
+                                   FontSize="28" 
                                    FontAttributes="Bold" 
                                    WidthRequest="300" 
                                    HorizontalOptions="Start"/>
                             <Label Text="{Binding Caption}"
                                    Margin="20,0,0,0"
                                    TextColor="White" 
-                                   FontSize="12" 
+                                   FontSize="16" 
                                    FontAttributes="Bold"
-                                   WidthRequest="250" 
+                                   WidthRequest="200" 
                                    HorizontalOptions="Start"/>
 
-                            </StackLayout>
 
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                <IndicatorView x:Name="LandingIndicator" 
+                        </StackLayout>
+
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="LandingIndicator"
+                            
                                Grid.Row="1" 
-                               IndicatorsShape="Circle"
+                               IndicatorsShape="Square"
                                IndicatorColor="White" 
                                SelectedIndicatorColor="#ef233c"/>
-                    <StackLayout Grid.Row="2" 
-                                 Margin="25,0,25,0"
+            <StackLayout x:Name="buttons" 
+                                 Grid.Row="2"         
                                  Orientation="Vertical" 
-                                 Spacing="30" VerticalOptions="End">
-                        <Button Text="Logowanie" 
-                                Clicked="WelcomeSignInPressed"
+                                 Spacing="25" 
+                                 
+                                 VerticalOptions="End">
+                <Button                                
+                            Text="Logowanie" 
+                                FontSize="18"                       
+                                Clicked="GoToSignInPage"
                                 HeightRequest="50" 
                                 WidthRequest="200"
                                 BackgroundColor="#ef233c"
                                 TextColor="White" 
                                 CornerRadius="25" 
                                 FontAttributes="Bold"/>
-                        <Button Text="Rejestracja"                               
-                                Clicked="WelcomeSignUpPressed"
+                <Button Text="Rejestracja"     
+                                FontSize="18"
+                                Clicked="GoToRegisterPage"
                                 HeightRequest="50" 
                                 WidthRequest="200"
                                 BackgroundColor="white"
                                 TextColor="black" 
                                 CornerRadius="25" 
                                 FontAttributes="Bold"/>
-                    </StackLayout>
-            </Grid>
+            </StackLayout>
         </Grid>
+    </Grid>
 </ContentPage>
