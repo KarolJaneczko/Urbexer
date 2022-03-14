@@ -1,4 +1,4 @@
-﻿using APIpz.entities;
+﻿using APIpz.Entities;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 

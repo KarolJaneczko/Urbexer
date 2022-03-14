@@ -31,7 +31,7 @@ namespace APIpz.Services
 
         public List<Miejsce> GetAll()
         {
-            var wynik = _context.Miejsce.ToList();
+            var wynik = _context.Miejsca.ToList();
             return wynik;
         }
 
