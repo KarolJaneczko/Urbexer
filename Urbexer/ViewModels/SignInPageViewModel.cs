@@ -44,7 +44,7 @@ namespace Urbexer.ViewModels {
 
                 else {
                     Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-                    //Shell.Current.GoToAsync(nameof(HomePage));
+                    await Shell.Current.GoToAsync(nameof(HomePage));
                 }
             }
             catch (AppException exception) {
