@@ -6,12 +6,9 @@ using Urbexer.Models;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms.Maps;
 
-namespace Urbexer.Services
-{
-    public class LocationService
-    {
-        public static Location GetLocationById(int id)
-        {
+namespace Urbexer.Services {
+    public class LocationService {
+        public static Location GetLocationById(int id) {
             var location = GetTestLocation(id);
             return location;
         }
@@ -22,16 +19,13 @@ namespace Urbexer.Services
             return location;
         }
         */
-        public static string[] GetImagesById(int id)
-        {
+        public static string[] GetImagesById(int id) {
             return GetTestImageLinks();
         }
-        private static Location GetTestLocation(int id)
-        {
+        private static Location GetTestLocation(int id) {
             string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
 
-            switch (id)
-            {
+            switch (id) {
                 case 0:
                     return new Location { Address = "Juliusza Słowackiego 1/3", Name = "DS6", Position = new Position(53.01279100718829, 18.596184269318496), Thumbnail = placeholder_image, Id = 0 };
                 case 1:
@@ -41,12 +35,9 @@ namespace Urbexer.Services
                 case 3:
                     return new Location { Address = "Toruń, ds10, Polska", Name = "DS10", Position = new Position(53.01959018140275, 18.57689926136301), Thumbnail = placeholder_image, Id = 3 };
             }
-
             return null;
         }
-
-        private static string[] GetTestImageLinks()
-        {
+        private static string[] GetTestImageLinks() {
             string[] links =  {
                 "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530",
                 "https://media.discordapp.net/attachments/129713358382301184/942607881671442432/2Q.png",
