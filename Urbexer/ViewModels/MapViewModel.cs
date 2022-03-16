@@ -45,6 +45,7 @@ namespace Urbexer.ViewModels
 
         private void ClearFilter()
         {
+            LocationsFiltered.Clear();
             foreach (var location in Locations)
             {
                 LocationsFiltered.Add(location);

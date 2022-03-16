@@ -3,3 +3,6 @@ obj
 *.user
 .vs
 /UrbexerAPI/API/bin/Release/net6.0
+bin/
+Builds/
+
