@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Urbexer.Models;
 using Urbexer.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
     public partial class SignInPage : ContentPage {
@@ -26,7 +22,7 @@ namespace Urbexer.Views {
             Shell.Current.GoToAsync(nameof(RegisterPage));
         }
         public void GoBack(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//WelcomePage");
+            Shell.Current.GoToAsync(nameof(WelcomePage));
         }
     }
 }
