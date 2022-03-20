@@ -1,21 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Urbexer.Models;
 using Urbexer.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
     public partial class RegisterPage : ContentPage {
         public RegisterPage() {
+            var vm = new RegisterPageModel();
+            this.BindingContext = vm;
             InitializeComponent();
+
+            Login.Completed += (object sender, EventArgs e) => {
+                Email.Focus();
+            };
+            Email.Completed += (object sender, EventArgs e) => {
+                Password.Focus();
+            };
+            Password.Completed += (object sender, EventArgs e) => {
+                PasswordRepeat.Focus();
+            };
+            PasswordRepeat.Completed += (object sender, EventArgs e) => {
+                vm.SubmitCommand.Execute(null);
+            };
         }
-        public void GoToSignIn(object sender, System.EventArgs e) {
+        public void GoToSignIn(object sender, EventArgs e) {
             Shell.Current.GoToAsync(nameof(SignInPage));
         }
-        public void GoBack(object sender, System.EventArgs e) {
-            Shell.Current.GoToAsync("//WelcomePage");
+        public void GoBack(object sender, EventArgs e) {
+            Shell.Current.GoToAsync(nameof(WelcomePage));
         }
     }
 }
