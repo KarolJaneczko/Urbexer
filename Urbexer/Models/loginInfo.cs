@@ -5,6 +5,6 @@ using System.Text;
 namespace Urbexer.Models {
     public class LoginInfo {
         public string Login { get; set; }
-        private string LoginHash { get; set; }
+        private string LoginToken { get; set; }
     }
 }
