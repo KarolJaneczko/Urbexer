@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using Urbexer.Models;
+﻿using Urbexer.Models;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms.Maps;
 using Urbexer.Services;
