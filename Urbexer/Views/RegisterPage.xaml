@@ -54,7 +54,7 @@
                                 <Frame BackgroundColor="#ef233c" CornerRadius="50"  HeightRequest="35" WidthRequest="35" Padding="0" Margin="5">
                                     <Image Source="login_icon.png" Aspect="AspectFill" Margin="0"/>
                                 </Frame>
-                                <Entry x:Name="Login"  Placeholder="Login" PlaceholderColor="#ef233c" TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
+                                <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login" PlaceholderColor="#ef233c" TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
                             </StackLayout>
                         </Frame>
                         <Label Text="Email"/>
@@ -84,12 +84,12 @@
                                 <Frame BackgroundColor="#ef233c" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" Margin="5">
                                     <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
                                 </Frame>
-                                <Entry x:Name="RepeatPassword" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
+                                <Entry x:Name="PasswordRepeat" Text="{Binding PasswordRepeat}" Placeholder="Hasło" PlaceholderColor="#ef233c" IsPassword="True"  TextColor="#ef233c" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
 
                             </StackLayout>
                         </Frame>
                     </StackLayout>
-                    <Button                                       
+                    <Button Command="{Binding SubmitCommand}"                                  
                     Text="Zarejestruj"                                                       
                     BorderColor="Black"                           
                     BackgroundColor="#ef233c"

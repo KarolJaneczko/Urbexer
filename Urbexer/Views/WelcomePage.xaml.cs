@@ -45,14 +45,11 @@ namespace Urbexer.Views {
                 });
             };
         }
-
         public void GoToSignInPage(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(SignInPage));
         }
         public void GoToRegisterPage(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(RegisterPage));
         }
-
     }
-
 }
