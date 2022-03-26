@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
+using System.Linq;
+using System;
 
 namespace Urbexer.Services {
     public class ConnectionService {
@@ -18,27 +20,54 @@ namespace Urbexer.Services {
         public async Task<bool> Login(Login login, HttpClient httpClient) {
             var myJson = JsonConvert.SerializeObject(login);
             var content = new StringContent(myJson, Encoding.UTF8, "application/json");
-            var result = await httpClient.PostAsync("https://urbexerapimgm.azure-api.net/Urbex/api/account/login", content);
-            if (result.StatusCode == System.Net.HttpStatusCode.InternalServerError) {
-                //throw new AppException("Wprowadzono nieprawidłowe dane logowania.", AppExceptionTypeEnum.LoginError);
+            var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", content);
+            ValidateResult(result, OperationTypeEnum.Logowanie);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK) {
+                var resultContent = await result.Content.ReadAsStringAsync();
+                UserInfo.loginInfo = new LoginInfo(login.login, resultContent);
+                UserInfo.isAdmin = false;
                 return true;
             }
-            return false;
-            /* Po naprawieniu kwestii internal server errora - po udanym zalogowaniu jak zwrocimy 200 to return true
-            var resultContent = await result.Content.ReadAsStringAsync();
-            potem wyżej odkomentować
-            */
+            else
+                return false;
         }
         public async Task<bool> Register(RegisterUser registerUser, HttpClient httpClient) {
             var myJson = JsonConvert.SerializeObject(registerUser);
             var content = new StringContent(myJson, Encoding.UTF8, "application/json");
-            var result = await httpClient.PostAsync("https://urbexerapimgm.azure-api.net/Urbex/api/account/register", content);
-            if (result.StatusCode == System.Net.HttpStatusCode.InternalServerError) {
-                //throw new AppException("Wprowadzono nieprawidłowe dane do rejestracji.", AppExceptionTypeEnum.LoginError);
+            var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/register/", content);
+            ValidateResult(result, OperationTypeEnum.Rejetracja);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
+            else
+                return false;
+        }
+        public async void ValidateResult(HttpResponseMessage result, OperationTypeEnum operation) {
+            try {
+                AppExceptionTypeEnum exceptionType = AppExceptionTypeEnum.UnspecifiedError;
+                var message = string.Empty;
+                switch (operation) {
+                    case OperationTypeEnum.Rejetracja:
+                        exceptionType = AppExceptionTypeEnum.RegistrationError;
+                        message = "Wystąpił błąd podczas rejestracji.\nLogin oraz adres mailowy muszą być unikalne.";
+                        break;
+                    case OperationTypeEnum.Logowanie:
+                        exceptionType = AppExceptionTypeEnum.LoginError;
+                        message = "Błędny login lub hasło.";
+                        break;
+                }
+                if (result.StatusCode == System.Net.HttpStatusCode.BadRequest) {
+                    throw new AppException(message, exceptionType);
+                }
+                if (result.StatusCode == System.Net.HttpStatusCode.InternalServerError) {
+                    throw new AppException("Wystąpił błąd połączenia z serwerem.", exceptionType);
+                }
             }
-            return false;
-            /* to samo co wyzej */
+            catch (AppException exception) {
+                await App.Current.MainPage.DisplayAlert(exception.title, exception.message, "OK");
+            }
+            catch (Exception exception) {
+                await App.Current.MainPage.DisplayAlert("Wystąpił nieoczekiwany błąd.", exception.Message.ToString(), "OK");
+            }
         }
     }
 }

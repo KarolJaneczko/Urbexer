@@ -61,7 +61,7 @@ namespace Urbexer.ViewModels {
                         hasloHash = PasswordRepeat,
                         czyAdmin = false
                     }, connectionService.httpClient) == true) {
-                        /* kodzior po udanej rejestracji aby zatwierdzic rejestracje */
+                        await App.Current.MainPage.DisplayAlert("Sukces", "Rejestracja zakończyła się powodzeniem.", "OK");
                     }
                 }
                 else {
