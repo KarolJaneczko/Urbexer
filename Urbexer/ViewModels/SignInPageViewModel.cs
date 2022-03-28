@@ -12,13 +12,13 @@ namespace Urbexer.ViewModels {
         public Action DisplayInvalidLoginPrompt;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         ConnectionService connectionService = new ConnectionService();
-        private string email;
+        private string login;
         private string password;
-        public string Email {
-            get { return email; }
+        public string Login {
+            get { return login; }
             set {
-                email = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                login = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Login"));
             }
         }
         public string Password {
@@ -35,10 +35,10 @@ namespace Urbexer.ViewModels {
 
         public async void OnSubmit() {
             try {
-                ValidateEmail(email);
+                ValidateLogin(login);
                 ValidatePassword(password);
                 if (await connectionService.Login(new Login {
-                    login = email,
+                    login = login,
                     password = password
                 }, connectionService.httpClient) == true) {
                     Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
@@ -52,18 +52,18 @@ namespace Urbexer.ViewModels {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
         }
-        private void ValidateEmail(string email) {
-            if (string.IsNullOrEmpty(email)) {
-                throw new AppException("Email nie może być pusty.", AppExceptionTypeEnum.EmptyField);
+        private void ValidateLogin(string login) {
+            if (string.IsNullOrEmpty(login)) {
+                throw new AppException("Login nie może być pusty.", AppExceptionTypeEnum.EmptyField);
             }
-            else if (email.Length < 6) {
-                throw new AppException("Email jest za krótki.", AppExceptionTypeEnum.InvalidMinCredLength);
+            else if (login.Length < 6) {
+                throw new AppException("Login jest za krótki.", AppExceptionTypeEnum.InvalidMinCredLength);
             }
-            else if (email.Length > 30) {
-                throw new AppException("Email jest za długi.", AppExceptionTypeEnum.InvalidMaxCredLength);
+            else if (login.Length > 30) {
+                throw new AppException("Login jest za długi.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
-            else if (!AppException.CheckMail(email)) {
-                throw new AppException("Zły format adresu mailowego.", AppExceptionTypeEnum.InvalidMailFormat);
+            else if (!AppException.CheckSpecialChars(login)) {
+                throw new AppException("Login nie może mieć znaków specjalnych innych niż '_'.", AppExceptionTypeEnum.InvalidLoginFormat);
             }
         }
         private void ValidatePassword(string password) {

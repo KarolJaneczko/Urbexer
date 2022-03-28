@@ -1,47 +1,264 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
              x:Class="Urbexer.Views.ProfilePage">
 
-    
+
+
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="black" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowDefinitions="Auto, *" >
+            <Grid
+                    HeightRequest="320"
+                    RowDefinitions="Auto, Auto"
+                    RowSpacing="0"
+                    BackgroundColor="#ef233c">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                        <GradientStop Color="#ef233c" Offset="0.2"/>
+                        <GradientStop Color="white" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                
+                    <Button HorizontalOptions="EndAndExpand" FontSize="10" VerticalOptions="StartAndExpand" WidthRequest="45" HeightRequest="45" CornerRadius="30" Text="Edytuj" Padding="-10" IsVisible="True" Margin="0,50,70,0" >
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
-                </ContentView>
-            </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Start developing now" FontSize="Title"/>
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
-                <Label FontSize="16" Padding="0,24,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Learn more at "/>
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
-                        Command="{Binding OpenWebCommand}"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-            </StackLayout>
-        </ScrollView>
-    </Grid>
+                    </Button>
+                
+                <!--przycisk do edycji profilu, ustawienie parametru isVisible na false jeśli ogląda inny user--> 
+                
+                <Frame BackgroundColor="#ddffffff" HeightRequest="100" HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="StartAndExpand" CornerRadius="80" WidthRequest="100" Margin="0,30,0,5"></Frame>
+                <Frame Margin="0,40,0,5"
+                       Padding="0"
+                       
+                        BackgroundColor="Black"                       
+                        CornerRadius="80"
+                        HeightRequest="120"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="StartAndExpand"
+                        WidthRequest="120">
+                    <Image Source="login_icon" Aspect="AspectFill"  >
+                        <!--<Image.Source >
+                    <UriImageSource
+                               CacheValidity="14"
+                               CachingEnabled="True"
+                               Uri="{Binding ProfileImage}" />
+                           
+                    </Image.Source>-->
+                    </Image>
+                
+                </Frame>
+                <!--</Frame>-->
+                <Label
+                    FontFamily="Lobster-Regular"
+                        FontAttributes="Bold"                        
+                        Grid.Row="1"
+                        Margin="0,15,0,2"
+                        FontSize="24"
+                        LineHeight="-2"
+                        Style="{StaticResource TitleLabelStyle}"                      
+                        Text="RafalekB" />
+                <!-- tu daj binding na nick uzytkowanika Text="{Binding username}"-->
 
+            </Grid>
+
+            <Grid>
+
+                <StackLayout Margin="0,300,0,0" 
+                             Padding="0" 
+                             BackgroundColor="Transparent"
+                             VerticalOptions="EndAndExpand"  >
+                    <Frame CornerRadius="20">
+                        <StackLayout Margin="0,55,0,100"
+                                     Spacing="30"
+                                     VerticalOptions="Center">
+                            <Frame CornerRadius="10" BackgroundColor="#cc000000">
+                                <Frame BorderColor="Black" BackgroundColor="#ffffff"  HeightRequest="75" CornerRadius="10" Padding="0" Margin="-16" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                    <Grid                                 
+                                    ColumnDefinitions="*,*,*"
+                                    HeightRequest="75"
+                                    ColumnSpacing="10"                         
+                                    RowDefinitions="*,*"
+                                    VerticalOptions="CenterAndExpand"
+                                    Padding="0,0,0,0"
+                                    Margin="5"                                   
+                                    RowSpacing="5">
+                                        <Label                                      
+                                        Grid.ColumnSpan="2"
+                                        Grid.RowSpan="2"
+                                        VerticalOptions="Center"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        FontSize="14"                              
+                                        Text="Pozytywne Oceny" />
+                                        <Label
+                                        Grid.Column="4"
+                                        HeightRequest="26"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        FontSize="18"                                       
+                                        Text="Ilość"
+                                        VerticalOptions="End" />
+                                        <Label           
+                                        Grid.Column="4"
+                                        Grid.Row="1"
+                                        FontSize="14"                              
+                                        Text="Miejsce" />
+                                        <Frame           
+                                        Grid.Column="5" 
+                                        Grid.RowSpan="2" 
+                                        BackgroundColor="#ef233c" 
+                                        CornerRadius="50" 
+                                        HeightRequest="50"
+                                        WidthRequest="50" 
+                                        Padding="0"
+                                        Margin="5">
+                                            <Image Source="email_icon.png" Margin="0"/>
+                                        </Frame>
+                                            
+                                    </Grid>
+                                </StackLayout>
+                                </Frame>
+                            </Frame>
+                            <Frame CornerRadius="10" BackgroundColor="#cc000000">
+                            <Frame BorderColor="Black" BackgroundColor="#ffffff"  HeightRequest="75" CornerRadius="10" Padding="0" Margin="-16" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <Grid                                 
+                                    ColumnDefinitions="*,*,*"
+                                    HeightRequest="75"
+                                    ColumnSpacing="10"                         
+                                    RowDefinitions="*,*"
+                                    VerticalOptions="CenterAndExpand"
+                                    Padding="0,0,0,0"
+                                    Margin="5"                                   
+                                    RowSpacing="5">
+                                        <Label                                      
+                                        Grid.ColumnSpan="2"
+                                        Grid.RowSpan="2"
+                                        VerticalOptions="Center"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        FontSize="14"                              
+                                        Text="Odwiedzone Miejsca" />
+                                        <Label
+                                        Grid.Column="4"
+                                        HeightRequest="26"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        FontSize="18"                                       
+                                        Text="Ilość"
+                                        VerticalOptions="End" />
+                                        <Label           
+                                        Grid.Column="4"
+                                        Grid.Row="1"
+                                        FontSize="14"                              
+                                        Text="Miejsce" />
+                                        <Frame
+                                        Grid.Column="5" 
+                                        Grid.RowSpan="2" 
+                                        BackgroundColor="#ef233c" 
+                                        CornerRadius="50" 
+                                        HeightRequest="50"
+                                        WidthRequest="50" 
+                                        Padding="0"
+                                        Margin="5">
+                                            <Image Source="email_icon.png" Margin="0"/>
+                                        </Frame>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                            </Frame>
+                            <Frame BackgroundColor="#cfffffff"  CornerRadius="10" Padding="0" Margin="0,0,0,5" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Margin="30,240,30,0">
+                    
+                    <Frame CornerRadius="0" HeightRequest="70">
+                        <Grid ColumnDefinitions="*,Auto,*,Auto,*"
+                      Margin="-18"
+                      Padding="5,0,5,0"
+                      HeightRequest="90"
+                      RowSpacing="0"
+                      ColumnSpacing="10"
+                      RowDefinitions="*,*"
+                      BackgroundColor="Black"
+                      >
+                            <Label Text="Bocian"
+                                   HeightRequest="24"
+                                   TextColor="White"
+                                   VerticalOptions="EndAndExpand"
+                                   HorizontalOptions="Center">
+
+                            </Label>
+                            <Label Grid.Row="1"
+                                    FontSize="10"
+                                    TextColor="White"
+                                    Text="Imię"
+                                   HorizontalOptions="Center">
+                            </Label>
+                            <BoxView
+                                Margin="0,25,0,25"
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                BackgroundColor="white"
+                                WidthRequest="1"                               
+                                HeightRequest="24"
+                                HorizontalOptions="Center"
+                                 />
+                            <Label Grid.Row="0" Grid.Column="2"
+                                   Text="53"
+                                   HeightRequest="24"
+                                   TextColor="White"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="Center">
+                            </Label>
+                            <Label Grid.Row="1" Grid.Column="2"
+                                FontSize="10"
+                                TextColor="White"
+                                Text="Wiek"
+                                   HorizontalOptions="Center">
+                            </Label>
+                            <BoxView
+                                Margin="0,25,0,25"
+                                Grid.RowSpan="2"
+                                Grid.Column="3"
+                                BackgroundColor="white"
+                                WidthRequest="1"                               
+                                HeightRequest="24"
+                                HorizontalOptions="Center"
+                                 />
+                            <Label Grid.Row="0" Grid.Column="4" 
+                                   Text="Toruń"
+                                   HeightRequest="24"
+                                   TextColor="White"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="Center">
+                            </Label>
+                            <Label Grid.Row="1" Grid.Column="4"
+                                FontSize="10"
+                                TextColor="White"
+                                Text="Miasto"
+                                   HorizontalOptions="Center">
+                            </Label>
+
+                        </Grid>
+                    </Frame>
+
+                </StackLayout>
+            </Grid>
+
+        </Grid>
+
+    </ScrollView>
 </ContentPage>

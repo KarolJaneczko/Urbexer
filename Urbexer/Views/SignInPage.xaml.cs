@@ -10,7 +10,7 @@ namespace Urbexer.Views {
             this.BindingContext = vm;
             InitializeComponent();
 
-            Email.Completed += (object sender, EventArgs e) => {
+            Login.Completed += (object sender, EventArgs e) => {
                 Password.Focus();
             };
 
