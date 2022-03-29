@@ -37,7 +37,7 @@ namespace APIpz.Services
         public async Task RegisterUser(RegisterUserDto dto)
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var kod = new char[8];
+            var kod = new char[5];
             var random = new Random();
 
             for (int i = 0; i < kod.Length; i++)
@@ -106,18 +106,20 @@ namespace APIpz.Services
 
         public void ConfirmUser(ConfirmUserDto dto)
         {
-            var user = _context.Uzytkownik.FirstOrDefault(u => u.KodPotwierdzajacyRejestracje == dto.KodPotwierdzajacy);
+            var user = _context.Uzytkownik.FirstOrDefault(u => u.Email == dto.Email);
             if (user is null)
             {
-                throw new BadRequestException("niepoprawny kod");
+                throw new BadRequestException("niepoprawne dane");
             }
             if (user.CzyKontoAktywne == true)
             {
                 throw new BadRequestException("konto zostało juz aktywowane");
             }
-
-            user.CzyKontoAktywne = true;
-            _context.SaveChanges();
+            if (user.KodPotwierdzajacyRejestracje == dto.KodPotwierdzajacy)
+            {
+                user.CzyKontoAktywne = true;
+                _context.SaveChanges();
+            }
         }
     }
 
