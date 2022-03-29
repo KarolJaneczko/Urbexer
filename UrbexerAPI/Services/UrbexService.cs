@@ -39,13 +39,13 @@ namespace APIpz.Services
 
         public List<Miejsce> GetAll()
         {
-            var wynik = _context.Miejsca.ToList();
+            var wynik = _context.Miejsce.ToList();
             return wynik;
         }
 
         public void DodajOdwiedzone(DodajOdwiedzoneDto dto)
         {
-            var urbex = _context.Miejsca.FirstOrDefault(u => u.Nazwa == dto.NazwaUrbexu);
+            var urbex = _context.Miejsce.FirstOrDefault(u => u.Nazwa == dto.NazwaUrbexu);
             _context.Attach(urbex);
 
             var noweOdwiedzone = new Odwiedzony()

@@ -10,22 +10,16 @@ using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Urbexer.Services;
 
-namespace Urbexer.Views
-{
+namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MapPage : ContentPage
-    {
+    public partial class MapPage : ContentPage {
         // Pokazuje kartę z informacjami o lokacji w zależności od id. -1 chowa karte.
         private int currentPinId = -1;
-        public int CurrentPinId
-        {
-            get
-            { return currentPinId; }
-            set
-            {
+        public int CurrentPinId {
+            get { return currentPinId; }
+            set {
                 currentPinId = value;
-                if (value <= -1)
-                {
+                if (value <= -1) {
                     currentPinId = -1;
                     LocationInfo.IsVisible = false;
                     return;
@@ -36,8 +30,7 @@ namespace Urbexer.Views
                 LocationInfo.BindingContext = LocationService.GetLocationById(value);
             }
         }
-        public MapPage()
-        {
+        public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
 
@@ -51,8 +44,7 @@ namespace Urbexer.Views
             Map.MoveToRegion(mapSpan);
 
             // Przykładowa prosta pinezka
-            Pin pin = new Pin
-            {
+            Pin pin = new Pin {
                 Label = "Spawn",
                 Address = "Startowa pozycja kamery",
                 Type = PinType.Place,
@@ -62,8 +54,7 @@ namespace Urbexer.Views
 
             Map_JumpTo_Address("Toruń");
         }
-        private void Map_MapClicked(object sender, MapClickedEventArgs e)
-        {
+        private void Map_MapClicked(object sender, MapClickedEventArgs e) {
             /*
             // Zmiana pozycji ekranu bez zmieniania poziomu zooma
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
@@ -74,38 +65,33 @@ namespace Urbexer.Views
         }
 
         // 
-        public void Map_MoveTo_Position(Position position)
-        {
+        public void Map_MoveTo_Position(Position position) {
             if (Map == null || Map.VisibleRegion == null) return;
             // Zmiana pozycji ekranu bez zmieniania poziomu zooma
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(position.Latitude, position.Longitude),
                 Map.VisibleRegion.Radius));
         }
-        public async void Map_MoveTo_Address(string address)
-        {
+        public async void Map_MoveTo_Address(string address) {
             Geocoder geocoder = new Geocoder();
             IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
             Map_MoveTo_Position(possiblePositions.FirstOrDefault());
         }
 
         // Reinstance the map in another position
-        public void Map_JumpTo_Position(Position position)
-        {
+        public void Map_JumpTo_Position(Position position) {
             float radius = 0.5f;
             MapSpan mapspan = MapSpan.FromCenterAndRadius(
                 position, Distance.FromKilometers(radius));
             Map.MoveToRegion(mapspan);
         }
-        public async void Map_JumpTo_Address(string address)
-        {
+        public async void Map_JumpTo_Address(string address) {
             Geocoder geocoder = new Geocoder();
             IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
             Map_JumpTo_Position(possiblePositions.FirstOrDefault());
         }
 
-        private void Pin_MarkerClicked(object sender, PinClickedEventArgs e)
-        {
+        private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
             //e.HideInfoWindow = true;
             DataPin pin = sender as DataPin;
             CurrentPinId = pin.LocationId;

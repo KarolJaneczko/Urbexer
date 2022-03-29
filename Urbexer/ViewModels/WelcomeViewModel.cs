@@ -26,8 +26,6 @@ namespace Urbexer.ViewModels {
         public string Caption { get; set; }
         public string Image { get; set; }
     }
-
-
 }
 
 
