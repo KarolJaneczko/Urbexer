@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
-using System.Linq;
 using System;
+using Newtonsoft.Json;
 
 namespace Urbexer.Services {
     public class ConnectionService {
@@ -57,8 +56,9 @@ namespace Urbexer.Services {
                 }
                 if (result.StatusCode == System.Net.HttpStatusCode.BadRequest) {
                     throw new AppException(message, exceptionType);
-                }
-                if (result.StatusCode == System.Net.HttpStatusCode.InternalServerError) {
+                } else if (result.StatusCode == System.Net.HttpStatusCode.NotFound){
+                    throw new AppException(message, exceptionType);
+                } else if (result.StatusCode == System.Net.HttpStatusCode.InternalServerError) {
                     throw new AppException("Wystąpił błąd połączenia z serwerem.", exceptionType);
                 }
             }
