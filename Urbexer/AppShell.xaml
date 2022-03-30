@@ -38,12 +38,12 @@
     </Shell.FlyoutHeaderTemplate>
    
     
-    <FlyoutItem Title="Profil" Icon="ProfileIcon1.png" FlyoutDisplayOptions="AsSingleItem">
+    <FlyoutItem Title="Profil" Icon="ProfileIcon1.png" FlyoutDisplayOptions="AsSingleItem" >
         <Tab Title="Podgląd" Icon="homepage_icon">
             <ShellContent ContentTemplate="{DataTemplate local:MapPage}" />
         </Tab>
-        <Tab Title="Edytuj" Icon="MapIcon1">
-            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+        <Tab Title="Profil" Icon="MapIcon1">
+            <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" />
         </Tab>
         <Tab Title="Edytuj" Icon="MapIcon1">
             <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
@@ -65,14 +65,12 @@
             Route="MapPage" />
         </Tab>
         <Tab Title="Lista lokacji" Icon="SearchIcon1">
-        <ShellContent
+            <ShellContent
             x:Name="LocationList"
             ContentTemplate="{DataTemplate local:LocationListPage}"
             Route="LocationListPage" />
         </Tab>
     </FlyoutItem>
-
-
 
     <MenuItem Text="Wyloguj się" IconImageSource="LogoutIcon1.png" Clicked="ClickedLogout"></MenuItem>
    

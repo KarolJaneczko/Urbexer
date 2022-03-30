@@ -12,7 +12,7 @@ namespace APIpz.Entities
         }
 
         public DbSet<Uzytkownik> Uzytkownik { get; set; }
-        public DbSet<Miejsce> Miejsca { get; set; }
+        public DbSet<Miejsce> Miejsce { get; set; }
         public DbSet<Opinia> Opinia { get; set; }
         public DbSet<Zdjecie> Zdjecie { get; set; }
         public DbSet<Ranking> Ranking { get; set; }

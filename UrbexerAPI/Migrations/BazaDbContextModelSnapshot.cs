@@ -49,9 +49,6 @@ namespace APIpz.Migrations
                     b.Property<int?>("Trudnosc")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UzytkownikId")
-                        .HasColumnType("int");
-
                     b.Property<float>("WspolrzedneLAT")
                         .HasColumnType("real");
 
@@ -64,8 +61,6 @@ namespace APIpz.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Miejsce_KategoriaId");
-
-                    b.HasIndex("UzytkownikId");
 
                     b.HasIndex("ZdjecieId");
 
@@ -87,6 +82,29 @@ namespace APIpz.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Miejsce_kategoria");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Odwiedzony", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("OdwiedzonePrzezId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OdwiedzonyUrbexId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OdwiedzonePrzezId");
+
+                    b.HasIndex("OdwiedzonyUrbexId");
+
+                    b.ToTable("Odwiedzone");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Opinia", b =>
@@ -198,12 +216,7 @@ namespace APIpz.Migrations
                     b.Property<byte[]>("Obraz")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int?>("UzytkownikId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UzytkownikId");
 
                     b.ToTable("Zdjecie");
                 });
@@ -216,10 +229,6 @@ namespace APIpz.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APIpz.Entities.Uzytkownik", null)
-                        .WithMany("Odwiedzone")
-                        .HasForeignKey("UzytkownikId");
-
                     b.HasOne("APIpz.Entities.Zdjecie", "Zdjecie")
                         .WithMany()
                         .HasForeignKey("ZdjecieId");
@@ -227,6 +236,25 @@ namespace APIpz.Migrations
                     b.Navigation("Miejsce_Kategoria");
 
                     b.Navigation("Zdjecie");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Odwiedzony", b =>
+                {
+                    b.HasOne("APIpz.Entities.Uzytkownik", "OdwiedzonePrzez")
+                        .WithMany()
+                        .HasForeignKey("OdwiedzonePrzezId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("APIpz.Entities.Miejsce", "OdwiedzonyUrbex")
+                        .WithMany()
+                        .HasForeignKey("OdwiedzonyUrbexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OdwiedzonePrzez");
+
+                    b.Navigation("OdwiedzonyUrbex");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Opinia", b =>
@@ -246,20 +274,6 @@ namespace APIpz.Migrations
                     b.Navigation("Miejsce");
 
                     b.Navigation("Uzytkownik");
-                });
-
-            modelBuilder.Entity("APIpz.Entities.Zdjecie", b =>
-                {
-                    b.HasOne("APIpz.Entities.Uzytkownik", null)
-                        .WithMany("Zdjecia")
-                        .HasForeignKey("UzytkownikId");
-                });
-
-            modelBuilder.Entity("APIpz.Entities.Uzytkownik", b =>
-                {
-                    b.Navigation("Odwiedzone");
-
-                    b.Navigation("Zdjecia");
                 });
 #pragma warning restore 612, 618
         }
