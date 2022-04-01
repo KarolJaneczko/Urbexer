@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
@@ -8,20 +9,60 @@ using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
     public class LocationService {
+        public HttpClientHandler clientHandler;
+        public HttpClient httpClient;
+        public LocationService() {
+            clientHandler = new HttpClientHandler {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+            httpClient = new HttpClient(clientHandler);
+        }
+
+        // Funkcje do pobierania list lokacji
+
+        // Pobierz wszystkie lokacje z bazy danych
+        public async Task<List<Location>> GetAllLocations() {
+            List<Location> locations = new List<Location>();
+            HttpResponseMessage result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/getall/");
+            //foreach (var location in result.result) {
+            //    locations.Add(location);
+            //}
+            return locations;
+        }
+        // Pobierz lokacje w okolicy danej pozycji
+        public async Task<List<Location>> GetLocationsInArea(Position position) {
+            List<Location> locations = new List<Location>();
+            HttpResponseMessage result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/"); // TODO Uzupełnić adres
+            //foreach (var location in result.result) {
+            //    locations.Add(location);
+            //}
+            return locations;
+        }
+        // Pobierz lokacje z danego województwa
+        public async Task<List<Location>> GetLocationsByProvince(Position position) {
+            List<Location> locations = new List<Location>();
+            HttpResponseMessage result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/");
+            //foreach (var location in result.result) {
+            //    locations.Add(location);
+            //}
+            return locations;
+        }
+
+        // Funkcje do pobierania konkretnej lokacji
+
+        // Pobierz szczegóły lokacji o danym id
         public static Location GetLocationById(int id) {
+            // TODO Zmodyfikować pod działanie z bazą danych
             var location = GetTestLocation(id);
             return location;
         }
-        /*
-        public static async Task<Location> GetLocationById(int id)
-        {
-            var location = GetTestLocation(id);
-            return location;
-        }
-        */
+        // Pobierz zdjęcia lokacji o danym id
         public static string[] GetImagesById(int id) {
+            // TODO Zmodyfikować pod działanie z bazą danych
             return GetTestImageLinks();
         }
+        
+        // Poniższe funkcje są do testowania. Ostatecznie do usunięcia
         private static Location GetTestLocation(int id) {
             string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
 
