@@ -46,7 +46,8 @@
             AbsoluteLayout.LayoutFlags="SizeProportional"
             CornerRadius="20"
             HasShadow="True"
-            IsClippedToBounds="True">
+            IsClippedToBounds="True"
+            IsVisible="false">
             <SearchBar
                 Margin="5"
                 Background="White"

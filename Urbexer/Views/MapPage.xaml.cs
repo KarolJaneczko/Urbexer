@@ -43,15 +43,6 @@ namespace Urbexer.Views {
             mapSpan = MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.444));
             Map.MoveToRegion(mapSpan);
 
-            // Przykładowa prosta pinezka
-            Pin pin = new Pin {
-                Label = "Spawn",
-                Address = "Startowa pozycja kamery",
-                Type = PinType.Place,
-                Position = position
-            };
-            Map.Pins.Add(pin);
-
             Map_JumpTo_Address("Toruń");
         }
         private void Map_MapClicked(object sender, MapClickedEventArgs e) {
@@ -92,7 +83,7 @@ namespace Urbexer.Views {
         }
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
-            //e.HideInfoWindow = true;
+            e.HideInfoWindow = true;
             DataPin pin = sender as DataPin;
             CurrentPinId = pin.LocationId;
         }

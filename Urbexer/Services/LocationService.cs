@@ -30,10 +30,9 @@ namespace Urbexer.Services {
             if (response.StatusCode == System.Net.HttpStatusCode.OK) {
                 var result = response.Content.ReadAsStringAsync().Result;
                 var content = JsonConvert.DeserializeObject<APILocation[]>(result);
-                /*
-                foreach (var location in myJson) {
-                    locations.Add(location);
-                }*/
+                foreach (var location in content) {
+                    locations.Add(new Location(location));
+                }
             }
             return locations;
         }
@@ -47,7 +46,7 @@ namespace Urbexer.Services {
             return locations;
         }
         // Pobierz lokacje z danego województwa
-        public async Task<List<Location>> GetLocationsByProvince(Position position) {
+        public async Task<List<Location>> GetLocationsByProvince(string province) {
             List<Location> locations = new List<Location>();
             HttpResponseMessage result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/");
             //foreach (var location in result.result) {
