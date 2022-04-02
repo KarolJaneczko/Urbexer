@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
+using Urbexer.Models.ApiModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms.Maps;
 
@@ -23,10 +25,15 @@ namespace Urbexer.Services {
         // Pobierz wszystkie lokacje z bazy danych
         public async Task<List<Location>> GetAllLocations() {
             List<Location> locations = new List<Location>();
-            HttpResponseMessage result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/getall/");
-            //foreach (var location in result.result) {
-            //    locations.Add(location);
-            //}
+            HttpResponseMessage response = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/getall/",
+                HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+                var result = response.Content.ReadAsStringAsync().Result;
+                var content = JsonConvert.DeserializeObject<APILocation[]>(result);
+                foreach (var location in content) {
+                    locations.Add(new Location(location));
+                }
+            }
             return locations;
         }
         // Pobierz lokacje w okolicy danej pozycji
@@ -39,7 +46,7 @@ namespace Urbexer.Services {
             return locations;
         }
         // Pobierz lokacje z danego województwa
-        public async Task<List<Location>> GetLocationsByProvince(Position position) {
+        public async Task<List<Location>> GetLocationsByProvince(string province) {
             List<Location> locations = new List<Location>();
             HttpResponseMessage result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/");
             //foreach (var location in result.result) {
