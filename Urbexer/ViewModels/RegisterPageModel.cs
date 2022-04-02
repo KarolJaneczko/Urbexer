@@ -62,6 +62,7 @@ namespace Urbexer.ViewModels {
                         czyAdmin = false
                     }, connectionService.httpClient) == true) {
                         await App.Current.MainPage.DisplayAlert("Sukces", "Rejestracja zakończyła się powodzeniem.", "OK");
+                        //Tu będzie metoda ustawiająca CzyKontoAktywne na true wysyłając Login.
                     }
                 }
                 else {

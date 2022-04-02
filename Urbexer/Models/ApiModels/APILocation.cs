@@ -14,6 +14,5 @@ namespace Urbexer.Models.ApiModels {
         //public int trudnosc;
         //public int doswiadczenie;
         //public string link;
-
     }
 }

@@ -32,7 +32,7 @@ namespace Urbexer.Models {
                 ImageLinks.Add(new ImageLink { Link = s });
             }
         }
-        // Konwertuj lokacje z bazy danych
+        // Konwertuj lokacje z bazy danych.
         public Location(APILocation apiLoc) {
             Address = apiLoc.adres;
             Name = apiLoc.nazwa;

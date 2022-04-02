@@ -23,8 +23,7 @@ namespace Urbexer.Services {
             ValidateResult(result, OperationTypeEnum.Logowanie);
             if (result.StatusCode == System.Net.HttpStatusCode.OK) {
                 var resultContent = await result.Content.ReadAsStringAsync();
-                UserInfo.loginInfo = new LoginInfo(login.login, resultContent);
-                UserInfo.isAdmin = false;
+                LoginInfo.SetLoginCredentials(login.login, resultContent);
                 return true;
             }
             else

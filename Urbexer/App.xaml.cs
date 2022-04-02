@@ -14,7 +14,7 @@ namespace Urbexer {
         }
         protected override void OnStart() {
             //Shell.Current.GoToAsync(nameof(WelcomePage));
-            Shell.Current.GoToAsync(nameof(MapPage));
+            Shell.Current.GoToAsync(nameof(HomePage));
         }
         protected override void OnSleep() {
         }
