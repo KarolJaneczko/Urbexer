@@ -10,8 +10,14 @@
 
     <!--  Strona wyświetlające karty lokacji w liście.  -->
 
+    <!--  Nieudane próby wsadzenia pola wyszukiwania do paska nawigacji  -->
     <NavigationPage.TitleView>
-        <Slider HeightRequest="44" WidthRequest="300" />
+        <StackLayout
+            HeightRequest="100"
+            Orientation="Horizontal"
+            WidthRequest="100">
+            <Slider HeightRequest="100" WidthRequest="300" />
+        </StackLayout>
     </NavigationPage.TitleView>
 
     <ContentPage.BindingContext>
