@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Urbexer.Views
-{
+namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RankingPage : ContentPage
-    {
-        public RankingPage()
-        {
+    public partial class RankingPage : ContentPage {
+        public RankingPage() {
             InitializeComponent();
         }
     }

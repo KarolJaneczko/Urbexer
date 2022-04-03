@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Urbexer.Models;
-using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Urbexer.Services;
+using Xamarin.Essentials;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -88,20 +86,16 @@ namespace Urbexer.Views {
             CurrentPinId = pin.LocationId;
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
             var route = $"{nameof(LocationDetailsPage)}?LocationId={currentPinId}";
             Shell.Current.GoToAsync(route);
         }
 
-        protected override bool OnBackButtonPressed()
-        {
-            if (CurrentPinId == -1)
-            {
+        protected override bool OnBackButtonPressed() {
+            if (CurrentPinId == -1) {
                 return base.OnBackButtonPressed();
             }
-            else
-            {
+            else {
                 CurrentPinId = -1;
                 return true;
             }

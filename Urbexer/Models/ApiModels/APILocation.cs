@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Urbexer.Models.ApiModels {
     public class APILocation {
@@ -14,6 +12,5 @@ namespace Urbexer.Models.ApiModels {
         //public int trudnosc;
         //public int doswiadczenie;
         //public string link;
-
     }
 }

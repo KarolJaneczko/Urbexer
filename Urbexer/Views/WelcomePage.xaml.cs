@@ -1,10 +1,6 @@
 ﻿using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using Octane.Xamarin.Forms.VideoPlayer;
-using System.IO;
-using System;
 using System.Timers;
 
 namespace Urbexer.Views {
@@ -13,7 +9,7 @@ namespace Urbexer.Views {
         Timer timer;
         public WelcomePage() {
             InitializeComponent();
-            this.BindingContext = new WelcomeViewModel();
+            BindingContext = new WelcomeViewModel();
             Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             AnimatedInfoCarousel();

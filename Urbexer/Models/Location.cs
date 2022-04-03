@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms.Maps;
-using System.ComponentModel;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Urbexer.Services;
 using Urbexer.Models.ApiModels;
@@ -32,7 +29,7 @@ namespace Urbexer.Models {
                 ImageLinks.Add(new ImageLink { Link = s });
             }
         }
-        // Konwertuj lokacje z bazy danych
+        // Konwertuj lokacje z bazy danych.
         public Location(APILocation apiLoc) {
             Address = apiLoc.adres;
             Name = apiLoc.nazwa;
