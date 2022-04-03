@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.OS;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
 using Android;
+using System.Threading.Tasks;
 
 namespace Urbexer.Droid {
     [Activity(Label = "Urbexer", Icon = "@drawable/app_icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
@@ -23,13 +24,13 @@ namespace Urbexer.Droid {
         }
         protected override void OnStart() {
             base.OnStart();
-
             if ((int)Build.VERSION.SdkInt >= 23) {
                 if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted) {
                     RequestPermissions(LocationPermissions, RequestLocationId);
-                }
-                else {
-                    // Permissions already granted - display a message.
+                    if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted) {
+                        System.Threading.Thread.Sleep(2000);
+                        Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Uwaga!", "Do poprawnego działania aplikacji wymagane jest udzielenie permisji do pobierania danych dotyczących lokalizacji.", "OK");
+                    }
                 }
             }
         }

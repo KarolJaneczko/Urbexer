@@ -4,28 +4,25 @@ using Urbexer.Models;
 using Xamarin.Forms;
 using System.ComponentModel;
 using Urbexer.Models.ApiModels;
-using Urbexer.Services;
 using Urbexer.Views;
 
 namespace Urbexer.ViewModels {
     public class SignInPageViewModel : BaseViewModel {
-        public Action DisplayInvalidLoginPrompt;
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        ConnectionService connectionService = new ConnectionService();
+        public event PropertyChangedEventHandler _PropertyChanged = delegate { };
         private string login;
         private string password;
         public string Login {
             get { return login; }
             set {
                 login = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Login"));
+                _PropertyChanged(this, new PropertyChangedEventArgs("Login"));
             }
         }
         public string Password {
             get { return password; }
             set {
                 password = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                _PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
         public ICommand SubmitCommand { protected set; get; }
@@ -40,7 +37,7 @@ namespace Urbexer.ViewModels {
                 if (await connectionService.Login(new Login {
                     login = login,
                     password = password
-                }, connectionService.httpClient) == true) {
+                }, httpClient) == true) {
                     Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
                     await Shell.Current.GoToAsync(nameof(HomePage));
                 }

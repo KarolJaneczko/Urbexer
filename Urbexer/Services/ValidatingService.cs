@@ -29,7 +29,7 @@ namespace Urbexer.Services {
                 return true;
         }
         public async void DisplayError(string title, string message) {
-            await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, message, "OK");
+       await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, message, "OK");    
         }
         public async void ValidateConnectionResult(HttpResponseMessage result, OperationTypeEnum operation) {
             try {
