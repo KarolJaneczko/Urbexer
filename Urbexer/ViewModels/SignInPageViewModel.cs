@@ -52,33 +52,5 @@ namespace Urbexer.ViewModels {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
         }
-        private void ValidateLogin(string login) {
-            if (string.IsNullOrEmpty(login)) {
-                throw new AppException("Login nie może być pusty.", AppExceptionTypeEnum.EmptyField);
-            }
-            else if (login.Length < 6) {
-                throw new AppException("Login jest za krótki.", AppExceptionTypeEnum.InvalidMinCredLength);
-            }
-            else if (login.Length > 30) {
-                throw new AppException("Login jest za długi.", AppExceptionTypeEnum.InvalidMaxCredLength);
-            }
-            else if (!AppException.CheckSpecialChars(login)) {
-                throw new AppException("Login nie może mieć znaków specjalnych innych niż '_'.", AppExceptionTypeEnum.InvalidLoginFormat);
-            }
-        }
-        private void ValidatePassword(string password) {
-            if (string.IsNullOrEmpty(password)) {
-                throw new AppException("Hasło nie może być puste.", AppExceptionTypeEnum.EmptyField);
-            }
-            else if (password.Length < 6) {
-                throw new AppException("Hasło nie może być krótsze niż 6 znaków.", AppExceptionTypeEnum.InvalidMinCredLength);
-            }
-            else if (password.Length > 12) {
-                throw new AppException("Hasło nie może być dłuższe niż 12 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
-            }
-        }
-        private async void DisplayError(string title, string message) {
-            await App.Current.MainPage.DisplayAlert(title, message, "OK");
-        }
     }
 }

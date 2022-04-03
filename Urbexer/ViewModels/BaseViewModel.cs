@@ -7,7 +7,7 @@ using Urbexer.Services;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
-    public class BaseViewModel : INotifyPropertyChanged {
+    public class BaseViewModel : ValidatingService, INotifyPropertyChanged {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         bool isBusy = false;
         string title = string.Empty;

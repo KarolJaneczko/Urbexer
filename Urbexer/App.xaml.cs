@@ -1,9 +1,8 @@
-﻿using System;
-using Urbexer;
+﻿using Plugin.Connectivity;
+using System;
 using Urbexer.Services;
 using Urbexer.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Urbexer {
     public partial class App : Application {
@@ -11,6 +10,8 @@ namespace Urbexer {
             InitializeComponent();
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+            var seconds = TimeSpan.FromSeconds(10);
+            Device.StartTimer(seconds, () => { CheckConnection(); return true; });
         }
         protected override void OnStart() {
             //Shell.Current.GoToAsync(nameof(WelcomePage));
@@ -19,6 +20,12 @@ namespace Urbexer {
         protected override void OnSleep() {
         }
         protected override void OnResume() {
+        }
+        public async void CheckConnection() {
+            if (!CrossConnectivity.Current.IsConnected)
+                await Current.MainPage.DisplayAlert("Błąd połączenia", "Do poprawnego działania aplikacji jest wymagane połączenie z internetem.", "OK");
+            else
+                return;
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Urbexer.Models {
     public static class LoginInfo {
@@ -8,9 +6,9 @@ namespace Urbexer.Models {
         public static string loginToken { get; set; }
         public static bool isAdmin { get; set; }
 
-        public static void SetLoginCredentials(string userLogin, string userLoginToken) {
-            login = userLogin;
-            loginToken = userLoginToken;
+        public static void SetLoginCredentials(string _login, string _loginToken) {
+            login = _login;
+            loginToken = _loginToken;
             isAdmin = false;
         }
     }

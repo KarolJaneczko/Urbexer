@@ -121,9 +121,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\InfoIcon2.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\MapIcon1.png" />
   </ItemGroup>
