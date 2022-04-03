@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Urbexer.Services;
+using Xamarin.Essentials;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]

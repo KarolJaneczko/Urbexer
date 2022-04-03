@@ -11,11 +11,11 @@ namespace Urbexer {
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
             var seconds = TimeSpan.FromSeconds(10);
-            Device.StartTimer(seconds, () => { CheckConnection(); return true; });
+            Device.StartTimer(seconds, () => { CheckConnection(); return true; }); 
         }
         protected override void OnStart() {
-            //Shell.Current.GoToAsync(nameof(WelcomePage));
-            Shell.Current.GoToAsync(nameof(HomePage));
+            Shell.Current.GoToAsync(nameof(WelcomePage));
+            //Shell.Current.GoToAsync(nameof(HomePage));
         }
         protected override void OnSleep() {
         }
