@@ -9,6 +9,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Urbexer.Services;
+using Xamarin.Essentials;
+using Map = Xamarin.Forms.Maps.Map;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -34,16 +36,17 @@ namespace Urbexer.Views {
             InitializeComponent();
             CurrentPinId = -1;
 
-            // Konstruowanie mapy
-            Position position = new Position(37.79752, -122.40183);
-            // MapSpan to obszar mapy o danej pozycji(position) pokazujący obszar obejmujący
-            // daną wysokość(0.01) i długość(0.01) geograficzną
-            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-            //Map map = new Map(mapSpan);
-            mapSpan = MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.444));
-            Map.MoveToRegion(mapSpan);
-
-            Map_JumpTo_Address("Toruń");
+            // Spróbuj ustawić pozycje mapy na pozycje użytkownika
+            try {
+                Xamarin.Essentials.Location location = Geolocation.GetLastKnownLocationAsync().Result;
+                if (location != null) {
+                    MapSpan mapSpan = MapSpan.FromCenterAndRadius(
+                        new Position(location.Latitude, location.Longitude), Distance.FromKilometers(2));
+                    map.MoveToRegion(mapSpan);
+                }
+            } catch (Exception ex){
+                DefaultPositionFallback();
+            }
         }
         private void Map_MapClicked(object sender, MapClickedEventArgs e) {
             /*
@@ -55,13 +58,23 @@ namespace Urbexer.Views {
             Map_MoveTo_Position(e.Position);
         }
 
+        // Ustaw mapę na środek Polski
+        private async void DefaultPositionFallback() {
+            string default_address = "Polska";
+            Geocoder geocoder = new Geocoder();
+            IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(default_address);
+            // 350km to mw. połowa szerokości Polski
+            MapSpan mapSpan = MapSpan.FromCenterAndRadius(possiblePositions.FirstOrDefault(), Distance.FromKilometers(350));
+            map.MoveToRegion(mapSpan);
+        }
+
         // 
         public void Map_MoveTo_Position(Position position) {
-            if (Map == null || Map.VisibleRegion == null) return;
+            if (map == null || map.VisibleRegion == null) return;
             // Zmiana pozycji ekranu bez zmieniania poziomu zooma
-            Map.MoveToRegion(MapSpan.FromCenterAndRadius(
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(position.Latitude, position.Longitude),
-                Map.VisibleRegion.Radius));
+                map.VisibleRegion.Radius));
         }
         public async void Map_MoveTo_Address(string address) {
             Geocoder geocoder = new Geocoder();
@@ -74,7 +87,7 @@ namespace Urbexer.Views {
             float radius = 0.5f;
             MapSpan mapspan = MapSpan.FromCenterAndRadius(
                 position, Distance.FromKilometers(radius));
-            Map.MoveToRegion(mapspan);
+            map.MoveToRegion(mapspan);
         }
         public async void Map_JumpTo_Address(string address) {
             Geocoder geocoder = new Geocoder();
@@ -83,7 +96,7 @@ namespace Urbexer.Views {
         }
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
-            e.HideInfoWindow = true;
+            //e.HideInfoWindow = true;
             DataPin pin = sender as DataPin;
             CurrentPinId = pin.LocationId;
         }
@@ -94,17 +107,11 @@ namespace Urbexer.Views {
             Shell.Current.GoToAsync(route);
         }
 
-        protected override bool OnBackButtonPressed()
-        {
-            if (CurrentPinId == -1)
-            {
-                return base.OnBackButtonPressed();
-            }
-            else
-            {
-                CurrentPinId = -1;
-                return true;
-            }
+        // Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
+        protected override bool OnBackButtonPressed(){
+            if (CurrentPinId == -1) return base.OnBackButtonPressed();
+            CurrentPinId = -1;
+            return true;
         }
     }
 }
