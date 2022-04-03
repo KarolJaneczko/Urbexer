@@ -29,17 +29,17 @@
                 <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource SelectedColor}"/>
             </Style>
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
-            
+
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="white" />
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Padding" Value="-20"/>
             </Style>
-            
+
             <Style
                 TargetType="Layout"
                 ApplyToDerivedTypes="True" 
-                Class="FlyoutItemLayoutStyle">  
+                Class="FlyoutItemLayoutStyle">
                 <Setter
                     Property="HeightRequest"
                     Value="54"/>
@@ -49,11 +49,11 @@
 
                 <Setter
                     Property="VisualStateManager.VisualStateGroups">
-                    
+
                     <VisualStateGroupList>
                         <VisualStateGroup
                 x:Name="CommonStates">
-                            
+
                             <VisualState
                     x:Name="Normal">
                                 <VisualState.Setters>
@@ -77,8 +77,8 @@
                         Value="5"/>
                                     <Setter Property="MinimumHeightRequest"
                                             Value="60"/>
-                                   
-                                    
+
+
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState
@@ -94,20 +94,20 @@
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
-                
+
 
             </Style>
         </ResourceDictionary>
-        
+
     </Shell.Resources>
 
-   
+
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
 
             <Grid ColumnDefinitions="*,*,125  ,*,*"
                   RowDefinitions="25,125,25">
-                
+
                 <Grid.Background>
                     <LinearGradientBrush
                         StartPoint="0,0"
@@ -118,10 +118,10 @@
                                       Offset="0.5"/>
                         <GradientStop Color="#363636"
                                       Offset="1.0"/>
-                        
+
                     </LinearGradientBrush>
 
-               
+
                 </Grid.Background>
                 <Frame Grid.Column="2"
                        Grid.ColumnSpan="1"
@@ -139,48 +139,43 @@
                        Padding="10" >
                         <Image Source="app_logo.png" Aspect="AspectFit"/>
                     </Frame>
-                </Frame> 
+                </Frame>
 
-               
+
 
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
 
-<!--Strona Główna-->
-    <FlyoutItem  Title="Start" 
+    <!--Strona Główna-->
+    <FlyoutItem Title="Start"
                 Icon="homepage_icon.png"
-                FlyoutDisplayOptions="AsSingleItem"
-                 >
-
-        <ShellContent  ContentTemplate="{DataTemplate local:ProfilePage}" />
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
     </FlyoutItem>
-    
+
     <!--Mapa-->
     <FlyoutItem Title="Lokacje" 
                 Icon="pin_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
-        <Tab Title="Mapa" 
-             Icon="map_icon.png">
-            <ShellContent
-            x:Name="Map"
-            ContentTemplate="{DataTemplate local:MapPage}"
-            Route="MapPage" />
+        
+        <Tab Title="Mapa" Icon="map_icon.png">
+            <ShellContent x:Name="Map" ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage"/>
         </Tab>
-        <Tab Title="Lista lokacji" 
-             Icon="locationlist_icon">
-            <ShellContent
-            x:Name="LocationList"
-            ContentTemplate="{DataTemplate local:LocationListPage}"
-            Route="LocationListPage" />
+        
+        <Tab Title="Lista lokacji" Icon="locationlist_icon">
+            <ShellContent x:Name="LocationList" ContentTemplate="{DataTemplate local:LocationListPage}" Route="LocationListPage" />
         </Tab>
     </FlyoutItem>
+    
+    <!--Profil-->
     <FlyoutItem Title="Profil" 
                 Icon="profile_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
-
     </FlyoutItem>
+    
+    
     <FlyoutItem Title="Ranking" 
                 Icon="cup_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
@@ -191,18 +186,18 @@
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
     </FlyoutItem>
-    
-   
-    
+
+
+
     <MenuItem
               Text="Wyloguj się" 
               IconImageSource="LogoutIcon1.png" 
               Clicked="ClickedLogout">
     </MenuItem>
 
-   
-           
-     
+
+
+
 
     <Shell.FlyoutFooter>
         <Grid RowDefinitions="*,*,*"

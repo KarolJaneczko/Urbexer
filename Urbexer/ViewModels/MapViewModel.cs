@@ -1,6 +1,5 @@
 ﻿using Urbexer.Models;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Xamarin.Forms.Maps;
 using Urbexer.Services;
 using System.Threading.Tasks;
 using Urbexer.Views;
