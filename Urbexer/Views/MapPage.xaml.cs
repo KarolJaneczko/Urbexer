@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Urbexer.Models;
-using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -83,12 +80,10 @@ namespace Urbexer.Views {
             CurrentPinId = pin.LocationId;
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
             var route = $"{nameof(LocationDetailsPage)}?LocationId={currentPinId}";
             Shell.Current.GoToAsync(route);
         }
-
         // Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
         protected override bool OnBackButtonPressed(){
             if (CurrentPinId == -1) return base.OnBackButtonPressed();

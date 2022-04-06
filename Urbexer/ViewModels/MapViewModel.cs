@@ -1,16 +1,13 @@
 ﻿using Urbexer.Models;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Xamarin.Forms.Maps;
 using Urbexer.Services;
 using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.Forms;
 using System.Windows.Input;
 
-namespace Urbexer.ViewModels
-{
-    public class MapViewModel
-    {
+namespace Urbexer.ViewModels {
+    public class MapViewModel {
         public ObservableRangeCollection<Location> Locations { get; set; } // Przechowuje wszystkie wczytane lokacje
         public ObservableRangeCollection<Location> LocationsFiltered { get; set; } // Przechowuje wyświetlane lokacje
 
@@ -34,7 +31,7 @@ namespace Urbexer.ViewModels
         }
 
         // Funkcje i zmienne filtrowania
-        
+
         string currentNameFilter = "";
 
         // Odśwież filtry
@@ -69,11 +66,11 @@ namespace Urbexer.ViewModels
             await Shell.Current.GoToAsync(route);
         }
 
-        public ICommand FilterLocationsByNameCommand => 
+        public ICommand FilterLocationsByNameCommand =>
             new Command<string>(async (string query) => {
-            //SetFilterByName(query);
+                //SetFilterByName(query);
                 currentNameFilter = query;
                 ApplyFilters();
-        });
+            });
     }
 }

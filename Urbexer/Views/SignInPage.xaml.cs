@@ -7,7 +7,7 @@ namespace Urbexer.Views {
         public SignInPage() {
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             var vm = new SignInPageViewModel();
-            this.BindingContext = vm;
+            BindingContext = vm;
             InitializeComponent();
 
             Login.Completed += (object sender, EventArgs e) => {

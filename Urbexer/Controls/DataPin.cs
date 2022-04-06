@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 
 namespace Urbexer.Models {
     public class DataPin : Xamarin.Forms.Maps.Pin {

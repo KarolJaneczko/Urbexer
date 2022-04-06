@@ -1,25 +1,13 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
-using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
-    public class LocationService {
-        public HttpClientHandler clientHandler;
-        public HttpClient httpClient;
-        public LocationService() {
-            clientHandler = new HttpClientHandler {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
-            };
-            httpClient = new HttpClient(clientHandler);
-        }
-
+    public class LocationService : ConnectionService {
         // Funkcje do pobierania list lokacji
 
         // Pobierz wszystkie lokacje z bazy danych

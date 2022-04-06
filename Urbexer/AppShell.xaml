@@ -4,7 +4,11 @@
        xmlns:local="clr-namespace:Urbexer.Views"
        Title="Urbexer"
        x:Class="Urbexer.AppShell"       
-       xmlns:sys="clr-namespace:System;assembly=netstandard">
+       xmlns:sys="clr-namespace:System;assembly=netstandard"
+       BackgroundColor="black"
+       FlyoutBackgroundColor="Black"
+       FlyoutBehavior="Flyout">
+
 
 
     <Shell.Resources>
@@ -13,77 +17,198 @@
             <Color x:Key="WhiteColor">White</Color>
             <Color x:Key="GrayColor">Gray</Color>
             <Color x:Key="BlackColor">Black</Color>
-            
             <Style x:Key="BaseStyle" TargetType="Element">
-              
+
                 <!--góra-->
-               
+
                 <!--ikona menu-->
-                
+
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BlackColor}" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource GrayColor}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource SelectedColor}" />
                 <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource SelectedColor}"/>
             </Style>
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
+
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="white" />
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="-20"/>
+            </Style>
+
+            <Style
+                TargetType="Layout"
+                ApplyToDerivedTypes="True" 
+                Class="FlyoutItemLayoutStyle">
+                <Setter
+                    Property="HeightRequest"
+                    Value="54"/>
+                <Setter Property="Padding" Value="-20"/>
+
+
+
+                <Setter
+                    Property="VisualStateManager.VisualStateGroups">
+
+                    <VisualStateGroupList>
+                        <VisualStateGroup
+                x:Name="CommonStates">
+
+                            <VisualState
+                    x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter
+                                    Property="BackgroundColor"
+                                    Value="#363636" />
+                                    <Setter Property="Padding"
+                        Value="5"/>
+                                    <Setter Property="MinimumHeightRequest"
+                                            Value="60"/>
+
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState
+                    x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter
+                            Property="BackgroundColor"
+                            Value="#B52435" />
+                                    <Setter Property="Padding"
+                        Value="5"/>
+                                    <Setter Property="MinimumHeightRequest"
+                                            Value="60"/>
+
+
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState
+                    x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter
+                                    Property="BackgroundColor"
+                                    Value="#003049" />
+                                    <Setter Property="Padding"
+                        Value="10"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+
+
+            </Style>
         </ResourceDictionary>
+
     </Shell.Resources>
+
 
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <ContentView BackgroundColor="{StaticResource SelectedColor}" HeightRequest="140">
-                <Image Source="app_logo.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            </ContentView>
+
+            <Grid ColumnDefinitions="*,*,125  ,*,*"
+                  RowDefinitions="25,125,25">
+
+                <Grid.Background>
+                    <LinearGradientBrush
+                        StartPoint="0,0"
+                        EndPoint="0,1">
+                        <GradientStop Color="#103049"
+                                      Offset="0.0"/>
+                        <GradientStop Color="Gray"
+                                      Offset="0.5"/>
+                        <GradientStop Color="#363636"
+                                      Offset="1.0"/>
+
+                    </LinearGradientBrush>
+
+
+                </Grid.Background>
+                <Frame Grid.Column="2"
+                       Grid.ColumnSpan="1"
+                       Grid.Row="1" 
+                       Padding="1"
+                       CornerRadius="35"
+                       HasShadow="True">
+                    <Frame Background="#B52435" 
+                       Grid.Column="2" 
+                       Grid.Row="1" 
+                       VerticalOptions="Center" 
+                       CornerRadius="35" 
+                       BorderColor="white"
+                       HasShadow="True"
+                       Padding="10" >
+                        <Image Source="app_logo.png" Aspect="AspectFit"/>
+                    </Frame>
+                </Frame>
+
+
+
+            </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
-   
-    
-    <FlyoutItem Title="Profil" Icon="ProfileIcon1.png" FlyoutDisplayOptions="AsSingleItem" >
-        <Tab Title="Podgląd" Icon="homepage_icon">
-            <ShellContent ContentTemplate="{DataTemplate local:MapPage}" />
-        </Tab>
-        <Tab Title="Profil" Icon="MapIcon1">
-            <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" />
-        </Tab>
-        <Tab Title="Edytuj" Icon="MapIcon1">
-            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
-        </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Mapa" Icon="MapIcon1.png" FlyoutDisplayOptions="AsSingleItem">
-        <Tab Title="Podgląd" Icon="homepage_icon">
-            <ShellContent ContentTemplate="{DataTemplate local:InfoPage}" />
-        </Tab>
-        <Tab Title="Szukaj" Icon="MapIcon1">
-            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
-        </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Mapa">
-        <Tab Title="Szukaj" Icon="MapIcon1">
-            <ShellContent
-            x:Name="Map"
-            ContentTemplate="{DataTemplate local:MapPage}"
-            Route="MapPage" />
-        </Tab>
-        <Tab Title="Lista lokacji" Icon="SearchIcon1">
-            <ShellContent
-            x:Name="LocationList"
-            ContentTemplate="{DataTemplate local:LocationListPage}"
-            Route="LocationListPage" />
-        </Tab>
+
+    <!--Strona Główna-->
+    <FlyoutItem Title="Start"
+                Icon="homepage_icon.png"
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
     </FlyoutItem>
 
-    <MenuItem Text="Wyloguj się" IconImageSource="LogoutIcon1.png" Clicked="ClickedLogout"></MenuItem>
-   
-            <!--<ShellContent Route="WelcomePage" ContentTemplate="{DataTemplate local:WelcomePage}" />-->
-            <!--<ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />-->
-     
+    <!--Mapa-->
+    <FlyoutItem Title="Lokacje" 
+                Icon="pin_icon.png" 
+                FlyoutDisplayOptions="AsSingleItem">
+        
+        <Tab Title="Mapa" Icon="map_icon.png">
+            <ShellContent x:Name="Map" ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage"/>
+        </Tab>
+        
+        <Tab Title="Lista lokacji" Icon="locationlist_icon">
+            <ShellContent x:Name="LocationList" ContentTemplate="{DataTemplate local:LocationListPage}" Route="LocationListPage" />
+        </Tab>
+    </FlyoutItem>
+    
+    <!--Profil-->
+    <FlyoutItem Title="Profil" 
+                Icon="profile_icon.png" 
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
+    </FlyoutItem>
+    
+    
+    <FlyoutItem Title="Ranking" 
+                Icon="cup_icon.png" 
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:RankingPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="O nas" 
+                Icon="info_icon.png" 
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
+    </FlyoutItem>
+
+
+
+    <MenuItem
+              Text="Wyloguj się" 
+              IconImageSource="LogoutIcon1.png" 
+              Clicked="ClickedLogout">
+    </MenuItem>
+
+
+
+
 
     <Shell.FlyoutFooter>
-        <StackLayout>
+        <Grid RowDefinitions="*,*,*"
+              RowSpacing="5">
             <Label Text="Urbexer" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" />
-            <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:HH:mm, dd.MM.yyyy}'}"
+            <Label Margin="0,0,0,0"  Grid.Row="1" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dd.MM.yyyy}'}"
                TextColor="White"
                HorizontalOptions="Center"/>
-        </StackLayout>
+            <Label Margin="0,0,0,0"  Grid.Row="2" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:HH:mm}'}"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+        </Grid>
     </Shell.FlyoutFooter>
 </Shell>

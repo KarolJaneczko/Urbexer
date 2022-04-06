@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Urbexer.Models {
-    public class LoginInfo {
-        public string login { get; set; }
-        public string loginToken { get; set; }
-        public LoginInfo(string login, string loginToken) {
-            this.login = login;
-            this.loginToken = loginToken;
+    public static class LoginInfo {
+        public static string login { get; set; }
+        public static string loginToken { get; set; }
+        public static bool isAdmin { get; set; }
+
+        public static void SetLoginCredentials(string _login, string _loginToken) {
+            login = _login;
+            loginToken = _loginToken;
+            isAdmin = false;
         }
     }
 }
