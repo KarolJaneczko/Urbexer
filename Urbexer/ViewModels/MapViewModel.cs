@@ -21,25 +21,16 @@ namespace Urbexer.ViewModels
             _locationService = new LocationService();
             LocationsFiltered = new ObservableRangeCollection<Location> { };
 
-            InitializeLocations();
+            InitializeLocations().Wait();
 
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
             //FilterLocationByNameCommand = new Command<string>(FilterLocationsByName);
         }
 
         // Funkcja do pierwotnego zapełnienia mapy
-        private void InitializeLocations() {
+        private async Task InitializeLocations() {
             Locations = new ObservableRangeCollection<Location>(_locationService.GetAllLocations().Result);
             ClearFilter();
-
-            /*           
-            Locations = new ObservableRangeCollection<Location>
-            {
-                LocationService.GetLocationById(0),
-                LocationService.GetLocationById(1),
-                LocationService.GetLocationById(2),
-                LocationService.GetLocationById(3),
-            };*/
         }
 
         // Funkcje i zmienne filtrowania
