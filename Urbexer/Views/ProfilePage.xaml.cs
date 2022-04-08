@@ -13,13 +13,15 @@ namespace Urbexer.Views {
         public ProfilePage()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(EditProfilePage), typeof(EditProfilePage));
             this.BindingContext = new ProfileViewModel();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        public void GoEditProfile(object sender, System.EventArgs e)
         {
-
+            Shell.Current.GoToAsync(nameof(EditProfilePage));
         }
+        
     }
        
 }

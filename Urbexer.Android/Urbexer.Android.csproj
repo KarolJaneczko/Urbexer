@@ -191,6 +191,10 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\overlay.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\editprofile_icon.png" />
+    <AndroidResource Include="Resources\drawable\profiledetails_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
