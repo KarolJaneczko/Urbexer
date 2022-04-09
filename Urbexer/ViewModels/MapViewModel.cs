@@ -13,9 +13,9 @@ namespace Urbexer.ViewModels {
 
         public AsyncCommand<Location> CardSelectedCommand { get; }
         //public Command<string> FilterLocationByNameCommand { get; }
-        private readonly LocationService _locationService;
+        protected readonly LocationService locationService;
         public MapViewModel() {
-            _locationService = new LocationService();
+            locationService = new LocationService();
             LocationsFiltered = new ObservableRangeCollection<Location> { };
 
             InitializeLocations().Wait();
@@ -25,22 +25,17 @@ namespace Urbexer.ViewModels {
         }
 
         // Funkcja do pierwotnego zapełnienia mapy
-        private async Task InitializeLocations() {
-            Locations = new ObservableRangeCollection<Location>(_locationService.GetAllLocations().Result);
+        protected async Task InitializeLocations() {
+            Locations = new ObservableRangeCollection<Location>(locationService.GetAllLocations().Result);
             ClearFilter();
         }
 
         // Funkcje i zmienne filtrowania
 
-        string currentNameFilter = "";
+        protected string currentNameFilter = "";
 
-        // Odśwież filtry
-        private void ApplyFilters() {
-            ClearFilter();
-            SetFilterByName(currentNameFilter);
-        }
         // Usuń filtrowanie lokacji
-        private void ClearFilter() {
+        protected void ClearFilter() {
             LocationsFiltered.Clear();
             if (Locations == null) return;
             // Skopiuj lokacje z Locations do LocationsFiltered
@@ -48,8 +43,13 @@ namespace Urbexer.ViewModels {
                 LocationsFiltered.Add(location);
             }
         }
+        // Odśwież filtry
+        protected void ApplyFilters() {
+            ClearFilter();
+            SetFilterByName(currentNameFilter);
+        }
         // Nie pokazuj lokalizacji, które nie zawierają danego stringa
-        private void SetFilterByName(string s) {
+        protected void SetFilterByName(string s) {
             if (string.IsNullOrEmpty(s)) return; // Jeśli string jest pusty to nie filtruj
             foreach (var location in Locations) {
                 if (!location.Name.ToLower().Contains(s.ToLower())) {
@@ -59,7 +59,7 @@ namespace Urbexer.ViewModels {
         }
 
         // Przenosi do strony lokacji o odpowiednim id
-        async Task CardSelected(Location location) {
+        protected async Task CardSelected(Location location) {
             if (location.Id < 0) return; // Id powinno być nieujemne.
 
             var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";

@@ -17,7 +17,9 @@ namespace Urbexer {
             Current.PageAppearing += OnPageAppearing;
         }
         protected override void OnStart() {
-            Shell.Current.GoToAsync(nameof(WelcomePage));
+            // WelcomePage to strona logowania
+            Shell.Current.GoToAsync(nameof(LocationListPage));//TEMP
+            //Shell.Current.GoToAsync(nameof(WelcomePage));
             //Shell.Current.GoToAsync(nameof(HomePage));
         }
         protected override void OnSleep() {

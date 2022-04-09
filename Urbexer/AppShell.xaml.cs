@@ -9,6 +9,7 @@ namespace Urbexer {
             Routing.RegisterRoute(nameof(LocationDetailsPage), typeof(LocationDetailsPage));
             Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+            Routing.RegisterRoute(nameof(LocationListPage), typeof(LocationListPage));//TEMP
         }
         private async void ClickedLogout(object sender, EventArgs e) {
             await Current.GoToAsync(nameof(WelcomePage));
