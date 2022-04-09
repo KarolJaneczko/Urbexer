@@ -11,10 +11,7 @@ namespace APIpz.Entities
         public int Id { get; set; }
 
         [Required]
-        public Uzytkownik Uzytkownik { get; set; } //uzytkownik dodający opinię 
-
-        [Required]
-        public Miejsce Miejsce { get; set; }
+        public Odwiedzony Odwiedzony { get; set; }
 
         public int Ocena { get; set; } // może w gwiazdkach lub opisowo
 

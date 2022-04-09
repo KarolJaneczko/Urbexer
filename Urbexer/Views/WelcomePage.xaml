@@ -100,7 +100,7 @@
                                Grid.Row="1" 
                                IndicatorsShape="Square"
                                IndicatorColor="White" 
-                               SelectedIndicatorColor="#ef233c"/>
+                               SelectedIndicatorColor="#B52435"/>
             <StackLayout x:Name="buttons" 
                                  Grid.Row="2"         
                                  Orientation="Vertical" 
@@ -113,7 +113,7 @@
                                 Clicked="GoToSignInPage"
                                 HeightRequest="50" 
                                 WidthRequest="200"
-                                BackgroundColor="#ef233c"
+                                BackgroundColor="#B52435"
                                 TextColor="White" 
                                 CornerRadius="25" 
                                 FontAttributes="Bold"/>

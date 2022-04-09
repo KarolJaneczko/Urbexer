@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Urbexer.Views;
-using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class WelcomeViewModel : BaseViewModel {

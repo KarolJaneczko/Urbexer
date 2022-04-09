@@ -1,0 +1,8 @@
+﻿namespace APIpz.Models
+{
+    public class PokazMojeOdwiedzoneDto
+    {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+    }
+}

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 
 namespace Urbexer.Models {
     public class AppException : Exception {
@@ -7,13 +6,13 @@ namespace Urbexer.Models {
         public string title;
         public AppExceptionTypeEnum type;
         public AppException() {
-            this.message = "Wystąpił nieoczekiwany błąd.";
-            this.type = AppExceptionTypeEnum.UnspecifiedError;
+            message = "Wystąpił nieoczekiwany błąd.";
+            type = AppExceptionTypeEnum.UnspecifiedError;
         }
-        public AppException(string message, AppExceptionTypeEnum type) {
-            this.message = message;
-            this.type = type;
-            this.title = SetTitle(type);
+        public AppException(string _message, AppExceptionTypeEnum _type) {
+            message = _message;
+            type = _type;
+            title = SetTitle(_type);
         }
         public string SetTitle(AppExceptionTypeEnum type) {
             switch (type) {
@@ -37,22 +36,6 @@ namespace Urbexer.Models {
                     return "Rejestracja się nie powiodła.";
             }
             return string.Empty;
-        }
-        public static bool CheckMail(string mail) {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10})+)$");
-            Match match = regex.Match(mail);
-            if (match.Success)
-                return true;
-            else
-                return false;
-        }
-        public static bool CheckSpecialChars(string word) {
-            Regex regex = new Regex(@"^[A-Za-z0-9\d_]+$");
-            Match match = regex.Match(word);
-            if (match.Success)
-                return true;
-            else
-                return false;
         }
     }
 }

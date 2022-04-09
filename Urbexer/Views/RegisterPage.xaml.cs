@@ -6,7 +6,7 @@ namespace Urbexer.Views {
     public partial class RegisterPage : ContentPage {
         public RegisterPage() {
             var vm = new RegisterPageModel();
-            this.BindingContext = vm;
+            BindingContext = vm;
             InitializeComponent();
 
             Login.Completed += (object sender, EventArgs e) => {

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Urbexer.Models;
-using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Urbexer.Services;
+using Xamarin.Essentials;
+using Map = Xamarin.Forms.Maps.Map;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -34,61 +33,45 @@ namespace Urbexer.Views {
             InitializeComponent();
             CurrentPinId = -1;
 
-            // Konstruowanie mapy
-            Position position = new Position(37.79752, -122.40183);
-            // MapSpan to obszar mapy o danej pozycji(position) pokazujący obszar obejmujący
-            // daną wysokość(0.01) i długość(0.01) geograficzną
-            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-            //Map map = new Map(mapSpan);
-            mapSpan = MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.444));
-            Map.MoveToRegion(mapSpan);
-
-            // Przykładowa prosta pinezka
-            Pin pin = new Pin {
-                Label = "Spawn",
-                Address = "Startowa pozycja kamery",
-                Type = PinType.Place,
-                Position = position
-            };
-            Map.Pins.Add(pin);
-
-            Map_JumpTo_Address("Toruń");
+            // Spróbuj ustawić pozycje mapy na pozycje użytkownika
+            try {
+                Xamarin.Essentials.Location location = Geolocation.GetLastKnownLocationAsync().Result;
+                if (location != null) {
+                    MapSpan mapSpan = MapSpan.FromCenterAndRadius(
+                        new Position(location.Latitude, location.Longitude), Distance.FromKilometers(2));
+                    map.MoveToRegion(mapSpan);
+                }
+            } catch (Exception ex){
+                DefaultPositionFallback();
+            }
         }
-        private void Map_MapClicked(object sender, MapClickedEventArgs e) {
-            /*
-            // Zmiana pozycji ekranu bez zmieniania poziomu zooma
+
+        // Zamień adres na pozycje
+        Position AddressToPosition(string address) {
+            Geocoder geocoder = new Geocoder();
+            IEnumerable<Position> possiblePositions = geocoder.GetPositionsForAddressAsync(address).Result;
+            return possiblePositions.FirstOrDefault();
+        }
+
+        // Ustaw mapę na środek Polski
+        private async void DefaultPositionFallback() {
+            string default_address = "Polska";
+            Position default_position = AddressToPosition(default_address);
+            // 350km to mw. połowa szerokości Polski
+            MapSpan mapSpan = MapSpan.FromCenterAndRadius(default_position, Distance.FromKilometers(350));
+            map.MoveToRegion(mapSpan);
+        }
+
+        // Zmiana pozycji ekranu bez zmieniania przybliżenia
+        public void MoveToPosition(Position position) {
+            if (map == null || map.VisibleRegion == null) return;
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
-                new Position(e.Position.Latitude, e.Position.Longitude),
-                map.VisibleRegion.Radius));
-            */
-            Map_MoveTo_Position(e.Position);
-        }
-
-        // 
-        public void Map_MoveTo_Position(Position position) {
-            if (Map == null || Map.VisibleRegion == null) return;
-            // Zmiana pozycji ekranu bez zmieniania poziomu zooma
-            Map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(position.Latitude, position.Longitude),
-                Map.VisibleRegion.Radius));
-        }
-        public async void Map_MoveTo_Address(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
-            Map_MoveTo_Position(possiblePositions.FirstOrDefault());
+                map.VisibleRegion.Radius));
         }
 
-        // Reinstance the map in another position
-        public void Map_JumpTo_Position(Position position) {
-            float radius = 0.5f;
-            MapSpan mapspan = MapSpan.FromCenterAndRadius(
-                position, Distance.FromKilometers(radius));
-            Map.MoveToRegion(mapspan);
-        }
-        public async void Map_JumpTo_Address(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> possiblePositions = await geocoder.GetPositionsForAddressAsync(address);
-            Map_JumpTo_Position(possiblePositions.FirstOrDefault());
+        private void Map_MapClicked(object sender, MapClickedEventArgs e) {
+            MoveToPosition(e.Position);
         }
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
@@ -97,23 +80,15 @@ namespace Urbexer.Views {
             CurrentPinId = pin.LocationId;
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
             var route = $"{nameof(LocationDetailsPage)}?LocationId={currentPinId}";
             Shell.Current.GoToAsync(route);
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            if (CurrentPinId == -1)
-            {
-                return base.OnBackButtonPressed();
-            }
-            else
-            {
-                CurrentPinId = -1;
-                return true;
-            }
+        // Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
+        protected override bool OnBackButtonPressed(){
+            if (CurrentPinId == -1) return base.OnBackButtonPressed();
+            CurrentPinId = -1;
+            return true;
         }
     }
 }
