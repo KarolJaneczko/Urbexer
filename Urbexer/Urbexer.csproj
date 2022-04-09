@@ -17,8 +17,8 @@
 
 
   <ItemGroup>
-    <Compile Update="Views\EntryProfile.xaml.cs">
-      <DependentUpon>EntryProfile.xaml</DependentUpon>
+    <Compile Update="Views\EditPorfilePage.xaml.cs">
+      <DependentUpon>EditPorfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
@@ -48,7 +48,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EntryProfile.xaml">
+    <EmbeddedResource Update="Views\EditPorfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LocationDetailsPage.xaml">
