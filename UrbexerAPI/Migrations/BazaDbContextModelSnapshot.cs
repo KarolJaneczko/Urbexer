@@ -136,6 +136,48 @@ namespace APIpz.Migrations
                     b.ToTable("Opinia");
                 });
 
+            modelBuilder.Entity("APIpz.Entities.Profil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Imie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkFacebook")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkInstagram")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkYouTube")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nazwisko")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UzytkownikIDId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UzytkownikIDId");
+
+                    b.ToTable("Profil");
+                });
+
             modelBuilder.Entity("APIpz.Entities.Ranking", b =>
                 {
                     b.Property<int>("Id")
@@ -274,6 +316,17 @@ namespace APIpz.Migrations
                     b.Navigation("Miejsce");
 
                     b.Navigation("Uzytkownik");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Profil", b =>
+                {
+                    b.HasOne("APIpz.Entities.Uzytkownik", "UzytkownikID")
+                        .WithMany()
+                        .HasForeignKey("UzytkownikIDId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UzytkownikID");
                 });
 #pragma warning restore 612, 618
         }

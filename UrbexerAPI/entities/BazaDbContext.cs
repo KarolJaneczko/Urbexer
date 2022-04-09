@@ -19,6 +19,7 @@ namespace APIpz.Entities
         public DbSet<Ranking_slownik> Ranking_slownik { get; set; }
         public DbSet<Miejsce_kategoria> Miejsce_kategoria { get; set; }
         public DbSet<Odwiedzony> Odwiedzone { get; set; }
+        public DbSet<Profil> Profil { get; set; }
     }
     //protected override void OnModelCreating(ModelBuilder modelbuilder)
     //{
