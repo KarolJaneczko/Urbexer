@@ -115,23 +115,18 @@ namespace APIpz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("MiejsceId")
+                    b.Property<int>("Ocena")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ocena")
+                    b.Property<int>("OdwiedzonyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Tekst")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UzytkownikId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MiejsceId");
-
-                    b.HasIndex("UzytkownikId");
+                    b.HasIndex("OdwiedzonyId");
 
                     b.ToTable("Opinia");
                 });
@@ -301,21 +296,13 @@ namespace APIpz.Migrations
 
             modelBuilder.Entity("APIpz.Entities.Opinia", b =>
                 {
-                    b.HasOne("APIpz.Entities.Miejsce", "Miejsce")
+                    b.HasOne("APIpz.Entities.Odwiedzony", "Odwiedzony")
                         .WithMany()
-                        .HasForeignKey("MiejsceId")
+                        .HasForeignKey("OdwiedzonyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APIpz.Entities.Uzytkownik", "Uzytkownik")
-                        .WithMany()
-                        .HasForeignKey("UzytkownikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Miejsce");
-
-                    b.Navigation("Uzytkownik");
+                    b.Navigation("Odwiedzony");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Profil", b =>
