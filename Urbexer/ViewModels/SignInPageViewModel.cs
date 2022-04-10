@@ -38,8 +38,7 @@ namespace Urbexer.ViewModels {
                     login = login,
                     password = password
                 }, httpClient) == true) {
-                    Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-                    await Shell.Current.GoToAsync(nameof(HomePage));
+                    await Shell.Current.GoToAsync("/"+nameof(HomePage));
                 }
             }
             catch (AppException exception) {
