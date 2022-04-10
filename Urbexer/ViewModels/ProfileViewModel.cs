@@ -22,8 +22,6 @@ namespace Urbexer.ViewModels {
     }
     public class Information {
         public string Category { get; set; }
-
         public string Info { get; set; }
-
     }
 }

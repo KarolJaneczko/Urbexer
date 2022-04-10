@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Urbexer.Models {
     public class DataPin : Xamarin.Forms.Maps.Pin {

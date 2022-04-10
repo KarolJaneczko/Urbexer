@@ -2,9 +2,13 @@
 
 namespace Urbexer.Models {
     public class AppException : Exception {
+        #region Zmienne
         public string message;
         public string title;
         public AppExceptionTypeEnum type;
+        #endregion
+
+        #region Konstruktory
         public AppException() {
             message = "Wystąpił nieoczekiwany błąd.";
             type = AppExceptionTypeEnum.UnspecifiedError;
@@ -14,6 +18,9 @@ namespace Urbexer.Models {
             type = _type;
             title = SetTitle(_type);
         }
+        #endregion
+
+        #region Metody
         public string SetTitle(AppExceptionTypeEnum type) {
             switch (type) {
                 case AppExceptionTypeEnum.UnspecifiedError:
@@ -34,8 +41,11 @@ namespace Urbexer.Models {
                     return "Wprowadzone dane się nie zgadzają.";
                 case AppExceptionTypeEnum.RegistrationError:
                     return "Rejestracja się nie powiodła.";
+                default:
+                    break;
             }
             return string.Empty;
         }
+        #endregion
     }
 }
