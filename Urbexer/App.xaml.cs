@@ -17,7 +17,6 @@ namespace Urbexer {
                 CacheCurrentPosition();
                 return true;
             });
-
             Current.PageAppearing += OnPageAppearing;
         }
         protected override void OnStart() {
