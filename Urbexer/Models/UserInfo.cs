@@ -36,7 +36,7 @@ namespace Urbexer.Models {
         }
         #endregion
 
-        #region Metody - dane użytkownika
+        #region Metody
         public static void SetLoginCredentials(string login, string loginToken) {
             Login = login;
             LoginToken = loginToken;

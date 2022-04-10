@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace Urbexer.ViewModels {
     public class ProfileViewModel : BaseViewModel {
-
         public ProfileViewModel() {
         }
         public List<Information> Informations { get => InformationData(); }
-
         private List<Information> InformationData() {
             var tempList = new List<Information> {
                 new Information { Category = "Imię", Info = "Bartosz" },

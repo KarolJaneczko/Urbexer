@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Urbexer.Views.HomePage">
 
-
     <StackLayout>
     <Label Text="Tu będzie feed" FontSize="Title"/>
-</StackLayout>
+    </StackLayout>
 
-<Shell.BackButtonBehavior>
-    <BackButtonBehavior Command="{Binding BackCommand}"/>
-</Shell.BackButtonBehavior>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="false"/>
+    </Shell.BackButtonBehavior>
+
 </ContentPage>
