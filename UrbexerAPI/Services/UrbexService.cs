@@ -19,6 +19,10 @@ namespace APIpz.Services
         PageResult<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
         void DodajOpinie(DodajOpinieDto dto);
         PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto);
+        Miejsce PokazMiejscePoId(PokazMiejscePoIdDto dto);
+        List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
+        IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto);
+        IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto);
 
     }
     public class UrbexService : IUrbexService
@@ -131,6 +135,34 @@ namespace APIpz.Services
             var result = new PageResult<OpiniaDto>(opinieDtos, totalitemsCount, dto.PageSize, dto.PageNumber);
             return result;
             
+        }
+
+        public Miejsce PokazMiejscePoId(PokazMiejscePoIdDto dto)
+        {
+            var miejsce = _context.Miejsce.FirstOrDefault( m => m.Id == dto.Id);
+            return miejsce;
+        }
+        public List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
+        {
+            var miejsca = _context.Miejsce.Where(m => dto.listaId.Contains(m.Id)).ToList();
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto)
+        {
+            var zapytanie = _context.Miejsce.Where(m => m.Miejsce_Kategoria.Nazwa == dto.Nazwa).ToList();
+            var miejsca = zapytanie.Select(m => m.Id);
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto)
+        {
+            var x1 = dto.WspolrzedneLATUser + dto.Promien;
+            var x2 = dto.WspolrzedneLATUser - dto.Promien;
+            var y1 = dto.WspolrzedneLNGUser + dto.Promien;
+            var y2 = dto.WspolrzedneLNGUser - dto.Promien;
+            var zapytanie = _context.Miejsce.Where(m => m.WspolrzedneLAT <= x1 && m.WspolrzedneLAT >= x2 && m.WspolrzedneLNG <= y1 && m.WspolrzedneLAT >= y2);
+
+            var miejsca = zapytanie.Select(m => m.Id);
+            return miejsca;
         }
     }
 }

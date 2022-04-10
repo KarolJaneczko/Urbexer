@@ -59,5 +59,30 @@ namespace APIpz.Controllers
             _urbexService.DodajOpinie(dto);
             return Ok();
         }
+        [HttpPut("pokazMiejscePoId")]
+        public ActionResult<Miejsce> pokazMiejscePoId([FromBody]PokazMiejscePoIdDto dto)
+        {
+            var wynik = _urbexService.PokazMiejscePoId(dto);
+            return Ok(wynik);
+        }
+        [HttpPut("pokazMiejscaZListy")]
+        public ActionResult<List<Miejsce>>  pokazMiejscaZListy([FromBody]PokazMiejscaZListyDto dto)
+        {
+            var wynik = _urbexService.PokazMiejscaZListy(dto);
+            return Ok(wynik);
+        }
+        [HttpPut("pokazMiejscaZKategorii")]
+        public ActionResult<IEnumerable<int>> pokazMiejscaZKategorii([FromBody] PokazMiejscaZKategoriiDto dto)
+        {
+            var wynik = _urbexService.PokazMiejscaZKategorii(dto);
+            return Ok(wynik);
+        }
+        [HttpPut("pokazMiejscaWPoblizu")]
+        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto)
+        {
+            var wynik = _urbexService.PokazMiejscaWPoblizu(dto);
+            return Ok(wynik);
+
+        }
     }
 }
