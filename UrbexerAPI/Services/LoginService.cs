@@ -16,6 +16,7 @@ namespace APIpz.Services
         string GenerateJwt(LoginDto dto);
 
         void ConfirmUser(ConfirmUserDto dto);
+        void TestowyConfirmUser(TestowyConfirmUserDto dto);
     }
 
     public class LoginService : ILoginService
@@ -120,6 +121,22 @@ namespace APIpz.Services
                 user.CzyKontoAktywne = true;
                 _context.SaveChanges();
             }
+        }
+
+        public void TestowyConfirmUser(TestowyConfirmUserDto dto)
+        {
+            var user = _context.Uzytkownik.FirstOrDefault(u => u.Login == dto.Login);
+            if (user is null)
+            {
+                throw new BadRequestException("niepoprawne dane");
+            }
+            if (user.CzyKontoAktywne == true)
+            {
+                throw new BadRequestException("konto zostało juz aktywowane");
+            }          
+            user.CzyKontoAktywne = true;
+            _context.SaveChanges();
+            
         }
     }
 

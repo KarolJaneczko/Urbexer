@@ -115,25 +115,62 @@ namespace APIpz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("MiejsceId")
+                    b.Property<int>("Ocena")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ocena")
+                    b.Property<int>("OdwiedzonyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Tekst")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UzytkownikId")
+                    b.HasKey("Id");
+
+                    b.HasIndex("OdwiedzonyId");
+
+                    b.ToTable("Opinia");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Profil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Imie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkFacebook")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkInstagram")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkYouTube")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nazwisko")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UzytkownikIDId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MiejsceId");
+                    b.HasIndex("UzytkownikIDId");
 
-                    b.HasIndex("UzytkownikId");
-
-                    b.ToTable("Opinia");
+                    b.ToTable("Profil");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Ranking", b =>
@@ -259,21 +296,24 @@ namespace APIpz.Migrations
 
             modelBuilder.Entity("APIpz.Entities.Opinia", b =>
                 {
-                    b.HasOne("APIpz.Entities.Miejsce", "Miejsce")
+                    b.HasOne("APIpz.Entities.Odwiedzony", "Odwiedzony")
                         .WithMany()
-                        .HasForeignKey("MiejsceId")
+                        .HasForeignKey("OdwiedzonyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APIpz.Entities.Uzytkownik", "Uzytkownik")
+                    b.Navigation("Odwiedzony");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Profil", b =>
+                {
+                    b.HasOne("APIpz.Entities.Uzytkownik", "UzytkownikID")
                         .WithMany()
-                        .HasForeignKey("UzytkownikId")
+                        .HasForeignKey("UzytkownikIDId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Miejsce");
-
-                    b.Navigation("Uzytkownik");
+                    b.Navigation("UzytkownikID");
                 });
 #pragma warning restore 612, 618
         }
