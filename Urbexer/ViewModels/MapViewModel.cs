@@ -26,7 +26,15 @@ namespace Urbexer.ViewModels {
 
         // Funkcja do pierwotnego zapełnienia mapy
         protected async Task InitializeLocations() {
-            Locations = new ObservableRangeCollection<Location>(locationService.GetAllLocations().Result);
+            //Locations = new ObservableRangeCollection<Location>(locationService.GetAllLocations().Result);
+            Locations = new ObservableRangeCollection<Location>();
+            for (int i = 0; i < 100; i++) {
+                Location location = locationService.GetLocationById(i).Result;
+                if (location != null) {
+                    Locations.Add(location);
+                }
+            }
+            //Locations.Add(locationService.GetLocationById().Result);
             ClearFilter();
         }
 

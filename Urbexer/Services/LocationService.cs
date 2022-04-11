@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
@@ -10,19 +12,25 @@ namespace Urbexer.Services {
     public class LocationService : ConnectionService {
         // Funkcje do pobierania list lokacji
 
-        // Pobierz wszystkie lokacje z bazy danych
-        public async Task<List<Location>> GetAllLocations() {
-            List<Location> locations = new List<Location>();
-            HttpResponseMessage response = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/getall/",
-                HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+
+        private async Task<List<Location>> GetLocations(string apiMethod, string json = "") {
+            List<APILocation> apiLocations = new List<APILocation>();
+            string uri = "https://urbexerapi.azurewebsites.net" + apiMethod;
+            var request = new HttpRequestMessage {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(uri),
+                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+            };
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             if (response.StatusCode == System.Net.HttpStatusCode.OK) {
                 var result = response.Content.ReadAsStringAsync().Result;
-                var content = JsonConvert.DeserializeObject<APILocation[]>(result);
-                foreach (var location in content) {
-                    locations.Add(new Location(location));
-                }
+                apiLocations = JsonConvert.DeserializeObject<List<APILocation>>(result);
             }
-            return locations;
+            return APILocationsToLocations(apiLocations);
+        }
+        // Pobierz wszystkie lokacje z bazy danych
+        public async Task<List<Location>> GetAllLocations() {
+            return GetLocations("/api/urbex/getall/").Result;
         }
         // Pobierz lokacje w okolicy danej pozycji
         public async Task<List<Location>> GetLocationsInArea(Position position) {
@@ -44,11 +52,32 @@ namespace Urbexer.Services {
         }
 
         // Funkcje do pobierania konkretnej lokacji
-
+        class Id {
+            public int id;
+        }
         // Pobierz szczegóły lokacji o danym id
-        public static Location GetLocationById(int id) {
-            // TODO Zmodyfikować pod działanie z bazą danych
-            var location = GetTestLocation(id);
+        public async Task<Location> GetLocationById(int id) {
+            APILocation apiLocation = new APILocation();
+            Location location = null;
+            string httpAddress = "https://urbexerapi.azurewebsites.net/api/urbex/pokazMiejscePoId";
+            //string httpAddress = "https://localhost:7204/api/urbex/pokazMiejscePoId";
+            Id newid = new Id();
+            newid.id = id;
+            //string json = JsonConvert.SerializeObject(newid);
+            string json = string.Format("{{\"id\": {0}}}", id);
+            var request = new HttpRequestMessage {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(httpAddress),
+                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+            };
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            //HttpResponseMessage response = await httpClient.GetAsync(httpAddress,
+              //  HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+                var result = response.Content.ReadAsStringAsync().Result;
+                apiLocation = JsonConvert.DeserializeObject<APILocation>(result);
+                location = new Location(apiLocation);
+            }
             return location;
         }
         // Pobierz zdjęcia lokacji o danym id
@@ -81,6 +110,20 @@ namespace Urbexer.Services {
                 "https://media.discordapp.net/attachments/129713358382301184/944117799008215091/Ba-dum-Tsss.jpg"
             };
             return links;
+        }
+
+        // Zamień metry na stopnie geograficzne
+        public static double MetersToDegrees(int meters) {
+            // 1 stopień to ok 111111m
+            return (float)meters / 111111f;
+        }
+        // Zamień liste lokacji pobranych z API na format z Location.cs
+        private static List<Location> APILocationsToLocations(List<APILocation>? input) {
+            List<Location> output = new List<Location>();
+            foreach (var location in input) {
+                output.Add(new Location(location));
+            }
+            return output;
         }
     }
 }

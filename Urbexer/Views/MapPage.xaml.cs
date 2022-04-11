@@ -26,7 +26,7 @@ namespace Urbexer.Views {
 
                 // Pokaż odpowiednią karte lokacji
                 LocationInfo.IsVisible = true;
-                LocationInfo.BindingContext = LocationService.GetLocationById(value);
+                //LocationInfo.BindingContext = LocationService.GetLocationById(value);
             }
         }
         public MapPage() {
