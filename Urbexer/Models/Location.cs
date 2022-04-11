@@ -7,20 +7,22 @@ using Urbexer.Models.ApiModels;
 
 namespace Urbexer.Models {
     public class Location {
-        public string Address { get; set; }
-        public string Name { get; set; }
-        public Position Position { get; set; }
+        #region Zmienne
         public int Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
         public string Thumbnail { get; set; }
+        public Position Position { get; set; }
         public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
+        #endregion
 
-        public Location(int id) {
-            string[] strings = LocationService.GetImagesById(id);
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
-            foreach (string s in strings) {
-                ImageLinks.Add(new ImageLink { Link = s });
-            }
+        #region Klasy
+        public class ImageLink {
+            public string Link { get; set; }
         }
+        #endregion
+
+        #region Konstruktory
         public Location() {
             int id = 0;
             string[] strings = LocationService.GetImagesById(id);
@@ -29,15 +31,22 @@ namespace Urbexer.Models {
                 ImageLinks.Add(new ImageLink { Link = s });
             }
         }
-        // Konwertuj lokacje z bazy danych.
+        public Location(int id) {
+            string[] strings = LocationService.GetImagesById(id);
+            ImageLinks = new ObservableRangeCollection<ImageLink>();
+            foreach (string s in strings) {
+                ImageLinks.Add(new ImageLink { Link = s });
+            }
+        }
         public Location(APILocation apiLoc) {
             Address = apiLoc.adres;
             Name = apiLoc.nazwa;
             Position = new Position(apiLoc.wspolrzedneLAT, apiLoc.wspolrzedneLNG);
             Id = apiLoc.id;
         }
+        #endregion
 
-        // Funkcje do generowania współrzędnych z adresu.
+        #region Metody
         public void Position_From_Address() {
             Position_From_Address(Address);
         }
@@ -46,7 +55,6 @@ namespace Urbexer.Models {
             IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
             Position = approximatePositions.FirstOrDefault();
         }
-        // Funkcje do generowania adresu z współrzędnych.
         public void Address_From_Position() {
             Address_From_Position(Position);
         }
@@ -58,8 +66,6 @@ namespace Urbexer.Models {
             IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
             Address = possibleAddresses.FirstOrDefault();
         }
-        public class ImageLink {
-            public string Link { get; set; }
-        }
+        #endregion
     }
 }

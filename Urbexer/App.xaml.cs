@@ -1,26 +1,30 @@
 ﻿using Plugin.Connectivity;
 using System;
-using Urbexer.Services;
+using Urbexer.Models;
 using Urbexer.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace Urbexer {
     public partial class App : Application {
         public App() {
             InitializeComponent();
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
-            var seconds = TimeSpan.FromSeconds(10);
-            Device.StartTimer(seconds, () => { CheckConnection(); return true; });
 
+            Device.StartTimer(TimeSpan.FromSeconds(10), () => {
+                CheckConnection();
+                CacheCurrentPosition();
+                return true;
+            });
             Current.PageAppearing += OnPageAppearing;
         }
         protected override void OnStart() {
-            // WelcomePage to strona logowania
-            Shell.Current.GoToAsync(nameof(LocationListPage));//TEMP
-            //Shell.Current.GoToAsync(nameof(WelcomePage));
-            //Shell.Current.GoToAsync(nameof(HomePage));
+            if (UserInfo.IsLoggedIn) {
+                Shell.Current.GoToAsync(nameof(HomePage));
+            }
+            else
+                Shell.Current.GoToAsync(nameof(WelcomePage));
         }
         protected override void OnSleep() {
         }
@@ -31,6 +35,15 @@ namespace Urbexer {
                 await Current.MainPage.DisplayAlert("Błąd połączenia", "Do poprawnego działania aplikacji jest wymagane połączenie z internetem.", "OK");
             else
                 return;
+        }
+        public static void CacheCurrentPosition(object state = null) {
+            var status = Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if (status.Result != PermissionStatus.Denied && status.Result != PermissionStatus.Disabled) {
+                Xamarin.Essentials.Location location = Geolocation.GetLastKnownLocationAsync().Result;
+                if (location == null)
+                    return;
+                UserInfo.SetCurrentPosition(new Position(location.Latitude, location.Longitude));
+            }
         }
         private void OnPageAppearing(object sender, Page page) {
             if (page is MapPage) {
