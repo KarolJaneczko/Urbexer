@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.Forms;
 using System.Windows.Input;
+using System.Collections.Generic;
+using Xamarin.Essentials;
+using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
     public class MapViewModel {
@@ -27,6 +30,7 @@ namespace Urbexer.ViewModels {
         // Funkcja do pierwotnego zapełnienia mapy
         protected async Task InitializeLocations() {
             //Locations = new ObservableRangeCollection<Location>(locationService.GetAllLocations().Result);
+            /*
             Locations = new ObservableRangeCollection<Location>();
             for (int i = 0; i < 100; i++) {
                 Location location = locationService.GetLocationById(i).Result;
@@ -34,7 +38,19 @@ namespace Urbexer.ViewModels {
                     Locations.Add(location);
                 }
             }
-            //Locations.Add(locationService.GetLocationById().Result);
+            */
+            /*
+            List<int> idList = new List<int>();
+            for (int i = 0; i < 2000; i++) {
+                idList.Add(i);
+            }
+            Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListByIds(idList).Result);
+            */
+
+            var location = await Geolocation.GetLastKnownLocationAsync();
+            List<int> idList = locationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, 20).Result;
+            Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListByIds(idList).Result);
+
             ClearFilter();
         }
 

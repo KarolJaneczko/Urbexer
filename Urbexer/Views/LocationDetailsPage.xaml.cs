@@ -15,8 +15,9 @@ namespace Urbexer.Views {
             base.OnAppearing();
 
             // Pobierz dane i zbinduj do lokacji 
-            int.TryParse(LocationId, out var result);
-            //BindingContext = LocationService.GetLocationById(result);
+            int.TryParse(LocationId, out var id);
+            LocationService locationService = new LocationService();
+            BindingContext = locationService.GetLocationById(id);
         }
     }
 }
