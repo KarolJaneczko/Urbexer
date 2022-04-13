@@ -149,17 +149,16 @@ namespace APIpz.Services
         }
         public IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto)
         {
-            var zapytanie = _context.Miejsce.Where(m => m.Miejsce_Kategoria.Nazwa == dto.Nazwa).ToList();
+            var zapytanie = _context.Miejsce.Where(m => m.Miejsce_Kategoria.Id == dto.Id).ToList();
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
         }
         public IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto)
         {
-            var x1 = dto.WspolrzedneLATUser + dto.Promien;
-            var x2 = dto.WspolrzedneLATUser - dto.Promien;
-            var y1 = dto.WspolrzedneLNGUser + dto.Promien;
-            var y2 = dto.WspolrzedneLNGUser - dto.Promien;
-            var zapytanie = _context.Miejsce.Where(m => m.WspolrzedneLAT <= x1 && m.WspolrzedneLAT >= x2 && m.WspolrzedneLNG <= y1 && m.WspolrzedneLAT >= y2);
+        //    for x, y in rekordy:
+        //if (x - x0) *(x - x0) + (y - y0) * (y - y0) == promien * promien:
+            var zapytanie = _context.Miejsce.Where(m => (m.WspolrzedneLAT - dto.WspolrzedneLATUser) * (m.WspolrzedneLAT - dto.WspolrzedneLATUser) +
+                                                        (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) * (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) <= dto.Promien * dto.Promien);
 
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
