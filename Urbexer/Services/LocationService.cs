@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace Urbexer.Services {
         public async Task<Location> GetLocationById(int id) {
             string json = string.Format("{{\"id\": {0}}}", id);
             string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscePoId", json).Result;
-            //if (result == null) return null;
+            if (result == null) return null;
             return new Location(JsonConvert.DeserializeObject<APILocation>(result));
         }
 
@@ -80,6 +81,25 @@ namespace Urbexer.Services {
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId
+
+        #region Geocoder
+        // Ustaw pozycje z danego adresu
+        public async Task<Position> GetPositionFromAddressAsync(string address) {
+            Geocoder geocoder = new Geocoder();
+            IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
+            return approximatePositions.FirstOrDefault();
+        }
+        // Ustaw adres z danych współrzędnych
+        public string GetAddressFromPositionAsync(float latitude, float longitude) {
+            return GetAddressFromPositionAsync(new Position(latitude, longitude)).Result;
+        }
+        // Ustaw adres z danej pozycji
+        public async Task<string> GetAddressFromPositionAsync(Position position) {
+            Geocoder geocoder = new Geocoder();
+            IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
+            return possibleAddresses.FirstOrDefault();
+        }
+        #endregion Geocoder
 
         #region Pomocnicze
         // Pobierz zdjęcia lokacji o danym id

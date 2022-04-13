@@ -24,48 +24,44 @@ namespace Urbexer.Models {
 
         #region Konstruktory
         public Location() {
-            int id = 0;
-            string[] strings = LocationService.GetImagesById(id);
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
-            foreach (string s in strings) {
-                ImageLinks.Add(new ImageLink { Link = s });
-            }
+            Id = -1;
         }
         public Location(int id) {
+            // TODO: Dodać pobieranie lokacji z LocationService kiedy zostanie przerobiona na statyczną
+            /*
             string[] strings = LocationService.GetImagesById(id);
             ImageLinks = new ObservableRangeCollection<ImageLink>();
             foreach (string s in strings) {
                 ImageLinks.Add(new ImageLink { Link = s });
             }
+            */
         }
-        public Location(APILocation apiLoc) {
-            Address = apiLoc.adres;
-            Name = apiLoc.nazwa;
-            Position = new Position(apiLoc.wspolrzedneLAT, apiLoc.wspolrzedneLNG);
-            Id = apiLoc.id;
+        public Location(APILocation apiLocation) {
+            Name = apiLocation.nazwa;
+            Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
+            Id = apiLocation.id;
+
+            if (apiLocation.adres != null) {
+                Address = apiLocation.adres;
+            } else {
+                // Wygeneruj adres geocoderem
+                // TODO: Zaktualizować to gdy LocationService będzie statyczne
+                //LocationService locationService = new LocationService();
+                //Address = locationService.GetAddressFromPositionAsync(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
+            }
+
+            ImageLinks = new ObservableRangeCollection<ImageLink>();
+            if (apiLocation.zdjecie != null) {
+
+            } else {
+                // Wczytaj placeholder
+                Thumbnail = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
+                ImageLinks.Add(new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" });
+            }
         }
         #endregion
 
         #region Metody
-        public void Position_From_Address() {
-            Position_From_Address(Address);
-        }
-        public async void Position_From_Address(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
-            Position = approximatePositions.FirstOrDefault();
-        }
-        public void Address_From_Position() {
-            Address_From_Position(Position);
-        }
-        public void Address_From_Position(float latitude, float longitude) {
-            Address_From_Position(new Position(latitude, longitude));
-        }
-        public async void Address_From_Position(Position position) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
-            Address = possibleAddresses.FirstOrDefault();
-        }
         #endregion
     }
 }
