@@ -158,11 +158,11 @@
     <FlyoutItem Title="Lokacje" 
                 Icon="pin_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
-        
+        <!--Zakładka z mapą-->
         <Tab Title="Mapa" Icon="map_icon.png">
             <ShellContent x:Name="Map" ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage"/>
         </Tab>
-        
+        <!--Zakładka z miejscami-->
         <Tab Title="Lista lokacji" Icon="locationlist_icon">
             <ShellContent x:Name="LocationList" ContentTemplate="{DataTemplate local:LocationListPage}" Route="LocationListPage" />
         </Tab>
@@ -175,29 +175,26 @@
         <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
     </FlyoutItem>
     
-    
+    <!--Ranking-->
     <FlyoutItem Title="Ranking" 
                 Icon="cup_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:RankingPage}"/>
     </FlyoutItem>
+    
+    <!--O nas-->
     <FlyoutItem Title="O nas" 
                 Icon="info_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
     </FlyoutItem>
 
-
-
+    <!--Wylogowanie-->
     <MenuItem
               Text="Wyloguj się" 
               IconImageSource="LogoutIcon1.png" 
               Clicked="ClickedLogout">
     </MenuItem>
-
-
-
-
 
     <Shell.FlyoutFooter>
         <Grid RowDefinitions="*,*,*"

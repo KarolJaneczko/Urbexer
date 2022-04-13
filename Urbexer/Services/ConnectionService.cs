@@ -17,7 +17,7 @@ namespace Urbexer.Services {
             ValidateConnectionResult(result, OperationTypeEnum.Logowanie);
             if (result.StatusCode == System.Net.HttpStatusCode.OK) {
                 var resultContent = await result.Content.ReadAsStringAsync();
-                LoginInfo.SetLoginCredentials(login.login, resultContent);
+                UserInfo.SetLoginCredentials(login.login, resultContent);
                 return true;
             }
             else
