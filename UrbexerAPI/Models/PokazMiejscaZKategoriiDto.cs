@@ -2,6 +2,6 @@
 {
     public class PokazMiejscaZKategoriiDto
     {
-        public string Nazwa { get; set; }
+        public int Id { get; set; }
     }
 }
