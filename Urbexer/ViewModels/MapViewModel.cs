@@ -29,7 +29,7 @@ namespace Urbexer.ViewModels {
 
         // Funkcja do pierwotnego zapełnienia mapy
         protected async Task InitializeLocations() {
-            //Locations = new ObservableRangeCollection<Location>(locationService.GetAllLocations().Result);
+            //Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListAll().Result);
             /*
             Locations = new ObservableRangeCollection<Location>();
             for (int i = 0; i < 100; i++) {
@@ -46,10 +46,12 @@ namespace Urbexer.ViewModels {
             }
             Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListByIds(idList).Result);
             */
-
+            
             var location = await Geolocation.GetLastKnownLocationAsync();
             List<int> idList = locationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, 20).Result;
+            //List<int> idList = locationService.GetIdListInArea(52.2297f, 21.0122f, 20).Result;
             Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListByIds(idList).Result);
+            
 
             ClearFilter();
         }

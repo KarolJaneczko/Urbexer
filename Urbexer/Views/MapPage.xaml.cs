@@ -26,9 +26,10 @@ namespace Urbexer.Views {
 
                 // Pokaż odpowiednią karte lokacji
                 LocationInfo.IsVisible = true;
-                //LocationInfo.BindingContext = LocationService.GetLocationById(value);
+                LocationInfo.BindingContext = locationService.GetLocationById(value).Result;// TODO: Przerobić po zrobieniu LocationService statyczną
             }
         }
+        private readonly LocationService locationService; // TODO: Usunąć po zrobieniu LocationService statyczną
         public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
@@ -44,6 +45,8 @@ namespace Urbexer.Views {
             } catch (Exception ex){
                 DefaultPositionFallback();
             }
+
+            locationService = new LocationService(); // TODO: Usunąć po zrobieniu LocationService statyczną
         }
 
         // Zamień adres na pozycje
@@ -54,7 +57,7 @@ namespace Urbexer.Views {
         }
 
         // Ustaw mapę na środek Polski
-        private async void DefaultPositionFallback() {
+        private void DefaultPositionFallback() {
             string default_address = "Polska";
             Position default_position = AddressToPosition(default_address);
             // 350km to mw. połowa szerokości Polski
@@ -68,10 +71,6 @@ namespace Urbexer.Views {
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(position.Latitude, position.Longitude),
                 map.VisibleRegion.Radius));
-        }
-
-        private void Map_MapClicked(object sender, MapClickedEventArgs e) {
-            MoveToPosition(e.Position);
         }
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
