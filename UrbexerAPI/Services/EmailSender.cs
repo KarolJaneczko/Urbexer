@@ -29,7 +29,7 @@ namespace APIpz.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Marinox1234@wp.pl", "APIpz rejestracja"),
+                From = new EmailAddress("urbexer@onet.pl", "Urbexer rejestracja"),
                 Subject = subject,
                 PlainTextContent = message
             };
