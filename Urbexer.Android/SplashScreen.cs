@@ -5,7 +5,7 @@ namespace Urbexer.Droid {
     [Activity(Theme = "@style/Theme.Splash",
         MainLauncher = true,
         NoHistory = true,
-        Icon = "@drawable/splashscreen")]
+        Icon = "@drawable/app_icon")]
     public class SplashScreen : Activity {
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
