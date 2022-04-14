@@ -87,25 +87,6 @@ namespace Urbexer.Services {
         }
         #endregion ListyId
 
-        #region Geocoder
-        // Ustaw pozycje z danego adresu
-        public static async Task<Position> GetPositionFromAddressAsync(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
-            return approximatePositions.FirstOrDefault();
-        }
-        // Ustaw adres z danych współrzędnych
-        public static string GetAddressFromPositionAsync(float latitude, float longitude) {
-            return GetAddressFromPositionAsync(new Position(latitude, longitude)).Result;
-        }
-        // Ustaw adres z danej pozycji
-        public static async Task<string> GetAddressFromPositionAsync(Position position) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
-            return possibleAddresses.FirstOrDefault();
-        }
-        #endregion Geocoder
-
         #region Pomocnicze
         // Pobierz zdjęcia lokacji o danym id
         public static string[] GetImagesById(int id) {

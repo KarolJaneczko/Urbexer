@@ -26,16 +26,6 @@ namespace Urbexer.Models {
         public Location() {
             Id = -1;
         }
-        public Location(int id) {
-            // TODO: Dodać pobieranie lokacji z LocationService kiedy zostanie przerobiona na statyczną
-            /*
-            string[] strings = LocationService.GetImagesById(id);
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
-            foreach (string s in strings) {
-                ImageLinks.Add(new ImageLink { Link = s });
-            }
-            */
-        }
         public Location(APILocation apiLocation) {
             Name = apiLocation.nazwa;
             Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
