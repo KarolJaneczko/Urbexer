@@ -26,10 +26,10 @@ namespace Urbexer.Views {
 
                 // Pokaż odpowiednią karte lokacji
                 LocationInfo.IsVisible = true;
-                LocationInfo.BindingContext = locationService.GetLocationById(value).Result;// TODO: Przerobić po zrobieniu LocationService statyczną
+                LocationInfo.BindingContext = LocationService.GetLocationById(value).Result;
             }
         }
-        private readonly LocationService locationService; // TODO: Usunąć po zrobieniu LocationService statyczną
+
         public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
@@ -45,8 +45,6 @@ namespace Urbexer.Views {
             } catch (Exception ex){
                 DefaultPositionFallback();
             }
-
-            locationService = new LocationService(); // TODO: Usunąć po zrobieniu LocationService statyczną
         }
 
         // Zamień adres na pozycje

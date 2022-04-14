@@ -10,12 +10,17 @@ using Urbexer.Models.ApiModels;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
-    public class LocationService : ConnectionService{
+    public static class LocationService {
         // Klasa do pobierania lokacji i pobiązanych danych z bazy.
+        private static readonly HttpClient httpClient;
+        static LocationService() {
+            HttpClientHandler clientHandler = new HttpClientHandler { UseProxy = false };
+            httpClient = new HttpClient(clientHandler);
+        }
 
         // Funkcja do wysyłania zapytań do api
         // Zwraca wynik zapytania przy sukcesie (kod 200), null w przeciwnym przypadku
-        private async Task<string> SendApiRequest(HttpMethod method, string path, string json = "") {
+        private static async Task<string> SendApiRequest(HttpMethod method, string path, string json = "") {
             string uri = "https://urbexerapi.azurewebsites.net" + path;
             var request = new HttpRequestMessage {
                 Method = method,
@@ -30,7 +35,7 @@ namespace Urbexer.Services {
         }
 
         // Pobierz konkretną lokacje o danym id
-        public async Task<Location> GetLocationById(int id) {
+        public static async Task<Location> GetLocationById(int id) {
             string json = string.Format("{{\"id\": {0}}}", id);
             string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscePoId", json).Result;
             if (result == null) return null;
@@ -41,11 +46,11 @@ namespace Urbexer.Services {
         // Funkcje do pobierania list lokacji
 
         // Pobierz wszystkie lokacje z bazy danych
-        public async Task<List<Location>> GetLocationListAll() {
+        public static async Task<List<Location>> GetLocationListAll() {
             string result = SendApiRequest(HttpMethod.Get, "/api/urbex/getall").Result;
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
-        public async Task<List<Location>> GetLocationListByIds(List<int> idList) {
+        public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",",idList));
             string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaZListy", json).Result;
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result)); // TODO Uzupełnić
@@ -56,7 +61,7 @@ namespace Urbexer.Services {
         // Funkcje do pobierania list id lokacji
 
         // Pobierz lokacje w okolicy danej pozycji
-        public async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius) {
+        public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius) {
             float deg = KmToDegrees(kmRadius);
             string json = string.Format("{{" +
                 "\"wspolrzedneLATUser\": {0}," +
@@ -69,12 +74,12 @@ namespace Urbexer.Services {
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         // Pobierz lokacje z danego województwa
-        public async Task<List<int>> GetIdListByProvince(string province) {
+        public static async Task<List<int>> GetIdListByProvince(string province) {
             // Nie ma do tego metody w api, ani nawet kolumny. Możliwe, że ostatecznie będzie usunięte
             return null; 
         }
         // Pobierz lokacje z danej kategorii
-        public async Task<List<int>> GetIdListByCategory(string category) {
+        public static async Task<List<int>> GetIdListByCategory(string category) {
             // TODO Poprawić i przetestować to jak Marcin naprawi api
             string json = string.Format("{{\"nazwa\": {0}}}", category);
             string result = await SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaZKategorii", json);
@@ -84,17 +89,17 @@ namespace Urbexer.Services {
 
         #region Geocoder
         // Ustaw pozycje z danego adresu
-        public async Task<Position> GetPositionFromAddressAsync(string address) {
+        public static async Task<Position> GetPositionFromAddressAsync(string address) {
             Geocoder geocoder = new Geocoder();
             IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
             return approximatePositions.FirstOrDefault();
         }
         // Ustaw adres z danych współrzędnych
-        public string GetAddressFromPositionAsync(float latitude, float longitude) {
+        public static string GetAddressFromPositionAsync(float latitude, float longitude) {
             return GetAddressFromPositionAsync(new Position(latitude, longitude)).Result;
         }
         // Ustaw adres z danej pozycji
-        public async Task<string> GetAddressFromPositionAsync(Position position) {
+        public static async Task<string> GetAddressFromPositionAsync(Position position) {
             Geocoder geocoder = new Geocoder();
             IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
             return possibleAddresses.FirstOrDefault();

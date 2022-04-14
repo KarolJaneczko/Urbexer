@@ -17,9 +17,7 @@ namespace Urbexer.ViewModels.LocationModels {
         protected ObservableRangeCollection<Location> Locations { get; set; } 
         public ObservableRangeCollection<Location> LocationsFiltered { get; set; } 
         public AsyncCommand<Location> CardSelectedCommand { get; }
-        protected readonly LocationService locationService; // Usunąć gdy LocationService stanie się statyczne 
         public BaseLocationViewModel() {
-            locationService = new LocationService();
             LocationsFiltered = new ObservableRangeCollection<Location> { };
             Locations = new ObservableRangeCollection<Location> { };
 

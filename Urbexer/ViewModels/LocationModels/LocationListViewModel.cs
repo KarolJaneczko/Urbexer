@@ -14,7 +14,7 @@ using Location = Urbexer.Models.Location;
 namespace Urbexer.ViewModels {
     internal class LocationListViewModel : BaseLocationViewModel{
         public LocationListViewModel() : base(){
-
+            InitializeLocations();
         }
         protected async Task InitializeLocations() {
             //Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListAll().Result);
@@ -28,9 +28,9 @@ namespace Urbexer.ViewModels {
             */
 
             var location = await Geolocation.GetLastKnownLocationAsync();
-            List<int> idList = locationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, 20).Result;
+            List<int> idList = LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, 20).Result;
             //List<int> idList = locationService.GetIdListInArea(52.2297f, 21.0122f, 20).Result;
-            Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListByIds(idList).Result);
+            Locations = new ObservableRangeCollection<Location>(LocationService.GetLocationListByIds(idList).Result);
 
 
             ClearFilter();
