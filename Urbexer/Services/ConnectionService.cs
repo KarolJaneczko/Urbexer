@@ -9,7 +9,7 @@ namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
         #region Zmienne
         public static HttpClientHandler clientHandler = new HttpClientHandler {
-            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            UseProxy = false,
         };
         public HttpClient httpClient = new HttpClient(clientHandler);
         #endregion
