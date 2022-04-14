@@ -41,6 +41,8 @@ namespace Urbexer.Models {
             Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
             Id = apiLocation.id;
 
+            Address = apiLocation.adres;
+            /*
             if (apiLocation.adres != null) {
                 Address = apiLocation.adres;
             } else {
@@ -49,6 +51,7 @@ namespace Urbexer.Models {
                 //LocationService locationService = new LocationService();
                 //Address = locationService.GetAddressFromPositionAsync(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
             }
+            */
 
             ImageLinks = new ObservableRangeCollection<ImageLink>();
             if (apiLocation.zdjecie != null) {
