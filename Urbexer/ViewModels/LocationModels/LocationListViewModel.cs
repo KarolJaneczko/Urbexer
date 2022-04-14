@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,39 +14,34 @@ using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
     internal class LocationListViewModel : BaseLocationViewModel{
+        public AsyncCommand LoadMoreCommand { get; }
+        private List<int> loadedLocationsIds = new List<int>();
+        private int currentLoadRange = 0;
         public LocationListViewModel() : base(){
-            InitializeLocations();
-        }
-        protected async Task InitializeLocations() {
-            //Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListAll().Result);
-
-            /*
-            List<int> idList = new List<int>();
-            for (int i = 0; i < 2000; i++) {
-                idList.Add(i);
-            }
-            Locations = new ObservableRangeCollection<Location>(locationService.GetLocationListByIds(idList).Result);
-            */
-
-            var location = await Geolocation.GetLastKnownLocationAsync();
-            List<int> idList = LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, 20).Result;
-            //List<int> idList = locationService.GetIdListInArea(52.2297f, 21.0122f, 20).Result;
-            Locations = new ObservableRangeCollection<Location>(LocationService.GetLocationListByIds(idList).Result);
-
-
-            ClearFilter();
+            LoadMore();
+            LoadMoreCommand = new AsyncCommand(LoadMore);
         }
 
         #region Komendy
         public ICommand FilterLocationsByNameCommand =>
             new Command<string>((string query) => {
                 currentNameFilter = query;
-                ApplyFilters();
+                ReapplyFilters();
             });
-        public ICommand LoadMoreCommand =>
-            new Command(async => {
-                var peepee = "poopoo"; // PLACEHOLDER
-            });
+        // Powiększ zasięg wczytywania lokacji i pobierz nowe lokacje
+        async Task LoadMore() {
+            List<int> newIds = new List<int>();
+            while (newIds.Count() == 0) {
+                currentLoadRange += 5;
+                Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
+                newIds = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, currentLoadRange);
+                newIds = newIds.Except(loadedLocationsIds).ToList();
+            }
+            Locations.AddRange(await LocationService.GetLocationListByIds(newIds));
+            loadedLocationsIds.AddRange(newIds);
+            
+            ReapplyFilters();
+        }
         #endregion Komendy
     }
 }

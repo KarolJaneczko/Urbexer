@@ -39,7 +39,7 @@ namespace Urbexer.ViewModels.LocationModels {
             }
         }
         // Odśwież filtry
-        protected void ApplyFilters() {
+        protected void ReapplyFilters() {
             ClearFilter();
             SetFilterByName(currentNameFilter);
         }
