@@ -8,6 +8,7 @@ using Xamarin.Forms.Xaml;
 using Urbexer.Services;
 using Xamarin.Essentials;
 using Map = Xamarin.Forms.Maps.Map;
+using System.Threading.Tasks;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -26,9 +27,10 @@ namespace Urbexer.Views {
 
                 // Pokaż odpowiednią karte lokacji
                 LocationInfo.IsVisible = true;
-                LocationInfo.BindingContext = LocationService.GetLocationById(value);
+                LocationInfo.BindingContext = LocationService.GetLocationById(value).Result;
             }
         }
+
         public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
@@ -46,17 +48,10 @@ namespace Urbexer.Views {
             }
         }
 
-        // Zamień adres na pozycje
-        Position AddressToPosition(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> possiblePositions = geocoder.GetPositionsForAddressAsync(address).Result;
-            return possiblePositions.FirstOrDefault();
-        }
-
         // Ustaw mapę na środek Polski
-        private async void DefaultPositionFallback() {
+        private async Task DefaultPositionFallback() {
             string default_address = "Polska";
-            Position default_position = AddressToPosition(default_address);
+            Position default_position = await GeocoderService.GetPositionFromAddressAsync(default_address);
             // 350km to mw. połowa szerokości Polski
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(default_position, Distance.FromKilometers(350));
             map.MoveToRegion(mapSpan);
@@ -68,10 +63,6 @@ namespace Urbexer.Views {
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
                 new Position(position.Latitude, position.Longitude),
                 map.VisibleRegion.Radius));
-        }
-
-        private void Map_MapClicked(object sender, MapClickedEventArgs e) {
-            MoveToPosition(e.Position);
         }
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {

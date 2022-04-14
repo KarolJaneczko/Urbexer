@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:DataType="viewmodels:MapViewModel">
+    x:DataType="viewmodels:LocationListViewModel">
 
     <!--  Strona wyświetlające karty lokacji w liście.  -->
 
@@ -21,37 +20,8 @@
     </NavigationPage.TitleView>
 
     <ContentPage.BindingContext>
-        <viewmodels:MapViewModel />
+        <viewmodels:LocationListViewModel />
     </ContentPage.BindingContext>
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
-        </ResourceDictionary>
-
-        <DataTemplate x:Key="LocationCard">
-            <ViewCell>
-                <Frame
-                    Margin="5"
-                    Padding="3"
-                    CornerRadius="10"
-                    VerticalOptions="FillAndExpand">
-                    <StackLayout x:DataType="models:Location" Orientation="Horizontal">
-                        <Image
-                            HorizontalOptions="Start"
-                            Source="{Binding Thumbnail}"
-                            WidthRequest="100" />
-                        <StackLayout VerticalOptions="Center">
-                            <Label Text="{Binding Name}" VerticalOptions="Center" />
-                            <Label Text="{Binding Address}" VerticalOptions="Center" />
-                            <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
-                            <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-            </ViewCell>
-        </DataTemplate>
-    </ContentPage.Resources>
 
     <StackLayout>
         <SearchBar
@@ -61,18 +31,43 @@
             HorizontalOptions="Fill"
             SearchCommand="{Binding FilterLocationsByNameCommand}"
             SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
-        <ListView
-            HasUnevenRows="True"
-            ItemTemplate="{DynamicResource LocationCard}"
+        <CollectionView
+            HorizontalOptions="End"
             ItemsSource="{Binding LocationsFiltered}"
-            VerticalOptions="StartAndExpand">
-            <ListView.Behaviors>
-                <xct:EventToCommandBehavior
-                    Command="{Binding CardSelectedCommand}"
-                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
-                    EventName="ItemSelected" />
-            </ListView.Behaviors>
-        </ListView>
+            RemainingItemsThreshold="1"
+            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+            SelectionChangedCommand="{Binding CardSelectedCommand}"
+            VerticalOptions="CenterAndExpand">
+            <CollectionView.EmptyView>
+                <StackLayout>
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="No locations?"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Margin="5"
+                        Padding="3"
+                        CornerRadius="10"
+                        VerticalOptions="FillAndExpand">
+                        <StackLayout x:DataType="models:Location" Orientation="Horizontal">
+                            <Image
+                                HorizontalOptions="Start"
+                                Source="{Binding Thumbnail}"
+                                WidthRequest="100" />
+                            <StackLayout VerticalOptions="Center">
+                                <Label Text="{Binding Name}" VerticalOptions="Center" />
+                                <Label Text="{Binding Address}" VerticalOptions="Center" />
+                                <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
+                                <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
-
 </ContentPage>
