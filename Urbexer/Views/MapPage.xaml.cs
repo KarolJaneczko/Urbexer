@@ -8,6 +8,7 @@ using Xamarin.Forms.Xaml;
 using Urbexer.Services;
 using Xamarin.Essentials;
 using Map = Xamarin.Forms.Maps.Map;
+using System.Threading.Tasks;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -47,17 +48,10 @@ namespace Urbexer.Views {
             }
         }
 
-        // Zamień adres na pozycje
-        Position AddressToPosition(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> possiblePositions = geocoder.GetPositionsForAddressAsync(address).Result;
-            return possiblePositions.FirstOrDefault();
-        }
-
         // Ustaw mapę na środek Polski
-        private void DefaultPositionFallback() {
+        private async Task DefaultPositionFallback() {
             string default_address = "Polska";
-            Position default_position = AddressToPosition(default_address);
+            Position default_position = await GeocoderService.GetPositionFromAddressAsync(default_address);
             // 350km to mw. połowa szerokości Polski
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(default_position, Distance.FromKilometers(350));
             map.MoveToRegion(mapSpan);
