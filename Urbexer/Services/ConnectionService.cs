@@ -7,17 +7,23 @@ using Newtonsoft.Json;
 
 namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
+        #region Zmienne
         public static HttpClientHandler clientHandler = new HttpClientHandler {
-            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            UseProxy = false,
         };
         public HttpClient httpClient = new HttpClient(clientHandler);
+        #endregion
+
+        #region Konstruktory
         public ConnectionService() { }
+        #endregion
+
         public async Task<bool> Login(Login login, HttpClient httpClient) {
             var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", SerializeToJson(login));
             ValidateConnectionResult(result, OperationTypeEnum.Logowanie);
             if (result.StatusCode == System.Net.HttpStatusCode.OK) {
                 var resultContent = await result.Content.ReadAsStringAsync();
-                LoginInfo.SetLoginCredentials(login.login, resultContent);
+                UserInfo.SetLoginCredentials(login.login, resultContent);
                 return true;
             }
             else

@@ -7,59 +7,54 @@ using Urbexer.Models.ApiModels;
 
 namespace Urbexer.Models {
     public class Location {
-        public string Address { get; set; }
-        public string Name { get; set; }
-        public Position Position { get; set; }
+        #region Zmienne
         public int Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
         public string Thumbnail { get; set; }
+        public Position Position { get; set; }
         public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
+        #endregion
 
-        public Location(int id) {
-            string[] strings = LocationService.GetImagesById(id);
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
-            foreach (string s in strings) {
-                ImageLinks.Add(new ImageLink { Link = s });
-            }
-        }
-        public Location() {
-            int id = 0;
-            string[] strings = LocationService.GetImagesById(id);
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
-            foreach (string s in strings) {
-                ImageLinks.Add(new ImageLink { Link = s });
-            }
-        }
-        // Konwertuj lokacje z bazy danych.
-        public Location(APILocation apiLoc) {
-            Address = apiLoc.adres;
-            Name = apiLoc.nazwa;
-            Position = new Position(apiLoc.wspolrzedneLAT, apiLoc.wspolrzedneLNG);
-            Id = apiLoc.id;
-        }
-
-        // Funkcje do generowania współrzędnych z adresu.
-        public void Position_From_Address() {
-            Position_From_Address(Address);
-        }
-        public async void Position_From_Address(string address) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
-            Position = approximatePositions.FirstOrDefault();
-        }
-        // Funkcje do generowania adresu z współrzędnych.
-        public void Address_From_Position() {
-            Address_From_Position(Position);
-        }
-        public void Address_From_Position(float latitude, float longitude) {
-            Address_From_Position(new Position(latitude, longitude));
-        }
-        public async void Address_From_Position(Position position) {
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
-            Address = possibleAddresses.FirstOrDefault();
-        }
+        #region Klasy
         public class ImageLink {
             public string Link { get; set; }
         }
+        #endregion
+
+        #region Konstruktory
+        public Location() {
+            Id = -1;
+        }
+        public Location(APILocation apiLocation) {
+            Name = apiLocation.nazwa;
+            Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
+            Id = apiLocation.id;
+
+            Address = apiLocation.adres;
+            /*
+            if (apiLocation.adres != null) {
+                Address = apiLocation.adres;
+            } else {
+                // Wygeneruj adres geocoderem
+                // TODO: Zaktualizować to gdy LocationService będzie statyczne
+                //LocationService locationService = new LocationService();
+                //Address = locationService.GetAddressFromPositionAsync(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
+            }
+            */
+
+            ImageLinks = new ObservableRangeCollection<ImageLink>();
+            if (apiLocation.zdjecie != null) {
+
+            } else {
+                // Wczytaj placeholder
+                Thumbnail = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
+                ImageLinks.Add(new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" });
+            }
+        }
+        #endregion
+
+        #region Metody
+        #endregion
     }
 }

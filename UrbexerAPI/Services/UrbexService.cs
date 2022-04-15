@@ -19,6 +19,10 @@ namespace APIpz.Services
         PageResult<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
         void DodajOpinie(DodajOpinieDto dto);
         PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto);
+        Miejsce PokazMiejscePoId(PokazMiejscePoIdDto dto);
+        List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
+        IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto);
+        IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto);
 
     }
     public class UrbexService : IUrbexService
@@ -131,6 +135,33 @@ namespace APIpz.Services
             var result = new PageResult<OpiniaDto>(opinieDtos, totalitemsCount, dto.PageSize, dto.PageNumber);
             return result;
             
+        }
+
+        public Miejsce PokazMiejscePoId(PokazMiejscePoIdDto dto)
+        {
+            var miejsce = _context.Miejsce.FirstOrDefault( m => m.Id == dto.Id);
+            return miejsce;
+        }
+        public List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
+        {
+            var miejsca = _context.Miejsce.Where(m => dto.listaId.Contains(m.Id)).ToList();
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto)
+        {
+            var zapytanie = _context.Miejsce.Where(m => m.Miejsce_Kategoria.Id == dto.Id).ToList();
+            var miejsca = zapytanie.Select(m => m.Id);
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto)
+        {
+        //    for x, y in rekordy:
+        //if (x - x0) *(x - x0) + (y - y0) * (y - y0) == promien * promien:
+            var zapytanie = _context.Miejsce.Where(m => (m.WspolrzedneLAT - dto.WspolrzedneLATUser) * (m.WspolrzedneLAT - dto.WspolrzedneLATUser) +
+                                                        (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) * (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) <= dto.Promien * dto.Promien);
+
+            var miejsca = zapytanie.Select(m => m.Id);
+            return miejsca;
         }
     }
 }
