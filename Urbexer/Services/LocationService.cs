@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +10,16 @@ using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
     public static class LocationService {
+        #region Zmienne
         // Klasa do pobierania lokacji i pobiązanych danych z bazy.
         private static readonly HttpClient httpClient;
         static LocationService() {
             HttpClientHandler clientHandler = new HttpClientHandler { UseProxy = false };
             httpClient = new HttpClient(clientHandler);
         }
+        #endregion
 
+        #region Główne metody
         // Funkcja do wysyłania zapytań do api
         // Zwraca wynik zapytania przy sukcesie (kod 200), null w przeciwnym przypadku
         private static async Task<string> SendApiRequest(HttpMethod method, string path, string json = "") {
@@ -41,6 +43,7 @@ namespace Urbexer.Services {
             if (result == null) return null;
             return new Location(JsonConvert.DeserializeObject<APILocation>(result));
         }
+        #endregion
 
         #region ListyLokacji
         // Funkcje do pobierania list lokacji
