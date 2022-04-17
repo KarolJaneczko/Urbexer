@@ -169,6 +169,7 @@
                         <Label Text="Oświadczam, że jestem osobą pełnoletnią i mam ukończone 18 lat."/>
                     </StackLayout>
                     
+                    <!-- Przycisk do rejestracji konta -->
                     <Button Command="{Binding SubmitCommand}"
                             x:Name="RejestracjaPrzycisk"
                             Text="Zarejestruj"                                                       
@@ -178,6 +179,15 @@
                             CornerRadius="25" 
                             FontAttributes="Bold"
                             IsEnabled="False"/>
+                    
+                    <!-- Przycisk do aktywacji konta -->
+                    <Button Command="{Binding ActivateAccount}"
+                            Text="Aktywuj konto"                                                       
+                            BorderColor="Black"                           
+                            BackgroundColor="#B52435"
+                            TextColor="White" 
+                            CornerRadius="25" 
+                            FontAttributes="Bold"/>
 
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"

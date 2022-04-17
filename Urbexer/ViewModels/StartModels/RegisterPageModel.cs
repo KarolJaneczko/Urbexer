@@ -38,8 +38,10 @@ namespace Urbexer.ViewModels {
             }
         }
         public ICommand SubmitCommand { protected set; get; }
+        public ICommand ActivateAccount { protected set; get; }
         public RegisterPageModel() {
             SubmitCommand = new Command(OnSubmit);
+            ActivateAccount = new Command(OnActivate);
         }
 
         #region Metody
@@ -56,8 +58,7 @@ namespace Urbexer.ViewModels {
                         hasloHash = PasswordRepeat,
                         czyAdmin = false
                     }, httpClient) == true) {
-                        await Application.Current.MainPage.DisplayAlert("Sukces", "Rejestracja zakończyła się powodzeniem.", "OK");
-                        //Tu będzie metoda ustawiająca CzyKontoAktywne na true wysyłając Login.
+                        await Application.Current.MainPage.DisplayAlert("Sukces", "Na podany adres mailowy otrzymasz token wymagany do aktywacji konta.", "OK");
                         //Tu będzie metoda generująca rekord w tabeli z profilami.
                     }
                 }
@@ -70,6 +71,8 @@ namespace Urbexer.ViewModels {
             catch (Exception exception) {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
+        }
+        public async void OnActivate() {
         }
         #endregion
     }
