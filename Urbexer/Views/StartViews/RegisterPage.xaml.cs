@@ -31,5 +31,15 @@ namespace Urbexer.Views {
         protected override bool OnBackButtonPressed() {
             return true;
         }
+        void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e) {
+            if (e.Value) {
+                RejestracjaPrzycisk.IsEnabled = true;
+                RejestracjaPrzycisk.BackgroundColor = Color.FromHex("B52435");
+            }
+            else {
+                RejestracjaPrzycisk.IsEnabled = false;
+                RejestracjaPrzycisk.BackgroundColor = new Color(0, 0, 0);
+            }
+        }
     }
 }

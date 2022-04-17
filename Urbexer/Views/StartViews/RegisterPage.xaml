@@ -14,7 +14,7 @@
     <Grid>
         <Image Source="background_image4"
                Aspect="AspectFill"/>
-            <Frame Padding="0"
+        <Frame Padding="0"
                    HeightRequest="125"
                    WidthRequest="125"
                    HorizontalOptions="CenterAndExpand"
@@ -22,7 +22,7 @@
                    BackgroundColor="Transparent"
                    CornerRadius="25"
                    Margin="0,50,0, 600">
-                  <Image Source="app_logo.png"
+            <Image Source="app_logo.png"
                                  Aspect="AspectFill"/>
         </Frame>
         <BoxView>
@@ -53,7 +53,7 @@
                     <StackLayout Margin="0,15,0,10" 
                                  Spacing="0" >
                         <Label Text="Login" 
-                               TextDecorations="None"/> 
+                               TextDecorations="None"/>
                         <Frame BackgroundColor="#cfffffff"  
                                CornerRadius="50" 
                                Padding="0" 
@@ -95,7 +95,7 @@
                                     <Image Source="email_icon.png" 
                                            Aspect="AspectFill"
                                            Margin="0"/>
-                                    
+
                                 </Frame>
                                 <Entry x:Name="Email" 
                                        Text="{Binding Email}" 
@@ -161,13 +161,23 @@
                             </StackLayout>
                         </Frame>
                     </StackLayout>
-                    <Button Command="{Binding SubmitCommand}"                                  
-                        Text="Zarejestruj"                                                       
-                        BorderColor="Black"                           
-                        BackgroundColor="#B52435"
-                        TextColor="White" 
-                        CornerRadius="25" 
-                        FontAttributes="Bold"/>
+                    
+                    <!-- Disclaimer -->
+                    <StackLayout>
+                    <CheckBox IsChecked="False" 
+                              CheckedChanged="OnCheckBoxCheckedChanged"/>
+                        <Label Text="Oświadczam, że jestem osobą pełnoletnią i mam ukończone 18 lat."/>
+                    </StackLayout>
+                    
+                    <Button Command="{Binding SubmitCommand}"
+                            x:Name="RejestracjaPrzycisk"
+                            Text="Zarejestruj"                                                       
+                            BorderColor="Black"                           
+                            BackgroundColor="#B52435"
+                            TextColor="White" 
+                            CornerRadius="25" 
+                            FontAttributes="Bold"
+                            IsEnabled="False"/>
 
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
@@ -196,7 +206,7 @@
                                    WidthRequest="50" 
                                    Padding="0" 
                                    Margin="0">
-                            <ImageButton Source="back_icon.png" 
+                                <ImageButton Source="back_icon.png" 
                                          Margin="0" 
                                          WidthRequest="30"
                                          HeightRequest="30" 
@@ -212,5 +222,5 @@
             </Frame>
         </StackLayout>
     </Grid>
-    
+
 </ContentPage>

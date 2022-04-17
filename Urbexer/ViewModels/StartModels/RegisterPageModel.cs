@@ -7,43 +7,42 @@ using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class RegisterPageModel : BaseViewModel {
-        public event PropertyChangedEventHandler _PropertyChanged = delegate { };
-        private string login;
-        private string email;
-        private string password;
-        private string passwordRepeat;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        private string login, email, password, passwordRepeat;
         public string Login {
             get { return login; }
             set {
                 login = value;
-                _PropertyChanged(this, new PropertyChangedEventArgs("Login"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Login"));
             }
         }
         public string Email {
             get { return email; }
             set {
                 email = value;
-                _PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
             }
         }
         public string Password {
             get { return password; }
             set {
                 password = value;
-                _PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
         public string PasswordRepeat {
             get { return passwordRepeat; }
             set {
                 passwordRepeat = value;
-                _PropertyChanged(this, new PropertyChangedEventArgs("PasswordRepeat"));
+                PropertyChanged(this, new PropertyChangedEventArgs("PasswordRepeat"));
             }
         }
         public ICommand SubmitCommand { protected set; get; }
         public RegisterPageModel() {
             SubmitCommand = new Command(OnSubmit);
         }
+
+        #region Metody
         public async void OnSubmit() {
             try {
                 ValidateLogin(Login);
@@ -62,7 +61,7 @@ namespace Urbexer.ViewModels {
                         //Tu będzie metoda generująca rekord w tabeli z profilami.
                     }
                 }
-                else 
+                else
                     throw new AppException("Hasła się nie zgadzają.", AppExceptionTypeEnum.StringsDontMatch);
             }
             catch (AppException exception) {
@@ -72,5 +71,6 @@ namespace Urbexer.ViewModels {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
         }
+        #endregion
     }
 }
