@@ -4,11 +4,12 @@
              x:Class="Urbexer.Views.HomePage">
 
     <StackLayout>
-    <Label Text="Tu będzie feed" FontSize="Title"/>
+        <Label Text="Tu będzie feed" FontSize="Title"/>
     </StackLayout>
 
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="false"/>
+        <!--<BackButtonBehavior IsEnabled="false"/>-->
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
     </Shell.BackButtonBehavior>
 
 </ContentPage>

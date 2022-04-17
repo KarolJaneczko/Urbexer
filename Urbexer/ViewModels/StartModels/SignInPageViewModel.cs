@@ -38,7 +38,7 @@ namespace Urbexer.ViewModels {
                     login = login,
                     password = password
                 }, httpClient) == true) {
-                    await Shell.Current.GoToAsync("/"+nameof(HomePage));
+                    await Shell.Current.GoToAsync("/" + nameof(HomePage));
                 }
             }
             catch (AppException exception) {

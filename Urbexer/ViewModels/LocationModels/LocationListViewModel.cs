@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Urbexer.Models;
 using Urbexer.Services;
 using Urbexer.ViewModels.LocationModels;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -13,11 +10,11 @@ using Xamarin.Forms;
 using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
-    internal class LocationListViewModel : BaseLocationViewModel{
+    internal class LocationListViewModel : BaseLocationViewModel {
         public AsyncCommand LoadMoreCommand { get; }
         private List<int> loadedLocationsIds = new List<int>();
         private int currentLoadRange = 0;
-        public LocationListViewModel() : base(){
+        public LocationListViewModel() : base() {
             LoadMore();
             LoadMoreCommand = new AsyncCommand(LoadMore);
         }
@@ -39,7 +36,7 @@ namespace Urbexer.ViewModels {
             }
             Locations.AddRange(await LocationService.GetLocationListByIds(newIds));
             loadedLocationsIds.AddRange(newIds);
-            
+
             ReapplyFilters();
         }
         #endregion Komendy

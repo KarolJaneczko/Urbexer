@@ -47,5 +47,8 @@ namespace Urbexer.Views {
         public void GoToRegisterPage(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(RegisterPage));
         }
+        protected override bool OnBackButtonPressed() {
+            return true;
+        }
     }
 }

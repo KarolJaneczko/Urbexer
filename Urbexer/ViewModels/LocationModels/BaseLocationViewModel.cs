@@ -1,21 +1,15 @@
-﻿using Urbexer.Models;
-using Xamarin.CommunityToolkit.ObjectModel;
-using Urbexer.Services;
+﻿using Xamarin.CommunityToolkit.ObjectModel;
 using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.Forms;
-using System.Windows.Input;
-using System.Collections.Generic;
-using Xamarin.Essentials;
 using Location = Urbexer.Models.Location;
-using Urbexer.ViewModels.LocationModels;
 
 namespace Urbexer.ViewModels.LocationModels {
     internal class BaseLocationViewModel {
         // Locations rzechowuje wszystkie wczytane lokacje
         // LocationsFiltered przechowuje wyświetlane lokacje. Musi być publiczne dla bindingów
-        protected ObservableRangeCollection<Location> Locations { get; set; } 
-        public ObservableRangeCollection<Location> LocationsFiltered { get; set; } 
+        protected ObservableRangeCollection<Location> Locations { get; set; }
+        public ObservableRangeCollection<Location> LocationsFiltered { get; set; }
         public AsyncCommand<Location> CardSelectedCommand { get; }
         public BaseLocationViewModel() {
             LocationsFiltered = new ObservableRangeCollection<Location> { };

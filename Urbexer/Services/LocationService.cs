@@ -141,4 +141,3 @@ namespace Urbexer.Services {
         #endregion Testowe
     }
 }
-
