@@ -28,5 +28,8 @@ namespace Urbexer.Views {
         public void GoBack(object sender, EventArgs e) {
             Shell.Current.GoToAsync(nameof(WelcomePage));
         }
+        protected override bool OnBackButtonPressed() {
+            return true;
+        }
     }
 }
