@@ -38,10 +38,13 @@ namespace Urbexer.ViewModels {
             }
         }
         public ICommand SubmitCommand { protected set; get; }
+        public bool IsSubmitEnabled { get; set; }
         public RegisterPageModel() {
             SubmitCommand = new Command(OnSubmit);
+            IsSubmitEnabled = false;
         }
         public async void OnSubmit() {
+            
             try {
                 ValidateLogin(Login);
                 ValidateEmail(Email);

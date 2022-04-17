@@ -161,13 +161,14 @@
                             </StackLayout>
                         </Frame>
                     </StackLayout>
-                    <Button Command="{Binding SubmitCommand}"                                  
+                    <Button Command="{Binding SubmitCommand}"  
                         Text="Zarejestruj"                                                       
                         BorderColor="Black"                           
                         BackgroundColor="#B52435"
                         TextColor="White" 
                         CornerRadius="25" 
-                        FontAttributes="Bold"/>
+                        FontAttributes="Bold"
+                        IsEnabled="{Binding IsSubmitEnabled}"/>
 
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"

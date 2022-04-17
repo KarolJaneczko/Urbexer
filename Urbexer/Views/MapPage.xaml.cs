@@ -9,6 +9,7 @@ using Urbexer.Services;
 using Xamarin.Essentials;
 using Map = Xamarin.Forms.Maps.Map;
 using System.Threading.Tasks;
+using Urbexer.ViewModels;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -34,6 +35,7 @@ namespace Urbexer.Views {
         public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
+            BindingContext = new MapViewModel();
 
             // Spróbuj ustawić pozycje mapy na pozycje użytkownika
             try {

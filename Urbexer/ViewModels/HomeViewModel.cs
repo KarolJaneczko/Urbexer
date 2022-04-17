@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using Urbexer.Models;
+using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -10,7 +11,7 @@ namespace Urbexer.ViewModels {
             BackCommand = new Command(async (x) => {
                 if (await LogoutPopout()) {
                     UserInfo.Logout();
-                    await Shell.Current.GoToAsync("WelcomePage");
+                    await Shell.Current.GoToAsync(nameof(MapPage));
                 } }  );
         }
         public async Task<bool> LogoutPopout() {
