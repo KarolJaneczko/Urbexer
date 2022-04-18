@@ -6,7 +6,11 @@ using System.Timers;
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WelcomePage : ContentPage {
+        #region Zmienne
         Timer timer;
+        #endregion
+
+        #region Konstruktory
         public WelcomePage() {
             InitializeComponent();
             BindingContext = new WelcomeViewModel();
@@ -16,6 +20,9 @@ namespace Urbexer.Views {
 
             buttons.Margin = new Thickness(25, 0, 25, 50);
         }
+        #endregion
+
+        #region Metody
         private void AnimatedInfoCarousel() {
             timer = new Timer(3500) {
                 AutoReset = true,
@@ -50,5 +57,6 @@ namespace Urbexer.Views {
         protected override bool OnBackButtonPressed() {
             return true;
         }
+        #endregion
     }
 }

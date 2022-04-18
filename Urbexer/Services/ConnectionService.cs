@@ -38,6 +38,14 @@ namespace Urbexer.Services {
             else
                 return false;
         }
+        public async Task<bool> ConfirmRegistration(ConfirmUser confirmUser, HttpClient httpClient) {
+            var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/account/confirm", SerializeToJson(confirmUser));
+            ValidateConnectionResult(result, OperationTypeEnum.AktywacjaKonta);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                return true;
+            else
+                return false;
+        }
         #endregion
 
         #region Pomocnicze metody

@@ -36,6 +36,9 @@
     <Compile Update="Views\LeaderboardPage.xaml.cs">
       <DependentUpon>LeaderboardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\StartViews\ActivatePage.xaml.cs">
+      <DependentUpon>ActivatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StartViews\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>

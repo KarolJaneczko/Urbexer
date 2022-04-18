@@ -46,6 +46,17 @@ namespace Urbexer.Services {
                 throw new AppException("Hasło nie może być dłuższe niż 12 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
         }
+        public void ValidateActivatingToken(string activatingToken) {
+            if (string.IsNullOrEmpty(activatingToken)) {
+                throw new AppException("Hasło nie może być puste.", AppExceptionTypeEnum.EmptyField);
+            }
+            else if (activatingToken.Length != 5) {
+                throw new AppException("Token musi zawierać 5 znaków.", AppExceptionTypeEnum.InvalidLength);
+            }
+            else if (!CheckNoSpecialChars(activatingToken)) {
+                throw new AppException("Token nie może zawierać znaków specjalnych.", AppExceptionTypeEnum.InvalidDataFormat);
+            }
+        }
         #endregion
 
         #region Walidacje formatu wprowadzanych danych
@@ -65,15 +76,23 @@ namespace Urbexer.Services {
             else
                 return false;
         }
+        public static bool CheckNoSpecialChars(string word) {
+            Regex regex = new Regex(@"^[A-Za-z0-9\d]+$");
+            Match match = regex.Match(word);
+            if (match.Success)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region Walidacje techniczne
         public static bool CheckForInternetConnection() {
             if (!CrossConnectivity.Current.IsConnected)
                 return false;
             else
                 return true;
         }
-        #endregion
-
-        #region Walidacje techniczne
         public async void ValidateConnectionResult(HttpResponseMessage result, OperationTypeEnum operation) {
             try {
                 AppExceptionTypeEnum exceptionType = AppExceptionTypeEnum.UnspecifiedError;
@@ -86,6 +105,10 @@ namespace Urbexer.Services {
                     case OperationTypeEnum.Logowanie:
                         exceptionType = AppExceptionTypeEnum.LoginError;
                         message = "Błędny login lub hasło.";
+                        break;
+                    case OperationTypeEnum.AktywacjaKonta:
+                        exceptionType = AppExceptionTypeEnum.ActivateAccountError;
+                        message = "Wystąpił błąd podczas aktywacji konta.\nBłędny adres mailowy lub kod aktywujący.";
                         break;
                 }
                 if (result.StatusCode == System.Net.HttpStatusCode.BadRequest || result.StatusCode == System.Net.HttpStatusCode.NotFound) {

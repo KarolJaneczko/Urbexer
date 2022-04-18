@@ -1,36 +1,34 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
-using Xamarin.Forms;
-using System.ComponentModel;
 using Urbexer.Models.ApiModels;
-using Urbexer.Views;
+using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
-    public class SignInPageViewModel : BaseViewModel {
+    public class ActivatePageModel : BaseViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        private string login;
-        private string password;
-        public string Login {
-            get { return login; }
+        private string email, token;
+        public string Email {
+            get { return email; }
             set {
-                login = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Login"));
+                email = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
             }
         }
-        public string Password {
-            get { return password; }
+        public string Token {
+            get { return token; }
             set {
-                password = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                token = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Token"));
             }
         }
         public ICommand SubmitCommand { protected set; get; }
         #endregion
 
         #region Konstruktory
-        public SignInPageViewModel() {
+        public ActivatePageModel() {
             SubmitCommand = new Command(OnSubmit);
         }
         #endregion
@@ -38,13 +36,13 @@ namespace Urbexer.ViewModels {
         #region Metody
         public async void OnSubmit() {
             try {
-                ValidateLogin(login);
-                ValidatePassword(password);
-                if (await connectionService.Login(new Login {
-                    login = login,
-                    password = password
+                ValidateEmail(Email);
+                ValidateActivatingToken(Token);
+                if (await connectionService.ConfirmRegistration(new ConfirmUser {
+                    email = Email,
+                    kodPotwierdzajacy = Token
                 }, httpClient) == true) {
-                    await Shell.Current.GoToAsync("/" + nameof(HomePage));
+                    await Application.Current.MainPage.DisplayAlert("Sukces", "Konto zostało zaktywowane.", "OK");
                 }
             }
             catch (AppException exception) {

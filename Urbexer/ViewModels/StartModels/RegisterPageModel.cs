@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class RegisterPageModel : BaseViewModel {
+        #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private string login, email, password, passwordRepeat;
         public string Login {
@@ -38,11 +39,13 @@ namespace Urbexer.ViewModels {
             }
         }
         public ICommand SubmitCommand { protected set; get; }
-        public ICommand ActivateAccount { protected set; get; }
+        #endregion
+
+        #region Konstruktory
         public RegisterPageModel() {
             SubmitCommand = new Command(OnSubmit);
-            ActivateAccount = new Command(OnActivate);
         }
+        #endregion
 
         #region Metody
         public async void OnSubmit() {
@@ -71,8 +74,6 @@ namespace Urbexer.ViewModels {
             catch (Exception exception) {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
-        }
-        public async void OnActivate() {
         }
         #endregion
     }
