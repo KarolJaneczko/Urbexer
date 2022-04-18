@@ -89,5 +89,25 @@ namespace APIpz.Controllers
             return Ok(wynik);
 
         }
+        [HttpPut("stworzPustyProfil")]
+        public ActionResult stworzOdwiedzone([FromBody] StworzPustyProfilDto dto)
+        {
+
+            _urbexService.StworzPustyProfil(dto);
+            return Ok();
+        }
+        [HttpPut("edytujProfil")]
+        public ActionResult edytujProfil([FromBody] EdytujProfilDto dto)
+        {
+
+            _urbexService.EdytujProfil(dto);
+            return Ok();
+        }
+        [HttpGet("pokazProfil")]
+        public ActionResult<PokazProfilDto> pokazProfil(StworzPustyProfilDto dto)
+        {
+            var wynik = _urbexService.PokazProfil(dto);
+            return Ok(wynik);
+        }
     }
 }
