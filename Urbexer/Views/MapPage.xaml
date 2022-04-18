@@ -19,7 +19,6 @@
             HorizontalOptions="Fill"
             IsShowingUser="True"
             ItemsSource="{Binding LocationsFiltered}"
-            MapClicked="Map_MapClicked"
             MapType="Hybrid"
             VerticalOptions="Fill">
 

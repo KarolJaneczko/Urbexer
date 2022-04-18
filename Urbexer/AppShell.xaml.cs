@@ -10,6 +10,7 @@ namespace Urbexer {
             Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+            Routing.RegisterRoute(nameof(LocationDetailsPage), typeof(LocationDetailsPage));
         }
         private async void ClickedLogout(object sender, EventArgs e) {
             UserInfo.Logout();

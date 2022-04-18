@@ -7,5 +7,8 @@ namespace Urbexer.Views {
             InitializeComponent();
             BindingContext = new HomeViewModel();
         }
+        protected override bool OnBackButtonPressed() {
+            return true;
+        }
     }
 }
