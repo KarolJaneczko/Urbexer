@@ -140,27 +140,24 @@ namespace APIpz.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Imie")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Layout")
+                        .HasColumnType("int");
+
                     b.Property<string>("LinkFacebook")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkInstagram")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkYouTube")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nazwisko")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Opis")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UzytkownikIDId")
@@ -181,7 +178,80 @@ namespace APIpz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("KatBiurowceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatDomyId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatHoteleIPensjonatyId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatIndustrialneId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatInneId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatKolejoweId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatMilitarneId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatPodziemiaITuneleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatPodziemiaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatRestauracjeIKlubyId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatRolniczeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatSzpitaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KatZamkiIPalaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LiczbaOdwiedzonychMiejsc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OdwiedzonyPrzezIdId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("KatBiurowceId");
+
+                    b.HasIndex("KatDomyId");
+
+                    b.HasIndex("KatHoteleIPensjonatyId");
+
+                    b.HasIndex("KatIndustrialneId");
+
+                    b.HasIndex("KatInneId");
+
+                    b.HasIndex("KatKolejoweId");
+
+                    b.HasIndex("KatMilitarneId");
+
+                    b.HasIndex("KatPodziemiaITuneleId");
+
+                    b.HasIndex("KatPodziemiaId");
+
+                    b.HasIndex("KatRestauracjeIKlubyId");
+
+                    b.HasIndex("KatRolniczeId");
+
+                    b.HasIndex("KatSzpitaleId");
+
+                    b.HasIndex("KatZamkiIPalaceId");
+
+                    b.HasIndex("OdwiedzonyPrzezIdId");
 
                     b.ToTable("Ranking");
                 });
@@ -314,6 +384,95 @@ namespace APIpz.Migrations
                         .IsRequired();
 
                     b.Navigation("UzytkownikID");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Ranking", b =>
+                {
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatBiurowce")
+                        .WithMany()
+                        .HasForeignKey("KatBiurowceId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatDomy")
+                        .WithMany()
+                        .HasForeignKey("KatDomyId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatHoteleIPensjonaty")
+                        .WithMany()
+                        .HasForeignKey("KatHoteleIPensjonatyId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatIndustrialne")
+                        .WithMany()
+                        .HasForeignKey("KatIndustrialneId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatInne")
+                        .WithMany()
+                        .HasForeignKey("KatInneId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatKolejowe")
+                        .WithMany()
+                        .HasForeignKey("KatKolejoweId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatMilitarne")
+                        .WithMany()
+                        .HasForeignKey("KatMilitarneId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatPodziemiaITunele")
+                        .WithMany()
+                        .HasForeignKey("KatPodziemiaITuneleId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatPodziemia")
+                        .WithMany()
+                        .HasForeignKey("KatPodziemiaId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatRestauracjeIKluby")
+                        .WithMany()
+                        .HasForeignKey("KatRestauracjeIKlubyId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatRolnicze")
+                        .WithMany()
+                        .HasForeignKey("KatRolniczeId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatSzpitale")
+                        .WithMany()
+                        .HasForeignKey("KatSzpitaleId");
+
+                    b.HasOne("APIpz.Entities.Miejsce_kategoria", "KatZamkiIPalace")
+                        .WithMany()
+                        .HasForeignKey("KatZamkiIPalaceId");
+
+                    b.HasOne("APIpz.Entities.Odwiedzony", "OdwiedzonyPrzezId")
+                        .WithMany()
+                        .HasForeignKey("OdwiedzonyPrzezIdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KatBiurowce");
+
+                    b.Navigation("KatDomy");
+
+                    b.Navigation("KatHoteleIPensjonaty");
+
+                    b.Navigation("KatIndustrialne");
+
+                    b.Navigation("KatInne");
+
+                    b.Navigation("KatKolejowe");
+
+                    b.Navigation("KatMilitarne");
+
+                    b.Navigation("KatPodziemia");
+
+                    b.Navigation("KatPodziemiaITunele");
+
+                    b.Navigation("KatRestauracjeIKluby");
+
+                    b.Navigation("KatRolnicze");
+
+                    b.Navigation("KatSzpitale");
+
+                    b.Navigation("KatZamkiIPalace");
+
+                    b.Navigation("OdwiedzonyPrzezId");
                 });
 #pragma warning restore 612, 618
         }
