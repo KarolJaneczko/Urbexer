@@ -1,5 +1,6 @@
 ﻿using Plugin.Connectivity;
 using System;
+using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Views;
 using Xamarin.Essentials;
@@ -21,6 +22,7 @@ namespace Urbexer {
         }
         protected override void OnStart() {
             if (UserInfo.IsLoggedIn) {
+                UserInfo.CheckedInternetConnection = false;
                 Shell.Current.GoToAsync(nameof(HomePage));
             }
             else
@@ -29,10 +31,15 @@ namespace Urbexer {
         protected override void OnSleep() {
         }
         protected override void OnResume() {
+            if (UserInfo.IsLoggedIn) {
+                UserInfo.CheckedInternetConnection = false;
+            }
         }
-        public async void CheckConnection() {
-            if (!CrossConnectivity.Current.IsConnected)
-                await Current.MainPage.DisplayAlert("Błąd połączenia", "Do poprawnego działania aplikacji jest wymagane połączenie z internetem.", "OK");
+        public void CheckConnection() {
+            if (!CrossConnectivity.Current.IsConnected && !UserInfo.CheckedInternetConnection) {
+                Current.MainPage.DisplayAlert("Błąd połączenia", "Do poprawnego działania aplikacji jest wymagane połączenie z internetem.", "OK");
+                UserInfo.CheckedInternetConnection = true;
+            }
             else
                 return;
         }

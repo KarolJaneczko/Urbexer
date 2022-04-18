@@ -186,7 +186,7 @@
     <FlyoutItem Title="O nas" 
                 Icon="info_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
-        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
+        <ShellContent ContentTemplate="{DataTemplate local:InfoPage}"/>
     </FlyoutItem>
 
     <!--Wylogowanie-->

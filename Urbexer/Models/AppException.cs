@@ -41,6 +41,12 @@ namespace Urbexer.Models {
                     return "Wprowadzone dane się nie zgadzają.";
                 case AppExceptionTypeEnum.RegistrationError:
                     return "Rejestracja się nie powiodła.";
+                case AppExceptionTypeEnum.InvalidLength:
+                    return "Nieodpowiednia ilość znaków.";
+                case AppExceptionTypeEnum.InvalidDataFormat:
+                    return "Nieprawidłowy format danych.";
+                case AppExceptionTypeEnum.ActivateAccountError:
+                    return "Bład przy aktywacji konta.";
                 default:
                     break;
             }

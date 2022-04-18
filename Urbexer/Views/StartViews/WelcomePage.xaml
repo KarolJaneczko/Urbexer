@@ -10,10 +10,7 @@
              Shell.FlyoutBehavior="Disabled"
              x:Class="Urbexer.Views.WelcomePage">
 
-
-
     <Grid>
-
         <CarouselView x:Name="backOnboarding" 
                               IndicatorView="LandingIndicatorBackGround"
                               ItemsSource= "{Binding Onboardings}"
@@ -27,13 +24,6 @@
         <IndicatorView x:Name="LandingIndicatorBackGround"                             
                                IndicatorsShape="Square"                              
                                SelectedIndicatorColor="Transparent"/>
-        <!--<o:VideoPlayer x:Name="BackgroundVideo"
-                           AutoPlay="True"
-                           DisplayControls="False"
-                           Source="https://i.imgur.com/OxhpWeK.mp4/"
-                           Repeat="True" 
-                           Volume="0"/>-->
-
 
 
         <Frame Padding="0"
