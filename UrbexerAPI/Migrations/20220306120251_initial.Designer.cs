@@ -120,19 +120,6 @@ namespace APIpz.Migrations
                     b.ToTable("Opinia");
                 });
 
-            modelBuilder.Entity("APIpz.Entities.Ranking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ranking");
-                });
-
             modelBuilder.Entity("APIpz.Entities.Ranking_slownik", b =>
                 {
                     b.Property<int>("Id")

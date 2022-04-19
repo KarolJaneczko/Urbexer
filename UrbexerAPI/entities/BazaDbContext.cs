@@ -15,7 +15,6 @@ namespace APIpz.Entities
         public DbSet<Miejsce> Miejsce { get; set; }
         public DbSet<Opinia> Opinia { get; set; }
         public DbSet<Zdjecie> Zdjecie { get; set; }
-        public DbSet<Ranking> Ranking { get; set; }
         public DbSet<Ranking_slownik> Ranking_slownik { get; set; }
         public DbSet<Miejsce_kategoria> Miejsce_kategoria { get; set; }
         public DbSet<Odwiedzony> Odwiedzone { get; set; }
