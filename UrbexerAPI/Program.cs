@@ -52,6 +52,8 @@ builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<Uzytkownik>, PasswordHasher<Uzytkownik>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 builder.Services.AddScoped<IValidator<ConfirmUserDto>, ConfirmUserDtoValidator>();
+builder.Services.AddScoped<IValidator<DodajOdwiedzoneDto>, DodajOdwiedzoneDtoValidator>();
+builder.Services.AddScoped<IValidator<EdytujProfilDto>, EdytujProfilDtoValidator>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
