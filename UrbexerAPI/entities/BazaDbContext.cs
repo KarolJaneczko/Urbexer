@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using APIpz.entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIpz.Entities
 {
@@ -19,6 +20,7 @@ namespace APIpz.Entities
         public DbSet<Miejsce_kategoria> Miejsce_kategoria { get; set; }
         public DbSet<Odwiedzony> Odwiedzone { get; set; }
         public DbSet<Profil> Profil { get; set; }
+        public DbSet<Miejsce_wojewodztwo> Miejsce_wojewodztwa { get; set; }
     }
     //protected override void OnModelCreating(ModelBuilder modelbuilder)
     //{
