@@ -33,10 +33,16 @@ namespace APIpz.Migrations
                     b.Property<string>("Adres")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DataDodania")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("Doswiadczenie")
                         .HasColumnType("int");
 
                     b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Miasto")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Miejsce_KategoriaId")
@@ -46,7 +52,13 @@ namespace APIpz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Opis")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Trudnosc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WojewodztwoId")
                         .HasColumnType("int");
 
                     b.Property<float>("WspolrzedneLAT")
@@ -61,6 +73,8 @@ namespace APIpz.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Miejsce_KategoriaId");
+
+                    b.HasIndex("WojewodztwoId");
 
                     b.HasIndex("ZdjecieId");
 
@@ -82,6 +96,23 @@ namespace APIpz.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Miejsce_kategoria");
+                });
+
+            modelBuilder.Entity("APIpz.entities.Miejsce_wojewodztwo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Miejsce_wojewodztwa");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Odwiedzony", b =>
@@ -250,11 +281,19 @@ namespace APIpz.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("APIpz.entities.Miejsce_wojewodztwo", "Wojewodztwo")
+                        .WithMany()
+                        .HasForeignKey("WojewodztwoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("APIpz.Entities.Zdjecie", "Zdjecie")
                         .WithMany()
                         .HasForeignKey("ZdjecieId");
 
                     b.Navigation("Miejsce_Kategoria");
+
+                    b.Navigation("Wojewodztwo");
 
                     b.Navigation("Zdjecie");
                 });
