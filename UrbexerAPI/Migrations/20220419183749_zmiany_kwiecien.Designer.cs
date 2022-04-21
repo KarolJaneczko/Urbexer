@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIpz.Migrations
 {
     [DbContext(typeof(BazaDbContext))]
-    [Migration("20220328205216_Odwiedzone")]
-    partial class Odwiedzone
+    [Migration("20220419183749_zmiany_kwiecien")]
+    partial class zmiany_kwiecien
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,28 +117,23 @@ namespace APIpz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("MiejsceId")
+                    b.Property<int>("Ocena")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ocena")
+                    b.Property<int>("OdwiedzonyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Tekst")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UzytkownikId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MiejsceId");
-
-                    b.HasIndex("UzytkownikId");
+                    b.HasIndex("OdwiedzonyId");
 
                     b.ToTable("Opinia");
                 });
 
-            modelBuilder.Entity("APIpz.Entities.Ranking", b =>
+            modelBuilder.Entity("APIpz.Entities.Profil", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,9 +141,35 @@ namespace APIpz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Imie")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Layout")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LinkFacebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkInstagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkYouTube")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nazwisko")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UzytkownikId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Ranking");
+                    b.HasIndex("UzytkownikId");
+
+                    b.ToTable("Profil");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Ranking_slownik", b =>
@@ -261,19 +282,22 @@ namespace APIpz.Migrations
 
             modelBuilder.Entity("APIpz.Entities.Opinia", b =>
                 {
-                    b.HasOne("APIpz.Entities.Miejsce", "Miejsce")
+                    b.HasOne("APIpz.Entities.Odwiedzony", "Odwiedzony")
                         .WithMany()
-                        .HasForeignKey("MiejsceId")
+                        .HasForeignKey("OdwiedzonyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Odwiedzony");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Profil", b =>
+                {
                     b.HasOne("APIpz.Entities.Uzytkownik", "Uzytkownik")
                         .WithMany()
                         .HasForeignKey("UzytkownikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Miejsce");
 
                     b.Navigation("Uzytkownik");
                 });

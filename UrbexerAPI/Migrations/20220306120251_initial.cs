@@ -23,18 +23,6 @@ namespace APIpz.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ranking",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ranking", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ranking_slownik",
                 columns: table => new
                 {
@@ -186,9 +174,6 @@ namespace APIpz.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Opinia");
-
-            migrationBuilder.DropTable(
-                name: "Ranking");
 
             migrationBuilder.DropTable(
                 name: "Ranking_slownik");

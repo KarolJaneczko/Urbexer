@@ -15,7 +15,7 @@ namespace APIpz.Authorization
             }
 
             var userId = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            if (odwiedzony.OdwiedzonePrzezId == int.Parse(userId))
+            if (odwiedzony.OdwiedzonePrzez.Id == int.Parse(userId))
             {
                 context.Succeed(requirement);
             }

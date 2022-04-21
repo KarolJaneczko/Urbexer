@@ -4,17 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Urbexer.Views.RegisterPage"
+             x:Class="Urbexer.Views.ActivatePage"
              Shell.FlyoutItemIsVisible="False"
-              Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 
 
     <Grid>
-        <Image Source="background_image4"
-               Aspect="AspectFill"/>
-            <Frame Padding="0"
+        <Image Source="background_image4" Aspect="AspectFill"/>
+        <Frame Padding="0"
                    HeightRequest="125"
                    WidthRequest="125"
                    HorizontalOptions="CenterAndExpand"
@@ -22,9 +21,9 @@
                    BackgroundColor="Transparent"
                    CornerRadius="25"
                    Margin="0,50,0, 600">
-                  <Image Source="app_logo.png"
-                                 Aspect="AspectFill"/>
+            <Image Source="app_logo.png" Aspect="AspectFill"/>
         </Frame>
+
         <BoxView>
             <BoxView.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -36,7 +35,6 @@
         </BoxView>
 
         <StackLayout Margin="30,200,30,0">
-
             <Frame BackgroundColor="#cfffffff"
                        HeightRequest="500"
                        CornerRadius="25"
@@ -44,41 +42,13 @@
                        HasShadow="True"
                        BorderColor="black">
                 <StackLayout>
-                    <Label Text="Załóż konto" 
+                    <Label Text="Aktywuj konto" 
                            TextColor="Black" 
                            FontSize="Medium" 
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center" 
                            HorizontalOptions="Center"/>
-                    <StackLayout Margin="0,15,0,10" 
-                                 Spacing="0" >
-                        <Label Text="Login" 
-                               TextDecorations="None"/> 
-                        <Frame BackgroundColor="#cfffffff"  
-                               CornerRadius="50" 
-                               Padding="0" 
-                               Margin="0,0,0,5" 
-                               HorizontalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Frame BackgroundColor="#B52435" 
-                                       CornerRadius="50"  
-                                       HeightRequest="35" 
-                                       WidthRequest="35"
-                                       Padding="0" 
-                                       Margin="5">
-                                    <Image Source="login_icon.png" 
-                                           Aspect="AspectFill" 
-                                           Margin="0"/>
-                                </Frame>
-                                <Entry x:Name="Login" 
-                                       Text="{Binding Login}" 
-                                       Placeholder="Login" 
-                                       PlaceholderColor="#B52435"
-                                       TextColor="#B52435" 
-                                       HorizontalOptions="FillAndExpand"
-                                       Margin="0,0,50,0"/>
-                            </StackLayout>
-                        </Frame>
+                    <StackLayout Margin="0,15,0,10" Spacing="0">
                         <Label Text="Email"/>
                         <Frame BackgroundColor="#cfffffff"  
                                CornerRadius="50" 
@@ -95,7 +65,7 @@
                                     <Image Source="email_icon.png" 
                                            Aspect="AspectFill"
                                            Margin="0"/>
-                                    
+
                                 </Frame>
                                 <Entry x:Name="Email" 
                                        Text="{Binding Email}" 
@@ -106,7 +76,8 @@
                                        Margin="0,0,50,0"/>
                             </StackLayout>
                         </Frame>
-                        <Label Text="Hasło"/>
+
+                        <Label Text="Token"/>
                         <Frame BackgroundColor="#cfffffff" 
                                CornerRadius="50" Padding="0"
                                Margin="0,0,0,5" 
@@ -122,9 +93,9 @@
                                            Aspect="AspectFill" 
                                            Margin="0"/>
                                 </Frame>
-                                <Entry x:Name="Password"
-                                       Text="{Binding Password}"
-                                       Placeholder="Hasło" 
+                                <Entry x:Name="Token"
+                                       Text="{Binding Token}"
+                                       Placeholder="Token" 
                                        PlaceholderColor="#B52435"
                                        IsPassword="True" 
                                        TextColor="#B52435"
@@ -132,56 +103,18 @@
                                        Margin="0,0,50,0"/>
                             </StackLayout>
                         </Frame>
-                        <Label Text="Powtórz Hasło"/>
-                        <Frame BackgroundColor="#cfffffff" 
-                               CornerRadius="50"
-                               Padding="0"
-                               Margin="0,0,0,5"
-                               HorizontalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Frame BackgroundColor="#B52435" 
-                                       CornerRadius="50" 
-                                       HeightRequest="35" 
-                                       WidthRequest="35" 
-                                       Padding="0" 
-                                       Margin="5">
-                                    <Image Source="password_icon.png"
-                                           Aspect="AspectFill" 
-                                           Margin="0"/>
-                                </Frame>
-                                <Entry x:Name="PasswordRepeat"
-                                       Text="{Binding PasswordRepeat}"
-                                       Placeholder="Hasło"
-                                       PlaceholderColor="#B52435" 
-                                       IsPassword="True" 
-                                       TextColor="#B52435"
-                                       HorizontalOptions="FillAndExpand" 
-                                       Margin="0,0,50,0"/>
-
-                            </StackLayout>
-                        </Frame>
                     </StackLayout>
-                    <Button Command="{Binding SubmitCommand}"                                  
-                        Text="Zarejestruj"                                                       
-                        BorderColor="Black"                           
-                        BackgroundColor="#B52435"
-                        TextColor="White" 
-                        CornerRadius="25" 
-                        FontAttributes="Bold"/>
 
-                    <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="CenterAndExpand"
-                                 Spacing="5"
-                                 Margin="0,0,0,0">
-                        <Label Text="Masz już konto?"
-                               HorizontalTextAlignment="Center" 
-                               VerticalTextAlignment="Center"/>
-                        <Button  Text="Zaloguj się" 
-                                 TextColor="#B52435" 
-                                 BackgroundColor="Transparent"
-                                 FontAttributes="Bold" 
-                                 Clicked="GoToSignIn"/>
-                    </StackLayout>
+                    <!-- Przycisk do aktywacji -->
+                    <Button Command="{Binding SubmitCommand}"
+                            x:Name="AktywacjaPrzycisk"
+                            Text="Aktywuj konto"                                                       
+                            BorderColor="Black"                           
+                            BackgroundColor="#B52435"
+                            TextColor="White" 
+                            CornerRadius="25" 
+                            FontAttributes="Bold"/>
+
                     <StackLayout>
                         <Grid>
                             <BoxView BackgroundColor="#B52435"
@@ -196,7 +129,7 @@
                                    WidthRequest="50" 
                                    Padding="0" 
                                    Margin="0">
-                            <ImageButton Source="back_icon.png" 
+                                <ImageButton Source="back_icon.png" 
                                          Margin="0" 
                                          WidthRequest="30"
                                          HeightRequest="30" 
@@ -212,5 +145,4 @@
             </Frame>
         </StackLayout>
     </Grid>
-    
 </ContentPage>

@@ -23,20 +23,21 @@ namespace APIpz.Services
         List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
         IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto);
         IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto);
+        void StworzPustyProfil(StworzPustyProfilDto dto);
+        void EdytujProfil(EdytujProfilDto dto);
+        PokazProfilDto PokazProfil(StworzPustyProfilDto dto);
 
     }
     public class UrbexService : IUrbexService
     {
         private readonly BazaDbContext _context;
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
-        private readonly IAuthorizationHandler _authorizationHandler;
         private readonly IUserContextService _userContextService;
         private readonly IMapper _mapper;
-        public UrbexService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IAuthorizationHandler authorizationHandler, IUserContextService userContextService, IMapper mapper)
+        public UrbexService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IUserContextService userContextService, IMapper mapper)
         {
             _context = context;
             _logger = logger;
-            _authorizationHandler = authorizationHandler;
             _userContextService = userContextService;
             _mapper = mapper;
         }
@@ -54,7 +55,7 @@ namespace APIpz.Services
 
             var noweOdwiedzone = new Odwiedzony()
             {
-                OdwiedzonePrzezId =(int)_userContextService.GetUserId,// dzięki JWT wyciągamy id
+                OdwiedzonePrzez = new Uzytkownik { Id = (int)_userContextService.GetUserId }, // dzięki JWT wyciągamy id
                 OdwiedzonyUrbex = urbex
             };
 
@@ -162,6 +163,44 @@ namespace APIpz.Services
 
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
+        }
+
+        public void StworzPustyProfil(StworzPustyProfilDto dto)
+        {
+            var uzytkownik = _context.Uzytkownik.FirstOrDefault(u => u.Login == dto.Login);
+            _context.Attach(uzytkownik);
+            var nowyProfil = new Profil()
+            {
+                Uzytkownik = uzytkownik,
+                Imie = null,
+                Nazwisko = null,
+                Opis = null,
+                LinkFacebook = null,
+                LinkInstagram = null,
+                LinkYouTube = null,
+            };
+            _context.Profil.Add(nowyProfil);
+            _context.SaveChanges();
+        }
+        public void EdytujProfil(EdytujProfilDto dto)
+        {
+            var profil = _context.Profil.FirstOrDefault(p => p.Uzytkownik.Login == dto.Login);
+
+            profil.Imie = dto.Imie;
+            profil.Nazwisko = dto.Nazwisko;
+            profil.LinkFacebook = dto.LinkFacebook;
+            profil.LinkInstagram = dto.LinkInstagram;
+            profil.LinkYouTube = dto.LinkYouTube;
+            _context.SaveChanges();
+        
+        }
+
+        public PokazProfilDto PokazProfil(StworzPustyProfilDto dto)
+        {
+            var profil = _context.Profil.FirstOrDefault(p => p.Uzytkownik.Login == dto.Login);
+
+            var profilDto = _mapper.Map<PokazProfilDto>(profil);
+            return profilDto;
         }
     }
 }
