@@ -4,6 +4,9 @@ using Xamarin.Forms.Maps;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Urbexer.Services;
 using Urbexer.Models.ApiModels;
+using System;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Urbexer.Models {
     public class Location {
@@ -13,6 +16,7 @@ namespace Urbexer.Models {
         public string Address { get; set; }
         public string Thumbnail { get; set; }
         public Position Position { get; set; }
+        public double Distance { get; set; }
         public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
         #endregion
 
@@ -30,6 +34,7 @@ namespace Urbexer.Models {
             Name = apiLocation.nazwa;
             Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
             Id = apiLocation.id;
+            RecalculateDistance();
 
             Address = apiLocation.adres;
             /*
@@ -55,6 +60,23 @@ namespace Urbexer.Models {
         #endregion
 
         #region Metody
+        // Oblicza odległość z from do Position(zmiennej obiektu)
+        public void RecalculateDistance(Position from) {
+            var distance = Math.Sqrt(Math.Pow((Position.Latitude - from.Latitude), 2)
+                + Math.Pow((Position.Longitude - from.Longitude), 2));
+            distance = DegreesToKm(distance);
+            distance = Math.Round(distance, 1); // Zaokrąglij do 1 miejsca po przecinku
+            Distance = distance;
+        }
+        public async Task RecalculateDistance() {
+            var location = await Geolocation.GetLastKnownLocationAsync();
+            RecalculateDistance(new Position(location.Latitude, location.Longitude));
+        }
+        // Zamień stopnie geograficzne na kilometry
+        private static double DegreesToKm(double degrees) {
+            // 1 stopień to ok 111.111km
+            return 111.111 * degrees;
+        }
         #endregion
     }
 }

@@ -58,12 +58,17 @@
                                 HorizontalOptions="Start"
                                 Source="{Binding Thumbnail}"
                                 WidthRequest="100" />
-                            <StackLayout VerticalOptions="Center">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" VerticalOptions="Center" />
                                 <Label Text="{Binding Address}" VerticalOptions="Center" />
-                                <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
-                                <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+
                             </StackLayout>
+                            <Label
+                                Padding="15"
+                                HorizontalOptions="End"
+                                MinimumWidthRequest="100"
+                                Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                                VerticalOptions="Center" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
