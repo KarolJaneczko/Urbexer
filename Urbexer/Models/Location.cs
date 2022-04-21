@@ -17,13 +17,9 @@ namespace Urbexer.Models {
         public string Thumbnail { get; set; }
         public Position Position { get; set; }
         public double Distance { get; set; }
-        public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
         #endregion
 
         #region Klasy
-        public class ImageLink {
-            public string Link { get; set; }
-        }
         #endregion
 
         #region Konstruktory
@@ -32,29 +28,16 @@ namespace Urbexer.Models {
         }
         public Location(APILocation apiLocation) {
             Name = apiLocation.nazwa;
+            Address = apiLocation.adres;
             Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
             Id = apiLocation.id;
             RecalculateDistance();
 
-            Address = apiLocation.adres;
-            /*
-            if (apiLocation.adres != null) {
-                Address = apiLocation.adres;
-            } else {
-                // Wygeneruj adres geocoderem
-                // TODO: Zaktualizować to gdy LocationService będzie statyczne
-                //LocationService locationService = new LocationService();
-                //Address = locationService.GetAddressFromPositionAsync(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
-            }
-            */
-
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
             if (apiLocation.zdjecie != null) {
 
             } else {
                 // Wczytaj placeholder
                 Thumbnail = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
-                ImageLinks.Add(new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" });
             }
         }
         #endregion

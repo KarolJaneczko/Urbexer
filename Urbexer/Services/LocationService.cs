@@ -35,11 +35,15 @@ namespace Urbexer.Services {
         }
 
         // Pobierz konkretną lokacje o danym id
-        public static async Task<Location> GetLocationById(int id) {
+        public static async Task<Location> GetLocationById(int id, bool detailed = false) {
             string json = string.Format("{{\"id\": {0}}}", id);
             string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscePoId", json).Result;
             if (result == null) return null;
-            return new Location(JsonConvert.DeserializeObject<APILocation>(result));
+            if (detailed) {
+                return new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result));
+            } else {
+                return new Location(JsonConvert.DeserializeObject<APILocation>(result));
+            }
         }
 
         #region ListyLokacji
