@@ -32,11 +32,13 @@
             SearchCommand="{Binding FilterLocationsByNameCommand}"
             SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
         <CollectionView
+            x:Name="CollectionView"
             HorizontalOptions="End"
             ItemsSource="{Binding LocationsFiltered}"
             RemainingItemsThreshold="1"
             RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
-            SelectionChangedCommand="{Binding CardSelectedCommand}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single"
             VerticalOptions="CenterAndExpand">
             <CollectionView.EmptyView>
                 <StackLayout>
