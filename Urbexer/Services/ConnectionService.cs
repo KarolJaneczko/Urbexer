@@ -18,6 +18,7 @@ namespace Urbexer.Services {
         public ConnectionService() { }
         #endregion
 
+        #region Requesty do API
         public async Task<bool> Login(Login login, HttpClient httpClient) {
             var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", SerializeToJson(login));
             ValidateConnectionResult(result, OperationTypeEnum.Logowanie);
@@ -37,11 +38,23 @@ namespace Urbexer.Services {
             else
                 return false;
         }
+        public async Task<bool> ConfirmRegistration(ConfirmUser confirmUser, HttpClient httpClient) {
+            var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/account/confirm", SerializeToJson(confirmUser));
+            ValidateConnectionResult(result, OperationTypeEnum.AktywacjaKonta);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region Pomocnicze metody
         public StringContent SerializeToJson(object obj) {
             if (obj is null)
                 throw new System.ArgumentNullException(nameof(obj));
             var myJson = JsonConvert.SerializeObject(obj);
             return new StringContent(myJson, Encoding.UTF8, "application/json");
         }
+        #endregion
     }
 }

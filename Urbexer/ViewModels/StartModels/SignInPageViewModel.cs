@@ -8,28 +8,34 @@ using Urbexer.Views;
 
 namespace Urbexer.ViewModels {
     public class SignInPageViewModel : BaseViewModel {
-        public event PropertyChangedEventHandler _PropertyChanged = delegate { };
+        #region Zmienne
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private string login;
         private string password;
         public string Login {
             get { return login; }
             set {
                 login = value;
-                _PropertyChanged(this, new PropertyChangedEventArgs("Login"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Login"));
             }
         }
         public string Password {
             get { return password; }
             set {
                 password = value;
-                _PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
         public ICommand SubmitCommand { protected set; get; }
+        #endregion
+
+        #region Konstruktory
         public SignInPageViewModel() {
             SubmitCommand = new Command(OnSubmit);
         }
+        #endregion
 
+        #region Metody
         public async void OnSubmit() {
             try {
                 ValidateLogin(login);
@@ -38,7 +44,7 @@ namespace Urbexer.ViewModels {
                     login = login,
                     password = password
                 }, httpClient) == true) {
-                    await Shell.Current.GoToAsync("/"+nameof(HomePage));
+                    await Shell.Current.GoToAsync("/" + nameof(HomePage));
                 }
             }
             catch (AppException exception) {
@@ -48,5 +54,6 @@ namespace Urbexer.ViewModels {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
         }
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace APIpz.Entities
 
         public int Id { get; set; }
 
-        public Uzytkownik UzytkownikID { get; set; }
+        public Uzytkownik Uzytkownik { get; set; }
 
         public string? Imie { get; set; }
         public string? Nazwisko { get; set; }

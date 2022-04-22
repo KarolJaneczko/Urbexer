@@ -32,14 +32,12 @@ namespace APIpz.Services
     {
         private readonly BazaDbContext _context;
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
-        private readonly IAuthorizationHandler _authorizationHandler;
         private readonly IUserContextService _userContextService;
         private readonly IMapper _mapper;
-        public UrbexService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IAuthorizationHandler authorizationHandler, IUserContextService userContextService, IMapper mapper)
+        public UrbexService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IUserContextService userContextService, IMapper mapper)
         {
             _context = context;
             _logger = logger;
-            _authorizationHandler = authorizationHandler;
             _userContextService = userContextService;
             _mapper = mapper;
         }
@@ -57,7 +55,7 @@ namespace APIpz.Services
 
             var noweOdwiedzone = new Odwiedzony()
             {
-                OdwiedzonePrzezId =(int)_userContextService.GetUserId,// dzięki JWT wyciągamy id
+                OdwiedzonePrzez = new Uzytkownik { Id = (int)_userContextService.GetUserId }, // dzięki JWT wyciągamy id
                 OdwiedzonyUrbex = urbex
             };
 
@@ -173,7 +171,7 @@ namespace APIpz.Services
             _context.Attach(uzytkownik);
             var nowyProfil = new Profil()
             {
-                UzytkownikID = uzytkownik,
+                Uzytkownik = uzytkownik,
                 Imie = null,
                 Nazwisko = null,
                 Opis = null,
@@ -186,7 +184,7 @@ namespace APIpz.Services
         }
         public void EdytujProfil(EdytujProfilDto dto)
         {
-            var profil = _context.Profil.FirstOrDefault(p => p.UzytkownikID.Login == dto.Login);
+            var profil = _context.Profil.FirstOrDefault(p => p.Uzytkownik.Login == dto.Login);
 
             profil.Imie = dto.Imie;
             profil.Nazwisko = dto.Nazwisko;
@@ -199,7 +197,7 @@ namespace APIpz.Services
 
         public PokazProfilDto PokazProfil(StworzPustyProfilDto dto)
         {
-            var profil = _context.Profil.FirstOrDefault(p => p.UzytkownikID.Login == dto.Login);
+            var profil = _context.Profil.FirstOrDefault(p => p.Uzytkownik.Login == dto.Login);
 
             var profilDto = _mapper.Map<PokazProfilDto>(profil);
             return profilDto;

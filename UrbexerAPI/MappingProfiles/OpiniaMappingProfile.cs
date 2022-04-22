@@ -20,9 +20,9 @@ namespace APIpz.MappingProfiles
                 .ForMember(o => o.Adres, c => c.MapFrom(s => s.OdwiedzonyUrbex.Adres));
 
             CreateMap<Profil, PokazProfilDto>()
-                .ForMember(o => o.Email, c => c.MapFrom(s => s.UzytkownikID.Email))
-                .ForMember(o => o.Login, c => c.MapFrom(s => s.UzytkownikID.Login))
-                .ForMember(o => o.CzyAdmin, c => c.MapFrom(s => s.UzytkownikID.CzyAdmin))
+                .ForMember(o => o.Email, c => c.MapFrom(s => s.Uzytkownik.Email))
+                .ForMember(o => o.Login, c => c.MapFrom(s => s.Uzytkownik.Login))
+                .ForMember(o => o.CzyAdmin, c => c.MapFrom(s => s.Uzytkownik.CzyAdmin))
                 .ForMember(o => o.Imie, c => c.MapFrom(s => s.Imie))
                 .ForMember(o => o.Nazwisko, c => c.MapFrom(s => s.Nazwisko))
                 .ForMember(o => o.Opis, c => c.MapFrom(s => s.Opis))
