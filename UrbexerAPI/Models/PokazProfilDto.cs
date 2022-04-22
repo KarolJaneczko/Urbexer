@@ -13,5 +13,6 @@
         public string LinkFacebook { get; set; }
         public string LinkInstagram { get; set; }
         public string LinkYouTube { get; set; }
+        public int Layout { get; set; }
     }
 }
