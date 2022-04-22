@@ -31,12 +31,18 @@ namespace Urbexer.ViewModels.LocationModels {
 
         // Usuń filtrowanie lokacji
         protected void ClearFilter() {
-            LocationsFiltered.Clear();
-            if (Locations == null) return;
+            //LocationsFiltered.Clear();
+            ObservableRangeCollection<Location> newList = new ObservableRangeCollection<Location>();
+            if (Locations == null) {
+                LocationsFiltered.Clear();
+                return;
+            }
             // Skopiuj lokacje z Locations do LocationsFiltered
             foreach (var location in Locations) {
-                LocationsFiltered.Add(location);
+                //LocationsFiltered.Add(location);
+                newList.Add(location);
             }
+            LocationsFiltered = newList;
         }
         // Odśwież filtry
         protected void ReapplyFilters() {

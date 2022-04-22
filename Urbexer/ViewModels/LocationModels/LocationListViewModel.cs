@@ -32,7 +32,7 @@ namespace Urbexer.ViewModels {
         async Task LoadMore() {
             List<int> newIds = new List<int>();
             while (newIds.Count() == 0) {
-                currentLoadRange += 5;
+                currentLoadRange += 30;
                 Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
                 newIds = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, currentLoadRange);
                 newIds = newIds.Except(loadedLocationsIds).ToList();
