@@ -23,6 +23,7 @@ namespace APIpz.Services
         List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
         IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto);
         IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto);
+        IEnumerable<int> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto);
         void StworzPustyProfil(StworzPustyProfilDto dto);
         void EdytujProfil(EdytujProfilDto dto);
         PokazProfilDto PokazProfil(StworzPustyProfilDto dto);
@@ -164,6 +165,18 @@ namespace APIpz.Services
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
         }
+        public IEnumerable<int> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto)
+        {
+            var zapytanie1 = _context.Miejsce.Where(m => (m.WspolrzedneLAT - dto.WspolrzedneLATUser) * (m.WspolrzedneLAT - dto.WspolrzedneLATUser) +
+                                                       (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) * (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) <= dto.Promien * dto.Promien);
+           
+            var zapytanie2 = _context.Odwiedzone.Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
+            var miejsca = zapytanie1.Select(m => m.Id);
+
+            var miejscaMinus = zapytanie2.Select(o => o.OdwiedzonyUrbex.Id);
+            var result = miejsca.Except(miejscaMinus);
+            return result;
+        }
 
         public void StworzPustyProfil(StworzPustyProfilDto dto)
         {
@@ -178,6 +191,7 @@ namespace APIpz.Services
                 LinkFacebook = null,
                 LinkInstagram = null,
                 LinkYouTube = null,
+                Layout = null,
             };
             _context.Profil.Add(nowyProfil);
             _context.SaveChanges();
@@ -185,13 +199,31 @@ namespace APIpz.Services
         public void EdytujProfil(EdytujProfilDto dto)
         {
             var profil = _context.Profil.FirstOrDefault(p => p.Uzytkownik.Login == dto.Login);
-
-            profil.Imie = dto.Imie;
-            profil.Nazwisko = dto.Nazwisko;
-            profil.LinkFacebook = dto.LinkFacebook;
-            profil.LinkInstagram = dto.LinkInstagram;
-            profil.LinkYouTube = dto.LinkYouTube;
-            _context.SaveChanges();
+            if (dto.Imie != null)
+            {
+                profil.Imie = dto.Imie;
+            }
+            if (dto.Nazwisko != null)
+            {
+                profil.Nazwisko = dto.Nazwisko;
+            }
+            if (dto.LinkFacebook != null)
+            {
+                profil.LinkFacebook = dto.LinkFacebook;
+            }
+            if (dto.LinkInstagram != null)
+            {
+                profil.LinkInstagram = dto.LinkInstagram;
+            }
+            if (dto.LinkYouTube != null)
+            {
+                profil.LinkYouTube = dto.LinkYouTube;
+            }
+            if (dto.Layout != null)
+            {
+                profil.Layout = dto.Layout;
+            }
+                _context.SaveChanges();
         
         }
 

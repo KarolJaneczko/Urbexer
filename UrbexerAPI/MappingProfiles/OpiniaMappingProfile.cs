@@ -28,7 +28,8 @@ namespace APIpz.MappingProfiles
                 .ForMember(o => o.Opis, c => c.MapFrom(s => s.Opis))
                 .ForMember(o => o.LinkFacebook, c => c.MapFrom(s => s.LinkFacebook))
                 .ForMember(o => o.LinkInstagram, c => c.MapFrom(s => s.LinkInstagram))
-                .ForMember(o => o.LinkYouTube, c => c.MapFrom(s => s.LinkYouTube));
+                .ForMember(o => o.LinkYouTube, c => c.MapFrom(s => s.LinkYouTube))
+                .ForMember(o => o.Layout, c => c.MapFrom(s => s.Layout));
         }
     }
 }

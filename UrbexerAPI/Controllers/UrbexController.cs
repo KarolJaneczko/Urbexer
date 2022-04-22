@@ -89,6 +89,13 @@ namespace APIpz.Controllers
             return Ok(wynik);
 
         }
+        [HttpGet("pokazMiejscaWPoblizuBezOdwiedzonych")]
+        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto)
+        {
+            var wynik = _urbexService.PokazMiejscaWPoblizuBezOdwiedzonych(dto);
+            return Ok(wynik);
+
+        }
         [HttpPut("stworzPustyProfil")]
         public ActionResult stworzOdwiedzone([FromBody] StworzPustyProfilDto dto)
         {
