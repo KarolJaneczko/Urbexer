@@ -10,6 +10,21 @@ using Xamarin.Essentials;
 
 namespace Urbexer.Models {
     public class Location {
+        public enum Category {
+            Kolejowe = 1,
+            Hotele_i_pensjonaty = 2,
+            Domy = 3,
+            Industrialne = 4,
+            Restauracje_i_kluby = 5,
+            Rolnicze = 6,
+            Zamki_i_palace = 7,
+            Podziemia = 8,
+            Biurowce = 9,
+            Militarne = 10,
+            Szpitale = 11,
+            Podziemia_i_tunele = 12,
+            Inne = 13,
+        }
         #region Zmienne
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,6 +32,7 @@ namespace Urbexer.Models {
         public string Thumbnail { get; set; }
         public Position Position { get; set; }
         public double Distance { get; set; }
+        public Category CategoryId { get; set; }
         #endregion
 
         #region Klasy
@@ -25,12 +41,14 @@ namespace Urbexer.Models {
         #region Konstruktory
         public Location() {
             Id = -1;
+            CategoryId = Category.Inne;
         }
         public Location(APILocation apiLocation) {
             Name = apiLocation.nazwa;
             Address = apiLocation.adres;
             Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
             Id = apiLocation.id;
+            CategoryId = Category.Inne; //TODO Zmienić na kategorie z apiLocation jak już będzie funkcjonalność
             RecalculateDistance();
 
             if (apiLocation.zdjecie != null) {
