@@ -107,14 +107,14 @@
                                 CornerRadius="25" 
                                 FontAttributes="Bold"/>
                 <Button Text="Rejestracja"     
-                                FontSize="18"
-                                Clicked="GoToRegisterPage"
-                                HeightRequest="50" 
-                                WidthRequest="200"
-                                BackgroundColor="white"
-                                TextColor="black" 
-                                CornerRadius="25" 
-                                FontAttributes="Bold"/>
+                        FontSize="18"
+                        Clicked="GoToRegisterPage"
+                        HeightRequest="50" 
+                        WidthRequest="200"
+                        BackgroundColor="white"
+                        TextColor="black" 
+                        CornerRadius="25" 
+                        FontAttributes="Bold"/>
             </StackLayout>
         </Grid>
     </Grid>

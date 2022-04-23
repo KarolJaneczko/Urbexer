@@ -6,7 +6,7 @@
        x:Class="Urbexer.AppShell"       
        xmlns:sys="clr-namespace:System;assembly=netstandard"
        BackgroundColor="black"
-       FlyoutBackgroundColor="Black"
+       FlyoutBackgroundColor="#363636"
        FlyoutBehavior="Flyout">
 
 
