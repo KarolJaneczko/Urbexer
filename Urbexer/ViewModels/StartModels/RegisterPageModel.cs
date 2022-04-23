@@ -61,7 +61,7 @@ namespace Urbexer.ViewModels {
                         hasloHash = PasswordRepeat,
                         czyAdmin = false
                     }, httpClient) == true) {
-                        await Application.Current.MainPage.DisplayAlert("Sukces", "Na podany adres mailowy otrzymasz token wymagany do aktywacji konta.", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Sukces", "Na podany adres mailowy otrzymasz link potwierdzający aktywację konta.", "OK");
                         //Tu będzie metoda generująca rekord w tabeli z profilami.
                     }
                 }
