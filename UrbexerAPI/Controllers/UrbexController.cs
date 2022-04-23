@@ -34,19 +34,19 @@ namespace APIpz.Controllers
             return Ok();
         }
         [HttpGet("pokazMojeOdwiedzone")]
-        public ActionResult<PageResult<ZwracaneOdwiedzoneDto>> PokazMojeOdwiedzone([FromBody] PokazMojeOdwiedzoneDto dto)
+        public ActionResult<PageResult<ZwracaneOdwiedzoneDto>> PokazMojeOdwiedzone([FromQuery] PokazMojeOdwiedzoneDto dto)
         {
             var wynik = _urbexService.PokazMojeOdwiedzone(dto);
             return Ok(wynik);
         }
         [HttpGet("pokazOninieDoMiejsca")]
-        public ActionResult<PageResult<OpiniaDto>> PokazOninieDoMiejsca([FromBody] PokazOpinieDoMiejscaDto dto)
+        public ActionResult<PageResult<OpiniaDto>> PokazOninieDoMiejsca([FromQuery] PokazOpinieDoMiejscaDto dto)
         {
             var wynik = _urbexService.PokazOpinieDoMiejsca(dto);
             return Ok(wynik);
         }
         [HttpGet("pokazCzyjesOdwiedzone")]
-        public ActionResult<PageResult<ZwracaneOdwiedzoneDto>> PokazCzyjesOdwiedzone([FromBody] PokazCzyjesOdwiedzoneDto dto)
+        public ActionResult<PageResult<ZwracaneOdwiedzoneDto>> PokazCzyjesOdwiedzone([FromQuery] PokazCzyjesOdwiedzoneDto dto)
         {
             var wynik = _urbexService.PokazCzyjesOdwiedzone(dto);
             return Ok(wynik);
@@ -61,33 +61,67 @@ namespace APIpz.Controllers
         }
 
         [HttpGet("pokazMiejscePoId")]
-        public ActionResult<Miejsce> pokazMiejscePoId([FromBody]PokazMiejscePoIdDto dto)
+        public ActionResult<Miejsce> PokazMiejscePoId(int id)
         {
-            var wynik = _urbexService.PokazMiejscePoId(dto);
+            var wynik = _urbexService.PokazMiejscePoId(id);
             return Ok(wynik);
         }
 
-        [HttpGet("pokazMiejscaZListy")]
-        public ActionResult<List<Miejsce>>  pokazMiejscaZListy([FromBody]PokazMiejscaZListyDto dto)
+        [HttpPost("pokazMiejscaZListy")]
+        public ActionResult<List<Miejsce>> PokazMiejscaZListy([FromBody]PokazMiejscaZListyDto dto)
         {
             var wynik = _urbexService.PokazMiejscaZListy(dto);
             return Ok(wynik);
         }
 
         [HttpGet("pokazMiejscaZKategorii")]
-        public ActionResult<IEnumerable<int>> pokazMiejscaZKategorii([FromBody] PokazMiejscaZKategoriiDto dto)
+        public ActionResult<IEnumerable<int>> PokazMiejscaZKategorii([FromBody] int id)
         {
-            var wynik = _urbexService.PokazMiejscaZKategorii(dto);
+            var wynik = _urbexService.PokazMiejscaZKategorii(id);
             return Ok(wynik);
         }
 
         [HttpGet("pokazMiejscaWPoblizu")]
 
-        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto)
+        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizu([FromQuery]PokazMiejscaWPoblizuDto dto)
         {
             var wynik = _urbexService.PokazMiejscaWPoblizu(dto);
             return Ok(wynik);
 
+        }
+        [HttpGet("pokazMiejscaWPoblizuBezOdwiedzonych")]
+        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizuBezOdwiedzonych([FromQuery] PokazMiejscaWPoblizuDto dto)
+        {
+            var wynik = _urbexService.PokazMiejscaWPoblizuBezOdwiedzonych(dto);
+            return Ok(wynik);
+
+        }
+
+        [HttpPut("stworzPustyProfil")]
+        public ActionResult StworzOdwiedzone([FromBody] StworzPustyProfilDto dto)
+        {
+
+            _urbexService.StworzPustyProfil(dto);
+            return Ok();
+        }
+
+        [HttpPut("edytujProfil")]
+        public ActionResult EdytujProfil([FromBody] EdytujProfilDto dto)
+        {
+
+            _urbexService.EdytujProfil(dto);
+            return Ok();
+        }
+
+        [HttpGet("pokazProfil")]
+        public ActionResult<PokazProfilDto> PokazProfil(string login)
+        {
+            var wynik = _urbexService.PokazProfil(login);
+            if (wynik == null)
+              {
+                return NotFound();
+            }
+            return Ok(wynik);
         }
     }
 }

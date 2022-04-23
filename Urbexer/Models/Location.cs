@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Forms.Maps;
+﻿using Xamarin.Forms.Maps;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Urbexer.Services;
 using Urbexer.Models.ApiModels;
 using System;
 using System.Threading.Tasks;
@@ -53,7 +50,8 @@ namespace Urbexer.Models {
 
             if (apiLocation.zdjecie != null) {
 
-            } else {
+            }
+            else {
                 // Wczytaj placeholder
                 Thumbnail = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
             }

@@ -1,60 +1,67 @@
 ﻿using APIpz.Entities;
-using APIpz.Exceptions;
 using APIpz.Middleware;
 using APIpz.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace APIpz.Services
 {
     public interface IUrbexService
     {
-        List<Miejsce> GetAll();
+        List<MiejsceDto> GetAll();
 
         void DodajOdwiedzone(DodajOdwiedzoneDto dto);
         PageResult<ZwracaneOdwiedzoneDto> PokazMojeOdwiedzone(PokazMojeOdwiedzoneDto dto);
         PageResult<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
         void DodajOpinie(DodajOpinieDto dto);
         PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto);
-        Miejsce PokazMiejscePoId(PokazMiejscePoIdDto dto);
-        List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
-        IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto);
+        MiejsceDto PokazMiejscePoId(int dto);
+        List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
+        IEnumerable<int> PokazMiejscaZKategorii(int dto);
         IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto);
+        IEnumerable<int> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto);
+        void StworzPustyProfil(StworzPustyProfilDto dto);
+        void EdytujProfil(EdytujProfilDto dto);
+        PokazProfilDto PokazProfil(string login);
 
     }
     public class UrbexService : IUrbexService
     {
         private readonly BazaDbContext _context;
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
-        private readonly IAuthorizationHandler _authorizationHandler;
         private readonly IUserContextService _userContextService;
         private readonly IMapper _mapper;
-        public UrbexService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IAuthorizationHandler authorizationHandler, IUserContextService userContextService, IMapper mapper)
+        public UrbexService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IUserContextService userContextService, IMapper mapper)
         {
             _context = context;
             _logger = logger;
-            _authorizationHandler = authorizationHandler;
             _userContextService = userContextService;
             _mapper = mapper;
         }
 
-        public List<Miejsce> GetAll()
+        public List<MiejsceDto> GetAll()
         {
-            var wynik = _context.Miejsce.ToList();
+            var wynik = _context.Miejsce
+                .Include(t=>t.Miejsce_Kategoria)
+                .Include(t=>t.Wojewodztwo)
+                .Take(20) // Tymczasowo!!!
+                .Select(x=> _mapper.Map<MiejsceDto>(x))
+                .ToList();
             return wynik;
         }
 
-        public void DodajOdwiedzone(DodajOdwiedzoneDto dto)
+          public void DodajOdwiedzone(DodajOdwiedzoneDto dto)
         {
-            var urbex = _context.Miejsce.FirstOrDefault(u => u.Nazwa == dto.NazwaUrbexu);
+            var urbex = _context.Miejsce
+                .Include(t=>t.Miejsce_Kategoria)
+                .Include(t=>t.Wojewodztwo)
+                .FirstOrDefault(u => u.Nazwa == dto.NazwaUrbexu);
             _context.Attach(urbex);
 
             var noweOdwiedzone = new Odwiedzony()
             {
-                OdwiedzonePrzezId =(int)_userContextService.GetUserId,// dzięki JWT wyciągamy id
+                OdwiedzonePrzez = new Uzytkownik { Id = (int)_userContextService.GetUserId }, // dzięki JWT wyciągamy id
                 OdwiedzonyUrbex = urbex
             };
 
@@ -137,19 +144,28 @@ namespace APIpz.Services
             
         }
 
-        public Miejsce PokazMiejscePoId(PokazMiejscePoIdDto dto)
+        public MiejsceDto? PokazMiejscePoId(int id)
         {
-            var miejsce = _context.Miejsce.FirstOrDefault( m => m.Id == dto.Id);
-            return miejsce;
+            var miejsce = _context.Miejsce
+                .Include(t=>t.Miejsce_Kategoria)
+                .Include(t=>t.Wojewodztwo)
+                .FirstOrDefault( m => m.Id == id);
+            return _mapper.Map<MiejsceDto>(miejsce);
         }
-        public List<Miejsce> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
+        public List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
         {
-            var miejsca = _context.Miejsce.Where(m => dto.listaId.Contains(m.Id)).ToList();
+            var miejsca = _context.Miejsce
+                .Include(t => t.Miejsce_Kategoria)
+                .Include(t => t.Wojewodztwo)
+                .Where(m => dto.listaId.Contains(m.Id)).Select(t=> _mapper.Map<MiejsceDto>(t)).ToList();
             return miejsca;
         }
-        public IEnumerable<int> PokazMiejscaZKategorii(PokazMiejscaZKategoriiDto dto)
+        public IEnumerable<int> PokazMiejscaZKategorii(int id)
         {
-            var zapytanie = _context.Miejsce.Where(m => m.Miejsce_Kategoria.Id == dto.Id).ToList();
+            var zapytanie = _context.Miejsce
+                .Include(t => t.Miejsce_Kategoria)
+                .Include(t => t.Wojewodztwo)
+                .Where(m => m.Miejsce_Kategoria.Id == id).ToList();
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
         }
@@ -162,6 +178,77 @@ namespace APIpz.Services
 
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto)
+        {
+            var zapytanie1 = _context.Miejsce.Where(m => (m.WspolrzedneLAT - dto.WspolrzedneLATUser) * (m.WspolrzedneLAT - dto.WspolrzedneLATUser) +
+                                                       (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) * (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) <= dto.Promien * dto.Promien);
+           
+            var zapytanie2 = _context.Odwiedzone.Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
+            var miejsca = zapytanie1.Select(m => m.Id);
+
+            var miejscaMinus = zapytanie2.Select(o => o.OdwiedzonyUrbex.Id);
+            var result = miejsca.Except(miejscaMinus);
+            return result;
+        }
+
+        public void StworzPustyProfil(StworzPustyProfilDto dto)
+        {
+            var uzytkownik = _context.Uzytkownik.FirstOrDefault(u => u.Login == dto.Login);
+            _context.Attach(uzytkownik);
+            var nowyProfil = new Profil()
+            {
+                Uzytkownik = uzytkownik,
+                Imie = null,
+                Nazwisko = null,
+                Opis = null,
+                LinkFacebook = null,
+                LinkInstagram = null,
+                LinkYouTube = null,
+                Layout = null,
+            };
+            _context.Profil.Add(nowyProfil);
+            _context.SaveChanges();
+        }
+        public void EdytujProfil(EdytujProfilDto dto)
+        {
+            var profil = _context.Profil.FirstOrDefault(p => p.Uzytkownik.Login == dto.Login);
+            if (dto.Imie != null)
+            {
+                profil.Imie = dto.Imie;
+            }
+            if (dto.Nazwisko != null)
+            {
+                profil.Nazwisko = dto.Nazwisko;
+            }
+            if (dto.LinkFacebook != null)
+            {
+                profil.LinkFacebook = dto.LinkFacebook;
+            }
+            if (dto.LinkInstagram != null)
+            {
+                profil.LinkInstagram = dto.LinkInstagram;
+            }
+            if (dto.LinkYouTube != null)
+            {
+                profil.LinkYouTube = dto.LinkYouTube;
+            }
+            if (dto.Layout != null)
+            {
+                profil.Layout = dto.Layout;
+            }
+                _context.SaveChanges();
+        
+        }
+
+        public PokazProfilDto PokazProfil(string login)
+        {
+            var profil = _context.Profil
+                .Include(t=>t.Uzytkownik)
+                .FirstOrDefault(p => p.Uzytkownik.Login == login);
+
+            var profilDto = _mapper.Map<PokazProfilDto>(profil);
+            return profilDto;
         }
     }
 }

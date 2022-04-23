@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
     static class GeocoderService {
+        #region Zmienne
         private static readonly Geocoder geocoder;
+        #endregion
+
+        #region Konstruktory
         static GeocoderService() {
             geocoder = new Geocoder();
         }
+        #endregion
 
+        #region Metody
         // Ustaw pozycje z danego adresu
         public static async Task<Position> GetPositionFromAddressAsync(string address) {
             IEnumerable<Position> approximatePositions = await geocoder.GetPositionsForAddressAsync(address);
@@ -26,5 +30,6 @@ namespace Urbexer.Services {
             IEnumerable<string> possibleAddresses = await geocoder.GetAddressesForPositionAsync(position);
             return possibleAddresses.FirstOrDefault();
         }
+        #endregion
     }
 }

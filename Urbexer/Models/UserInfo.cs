@@ -34,6 +34,10 @@ namespace Urbexer.Models {
             get => AppSettings.GetValueOrDefault(nameof(IsLoggedIn), false);
             set => AppSettings.AddOrUpdateValue(nameof(IsLoggedIn), value);
         }
+        public static bool CheckedInternetConnection {
+            get => AppSettings.GetValueOrDefault(nameof(CheckedInternetConnection), false);
+            set => AppSettings.AddOrUpdateValue(nameof(CheckedInternetConnection), value);
+        }
         #endregion
 
         #region Metody

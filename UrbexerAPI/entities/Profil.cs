@@ -10,13 +10,14 @@ namespace APIpz.Entities
 
         public int Id { get; set; }
 
-        public Uzytkownik UzytkownikID { get; set; }
+        public Uzytkownik Uzytkownik { get; set; }
 
-        public string Imie { get; set; }
-        public string Nazwisko { get; set; }
-        public string Opis { get; set; }
-        public string LinkFacebook { get; set; }
-        public string LinkInstagram { get; set; }
-        public string LinkYouTube { get; set; }
+        public string? Imie { get; set; }
+        public string? Nazwisko { get; set; }
+        public string? Opis { get; set; }
+        public string? LinkFacebook { get; set; }
+        public string? LinkInstagram { get; set; }
+        public string? LinkYouTube { get; set; }
+        public int? Layout { get; set; }
     }
 }
