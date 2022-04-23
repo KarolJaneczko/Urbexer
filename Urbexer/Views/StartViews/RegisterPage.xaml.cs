@@ -9,7 +9,7 @@ namespace Urbexer.Views {
             var vm = new RegisterPageModel();
             BindingContext = vm;
             InitializeComponent();
-
+            RejestracjaPrzycisk.IsEnabled = false;
             Login.Completed += (object sender, EventArgs e) => {
                 Email.Focus();
             };
