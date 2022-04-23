@@ -1,4 +1,5 @@
-﻿using Urbexer.ViewModels;
+﻿using System;
+using Urbexer.ViewModels;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
@@ -6,6 +7,8 @@ namespace Urbexer.Views {
         public HomePage() {
             InitializeComponent();
             BindingContext = new HomeViewModel();
+        }
+        void OnExpanderTapped(object sender, EventArgs e) {
         }
         protected override bool OnBackButtonPressed() {
             return true;
