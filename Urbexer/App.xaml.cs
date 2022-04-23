@@ -1,6 +1,5 @@
 ﻿using Plugin.Connectivity;
 using System;
-using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Views;
 using Xamarin.Essentials;

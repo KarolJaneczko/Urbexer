@@ -4,32 +4,28 @@
              x:Class="Urbexer.App">
 
     <Application.Resources>
-    <ResourceDictionary>
-        
+        <ResourceDictionary>
             <Color x:Key="Primary">#242526</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        
+                        <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
-                            <VisualState.Setters>
+                                <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="Black"/>
-                            </VisualState.Setters>
+                                </VisualState.Setters>
                             </VisualState>
-                        
                             <VisualState x:Name="Disabled">
-                            <VisualState.Setters>
+                                <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="Black" />
-                            </VisualState.Setters>
+                                </VisualState.Setters>
                             </VisualState>
-                        
-                    </VisualStateGroup>
+
+                        </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-        
-    </ResourceDictionary>        
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

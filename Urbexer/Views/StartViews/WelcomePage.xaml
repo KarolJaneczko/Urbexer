@@ -11,32 +11,19 @@
              x:Class="Urbexer.Views.WelcomePage">
 
     <Grid>
-        <CarouselView x:Name="backOnboarding" 
-                              IndicatorView="LandingIndicatorBackGround"
-                              ItemsSource= "{Binding Onboardings}"
-                              VerticalOptions="End">
+        <CarouselView x:Name="backOnboarding" IndicatorView="LandingIndicatorBackGround" ItemsSource= "{Binding Onboardings}" VerticalOptions="End">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <Image Source="{Binding Image}" Aspect="AspectFill"/>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
-        <IndicatorView x:Name="LandingIndicatorBackGround"                             
-                               IndicatorsShape="Square"                              
-                               SelectedIndicatorColor="Transparent"/>
 
+        <IndicatorView x:Name="LandingIndicatorBackGround" IndicatorsShape="Square" SelectedIndicatorColor="Transparent"/>
 
-        <Frame Padding="0"
-                   HeightRequest="125"
-                   WidthRequest="125"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand"
-                   CornerRadius="25"
-                   
-               BackgroundColor="Transparent"
-                   Margin="0,50,0, 600">
-            <Image Source="app_logo.png"
-                                 Aspect="AspectFill"/>
+        <Frame Padding="0" HeightRequest="125" WidthRequest="125" BackgroundColor="Transparent"
+               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0,50,0, 600">
+            <Image Source="app_logo.png" Aspect="AspectFill"/>
         </Frame>
 
         <BoxView>
@@ -48,22 +35,11 @@
                 </LinearGradientBrush>
             </BoxView.Background>
         </BoxView>
-        <Grid RowDefinitions="Auto, Auto, Auto" 
-                  HeightRequest="360"
-                  Margin="30,30,30,0"
-                  RowSpacing="30" 
-                  VerticalOptions="End">
-            <CarouselView x:Name="cvOnboarding" 
-                              IndicatorView="LandingIndicator"
-                              ItemsSource= "{Binding Onboardings}"
-                              VerticalOptions="End">
+        <Grid RowDefinitions="Auto, Auto, Auto" HeightRequest="360" Margin="30,30,30,0" RowSpacing="30" VerticalOptions="End">
+            <CarouselView x:Name="cvOnboarding" IndicatorView="LandingIndicator" ItemsSource= "{Binding Onboardings}" VerticalOptions="End">
                 <CarouselView.ItemTemplate>
-
                     <DataTemplate>
-
-                        <StackLayout x:Name="captions"
-                                Margin="0,50,0,0">
-
+                        <StackLayout x:Name="captions" Margin="0,50,0,0">
                             <Label Text="{Binding Heading}"
                                    TextColor="white"
                                    FontSize="28" 
@@ -77,35 +53,30 @@
                                    FontAttributes="Bold"
                                    WidthRequest="200" 
                                    HorizontalOptions="Start"/>
-
-
                         </StackLayout>
-
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-            <IndicatorView x:Name="LandingIndicator"
-                            
-                               Grid.Row="1" 
-                               IndicatorsShape="Square"
-                               IndicatorColor="White" 
-                               SelectedIndicatorColor="#B52435"/>
+
+            <IndicatorView x:Name="LandingIndicator"     
+                           Grid.Row="1" 
+                           IndicatorsShape="Square"
+                           IndicatorColor="White" 
+                           SelectedIndicatorColor="#B52435"/>
             <StackLayout x:Name="buttons" 
-                                 Grid.Row="2"         
-                                 Orientation="Vertical" 
-                                 Spacing="25" 
-                                 
-                                 VerticalOptions="End">
-                <Button                                
-                            Text="Logowanie" 
-                                FontSize="18"                       
-                                Clicked="GoToSignInPage"
-                                HeightRequest="50" 
-                                WidthRequest="200"
-                                BackgroundColor="#B52435"
-                                TextColor="White" 
-                                CornerRadius="25" 
-                                FontAttributes="Bold"/>
+                         Grid.Row="2"         
+                         Orientation="Vertical" 
+                         Spacing="25"                
+                         VerticalOptions="End">
+                <Button Text="Logowanie" 
+                        FontSize="18"                       
+                        Clicked="GoToSignInPage"
+                        HeightRequest="50" 
+                        WidthRequest="200"
+                        BackgroundColor="#B52435"
+                        TextColor="White" 
+                        CornerRadius="25"
+                        FontAttributes="Bold"/>
                 <Button Text="Rejestracja"     
                         FontSize="18"
                         Clicked="GoToRegisterPage"

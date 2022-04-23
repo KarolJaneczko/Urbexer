@@ -11,9 +11,6 @@
              Shell.NavBarIsVisible="False"
              x:Class="Urbexer.Views.SignInPage">
 
-
-
-
     <Grid>
         <Image Source="background_image4" Aspect="AspectFill"/>
 
@@ -25,9 +22,9 @@
                CornerRadius="25"
                BackgroundColor="Transparent"
                Margin="0,50,0,600">
-            
             <Image Source="app_logo.png" Aspect="AspectFill"/>
         </Frame>
+
         <BoxView>
             <BoxView.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -38,20 +35,19 @@
             </BoxView.Background>
         </BoxView>
 
-        <StackLayout Margin="30,200,30,0">
-
+        <StackLayout Margin="30,225,30,125">
             <Frame BackgroundColor="#cfffffff"
-                       HeightRequest="500"
-                       CornerRadius="25"
-                       HorizontalOptions="FillAndExpand"
-                       HasShadow="True"
-                       BorderColor="black">
+                   HeightRequest="500"
+                   CornerRadius="25"
+                   HorizontalOptions="FillAndExpand"
+                   HasShadow="True"
+                   BorderColor="black">
                 <StackLayout>
                     <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Label Text="Zaloguj się" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Text="Zaloguj się" TextColor="Black" FontSize="Title" FontAttributes="Bold"/>
                     </StackLayout>
 
-                    <StackLayout Margin="0,25,0,50" Spacing="3">
+                    <StackLayout Margin="0,25,0,20" Spacing="3">
                         <Label Text="Login"/>
                         <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
@@ -59,7 +55,6 @@
                                     <Image Source="profile_icon.png" Aspect="AspectFill"   Margin="5"/>
                                 </Frame>
                                 <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login" PlaceholderColor="#B52435" Keyboard="Email"  TextColor="#B52435" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
-
                             </StackLayout>
                         </Frame>
                         <Label Text="Hasło"/>
@@ -76,28 +71,22 @@
                                         </EventTrigger>
                                     </ImageButton.Triggers>
                                 </ImageButton>
-
                             </StackLayout>
                         </Frame>
                     </StackLayout>
 
                     <Button Command="{Binding SubmitCommand}"                                      
-                    Text="ZALOGUJ"                                                       
-                    BorderColor="Black"                           
-                    BackgroundColor="#B52435"
-                    TextColor="White" 
-                    CornerRadius="25" 
-                   
-                    FontAttributes="Bold"/>
-
+                            Text="ZALOGUJ"                                                       
+                            BorderColor="Black"                           
+                            BackgroundColor="#B52435"
+                            TextColor="White" 
+                            CornerRadius="25"  
+                            FontAttributes="Bold"/>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Nie masz jeszcze konta?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                         <Button  Text="Zarejestruj się" TextColor="#B52435" BackgroundColor="Transparent" FontAttributes="Bold"  Clicked="GoToSignUp"/>
                     </StackLayout>
                     <StackLayout Margin=" 0,0,0,0" Spacing="50">
-                        <Grid>
-                           
-                        </Grid>
                         <Grid>
                             <BoxView BackgroundColor="#B52435" HeightRequest="1" Margin="20" HorizontalOptions="CenterAndExpand" WidthRequest="120" />
                             <Frame BackgroundColor="#B52435" CornerRadius="50" HorizontalOptions="Center" HeightRequest="35" WidthRequest="50" Padding="0" Margin="0">
@@ -109,5 +98,4 @@
             </Frame>
         </StackLayout>
     </Grid>
-
 </ContentPage>
