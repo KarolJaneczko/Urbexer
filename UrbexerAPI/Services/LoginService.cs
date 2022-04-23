@@ -7,12 +7,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Net;
 
 namespace APIpz.Services
 {
     public interface ILoginService
     {
-        Task RegisterUser(RegisterUserDto dto);
+        Task RegisterUser(RegisterUserDto dto, string host);
         string GenerateJwt(LoginDto dto);
 
         void ConfirmUser(ConfirmUserDto dto);
@@ -35,7 +36,7 @@ namespace APIpz.Services
             _emailSender = emailSender;
 
         }
-        public async Task RegisterUser(RegisterUserDto dto)
+        public async Task RegisterUser(RegisterUserDto dto, string host)
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var kod = new char[5];
@@ -64,9 +65,9 @@ namespace APIpz.Services
             
             _context.Uzytkownik.Add(newUzytkownik);
             _context.SaveChanges();
-            await _emailSender.SendEmailAsync(newUzytkownik.Email, "kod do potwierdzenia rejestracji", wlasciwykod);
-            
-            
+            var url = $"{host}/api/account/confirm?email={WebUtility.UrlEncode(dto.Email)}&kod={wlasciwykod}";
+            var tresc = $"Aby aktywować konto, kliknij w link: {url}";
+            await _emailSender.SendEmailAsync(newUzytkownik.Email, "Link do potwierdzenia rejestracji", tresc);
         }
 
         public string GenerateJwt(LoginDto dto)
@@ -116,7 +117,7 @@ namespace APIpz.Services
             {
                 throw new BadRequestException("konto zostało juz aktywowane");
             }
-            if (user.KodPotwierdzajacyRejestracje == dto.KodPotwierdzajacy)
+            if (user.KodPotwierdzajacyRejestracje == dto.Kod)
             {
                 user.CzyKontoAktywne = true;
                 _context.SaveChanges();

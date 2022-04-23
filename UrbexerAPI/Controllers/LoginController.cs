@@ -17,7 +17,8 @@ namespace APIpz.Controllers
         [HttpPost("register")]
         public ActionResult RegisterUser([FromBody] RegisterUserDto dto)
         {
-            _loginService.RegisterUser(dto);
+            var hostUrl = $"{Request.Scheme}://{Request.Host.Value}";
+            _loginService.RegisterUser(dto, hostUrl);
             return Ok();
         }
 
@@ -29,11 +30,11 @@ namespace APIpz.Controllers
 
         }
 
-        [HttpPut("confirm")]
-        public ActionResult Confirm([FromBody] ConfirmUserDto dto)
+        [HttpGet("confirm")]
+        public ActionResult Confirm([FromQuery] ConfirmUserDto dto)
         {
             _loginService.ConfirmUser(dto);
-            return Ok();
+            return Content("Dziękujemy za aktywację konta");
         }
         [HttpPut("Testconfirm")]
         public ActionResult TestConfirm([FromBody] TestowyConfirmUserDto dto)
