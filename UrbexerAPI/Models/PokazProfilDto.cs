@@ -14,5 +14,7 @@
         public string LinkInstagram { get; set; }
         public string LinkYouTube { get; set; }
         public int Layout { get; set; }
+
+        public int UzytkownikId { get; set; }
     }
 }
