@@ -33,28 +33,28 @@ namespace Urbexer.Services {
                 Content = new StringContent(json, Encoding.UTF8, "application/json"),
             };
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-                return response.Content.ReadAsStringAsync().Result;
-            }
-            return null;
+            return response.StatusCode == System.Net.HttpStatusCode.OK 
+                ? response.Content.ReadAsStringAsync().Result 
+                : null;
         }
 
         // Pobierz konkretną lokacje o danym id
         public static async Task<Location> GetLocationById(int id, bool detailed = false) {
             string json = string.Format("{{\"id\": {0}}}", id);
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscePoId", json).Result;
-            if (result == null) return null;
-            if (detailed) {
-                return new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result));
-            } else {
-                return new Location(JsonConvert.DeserializeObject<APILocation>(result));
-            }
+            string path = "/api/urbex/pokazMiejscePoId";
+            string args = "?id=" + id;
+            string result = SendApiRequest(HttpMethod.Get, path + args).Result;
+            if (result == null)
+                return null;
+            return detailed
+                ? new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result))
+                : new Location(JsonConvert.DeserializeObject<APILocation>(result));
+
         }
         #endregion
 
-        #region ListyLokacji
         // Funkcje do pobierania list lokacji
-
+        #region ListyLokacji
         // Pobierz wszystkie lokacje z bazy danych
         public static async Task<List<Location>> GetLocationListAll() {
             string result = SendApiRequest(HttpMethod.Get, "/api/urbex/getall").Result;
@@ -62,26 +62,29 @@ namespace Urbexer.Services {
         }
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaZListy", json).Result;
+            string result = SendApiRequest(HttpMethod.Post, "/api/urbex/pokazMiejscaZListy", json).Result;
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result)); // TODO Uzupełnić
         }
         #endregion ListyLokacji
 
-        #region ListyId
         // Funkcje do pobierania list id lokacji
-
+        #region ListyId 
         // Pobierz lokacje w okolicy danej pozycji
         public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius) {
             float deg = KmToDegrees(kmRadius);
-            string json = string.Format("{{" +
-                "\"wspolrzedneLATUser\": {0}," +
-                "\"wspolrzedneLNGUser\": {1}," +
-                "\"promien\": {2}}}",
+            string path = "/api/urbex/pokazMiejscaWPoblizu";
+            string args = string.Format("?WspolrzedneLATUser={0}&WspolrzedneLNGUser={1}&Promien={2}",
                 latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaWPoblizu", json).Result;
-            return JsonConvert.DeserializeObject<List<int>>(result);
+            string result = SendApiRequest(HttpMethod.Get, path + args).Result;
+            // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
+            result = result.Trim(new char[] { '[', ']' });
+            List<int> output = new List<int>();
+            foreach (string id in result.Split(',')) {
+                output.Add(int.Parse(id));
+            }
+            return output;
         }
         // Pobierz lokacje z danego województwa
         public static async Task<List<int>> GetIdListByProvince(string province) {
@@ -119,8 +122,8 @@ namespace Urbexer.Services {
         }
         #endregion Pomocnicze
 
-        #region Testowe
         // Poniższe funkcje są do testowania. Ostatecznie do usunięcia
+        #region Testowe
         private static Location GetTestLocation(int id) {
             string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
 
