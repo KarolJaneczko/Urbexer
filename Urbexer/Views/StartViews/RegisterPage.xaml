@@ -179,15 +179,6 @@
                             CornerRadius="25" 
                             FontAttributes="Bold"
                             IsEnabled="False"/>
-                    
-                    <!-- Przycisk do aktywacji konta -->
-                    <Button Clicked="GoToActivatePage"
-                            Text="Aktywacja konta"                                                       
-                            BorderColor="Black"                           
-                            BackgroundColor="#B52435"
-                            TextColor="White" 
-                            CornerRadius="25" 
-                            FontAttributes="Bold"/>
 
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
