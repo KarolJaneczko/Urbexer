@@ -22,7 +22,7 @@ namespace Urbexer {
         protected override void OnStart() {
             if (UserInfo.IsLoggedIn) {
                 UserInfo.CheckedInternetConnection = false;
-                Shell.Current.GoToAsync(nameof(HomePage));
+                Shell.Current.GoToAsync("//HomePage");
             }
             else
                 Shell.Current.GoToAsync(nameof(WelcomePage));

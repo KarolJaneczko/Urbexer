@@ -27,9 +27,4 @@
             </Grid>
         </xct:Expander>
     </StackLayout>
-
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}"/>
-    </Shell.BackButtonBehavior>
-
 </ContentPage>

@@ -163,9 +163,8 @@
             <StackLayout BackgroundColor="white" 
                          IsEnabled="True"
                          Grid.Row="3"
-                         HeightRequest="300"
+                         HeightRequest="150"
                          Margin="20,0" 
-                         VerticalOptions="Fill"
                          HorizontalOptions="Fill">
                 <Frame BackgroundColor="White" 
                        Padding="3"
@@ -177,78 +176,81 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" 
-                               Text="chuj" 
+                        <Label Grid.Column="0"
+                               Text="Imię" 
                                TextColor="black" 
-                               FontSize="14"
+                               FontSize="15"
                                FontAttributes="Bold"
                                VerticalOptions="Center"
                                HorizontalOptions="Start" 
                                Margin="10,0"/>
-                        <Label Grid.Column="1" 
-                               Text="eeelo" 
+                        <Label Grid.Column="1"
+                               Text="{Binding ProfileFirstName}"
                                TextColor="#BF0603"
                                FontAttributes="Bold" 
-                               FontSize="18" 
+                               FontSize="15" 
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               Margin="20,0"/>
+                    </Grid>
+                </Frame>
+                <Frame BackgroundColor="White" 
+                       Padding="3"
+                       Margin="0,0,0,0"
+                       HasShadow="True"
+                       HeightRequest="50">
+                    <Grid HeightRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               Text="Nazwisko" 
+                               TextColor="black" 
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" 
+                               Margin="10,0"/>
+                        <Label Grid.Column="1"
+                               Text="{Binding ProfileLastName}"
+                               TextColor="#BF0603"
+                               FontAttributes="Bold" 
+                               FontSize="15" 
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               Margin="20,0"/>
+                    </Grid>
+                </Frame>
+                <Frame BackgroundColor="White" 
+                       Padding="3"
+                       Margin="0,0,0,0"
+                       HasShadow="True"
+                       HeightRequest="50">
+                    <Grid HeightRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               Text="Odwiedzone miejsca" 
+                               TextColor="black" 
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" 
+                               Margin="10,0"/>
+                        <Label Grid.Column="1"
+                               Text="{Binding ProfileVisitedPlaces}"
+                               TextColor="#BF0603"
+                               FontAttributes="Bold" 
+                               FontSize="15" 
                                VerticalOptions="Center"
                                HorizontalOptions="End"
                                Margin="20,0"/>
                     </Grid>
                 </Frame>
             </StackLayout>
-
-            <!--
-            <ListView BackgroundColor="white" 
-                      IsEnabled="True"
-                      x:Name="UserInfoList" 
-                      ItemsSource="{Binding Informations}" 
-                      SeparatorVisibility="Default"
-                      Grid.Row="3"
-                      HeightRequest="300"
-                      Margin="20,0" 
-                      VerticalOptions="Fill"
-                      HorizontalOptions="Fill">
-                <ListView.ItemTemplate>
-                    <DataTemplate >
-                        <ViewCell>
-                            <Frame BackgroundColor="White" 
-                               Padding="3"
-                               Margin="0,0,0,0"
-                               HasShadow="True"
-                               HeightRequest="80">
-                                <Grid HeightRequest="80"
-                                  HorizontalOptions="FillAndExpand"
-                                  VerticalOptions="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" 
-                                       Text="{Binding Category}" 
-                                       TextColor="black" 
-                                       FontSize="14"
-                                           FontAttributes="Bold"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Start" 
-                                       Margin="10,0"/>
-                                    <Label Grid.Column="1" 
-                                       Text="{Binding Info}" 
-                                       TextColor="#BF0603"
-                                       FontAttributes="Bold" 
-                                       FontSize="18" 
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="End"
-                                       Margin="20,0"/>
-                                </Grid>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView> -->
-
-
         </Grid>
     </ScrollView>
 </ContentPage>
