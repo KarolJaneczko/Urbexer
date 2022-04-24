@@ -4,24 +4,43 @@ using Urbexer.Models.ApiModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using System.Collections.Generic;
 
 namespace Urbexer.Models {
     public class Location {
-        public enum Category {
-            Kolejowe = 1,
-            Hotele_i_pensjonaty = 2,
-            Domy = 3,
-            Industrialne = 4,
-            Restauracje_i_kluby = 5,
-            Rolnicze = 6,
-            Zamki_i_palace = 7,
-            Podziemia = 8,
-            Biurowce = 9,
-            Militarne = 10,
-            Szpitale = 11,
-            Podziemia_i_tunele = 12,
-            Inne = 13,
-        }
+        public readonly Dictionary<int, string> CategoryDict = new Dictionary<int, string>() {
+            { 1, "Kolejowe"},
+            { 2, "Hotele i pensjonaty"},
+            { 3, "Domy"},
+            { 4, "Industrialne"},
+            { 5, "Restauracje i kluby"},
+            { 6, "Rolnicze"},
+            { 7, "Zamki_i_palace"},
+            { 8, "Podziemia"},
+            { 9, "Biurowce"},
+            { 10, "Militarne"},
+            { 11, "Szpitale"},
+            { 12, "Podziemia i tunele"},
+            { 13, "Inne"},
+        };
+        public readonly Dictionary<int, string> ProvinceDict = new Dictionary<int, string>() {
+            { 1, "Dolnośląskie"},
+            { 2, "Kujawsko-pomorskie"},
+            { 3, "Lubelskie"},
+            { 4, "Lubuskie"},
+            { 5, "Łódzkie"},
+            { 6, "Małopolskie"},
+            { 7, "Mazowieckie"},
+            { 8, "Opolskie"},
+            { 9, "Podkarpackie"},
+            { 10, "Podlaskie"},
+            { 11, "Pomorskie"},
+            { 12, "Śląskie"},
+            { 13, "Świętokrzyskie"},
+            { 14, "Warmińsko-mazurskie"},
+            { 15, "Wielkopolskie"},
+            { 16, "Zachodniopomorskie"},
+        };
         #region Zmienne
         public int Id { get; set; }
         public string Name { get; set; }
@@ -29,7 +48,8 @@ namespace Urbexer.Models {
         public string Thumbnail { get; set; }
         public Position Position { get; set; }
         public double Distance { get; set; }
-        public Category CategoryId { get; set; }
+        public int CategoryId { get; set; }
+        public int ProvinceId { get; set; }
         #endregion
 
         #region Klasy
@@ -38,14 +58,14 @@ namespace Urbexer.Models {
         #region Konstruktory
         public Location() {
             Id = -1;
-            CategoryId = Category.Inne;
         }
         public Location(APILocation apiLocation) {
             Name = apiLocation.nazwa;
             Address = apiLocation.adres;
             Position = new Position(apiLocation.wspolrzedneLAT, apiLocation.wspolrzedneLNG);
             Id = apiLocation.id;
-            CategoryId = Category.Inne; //TODO Zmienić na kategorie z apiLocation jak już będzie funkcjonalność
+            CategoryId = apiLocation.kategoriaId;
+            ProvinceId = apiLocation.wojewodztwoId;
             RecalculateDistance();
 
             if (apiLocation.zdjecie != null) {
