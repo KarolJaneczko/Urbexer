@@ -15,15 +15,13 @@ namespace Urbexer.Models {
         }
         public LocationDetailed() : base(){ }
         public LocationDetailed(APILocation apiLocation) : base(apiLocation){
-            ImageLinks = new ObservableRangeCollection<ImageLink>();
-            if (apiLocation.zdjecie != null) {
+            ImageLinks = new ObservableRangeCollection<ImageLink>() {
+            new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" },
+            new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967839054794223646/20211017_131032-100x100.jpg" },
+            new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967839116714737764/20211017_131032-220x220.jpg" },
+            new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967840380840210532/279028066_708718033656815_8015671028846047975_n.jpg" },
+        };
 
-            }
-            else {
-                // Wczytaj placeholder
-                Thumbnail = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
-                ImageLinks.Add(new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" });
-            }
         }
     }
 }
