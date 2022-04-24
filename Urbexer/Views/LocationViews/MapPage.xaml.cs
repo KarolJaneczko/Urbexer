@@ -35,19 +35,23 @@ namespace Urbexer.Views {
             InitializeComponent();
             CurrentPinId = -1;
 
-            // Spróbuj ustawić pozycje mapy na pozycje użytkownika
+            Task.Run(async () => await MoveToUser());
+        }
+
+        // Spróbuj ustawić pozycje mapy na pozycje użytkownika
+        private async Task MoveToUser() {
             try {
-                Xamarin.Essentials.Location location = Geolocation.GetLastKnownLocationAsync().Result;
+                Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
                 if (location != null) {
                     MapSpan mapSpan = MapSpan.FromCenterAndRadius(
                         new Position(location.Latitude, location.Longitude), Distance.FromKilometers(2));
                     map.MoveToRegion(mapSpan);
                 }
-            } catch (Exception ex){
-                DefaultPositionFallback();
+            }
+            catch {
+                await DefaultPositionFallback();
             }
         }
-
         // Ustaw mapę na środek Polski
         private async Task DefaultPositionFallback() {
             string default_address = "Polska";
