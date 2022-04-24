@@ -8,7 +8,7 @@ namespace APIpz.Models.Validators
     {
         public ConfirmUserDtoValidator(BazaDbContext context)
         {
-            RuleFor(x => x.KodPotwierdzajacy).NotEmpty().Length(5);
+            RuleFor(x => x.Kod).NotEmpty().Length(5);
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
         }
     }

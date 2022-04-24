@@ -61,7 +61,7 @@ namespace APIpz.Controllers
         }
 
         [HttpGet("pokazMiejscePoId")]
-        public ActionResult<Miejsce> PokazMiejscePoId(int id)
+        public ActionResult<Miejsce> PokazMiejscePoId([FromQuery] int id)
         {
             var wynik = _urbexService.PokazMiejscePoId(id);
             return Ok(wynik);
@@ -75,7 +75,7 @@ namespace APIpz.Controllers
         }
 
         [HttpGet("pokazMiejscaZKategorii")]
-        public ActionResult<IEnumerable<int>> PokazMiejscaZKategorii([FromBody] int id)
+        public ActionResult<IEnumerable<int>> PokazMiejscaZKategorii([FromQuery] int id)
         {
             var wynik = _urbexService.PokazMiejscaZKategorii(id);
             return Ok(wynik);
@@ -114,7 +114,7 @@ namespace APIpz.Controllers
         }
 
         [HttpGet("pokazProfil")]
-        public ActionResult<PokazProfilDto> PokazProfil(string login)
+        public ActionResult<PokazProfilDto> PokazProfil([FromQuery] string login)
         {
             var wynik = _urbexService.PokazProfil(login);
             if (wynik == null)
