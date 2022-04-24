@@ -55,10 +55,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="overlay.png" 
-               Aspect="Fill" 
-               HeightRequest="300" 
-               VerticalOptions="StartAndExpand"/>
+            <Image Source="overlay.png" Aspect="Fill" HeightRequest="300" VerticalOptions="StartAndExpand"/>
             <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="20,50"/>
             <StackLayout Orientation="Vertical" Margin="0,20" HorizontalOptions="Center" VerticalOptions="Center">
                 <Grid ColumnDefinitions="*,auto,Auto,auto,*">
@@ -84,7 +81,7 @@
                                      Margin="5"
                                      CornerRadius="50"
                                      Opacity="0.9"
-                                     Clicked="GoEditProfile" 
+                                     Command="{Binding ClickedEdit}" 
                                      BackgroundColor="#023047"/>
                     </Frame>
                 </Grid>

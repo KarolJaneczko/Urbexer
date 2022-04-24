@@ -1,8 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.Enums;
 using Urbexer.Models.UserModels;
+using Urbexer.Services;
+using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -62,12 +66,14 @@ namespace Urbexer.ViewModels {
         public ICommand ClickedInstagram { protected set; get; }
         public ICommand ClickedYoutube { protected set; get; }
         public ICommand ClickedFacebook { protected set; get; }
+        public ICommand ClickedEdit { protected set; get; }
         #endregion
         #region Konstruktory
         public ProfileViewModel() {
             ClickedInstagram = new Command(OnClickedInstagram);
             ClickedYoutube = new Command(OnClickedYoutube);
             ClickedFacebook = new Command(OnClickedFacebook);
+            ClickedEdit = new Command(OnClickedEdit);
             FillProfile(UserInfo.yourProfile);
         }
         #endregion
@@ -84,13 +90,27 @@ namespace Urbexer.ViewModels {
             }
         }
         public void OnClickedInstagram() {
-
+            if (UserInfo.yourProfile.InstagramLink != null) {
+                Device.OpenUri(new Uri(UserInfo.yourProfile.InstagramLink));
+            }
         }
         public void OnClickedYoutube() {
-
+            if (UserInfo.yourProfile.YoutubeLink != null) {
+                Device.OpenUri(new Uri(UserInfo.yourProfile.YoutubeLink));
+            }
         }
         public void OnClickedFacebook() {
-
+            if (UserInfo.yourProfile.FacebookLink != null) {
+                Device.OpenUri(new Uri(UserInfo.yourProfile.FacebookLink));
+            }
+        }
+        public void OnClickedEdit() {
+            Shell.Current.GoToAsync(nameof(EditProfilePage));
+        }
+        // Jeśli dodamy miejsce do odwiedzonych lub ranking się odświeży po jakimś okresie to wywołujemy metodę.
+        public static async Task RefreshProfileAsync() {
+            UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
+            FillProfile(UserInfo.yourProfile);
         }
         private static string GetAvatarByLayout(int layout) {
             switch (layout) {
