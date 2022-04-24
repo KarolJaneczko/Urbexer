@@ -8,11 +8,8 @@ namespace Urbexer.Views {
             Routing.RegisterRoute(nameof(EditProfilePage), typeof(EditProfilePage));
             BindingContext = new ProfileViewModel();
         }
-
         public void GoEditProfile(object sender, System.EventArgs e) {
             Shell.Current.GoToAsync(nameof(EditProfilePage));
         }
     }
 }
-
-

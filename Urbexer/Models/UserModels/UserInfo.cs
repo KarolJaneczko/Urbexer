@@ -1,5 +1,6 @@
 ﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using Urbexer.Models.UserModels;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Models {
@@ -12,6 +13,7 @@ namespace Urbexer.Models {
         public static string LoginToken { get; set; }
         public static bool IsAdmin { get; set; }
         public static Position CurrentPosition = new Position(53.0138, 18.5984);
+        public static ProfileData yourProfile;
         #endregion
 
         #region Zmienne - ustawienia
