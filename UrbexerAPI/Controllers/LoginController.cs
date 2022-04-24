@@ -27,7 +27,6 @@ namespace APIpz.Controllers
         {
             string token = _loginService.GenerateJwt(dto);
             return Ok(token);
-
         }
 
         [HttpGet("confirm")]
@@ -42,10 +41,10 @@ namespace APIpz.Controllers
             _loginService.TestowyConfirmUser(dto);
             return Ok();
         }
-        [HttpGet("rozruch")]
+       /* [HttpGet("rozruch")]
         public ActionResult rozruch()
         {
             return Ok();
-        }
+        }*/
     }
 }
