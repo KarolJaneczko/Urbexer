@@ -32,16 +32,31 @@ namespace Urbexer.ViewModels {
         async Task LoadMore() {
             List<int> newIds = new List<int>();
             while (newIds.Count() == 0) {
-                currentLoadRange += 5;
+                currentLoadRange += 30;
                 Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
                 newIds = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, currentLoadRange);
                 newIds = newIds.Except(loadedLocationsIds).ToList();
             }
-            Locations.AddRange(await LocationService.GetLocationListByIds(newIds));
+            var newLocations = await LocationService.GetLocationListByIds(newIds);
+            SortLocationsByDistance(newLocations);
+            //Locations.AddRange(newLocations);
+            LocationsFiltered.AddRange(newLocations);
             loadedLocationsIds.AddRange(newIds);
             
-            ReapplyFilters();
+            //ReapplyFilters();
         }
         #endregion Komendy
+
+        #region Metody
+        // Sortuje daną liste lokacji
+        private void SortLocationsByDistance(List<Location> locations) {
+            if (locations == null) return;
+
+            locations.Sort((location1, location2) => {
+                if (location1.Distance == location2.Distance) return 0;
+                return location1.Distance < location2.Distance ? -1 : 1;
+            });
+        }
+        #endregion
     }
 }

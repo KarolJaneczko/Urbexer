@@ -1,0 +1,91 @@
+﻿using APIpz.Entities;
+using APIpz.Middleware;
+using APIpz.Models;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+
+
+namespace APIpz.Services
+{
+    public interface IMiejsceService
+    {
+        List<MiejsceDto> GetAll();
+        MiejsceDto PokazMiejscePoId(int dto);
+        List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto);
+        IEnumerable<int> PokazMiejscaZKategorii(int dto);
+        IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto);
+        IEnumerable<int> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto);
+    }
+    public class MiejsceService : IMiejsceService
+    {
+        private readonly BazaDbContext _context;
+        private readonly ILogger<ErrorHandlingMiddleware> _logger;
+        private readonly IUserContextService _userContextService;
+        private readonly IMapper _mapper;
+        public MiejsceService(BazaDbContext context, ILogger<ErrorHandlingMiddleware> logger, IUserContextService userContextService, IMapper mapper)
+        {
+            _context = context;
+            _logger = logger;
+            _userContextService = userContextService;
+            _mapper = mapper;
+        }
+
+        public List<MiejsceDto> GetAll()
+        {
+            var wynik = _context.Miejsce
+                .Include(t=>t.Miejsce_Kategoria)
+                .Include(t=>t.Wojewodztwo)
+                .Take(20) // Tymczasowo!!!
+                .Select(x=> _mapper.Map<MiejsceDto>(x))
+                .ToList();
+            return wynik;
+        }
+        public MiejsceDto? PokazMiejscePoId(int id)
+        {
+            var miejsce = _context.Miejsce
+                .Include(t=>t.Miejsce_Kategoria)
+                .Include(t=>t.Wojewodztwo)
+                .FirstOrDefault( m => m.Id == id);
+            return _mapper.Map<MiejsceDto>(miejsce);
+        }
+        public List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
+        {
+            var miejsca = _context.Miejsce
+                .Include(t => t.Miejsce_Kategoria)
+                .Include(t => t.Wojewodztwo)
+                .Where(m => dto.listaId.Contains(m.Id)).Select(t=> _mapper.Map<MiejsceDto>(t)).ToList();
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaZKategorii(int id)
+        {
+            var zapytanie = _context.Miejsce
+                .Include(t => t.Miejsce_Kategoria)
+                .Include(t => t.Wojewodztwo)
+                .Where(m => m.Miejsce_Kategoria.Id == id).ToList();
+            var miejsca = zapytanie.Select(m => m.Id);
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaWPoblizu(PokazMiejscaWPoblizuDto dto)
+        {
+        //    for x, y in rekordy:
+        //if (x - x0) *(x - x0) + (y - y0) * (y - y0) == promien * promien:
+            var zapytanie = _context.Miejsce.Where(m => (m.WspolrzedneLAT - dto.WspolrzedneLATUser) * (m.WspolrzedneLAT - dto.WspolrzedneLATUser) +
+                                                        (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) * (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) <= dto.Promien * dto.Promien);
+
+            var miejsca = zapytanie.Select(m => m.Id);
+            return miejsca;
+        }
+        public IEnumerable<int> PokazMiejscaWPoblizuBezOdwiedzonych(PokazMiejscaWPoblizuDto dto)
+        {
+            var zapytanie1 = _context.Miejsce.Where(m => (m.WspolrzedneLAT - dto.WspolrzedneLATUser) * (m.WspolrzedneLAT - dto.WspolrzedneLATUser) +
+                                                       (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) * (m.WspolrzedneLNG - dto.WspolrzedneLNGUser) <= dto.Promien * dto.Promien);
+           
+            var zapytanie2 = _context.Odwiedzone.Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
+            var miejsca = zapytanie1.Select(m => m.Id);
+
+            var miejscaMinus = zapytanie2.Select(o => o.OdwiedzonyUrbex.Id);
+            var result = miejsca.Except(miejscaMinus);
+            return result;
+        }
+    }
+}

@@ -6,8 +6,9 @@ namespace Urbexer.Models.ApiModels {
     public class APILocation {
         public int id;
         public string nazwa = "";
-        public string? miejsce_Kategoria;
         public string? adres;
+        public int kategoriaId;
+        public int wojewodztwoId;
         public float wspolrzedneLAT;
         public float wspolrzedneLNG;
         public string? zdjecie;
