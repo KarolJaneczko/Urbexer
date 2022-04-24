@@ -35,7 +35,7 @@ namespace Urbexer.Services {
             };
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             return response.StatusCode == System.Net.HttpStatusCode.OK 
-                ? response.Content.ReadAsStringAsync().Result 
+                ? await response.Content.ReadAsStringAsync()
                 : null;
         }
 
@@ -43,7 +43,7 @@ namespace Urbexer.Services {
         public static async Task<Location> GetLocationById(int id, bool detailed = false) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
-            string result = SendApiRequest(HttpMethod.Get, path + args).Result;
+            string result = await SendApiRequest(HttpMethod.Get, path + args);
             if (result == null)
                 return null;
             return detailed
@@ -57,12 +57,12 @@ namespace Urbexer.Services {
         #region ListyLokacji
         // Pobierz wszystkie lokacje z bazy danych
         public static async Task<List<Location>> GetLocationListAll() {
-            string result = SendApiRequest(HttpMethod.Get, "/api/place/getall").Result;
+            string result = await SendApiRequest(HttpMethod.Get, "/api/place/getall");
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
-            string result = SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json).Result;
+            string result = await SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json);
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         #endregion ListyLokacji
@@ -80,7 +80,7 @@ namespace Urbexer.Services {
                 latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            string result = SendApiRequest(HttpMethod.Get, path + args).Result;
+            string result = await SendApiRequest(HttpMethod.Get, path + args);
             // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
             result = result.Trim(new char[] { '[', ']' });
             List<int> output = new List<int>();
@@ -98,7 +98,7 @@ namespace Urbexer.Services {
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
             string args = "?id=" + categoryId;
-            string result = SendApiRequest(HttpMethod.Get, path + args).Result;
+            string result = await SendApiRequest(HttpMethod.Get, path + args);
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId
