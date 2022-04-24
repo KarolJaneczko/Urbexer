@@ -8,13 +8,11 @@ namespace Urbexer.Services {
         #region Zmienne
         private static readonly Geocoder geocoder;
         #endregion
-
         #region Konstruktory
         static GeocoderService() {
             geocoder = new Geocoder();
         }
         #endregion
-
         #region Metody
         // Ustaw pozycje z danego adresu
         public static async Task<Position> GetPositionFromAddressAsync(string address) {

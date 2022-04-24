@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="Urbexer.Views.RegisterPage"
              Shell.FlyoutItemIsVisible="False"
-              Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 

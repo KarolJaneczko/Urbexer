@@ -9,7 +9,6 @@ namespace Urbexer.Views {
         #region Zmienne
         Timer timer;
         #endregion
-
         #region Konstruktory
         public WelcomePage() {
             InitializeComponent();
@@ -21,7 +20,6 @@ namespace Urbexer.Views {
             buttons.Margin = new Thickness(25, 0, 25, 50);
         }
         #endregion
-
         #region Metody
         private void AnimatedInfoCarousel() {
             timer = new Timer(3500) {

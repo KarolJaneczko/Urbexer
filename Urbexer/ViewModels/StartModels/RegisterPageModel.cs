@@ -40,13 +40,11 @@ namespace Urbexer.ViewModels {
         }
         public ICommand SubmitCommand { protected set; get; }
         #endregion
-
         #region Konstruktory
         public RegisterPageModel() {
             SubmitCommand = new Command(OnSubmit);
         }
         #endregion
-
         #region Metody
         public async void OnSubmit() {
             try {

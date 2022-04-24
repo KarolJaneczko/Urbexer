@@ -7,7 +7,6 @@ namespace Urbexer.Models {
         public string title;
         public AppExceptionTypeEnum type;
         #endregion
-
         #region Konstruktory
         public AppException() {
             message = "Wystąpił nieoczekiwany błąd.";
@@ -19,7 +18,6 @@ namespace Urbexer.Models {
             title = SetTitle(_type);
         }
         #endregion
-
         #region Metody
         public string SetTitle(AppExceptionTypeEnum type) {
             switch (type) {

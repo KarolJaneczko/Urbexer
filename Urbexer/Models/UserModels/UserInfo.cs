@@ -15,7 +15,6 @@ namespace Urbexer.Models {
         public static Position CurrentPosition = new Position(53.0138, 18.5984);
         public static ProfileData yourProfile;
         #endregion
-
         #region Zmienne - ustawienia
         private const string SettingsKey = "settings_key";
         private static readonly string SettingsDefault = string.Empty;
@@ -41,7 +40,6 @@ namespace Urbexer.Models {
             set => AppSettings.AddOrUpdateValue(nameof(CheckedInternetConnection), value);
         }
         #endregion
-
         #region Metody
         public static void SetLoginCredentials(string login, string loginToken) {
             Login = login;
@@ -56,6 +54,7 @@ namespace Urbexer.Models {
             Login = null;
             LoginToken = null;
             IsLoggedIn = false;
+            yourProfile = null;
             AppSettings.Clear();
         }
         #endregion

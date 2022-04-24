@@ -64,7 +64,8 @@
                 <Grid ColumnDefinitions="*,auto,Auto,auto,*">
                     <StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                         <Frame BackgroundColor="silver" CornerRadius="50" HorizontalOptions="Center">
-                            <Image Source="profile_icon.png" WidthRequest="100" HeightRequest="100" VerticalOptions="Center"/>
+                            <!--Avatar-->
+                            <Image Source="{Binding ProfileAvatarSource}" WidthRequest="100" HeightRequest="100" VerticalOptions="Center"/>
                         </Frame>
                     </StackLayout>
                     <Frame Grid.Column="4" 
@@ -151,7 +152,7 @@
                     </StackLayout>
                 </Grid>
             </Frame>
-
+            <!--Opis proflu-->
             <Frame BorderColor="#363636" Margin="10" Grid.Row="2" CornerRadius="10" Padding="8">
                 <StackLayout>
                     <Label Text="Biogram" HorizontalOptions="Start" FontSize="Large"/>

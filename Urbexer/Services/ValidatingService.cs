@@ -47,7 +47,6 @@ namespace Urbexer.Services {
             }
         }
         #endregion
-
         #region Walidacje formatu wprowadzanych danych
         public static bool CheckMailFormat(string mail) {
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10})+)$");
@@ -74,7 +73,6 @@ namespace Urbexer.Services {
                 return false;
         }
         #endregion
-
         #region Walidacje techniczne
         public static bool CheckForInternetConnection() {
             if (!CrossConnectivity.Current.IsConnected)
@@ -121,7 +119,6 @@ namespace Urbexer.Services {
             }
         }
         #endregion
-
         #region Metody pomocnicze
         public async void DisplayError(string title, string message) {
             await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, message, "OK");

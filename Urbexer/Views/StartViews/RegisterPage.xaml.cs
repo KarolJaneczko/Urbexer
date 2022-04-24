@@ -24,7 +24,6 @@ namespace Urbexer.Views {
             };
         }
         #endregion
-
         #region Metody
         public void GoToSignIn(object sender, EventArgs e) {
             Shell.Current.GoToAsync(nameof(SignInPage));
