@@ -19,17 +19,9 @@ namespace APIpz.Controllers
             _urbexService = urbexService;
         }
 
-        [HttpGet("getall")]
-        public ActionResult<IEnumerable<Miejsce>> GetAll()
-        {
-            var wynik = _urbexService.GetAll();
-            return Ok(wynik);
-        }
-
         [HttpPut("dodajodwiedzone")]
         public ActionResult DodajOdwiedzone([FromBody] DodajOdwiedzoneDto dto)
         {
-
             _urbexService.DodajOdwiedzone(dto);
             return Ok();
         }
@@ -58,70 +50,6 @@ namespace APIpz.Controllers
 
             _urbexService.DodajOpinie(dto);
             return Ok();
-        }
-
-        [HttpGet("pokazMiejscePoId")]
-        public ActionResult<Miejsce> PokazMiejscePoId([FromQuery] int id)
-        {
-            var wynik = _urbexService.PokazMiejscePoId(id);
-            return Ok(wynik);
-        }
-
-        [HttpPost("pokazMiejscaZListy")]
-        public ActionResult<List<Miejsce>> PokazMiejscaZListy([FromBody]PokazMiejscaZListyDto dto)
-        {
-            var wynik = _urbexService.PokazMiejscaZListy(dto);
-            return Ok(wynik);
-        }
-
-        [HttpGet("pokazMiejscaZKategorii")]
-        public ActionResult<IEnumerable<int>> PokazMiejscaZKategorii([FromQuery] int id)
-        {
-            var wynik = _urbexService.PokazMiejscaZKategorii(id);
-            return Ok(wynik);
-        }
-
-        [HttpGet("pokazMiejscaWPoblizu")]
-
-        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizu([FromQuery]PokazMiejscaWPoblizuDto dto)
-        {
-            var wynik = _urbexService.PokazMiejscaWPoblizu(dto);
-            return Ok(wynik);
-
-        }
-        [HttpGet("pokazMiejscaWPoblizuBezOdwiedzonych")]
-        public ActionResult<IEnumerable<int>> PokazMiejscaWPoblizuBezOdwiedzonych([FromQuery] PokazMiejscaWPoblizuDto dto)
-        {
-            var wynik = _urbexService.PokazMiejscaWPoblizuBezOdwiedzonych(dto);
-            return Ok(wynik);
-
-        }
-
-        [HttpPut("stworzPustyProfil")]
-        public ActionResult StworzOdwiedzone([FromBody] StworzPustyProfilDto dto)
-        {
-
-            _urbexService.StworzPustyProfil(dto);
-            return Ok();
-        }
-
-        [HttpPut("edytujProfil")]
-        public ActionResult EdytujProfil([FromBody] EdytujProfilDto dto)
-        {
-
-            _urbexService.EdytujProfil(dto);
-            return Ok();
-        }
-
-        [HttpGet("pokazProfil")]
-        public ActionResult<PokazProfilDto> PokazProfil([FromQuery] string login)
-        {
-            var wynik = _urbexService.PokazProfil(login);
-            if (wynik == null)
-              {
-                return NotFound();
-            }
-            return Ok(wynik);
         }
     }
 }
