@@ -63,7 +63,7 @@
                             <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" VerticalOptions="Center" />
                                 <Label Text="{Binding Address}" VerticalOptions="Center" />
-
+                                <Label Text="{Binding Path=CategoryId, StringFormat='Kategoria: {0}'}" VerticalOptions="Center" />
                             </StackLayout>
                             <Label
                                 Padding="15"

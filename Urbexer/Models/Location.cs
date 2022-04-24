@@ -73,7 +73,7 @@ namespace Urbexer.Models {
             }
             else {
                 // Wczytaj placeholder
-                Thumbnail = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
+                Thumbnail = "https://cdn.discordapp.com/attachments/967515297705779200/967515764414382132/placeholder.png";
             }
         }
         #endregion
