@@ -10,8 +10,9 @@ using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
     public static class LocationService {
-        #region Zmienne
         // Klasa do pobierania lokacji i pobiązanych danych z bazy.
+
+        #region Zmienne
         private static readonly HttpClient httpClient;
         #endregion
 
@@ -40,8 +41,7 @@ namespace Urbexer.Services {
 
         // Pobierz konkretną lokacje o danym id
         public static async Task<Location> GetLocationById(int id, bool detailed = false) {
-            string json = string.Format("{{\"id\": {0}}}", id);
-            string path = "/api/urbex/pokazMiejscePoId";
+            string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
             string result = SendApiRequest(HttpMethod.Get, path + args).Result;
             if (result == null)
@@ -57,22 +57,25 @@ namespace Urbexer.Services {
         #region ListyLokacji
         // Pobierz wszystkie lokacje z bazy danych
         public static async Task<List<Location>> GetLocationListAll() {
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/getall").Result;
+            string result = SendApiRequest(HttpMethod.Get, "/api/place/getall").Result;
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
-            string result = SendApiRequest(HttpMethod.Post, "/api/urbex/pokazMiejscaZListy", json).Result;
-            return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result)); // TODO Uzupełnić
+            string result = SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json).Result;
+            return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         #endregion ListyLokacji
 
         // Funkcje do pobierania list id lokacji
         #region ListyId 
         // Pobierz lokacje w okolicy danej pozycji
-        public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius) {
+        // Flaga unvisitedOnly sprawia że zwracane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika
+        public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius, bool unvisitedOnly = false) {
             float deg = KmToDegrees(kmRadius);
-            string path = "/api/urbex/pokazMiejscaWPoblizu";
+            string path = "/api/place/pokazMiejscaWPoblizu";
+            if (unvisitedOnly)
+                path += "BezOdwiedzonych";
             string args = string.Format("?WspolrzedneLATUser={0}&WspolrzedneLNGUser={1}&Promien={2}",
                 latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
@@ -92,10 +95,10 @@ namespace Urbexer.Services {
             return null;
         }
         // Pobierz lokacje z danej kategorii
-        public static async Task<List<int>> GetIdListByCategory(string category) {
-            // TODO Poprawić i przetestować to jak Marcin naprawi api
-            string json = string.Format("{{\"nazwa\": {0}}}", category);
-            string result = await SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaZKategorii", json);
+        public static async Task<List<int>> GetIdListByCategory(int categoryId) {
+            string path = "/api/place/pokazMiejscaZKategorii";
+            string args = "?id=" + categoryId;
+            string result = SendApiRequest(HttpMethod.Get, path + args).Result;
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId
