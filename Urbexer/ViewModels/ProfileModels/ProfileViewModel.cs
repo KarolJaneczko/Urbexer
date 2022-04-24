@@ -62,23 +62,13 @@ namespace Urbexer.ViewModels {
         public ICommand ClickedInstagram { protected set; get; }
         public ICommand ClickedYoutube { protected set; get; }
         public ICommand ClickedFacebook { protected set; get; }
-        public ICommand GetMyProfile { get; private set; }
         #endregion
         #region Konstruktory
         public ProfileViewModel() {
             ClickedInstagram = new Command(OnClickedInstagram);
             ClickedYoutube = new Command(OnClickedYoutube);
             ClickedFacebook = new Command(OnClickedFacebook);
-            if (UserInfo.IsLoggedIn) {
-                FillProfile(UserInfo.yourProfile);
-            } else {
-                GoBackCommand = new Command(async (x) => {
-                    if (await LogoutPopout()) {
-                        UserInfo.Logout();
-                        await Shell.Current.GoToAsync("WelcomePage");
-                    }
-                });
-            }
+            FillProfile(UserInfo.yourProfile);
         }
         #endregion
         #region Metody
