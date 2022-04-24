@@ -84,7 +84,7 @@
 
                         <Frame BackgroundColor="silver" 
                        CornerRadius="50" HorizontalOptions="Center">
-                            <Image Source="profile_icon.png"
+                            <Image Source="indianajones.png"
                            WidthRequest="100"
                            HeightRequest="100"
                            VerticalOptions="Center"/>
