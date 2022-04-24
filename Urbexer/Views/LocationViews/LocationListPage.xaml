@@ -32,11 +32,13 @@
             SearchCommand="{Binding FilterLocationsByNameCommand}"
             SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
         <CollectionView
+            x:Name="CollectionView"
             HorizontalOptions="End"
             ItemsSource="{Binding LocationsFiltered}"
             RemainingItemsThreshold="1"
             RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
-            SelectionChangedCommand="{Binding CardSelectedCommand}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single"
             VerticalOptions="CenterAndExpand">
             <CollectionView.EmptyView>
                 <StackLayout>
@@ -58,12 +60,17 @@
                                 HorizontalOptions="Start"
                                 Source="{Binding Thumbnail}"
                                 WidthRequest="100" />
-                            <StackLayout VerticalOptions="Center">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" VerticalOptions="Center" />
                                 <Label Text="{Binding Address}" VerticalOptions="Center" />
-                                <Label Text="{Binding Position.Latitude}" VerticalOptions="Center" />
-                                <Label Text="{Binding Position.Longitude}" VerticalOptions="Center" />
+                                <Label Text="{Binding Path=CategoryId, StringFormat='Kategoria: {0}'}" VerticalOptions="Center" />
                             </StackLayout>
+                            <Label
+                                Padding="15"
+                                HorizontalOptions="End"
+                                MinimumWidthRequest="100"
+                                Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                                VerticalOptions="Center" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

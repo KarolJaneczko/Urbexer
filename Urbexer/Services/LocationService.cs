@@ -10,8 +10,9 @@ using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
     public static class LocationService {
-        #region Zmienne
         // Klasa do pobierania lokacji i pobiązanych danych z bazy.
+
+        #region Zmienne
         private static readonly HttpClient httpClient;
         #endregion
 
@@ -33,51 +34,60 @@ namespace Urbexer.Services {
                 Content = new StringContent(json, Encoding.UTF8, "application/json"),
             };
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-                return response.Content.ReadAsStringAsync().Result;
-            }
-            return null;
+            return response.StatusCode == System.Net.HttpStatusCode.OK 
+                ? await response.Content.ReadAsStringAsync()
+                : null;
         }
 
         // Pobierz konkretną lokacje o danym id
-        public static async Task<Location> GetLocationById(int id) {
-            string json = string.Format("{{\"id\": {0}}}", id);
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscePoId", json).Result;
-            if (result == null) return null;
-            return new Location(JsonConvert.DeserializeObject<APILocation>(result));
+        public static async Task<Location> GetLocationById(int id, bool detailed = false) {
+            string path = "/api/place/pokazMiejscePoId";
+            string args = "?id=" + id;
+            string result = await SendApiRequest(HttpMethod.Get, path + args);
+            if (result == null)
+                return null;
+            return detailed
+                ? new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result))
+                : new Location(JsonConvert.DeserializeObject<APILocation>(result));
+
         }
         #endregion
 
-        #region ListyLokacji
         // Funkcje do pobierania list lokacji
-
+        #region ListyLokacji
         // Pobierz wszystkie lokacje z bazy danych
         public static async Task<List<Location>> GetLocationListAll() {
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/getall").Result;
+            string result = await SendApiRequest(HttpMethod.Get, "/api/place/getall");
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaZListy", json).Result;
-            return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result)); // TODO Uzupełnić
+            string result = await SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json);
+            return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         #endregion ListyLokacji
 
-        #region ListyId
         // Funkcje do pobierania list id lokacji
-
+        #region ListyId 
         // Pobierz lokacje w okolicy danej pozycji
-        public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius) {
+        // Flaga unvisitedOnly sprawia że zwracane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika
+        public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius, bool unvisitedOnly = false) {
             float deg = KmToDegrees(kmRadius);
-            string json = string.Format("{{" +
-                "\"wspolrzedneLATUser\": {0}," +
-                "\"wspolrzedneLNGUser\": {1}," +
-                "\"promien\": {2}}}",
+            string path = "/api/place/pokazMiejscaWPoblizu";
+            if (unvisitedOnly)
+                path += "BezOdwiedzonych";
+            string args = string.Format("?WspolrzedneLATUser={0}&WspolrzedneLNGUser={1}&Promien={2}",
                 latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            string result = SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaWPoblizu", json).Result;
-            return JsonConvert.DeserializeObject<List<int>>(result);
+            string result = await SendApiRequest(HttpMethod.Get, path + args);
+            // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
+            result = result.Trim(new char[] { '[', ']' });
+            List<int> output = new List<int>();
+            foreach (string id in result.Split(',')) {
+                output.Add(int.Parse(id));
+            }
+            return output;
         }
         // Pobierz lokacje z danego województwa
         public static async Task<List<int>> GetIdListByProvince(string province) {
@@ -85,10 +95,10 @@ namespace Urbexer.Services {
             return null;
         }
         // Pobierz lokacje z danej kategorii
-        public static async Task<List<int>> GetIdListByCategory(string category) {
-            // TODO Poprawić i przetestować to jak Marcin naprawi api
-            string json = string.Format("{{\"nazwa\": {0}}}", category);
-            string result = await SendApiRequest(HttpMethod.Get, "/api/urbex/pokazMiejscaZKategorii", json);
+        public static async Task<List<int>> GetIdListByCategory(int categoryId) {
+            string path = "/api/place/pokazMiejscaZKategorii";
+            string args = "?id=" + categoryId;
+            string result = await SendApiRequest(HttpMethod.Get, path + args);
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId
@@ -115,8 +125,8 @@ namespace Urbexer.Services {
         }
         #endregion Pomocnicze
 
-        #region Testowe
         // Poniższe funkcje są do testowania. Ostatecznie do usunięcia
+        #region Testowe
         private static Location GetTestLocation(int id) {
             string placeholder_image = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530";
 
