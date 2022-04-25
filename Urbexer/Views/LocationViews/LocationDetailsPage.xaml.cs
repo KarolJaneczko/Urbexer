@@ -1,4 +1,5 @@
-﻿using Urbexer.Services;
+﻿using System.Threading.Tasks;
+using Urbexer.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,9 +15,13 @@ namespace Urbexer.Views {
         protected override void OnAppearing() {
             base.OnAppearing();
 
+            Device.InvokeOnMainThreadAsync(async () => await SetBinding());
+        }
+
+        private async Task SetBinding() {
             // Pobierz dane i zbinduj do lokacji 
             int.TryParse(LocationId, out var id);
-            BindingContext = LocationService.GetLocationById(id, detailed: true).Result;
+            BindingContext = await LocationService.GetLocationById(id, detailed: true);
         }
     }
 }

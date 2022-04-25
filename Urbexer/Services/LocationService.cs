@@ -81,6 +81,8 @@ namespace Urbexer.Services {
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
             string result = await SendApiRequest(HttpMethod.Get, path + args);
+            if (result == null)
+                return null;
             // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
             result = result.Trim(new char[] { '[', ']' });
             List<int> output = new List<int>();
