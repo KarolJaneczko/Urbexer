@@ -6,25 +6,23 @@
              mc:Ignorable="d"
              x:Class="Urbexer.Views.RegisterPage"
              Shell.FlyoutItemIsVisible="False"
-              Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 
-
     <Grid>
-        <Image Source="background_image4"
-               Aspect="AspectFill"/>
+        <Image Source="background_image4" Aspect="AspectFill"/>
         <Frame Padding="0"
-                   HeightRequest="125"
-                   WidthRequest="125"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand"
-                   BackgroundColor="Transparent"
-                   CornerRadius="25"
-                   Margin="0,50,0, 600">
-            <Image Source="app_logo.png"
-                                 Aspect="AspectFill"/>
+               HeightRequest="125"
+               WidthRequest="125"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               BackgroundColor="Transparent"
+               CornerRadius="25"
+               Margin="0,50,0, 600">
+            <Image Source="app_logo.png" Aspect="AspectFill"/>
         </Frame>
+
         <BoxView>
             <BoxView.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -36,22 +34,20 @@
         </BoxView>
 
         <StackLayout Margin="30,200,30,0">
-
             <Frame BackgroundColor="#cfffffff"
-                       HeightRequest="500"
-                       CornerRadius="25"
-                       HorizontalOptions="FillAndExpand"
-                       HasShadow="True"
-                       BorderColor="black">
+                   HeightRequest="500"
+                   CornerRadius="25"
+                   HorizontalOptions="FillAndExpand"
+                   HasShadow="True"
+                   BorderColor="black">
                 <StackLayout>
                     <Label Text="Załóż konto" 
                            TextColor="Black" 
-                           FontSize="Medium" 
+                           FontSize="Title" 
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center" 
                            HorizontalOptions="Center"/>
-                    <StackLayout Margin="0,15,0,10" 
-                                 Spacing="0" >
+                    <StackLayout Margin="0,15,0,0" Spacing="0">
                         <Label Text="Login" 
                                TextDecorations="None"/>
                         <Frame BackgroundColor="#cfffffff"  
@@ -66,9 +62,7 @@
                                        WidthRequest="35"
                                        Padding="0" 
                                        Margin="5">
-                                    <Image Source="login_icon.png" 
-                                           Aspect="AspectFill" 
-                                           Margin="0"/>
+                                    <Image Source="login_icon.png" Aspect="AspectFill" Margin="0"/>
                                 </Frame>
                                 <Entry x:Name="Login" 
                                        Text="{Binding Login}" 
@@ -95,7 +89,6 @@
                                     <Image Source="email_icon.png" 
                                            Aspect="AspectFill"
                                            Margin="0"/>
-
                                 </Frame>
                                 <Entry x:Name="Email" 
                                        Text="{Binding Email}" 
@@ -160,15 +153,25 @@
 
                             </StackLayout>
                         </Frame>
+                        <Frame BackgroundColor="Transparent" Padding="0" Margin="0,10,0,0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Background="Transparent"
+                                       CornerRadius="50" 
+                                       HeightRequest="50" 
+                                       WidthRequest="100" 
+                                       Padding="0" 
+                                       Margin="0">
+                                    <CheckBox Color="#B52435" IsChecked="False" CheckedChanged="OnCheckBoxCheckedChanged"/>
+                                </Frame>
+                                <Label x:Name="Pxdd"
+                                       Text="Oświadczam, że jestem osobą pełnoletnią i mam ukończone 18 lat."
+                                       TextColor="Black"
+                                       HorizontalOptions="FillAndExpand" 
+                                       Margin="0,0,50,0"/>
+                            </StackLayout>
+                        </Frame>
                     </StackLayout>
-                    
-                    <!-- Disclaimer -->
-                    <StackLayout>
-                    <CheckBox IsChecked="False" 
-                              CheckedChanged="OnCheckBoxCheckedChanged"/>
-                        <Label Text="Oświadczam, że jestem osobą pełnoletnią i mam ukończone 18 lat."/>
-                    </StackLayout>
-                    
+
                     <!-- Przycisk do rejestracji konta -->
                     <Button Command="{Binding SubmitCommand}"
                             x:Name="RejestracjaPrzycisk"
@@ -177,31 +180,7 @@
                             BackgroundColor="#B52435"
                             TextColor="White" 
                             CornerRadius="25" 
-                            FontAttributes="Bold"
-                            IsEnabled="False"/>
-                    
-                    <!-- Przycisk do aktywacji konta -->
-                    <Button Clicked="GoToActivatePage"
-                            Text="Aktywacja konta"                                                       
-                            BorderColor="Black"                           
-                            BackgroundColor="#B52435"
-                            TextColor="White" 
-                            CornerRadius="25" 
                             FontAttributes="Bold"/>
-
-                    <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="CenterAndExpand"
-                                 Spacing="5"
-                                 Margin="0,0,0,0">
-                        <Label Text="Masz już konto?"
-                               HorizontalTextAlignment="Center" 
-                               VerticalTextAlignment="Center"/>
-                        <Button  Text="Zaloguj się" 
-                                 TextColor="#B52435" 
-                                 BackgroundColor="Transparent"
-                                 FontAttributes="Bold" 
-                                 Clicked="GoToSignIn"/>
-                    </StackLayout>
                     <StackLayout>
                         <Grid>
                             <BoxView BackgroundColor="#B52435"
@@ -217,14 +196,14 @@
                                    Padding="0" 
                                    Margin="0">
                                 <ImageButton Source="back_icon.png" 
-                                         Margin="0" 
-                                         WidthRequest="30"
-                                         HeightRequest="30" 
-                                         VerticalOptions="FillAndExpand" 
-                                         Clicked="GoBack" 
-                                         BackgroundColor="Transparent"
-                                         BorderColor="Black" 
-                                         CornerRadius="50"/>
+                                             Margin="0" 
+                                             WidthRequest="30"
+                                             HeightRequest="30" 
+                                             VerticalOptions="FillAndExpand" 
+                                             Clicked="GoBack" 
+                                             BackgroundColor="Transparent"
+                                             BorderColor="Black" 
+                                             CornerRadius="50"/>
                             </Frame>
                         </Grid>
                     </StackLayout>
@@ -232,5 +211,4 @@
             </Frame>
         </StackLayout>
     </Grid>
-
 </ContentPage>

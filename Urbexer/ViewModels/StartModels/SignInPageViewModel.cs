@@ -4,7 +4,7 @@ using Urbexer.Models;
 using Xamarin.Forms;
 using System.ComponentModel;
 using Urbexer.Models.ApiModels;
-using Urbexer.Views;
+using Urbexer.Services;
 
 namespace Urbexer.ViewModels {
     public class SignInPageViewModel : BaseViewModel {
@@ -28,13 +28,11 @@ namespace Urbexer.ViewModels {
         }
         public ICommand SubmitCommand { protected set; get; }
         #endregion
-
         #region Konstruktory
         public SignInPageViewModel() {
             SubmitCommand = new Command(OnSubmit);
         }
         #endregion
-
         #region Metody
         public async void OnSubmit() {
             try {
@@ -44,7 +42,8 @@ namespace Urbexer.ViewModels {
                     login = login,
                     password = password
                 }, httpClient) == true) {
-                    await Shell.Current.GoToAsync("/" + nameof(HomePage));
+                    UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
+                    await Shell.Current.GoToAsync("../../..//HomePage");
                 }
             }
             catch (AppException exception) {

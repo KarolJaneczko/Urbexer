@@ -6,11 +6,10 @@ namespace Urbexer.Views {
     public partial class RegisterPage : ContentPage {
         #region Konstruktory
         public RegisterPage() {
-            Routing.RegisterRoute(nameof(ActivatePage), typeof(ActivatePage));
             var vm = new RegisterPageModel();
             BindingContext = vm;
             InitializeComponent();
-
+            RejestracjaPrzycisk.IsEnabled = false;
             Login.Completed += (object sender, EventArgs e) => {
                 Email.Focus();
             };
@@ -25,13 +24,9 @@ namespace Urbexer.Views {
             };
         }
         #endregion
-
         #region Metody
         public void GoToSignIn(object sender, EventArgs e) {
             Shell.Current.GoToAsync(nameof(SignInPage));
-        }
-        public void GoToActivatePage(object sender, EventArgs e) {
-            Shell.Current.GoToAsync(nameof(ActivatePage));
         }
         public void GoBack(object sender, EventArgs e) {
             Shell.Current.GoToAsync(nameof(WelcomePage));

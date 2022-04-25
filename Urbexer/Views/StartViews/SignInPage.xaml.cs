@@ -20,7 +20,6 @@ namespace Urbexer.Views {
             };
         }
         #endregion
-
         #region Metody
         public void GoToSignUp(object sender, EventArgs e) {
             Shell.Current.GoToAsync(nameof(RegisterPage));

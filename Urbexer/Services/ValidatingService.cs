@@ -12,10 +12,10 @@ namespace Urbexer.Services {
                 throw new AppException("Login nie może być pusty.", AppExceptionTypeEnum.EmptyField);
             }
             else if (login.Length < 6) {
-                throw new AppException("Login jest za krótki.", AppExceptionTypeEnum.InvalidMinCredLength);
+                throw new AppException("Login nie może być krótszy niż 6 znaków.", AppExceptionTypeEnum.InvalidMinCredLength);
             }
             else if (login.Length > 30) {
-                throw new AppException("Login jest za długi.", AppExceptionTypeEnum.InvalidMaxCredLength);
+                throw new AppException("Login nie może być dłuższy niż 30 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
             else if (!CheckNoSpecialCharsExceptUnderscore(login)) {
                 throw new AppException("Login nie może mieć znaków specjalnych innych niż '_'.", AppExceptionTypeEnum.InvalidLoginFormat);
@@ -26,10 +26,10 @@ namespace Urbexer.Services {
                 throw new AppException("Email nie może być pusty.", AppExceptionTypeEnum.EmptyField);
             }
             else if (email.Length < 6) {
-                throw new AppException("Email jest za krótki.", AppExceptionTypeEnum.InvalidMinCredLength);
+                throw new AppException("Email nie może być krótszy niż 6 znaków.", AppExceptionTypeEnum.InvalidMinCredLength);
             }
             else if (email.Length > 30) {
-                throw new AppException("Email jest za długi.", AppExceptionTypeEnum.InvalidMaxCredLength);
+                throw new AppException("Email nie może być dłuższy niż 30 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
             else if (CheckMailFormat(email)) {
                 throw new AppException("Zły format adresu mailowego.", AppExceptionTypeEnum.InvalidMailFormat);
@@ -46,19 +46,7 @@ namespace Urbexer.Services {
                 throw new AppException("Hasło nie może być dłuższe niż 12 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
         }
-        public void ValidateActivatingToken(string activatingToken) {
-            if (string.IsNullOrEmpty(activatingToken)) {
-                throw new AppException("Hasło nie może być puste.", AppExceptionTypeEnum.EmptyField);
-            }
-            else if (activatingToken.Length != 5) {
-                throw new AppException("Token musi zawierać 5 znaków.", AppExceptionTypeEnum.InvalidLength);
-            }
-            else if (!CheckNoSpecialChars(activatingToken)) {
-                throw new AppException("Token nie może zawierać znaków specjalnych.", AppExceptionTypeEnum.InvalidDataFormat);
-            }
-        }
         #endregion
-
         #region Walidacje formatu wprowadzanych danych
         public static bool CheckMailFormat(string mail) {
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10})+)$");
@@ -85,7 +73,6 @@ namespace Urbexer.Services {
                 return false;
         }
         #endregion
-
         #region Walidacje techniczne
         public static bool CheckForInternetConnection() {
             if (!CrossConnectivity.Current.IsConnected)
@@ -132,7 +119,6 @@ namespace Urbexer.Services {
             }
         }
         #endregion
-
         #region Metody pomocnicze
         public async void DisplayError(string title, string message) {
             await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, message, "OK");

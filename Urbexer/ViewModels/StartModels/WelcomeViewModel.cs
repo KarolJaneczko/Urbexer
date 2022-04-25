@@ -6,13 +6,11 @@ namespace Urbexer.ViewModels {
         #region Zmienne
         public List<Onboarding> Onboardings { get; set; }
         #endregion
-
         #region Konstruktory
         public WelcomeViewModel() {
             Onboardings = GetOnboarding();
         }
         #endregion
-
         #region Metody
         private List<Onboarding> GetOnboarding() {
             return new List<Onboarding> {

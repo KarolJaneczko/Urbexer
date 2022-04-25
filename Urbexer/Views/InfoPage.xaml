@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="o nas - cienżka praca, sporo wyrzeczeń no pain no gain" FontSize="Title"/>
+                <Label Text="o nas :)" FontSize="Title"/>
             </StackLayout>
         </ScrollView>
     </Grid>

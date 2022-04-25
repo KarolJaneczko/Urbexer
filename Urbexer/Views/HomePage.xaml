@@ -1,15 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Urbexer.Views.HomePage"
-             >
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             x:Class="Urbexer.Views.HomePage">
 
     <StackLayout>
         <Label Text="Tu będzie feed" FontSize="Title"/>
+        <xct:Expander Tapped="OnExpanderTapped">
+            <xct:Expander.Header>
+                <Label Text="Przykładowy expander"
+                       FontAttributes="Bold"
+                       FontSize="Medium" />
+            </xct:Expander.Header>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Source="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Trollface_non-free.png/220px-Trollface_non-free.png"
+                       Aspect="AspectFill"
+                       HeightRequest="120" 
+                       WidthRequest="120" />
+                <Label Grid.Column="1"
+                       Text="bartek obrób wiesz sam co ;)"
+                       FontAttributes="Italic" />
+            </Grid>
+        </xct:Expander>
     </StackLayout>
-
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}"/>
-    </Shell.BackButtonBehavior>
-
 </ContentPage>
