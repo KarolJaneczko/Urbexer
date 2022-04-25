@@ -26,7 +26,7 @@ namespace Urbexer {
                 UserInfo.CheckedInternetConnection = false;
                 GetMyProfile();
                 System.Threading.Thread.Sleep(5);
-                Shell.Current.GoToAsync("//HomePage");
+                Shell.Current.GoToAsync("..//HomePage");
             }
             else
                 Shell.Current.GoToAsync(nameof(WelcomePage));

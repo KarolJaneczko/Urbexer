@@ -1,30 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
-             x:Class="Urbexer.Views.HomePage">
+<ContentPage
+    x:Class="Urbexer.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
+
+    <ContentPage.BindingContext>
+        <viewmodels:HomeViewModel />
+    </ContentPage.BindingContext>
 
     <StackLayout>
-        <Label Text="Tu będzie feed" FontSize="Title"/>
+        <Label FontSize="Title" Text="Tu będzie feed" />
         <xct:Expander Tapped="OnExpanderTapped">
             <xct:Expander.Header>
-                <Label Text="Przykładowy expander"
-                       FontAttributes="Bold"
-                       FontSize="Medium" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Przykładowy expander" />
             </xct:Expander.Header>
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Image Source="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Trollface_non-free.png/220px-Trollface_non-free.png"
-                       Aspect="AspectFill"
-                       HeightRequest="120" 
-                       WidthRequest="120" />
-                <Label Grid.Column="1"
-                       Text="bartek obrób wiesz sam co ;)"
-                       FontAttributes="Italic" />
+                <Image
+                    Aspect="AspectFill"
+                    HeightRequest="120"
+                    Source="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Trollface_non-free.png/220px-Trollface_non-free.png"
+                    WidthRequest="120" />
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Italic"
+                    Text="bartek obrób wiesz sam co ;)" />
             </Grid>
         </xct:Expander>
+        <CollectionView
+            FlowDirection="LeftToRight"
+            HorizontalOptions="Start"
+            ItemsSource="{Binding Locations}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single"
+            VerticalOptions="StartAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Margin="5"
+                        Padding="3"
+                        CornerRadius="10"
+                        VerticalOptions="FillAndExpand">
+                        <StackLayout x:DataType="models:Location" Orientation="Horizontal">
+                            <Image
+                                HorizontalOptions="Start"
+                                Source="{Binding Thumbnail}"
+                                WidthRequest="100" />
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" VerticalOptions="Center" />
+                                <Label Text="{Binding Address}" VerticalOptions="Center" />
+                                <Label Text="{Binding Path=CategoryId, StringFormat='Kategoria: {0}'}" VerticalOptions="Center" />
+                            </StackLayout>
+                            <Label
+                                Padding="15"
+                                HorizontalOptions="End"
+                                MinimumWidthRequest="100"
+                                Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>

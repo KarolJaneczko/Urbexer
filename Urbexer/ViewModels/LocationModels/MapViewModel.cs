@@ -13,7 +13,7 @@ using Urbexer.ViewModels.LocationModels;
 namespace Urbexer.ViewModels {
     internal class MapViewModel : BaseLocationViewModel{
         public MapViewModel() : base(){
-            InitializeLocations();
+            Task.Run(async () => await InitializeLocations());
         }
 
         // Funkcja do pierwotnego zapełnienia mapy
