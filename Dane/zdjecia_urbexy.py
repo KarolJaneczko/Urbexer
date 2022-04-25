@@ -10,17 +10,18 @@ placeholder_media_id = 411
 # używa jako placeholder gdy miejsce nie ma obrazka
 
 # Wybierz jeden i odkomentuj, reszte zakomentuj; kolejność od najmniejszego do największego
-#size = 'places-list-thumb' # 100x100	
+size = 'places-list-thumb' # 100x100	
 #size = 'thumbnail' # 220x220
 #size = 'medium'	
 #size = 'medium_large'
 #size = 'baza-wiedzy-featured-image'	
-size = 'full'	
+#size = 'full'	
 
 
 fieldnames = [
             'id',
             'media_id',
+            'media_nr',
             'width',
             'height',
             'mime_type',
@@ -63,6 +64,9 @@ with open(filename, 'w', newline='') as file:
             mime_type = ''
             source_url = ''
 
+            med_id = ''
+            med_nr = ''
+
 
             if not entry['ACF']['urbexy_featured_image']: 
                 print("ERROR: entry's JSON has no 'urbexy_featured_image' property, skipping")
@@ -73,61 +77,73 @@ with open(filename, 'w', newline='') as file:
                 skipped_entries += 1
                 continue
             else:
-                media_url = 'https://urbexy.pl/wp-json/wp/v2/media/' + str(entry['ACF']['urbexy_featured_image']) 
-                media_r = requests.get(url = media_url)
-                if media_r.status_code != 200: # błąd
-                    if media_r.status_code == 503: # 503 Service Unavailable, musimy poczekać 
-                        print("ERROR: media query status code 503, skipping")
-                        skipped_entries += 1
-                        continue
-                    elif media_r.status_code == 404: # 404 Not Found, zawartość mediów pod to id mediów nie istnieje mimo że jest wpisane w jsonie miejsca
-                        print("ERROR: media query status code 404, skipping")
-                        skipped_entries += 1
-                        continue
-                    else:
-                        print("CRITICAL ERROR: media query got status " + str(media_r.status_code) \
-                             + " which is different than 200")
-                        print(json.dumps(entry, indent=2))
-                        sys.exit(1)
-                if not media_r.json(): # pusty JSON
-                    print("CRITICAL ERROR: media query got empty JSON")
-                    sys.exit(1)
-                media_json = media_r.json()
-                if size not in media_json['media_details']['sizes']:
-                    print("ERROR: cannot get JSON of size "+ size +", skipping")
-                    skipped_entries += 1
-                    continue
-                image_json = media_json['media_details']['sizes'][size]
-                width = image_json['width']
-                height = image_json['height']
-                mime_type = image_json['mime_type']
-                source_url = image_json['source_url']
-                
-                response_file = requests.get(source_url)
-                if media_r.status_code != 200: # błąd
-                    print("CRITICAL ERROR: cannot download image at url", source_url)
-                    sys.exit(1)
-                if mime_type == 'image/png':
-                    file = open(os.path.join(dirname, str(entry['id']) + "_" + size + ".png"), "wb")
-                    file.write(response_file.content)
-                    file.close()
-                elif mime_type == 'image/jpeg':
-                    file = open(os.path.join(dirname, str(entry['id']) + "_" + size + ".jpg"), "wb")
-                    file.write(response_file.content)
-                    file.close()
-                else:
-                    print("CRITICAL ERROR: unknown image format", mime_type)
-                    sys.exit(1)
+                gallery_media_ids = []
+                if entry['ACF']['urbexy_gallery']:
+                    for gallery_image_json in entry['ACF']['urbexy_gallery']:
+                        gallery_media_ids.append(gallery_image_json['urbexy_foto'])
+                media_ids = gallery_media_ids
+                media_ids.insert(0, entry['ACF']['urbexy_featured_image'])
 
-            writer.writerow({
-                'id'         : entry['id'],
-                'media_id'   : entry['ACF']['urbexy_featured_image'],
-                'width'      : image_json['width'],
-                'height'     : image_json['height'],
-                'mime_type'  : image_json['mime_type'],
-                'source_url' : image_json['source_url']
-                })
-            
+                for media_nr, media_id in enumerate(media_ids, start = 0):
+                    media_url = 'https://urbexy.pl/wp-json/wp/v2/media/' + str(media_id) 
+                    media_r = requests.get(url = media_url)
+                    if media_r.status_code != 200: # błąd
+                        if media_r.status_code == 503: # 503 Service Unavailable, musimy poczekać 
+                            print("ERROR: media query status code 503, skipping")
+                            skipped_entries += 1
+                            continue
+                        elif media_r.status_code == 404: # 404 Not Found, zawartość mediów pod to id mediów nie istnieje mimo że jest wpisane w jsonie miejsca
+                            print("ERROR: media query status code 404, skipping")
+                            skipped_entries += 1
+                            continue
+                        else:
+                            print("CRITICAL ERROR: media query got status " + str(media_r.status_code) \
+                                + " which is different than 200")
+                            print(json.dumps(entry, indent=2))
+                            sys.exit(1)
+                    if not media_r.json(): # pusty JSON
+                        print("CRITICAL ERROR: media query got empty JSON")
+                        sys.exit(1)
+                    media_json = media_r.json()
+                    if size not in media_json['media_details']['sizes']:
+                        print("ERROR: cannot get JSON of size "+ size +", skipping")
+                        skipped_entries += 1
+                        continue
+                    image_json = media_json['media_details']['sizes'][size]
+                    width = image_json['width']
+                    height = image_json['height']
+                    mime_type = image_json['mime_type']
+                    source_url = image_json['source_url']
+
+                    med_id = media_id
+                    med_nr = media_nr
+                    
+                    response_file = requests.get(source_url)
+                    if media_r.status_code != 200: # błąd
+                        print("CRITICAL ERROR: cannot download image at url", source_url)
+                        sys.exit(1)
+                    if mime_type == 'image/png':
+                        file = open(os.path.join(dirname, str(entry['id']) + "_" + size + "_" + str(media_nr) + ".png"), "wb")
+                        file.write(response_file.content)
+                        file.close()
+                    elif mime_type == 'image/jpeg':
+                        file = open(os.path.join(dirname, str(entry['id']) + "_" + size + "_" + str(media_nr) + ".jpg"), "wb")
+                        file.write(response_file.content)
+                        file.close()
+                    else:
+                        print("CRITICAL ERROR: unknown image format", mime_type)
+                        sys.exit(1)
+
+                    writer.writerow({
+                        'id'         : entry['id'],
+                        'media_id'   : med_id,
+                        'media_nr'   : med_nr,
+                        'width'      : width,
+                        'height'     : height,
+                        'mime_type'  : mime_type,
+                        'source_url' : source_url
+                        })
+
             print("\rProcessing entry: {} ".format(total_entries), end='')
         page += 1
 
