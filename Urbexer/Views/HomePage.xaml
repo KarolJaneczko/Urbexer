@@ -1,14 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Urbexer.Views.HomePage">
+<ContentPage
+    x:Class="Urbexer.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels">
+
+    <ContentPage.BindingContext>
+        <viewmodels:HomeViewModel />
+    </ContentPage.BindingContext>
 
     <StackLayout>
-        <Label Text="Tu będzie feed" FontSize="Title"/>
+        <Label FontSize="Title" Text="Tu będzie feed" />
+        <CollectionView
+            FlowDirection="LeftToRight"
+            HorizontalOptions="Start"
+            ItemsSource="{Binding Locations}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single"
+            VerticalOptions="StartAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Margin="5"
+                        Padding="3"
+                        CornerRadius="10"
+                        VerticalOptions="FillAndExpand">
+                        <StackLayout x:DataType="models:Location" Orientation="Horizontal">
+                            <Image
+                                HorizontalOptions="Start"
+                                Source="{Binding Thumbnail}"
+                                WidthRequest="100" />
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" VerticalOptions="Center" />
+                                <Label Text="{Binding Address}" VerticalOptions="Center" />
+                                <Label Text="{Binding Path=CategoryId, StringFormat='Kategoria: {0}'}" VerticalOptions="Center" />
+                            </StackLayout>
+                            <Label
+                                Padding="15"
+                                HorizontalOptions="End"
+                                MinimumWidthRequest="100"
+                                Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 
+
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}"/>
+        <BackButtonBehavior Command="{Binding GoBackCommand}" />
     </Shell.BackButtonBehavior>
 
 </ContentPage>

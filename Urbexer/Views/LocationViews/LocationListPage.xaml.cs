@@ -10,13 +10,16 @@ namespace Urbexer.Views {
         }
 
         private void CollectionView_SelectionChanged(CollectionView sender, SelectionChangedEventArgs e) {
-            // To można zrobić komendą, ale nie wiem jak przekazać SelectedItem jako parametr do komendy
-            Location location = (Location)sender.SelectedItem;
-            int id = location.Id;
-            if (location.Id < 0) return; // Id powinno być nieujemne.
+            if (sender.SelectedItem == null)
+                return;
 
-            var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";
+            int locationId = ((Location)sender.SelectedItem).Id;
+            if (locationId < 0) return; // Id powinno być nieujemne.
+
+            var route = $"{nameof(LocationDetailsPage)}?LocationId={locationId}";
             Shell.Current.GoToAsync(route);
+
+            sender.SelectedItem = null;
         }
     }
 }
