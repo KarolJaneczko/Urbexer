@@ -11,10 +11,9 @@ namespace Urbexer.Views {
         }
         public List<Weather> Weathers { get => WeatherData(); }
 
-        private List<Weather> WeatherData()
-        {
+        private List<Weather> WeatherData() {
             var tempList = new List<Weather>();
-            tempList.Add(new Weather { Temp = "22", Date = "Sunday 16", Icon = "tunnel_icon" });
+            tempList.Add(new Weather { Temp = "22", Date = "Sunday 16", Icon = "hotel_icon" });
             tempList.Add(new Weather { Temp = "21", Date = "Monday 17", Icon = "tunnel_icon.png" });
             tempList.Add(new Weather { Temp = "20", Date = "Tuesday 18", Icon = "tunnel_icon.png" });
             tempList.Add(new Weather { Temp = "12", Date = "Wednesday 19", Icon = "tunnel_icon.png" });
@@ -25,8 +24,7 @@ namespace Urbexer.Views {
         }
     }
 
-    public class Weather
-    {
+    public class Weather {
         public string Temp { get; set; }
         public string Date { get; set; }
         public string Icon { get; set; }

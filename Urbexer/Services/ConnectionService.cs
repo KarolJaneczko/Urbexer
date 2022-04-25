@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
 using Newtonsoft.Json;
+using Urbexer.Models.UserModels;
 
 namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
@@ -12,12 +13,11 @@ namespace Urbexer.Services {
             UseProxy = false,
         };
         public HttpClient httpClient = new HttpClient(clientHandler);
+        public static HttpClient httpClient2 = new HttpClient(clientHandler);
         #endregion
-
         #region Konstruktory
         public ConnectionService() { }
         #endregion
-
         #region Requesty do API
         public async Task<bool> Login(Login login, HttpClient httpClient) {
             var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", SerializeToJson(login));
@@ -38,16 +38,14 @@ namespace Urbexer.Services {
             else
                 return false;
         }
-        public async Task<bool> ConfirmRegistration(ConfirmUser confirmUser, HttpClient httpClient) {
-            var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/account/confirm", SerializeToJson(confirmUser));
-            ValidateConnectionResult(result, OperationTypeEnum.AktywacjaKonta);
-            if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                return true;
+        public static async Task<ProfileData> GetProfileByLogin(string login, HttpClient httpClient) {
+            var result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/profile/pokazProfil?login=" + login).Result.Content.ReadAsStringAsync();
+            if (result == null)
+                return null;
             else
-                return false;
+                return new ProfileData(JsonConvert.DeserializeObject<APIProfile>(result));
         }
         #endregion
-
         #region Pomocnicze metody
         public StringContent SerializeToJson(object obj) {
             if (obj is null)

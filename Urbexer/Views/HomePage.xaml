@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels">
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
 
     <ContentPage.BindingContext>
         <viewmodels:HomeViewModel />
@@ -12,6 +13,29 @@
 
     <StackLayout>
         <Label FontSize="Title" Text="Tu będzie feed" />
+        <xct:Expander Tapped="OnExpanderTapped">
+            <xct:Expander.Header>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Przykładowy expander" />
+            </xct:Expander.Header>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Aspect="AspectFill"
+                    HeightRequest="120"
+                    Source="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Trollface_non-free.png/220px-Trollface_non-free.png"
+                    WidthRequest="120" />
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Italic"
+                    Text="bartek obrób wiesz sam co ;)" />
+            </Grid>
+        </xct:Expander>
         <CollectionView
             FlowDirection="LeftToRight"
             HorizontalOptions="Start"
@@ -48,10 +72,4 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </StackLayout>
-
-
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}" />
-    </Shell.BackButtonBehavior>
-
 </ContentPage>

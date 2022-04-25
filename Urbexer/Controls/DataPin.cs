@@ -9,7 +9,6 @@ namespace Urbexer.Models {
             propertyChanged: LocationIdPropertyChanged,
             defaultBindingMode: BindingMode.TwoWay);
         #endregion
-
         #region Metody
         private static void LocationIdPropertyChanged(BindableObject bindable, object oldValue, object newValue) {
             var pin = (DataPin)bindable;

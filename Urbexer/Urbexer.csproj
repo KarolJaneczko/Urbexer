@@ -18,7 +18,7 @@
 
 
   <ItemGroup>
-    <Compile Update="Views\EditProfilePage.xaml.cs">
+    <Compile Update="Views\ProfileViews\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\InfoPage.xaml.cs">
@@ -30,14 +30,11 @@
     <Compile Update="Views\LocationViews\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ProfilePage.xaml.cs">
+    <Compile Update="Views\ProfileViews\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LeaderboardPage.xaml.cs">
       <DependentUpon>LeaderboardPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\StartViews\ActivatePage.xaml.cs">
-      <DependentUpon>ActivatePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StartViews\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
@@ -52,7 +49,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EditProfilePage.xaml">
+    <EmbeddedResource Update="Views\ProfileViews\EditProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LocationViews\LocationDetailsPage.xaml">
