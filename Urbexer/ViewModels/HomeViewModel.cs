@@ -6,6 +6,8 @@ using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class HomeViewModel : BaseViewModel {
+
+        public bool IsExpanded { get; set; }
         public HomeViewModel() {
         }
     }

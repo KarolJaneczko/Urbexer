@@ -235,6 +235,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\wloczykij_avatar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\collapse_icon.png" />
+    <AndroidResource Include="Resources\drawable\expand_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pytajnik_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

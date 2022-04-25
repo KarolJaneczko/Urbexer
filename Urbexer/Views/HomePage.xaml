@@ -2,29 +2,144 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
-             x:Class="Urbexer.Views.HomePage">
+             x:Class="Urbexer.Views.HomePage"
+             Title="Strona Główna"
+             BackgroundColor="#777777">
 
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="Ikona" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#BF0603"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="Padding" Value="2"/>
+            </Style>
+            <Style x:Key="Collapsed" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="0"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="20,0,20,0"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                
+            </Style>
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="black" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="Expander" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="20"/>
+            </Style>
+            
+            <Style x:Key="GridUserInfo" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="*,*"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="ThemeStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="TextColor" Value="#363636"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+              
+                <Setter Property="FontFamily" Value="upper"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10,0"/>
+            </Style>
+            <Style x:Key="BottomThemeStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="#363636"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10,0"/>
+            </Style>
+            <Style x:Key="Info" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor" Value="#BF0603"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10,0"/>
+            </Style>
+            <Style x:Key="Ptaszek" TargetType="Image">
+                <Setter Property="Grid.Column" Value="3"/>
+                <Setter Property="HeightRequest" Value="35"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="0,0,5,0"/>
+            </Style>
+        
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
     <StackLayout>
-        <Label Text="Tu będzie feed" FontSize="Title"/>
-        <xct:Expander Tapped="OnExpanderTapped">
-            <xct:Expander.Header>
-                <Label Text="Przykładowy expander"
-                       FontAttributes="Bold"
-                       FontSize="Medium" />
-            </xct:Expander.Header>
-            <Grid Padding="10">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Trollface_non-free.png/220px-Trollface_non-free.png"
-                       Aspect="AspectFill"
-                       HeightRequest="120" 
-                       WidthRequest="120" />
-                <Label Grid.Column="1"
-                       Text="bartek obrób wiesz sam co ;)"
-                       FontAttributes="Italic" />
             </Grid>
+        
+        <xct:Expander Padding="10,0,10,0" AnimationLength="500">
+                <xct:Expander.Header>
+                    <Frame Style="{DynamicResource Expander}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame Style="{DynamicResource Ikona}"
+                               Grid.Column="0">
+                                <Image Source="pytajnik_icon"   
+                                   VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Czym jest urbex?"
+                               Grid.Column="1"
+                               Style="{DynamicResource ThemeStyle}"/>
+                            <Image Source="expand_icon.png" 
+                               Style="{DynamicResource Ptaszek}">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}},  Path=IsExpanded}">
+                                        <Setter Property="Source"
+                                Value="collapse_icon.png" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </Grid>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.ContentTemplate>
+                    <DataTemplate >
+                        <Grid Margin="20,0,20,0" Padding="10" BackgroundColor="#dd000000">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Frame Grid.Row="0" Margin="80,0,80,0" Padding="10">
+                                <Image Source="background_image1" Grid.Row="0"/>
+                            </Frame>
+
+                            <Label   FontFamily="Lobster-Regular" TextColor="silver" Grid.Row="1" FontSize="Medium" Text="Urbex (urban exploration), to eksploracja miejsc, 
+                                   które są efektem rozwoju ludzkiej cywilizacji; opuszczonych, zapomnianych, trudno dostępnych. Im obiekt jest bardziej tajemniczy, tym ciekawszy da eksploratora."
+                       FontAttributes="Bold" />
+                        </Grid>                      
+                    </DataTemplate>
+            </xct:Expander.ContentTemplate>
         </xct:Expander>
-    </StackLayout>
+
+         </StackLayout>
+    </ScrollView>
+
 </ContentPage>
