@@ -50,6 +50,7 @@ namespace Urbexer.Models {
         public double Distance { get; set; }
         public int CategoryId { get; set; }
         public int ProvinceId { get; set; }
+        public string CategoryIconPath { get; set; }
         #endregion
 
         #region Klasy
@@ -66,6 +67,7 @@ namespace Urbexer.Models {
             Id = apiLocation.id;
             CategoryId = apiLocation.kategoriaId;
             ProvinceId = apiLocation.wojewodztwoId;
+            CategoryIconPath = GetCategoryIconPath(CategoryId);
             RecalculateDistance();
 
             if (apiLocation.zdjecie != null) {
@@ -95,6 +97,51 @@ namespace Urbexer.Models {
         private static double DegreesToKm(double degrees) {
             // 1 stopień to ok 111.111km
             return 111.111 * degrees;
+        }
+        private string GetCategoryIconPath(int id) {
+            string output = "";
+            switch (id) {
+                case 1:
+                    output += "railway_icon.png";
+                    break;
+                case 2:
+                    output += "hotel_icon.png";
+                    break;
+                case 3:
+                    output += "house_icon.png";
+                    break;
+                case 4:
+                    output += "industrial_icon.png";
+                    break;
+                case 5:
+                    output += "restaurant_icon.png";
+                    break;
+                case 6:
+                    output += "farm_icon.png";
+                    break;
+                case 7:
+                    output += "castle_icon.png";
+                    break;
+                case 8:
+                    output += "underground_icon.png";
+                    break;
+                case 9:
+                    output += "office_icon.png";
+                    break;
+                case 10:
+                    output += "military_icon.png";
+                    break;
+                case 11:
+                    output += "hospital_icon.png";
+                    break;
+                case 12:
+                    output += "tunnel_icon.png";
+                    break;
+                case 13:
+                    output += "other_icon.png";
+                    break;
+            }
+            return output;
         }
         #endregion
     }

@@ -15,7 +15,7 @@ namespace Urbexer.Views {
         protected override void OnAppearing() {
             base.OnAppearing();
 
-            Task.Run(async() => await SetBinding());
+            Device.InvokeOnMainThreadAsync(async () => await SetBinding());
         }
 
         private async Task SetBinding() {
