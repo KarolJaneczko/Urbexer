@@ -27,8 +27,11 @@ namespace Urbexer.Views {
 
                 // Pokaż odpowiednią karte lokacji
                 LocationInfo.IsVisible = true;
-                LocationInfo.BindingContext = LocationService.GetLocationById(value).Result;
+                Device.InvokeOnMainThreadAsync(async () => await SetPinBinding());
             }
+        }
+        private async Task SetPinBinding() {
+            LocationInfo.BindingContext = await LocationService.GetLocationById(currentPinId);
         }
 
         public MapPage() {
@@ -70,7 +73,7 @@ namespace Urbexer.Views {
         }
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
-            //e.HideInfoWindow = true;
+            e.HideInfoWindow = true;
             DataPin pin = sender as DataPin;
             CurrentPinId = pin.LocationId;
         }
