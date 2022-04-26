@@ -19,7 +19,8 @@ namespace Urbexer.ViewModels {
         // Funkcja do pierwotnego zapełnienia mapy
         protected async Task InitializeLocations() {
             var location = await Geolocation.GetLastKnownLocationAsync();
-            List<int> idList = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, 20);
+            int range = 100;
+            List<int> idList = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, range);
             LocationsFiltered.Add(new ObservableRangeCollection<Location>(await LocationService.GetLocationListByIds(idList)));
 
             ClearFilter();
