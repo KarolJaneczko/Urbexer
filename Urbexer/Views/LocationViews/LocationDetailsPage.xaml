@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    Title="{Binding Description}">
+    Title="{Binding Name}"
+    x:DataType="models:LocationDetailed">
 
     <!--  Strona wyświetlania po kliknięciu w karte lokacji. Wyświetla szczegóły dotyczące danej lokacji.  -->
 
@@ -13,6 +14,7 @@
             <StackLayout>
                 <CarouselView
                     x:Name="ImageCarousel"
+                    BackgroundColor="Red"
                     HeightRequest="250"
                     ItemsSource="{Binding ImageLinks}"
                     VerticalOptions="Start">
@@ -22,13 +24,36 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <StackLayout x:DataType="models:Location" VerticalOptions="FillAndExpand">
-                    <Label Text="{Binding Name}" />
-                    <Label Text="{Binding Address}" />
-                    <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
-                    <!--  wstawić tutaj miejsce na recenzje?  -->
+                <AbsoluteLayout HeightRequest="250">
+                    <!--  AbsoluteLayout jest tylko po to żeby obrazek był tłem. Jeżeli to zmieniasz to usuń AbsoluteLayout  -->
+                    <StackLayout Padding="10" VerticalOptions="StartAndExpand">
+                        <!--  opis, adres itd, wszystko co nie jest zdjęciami ani recenzjami  -->
+                        <Label Text="{Binding Description}" />
+                        <Label FontSize="25" Text="Adres:" />
+                        <Label FontSize="15" Text="{Binding Address}" />
+                        <Label Text="{Binding Path=ProvinceId, StringFormat='Id województwa(placeholder): {0}'}" />
+                    </StackLayout>
+                    <Image
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HeightRequest="100"
+                        HorizontalOptions="FillAndExpand"
+                        Opacity="0.15"
+                        Source="{Binding CategoryIconPath}" />
+                </AbsoluteLayout>
+                <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
+                <StackLayout BackgroundColor="Gray" VerticalOptions="StartAndExpand">
+                    <!--  przerobić to na collectionview i tutaj będą recenzje  -->
+                    <Label Text="Tutaj będą recenzje" />
+                    <Label Text="Tutaj będą recenzje" />
+                    <Label Text="Tutaj będą recenzje" />
+                    <Label Text="Tutaj będą recenzje" />
+                    <Label Text="Tutaj będą recenzje" />
+                    <Label Text="Tutaj będą recenzje" />
+                    <Label Text="Tutaj będą recenzje" />
                 </StackLayout>
             </StackLayout>
+
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
