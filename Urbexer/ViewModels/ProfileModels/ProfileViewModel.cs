@@ -10,7 +10,7 @@ using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
-    public class ProfileViewModel : BaseViewModel {
+    public class ProfileViewModel : BaseViewModel, INotifyPropertyChanged {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private static string profileAvatarSource, profileLogin, profilePosition, profileDescription, profileFirstName, profileLastName, profileVisitedPlaces;
@@ -31,35 +31,35 @@ namespace Urbexer.ViewModels {
         public string ProfilePosition {
             get { return profilePosition; }
             set {
-                profileLogin = value;
+                profilePosition = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfilePosition"));
             }
         }
         public string ProfileDescription {
             get { return profileDescription; }
             set {
-                profileLogin = value;
+                profileDescription = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileDescription"));
             }
         }
         public string ProfileFirstName {
             get { return profileFirstName; }
             set {
-                profileLogin = value;
+                profileFirstName = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileFirstName"));
             }
         }
         public string ProfileLastName {
             get { return profileLastName; }
             set {
-                profileLogin = value;
+                profileLastName = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileLastName"));
             }
         }
         public string ProfileVisitedPlaces {
             get { return profileVisitedPlaces; }
             set {
-                profileLogin = value;
+                profileVisitedPlaces = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileVisitedPlaces"));
             }
         }
@@ -83,28 +83,29 @@ namespace Urbexer.ViewModels {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
                 profilePosition = "Miejsce w rankingu #" + profileData.LeaderboardPosition.ToString();
-                profileDescription = profileData.Description;
-                profileFirstName = profileData.FirstName;
-                profileLastName = profileData.LastName;
+                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileDescription;
+                profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
+                profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
             }
         }
         public void OnClickedInstagram() {
-            if (UserInfo.yourProfile.InstagramLink != null) {
+            if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
                 Device.OpenUri(new Uri(UserInfo.yourProfile.InstagramLink));
             }
         }
         public void OnClickedYoutube() {
-            if (UserInfo.yourProfile.YoutubeLink != null) {
+            if (!string.IsNullOrEmpty(UserInfo.yourProfile.YoutubeLink)) {
                 Device.OpenUri(new Uri(UserInfo.yourProfile.YoutubeLink));
             }
         }
         public void OnClickedFacebook() {
-            if (UserInfo.yourProfile.FacebookLink != null) {
+            if (!string.IsNullOrEmpty(UserInfo.yourProfile.FacebookLink)) {
                 Device.OpenUri(new Uri(UserInfo.yourProfile.FacebookLink));
             }
         }
         public void OnClickedEdit() {
+            EditProfileViewModel.FillEdit(UserInfo.yourProfile);
             Shell.Current.GoToAsync(nameof(EditProfilePage));
         }
         // Jeśli dodamy miejsce do odwiedzonych lub ranking się odświeży po jakimś okresie to wywołujemy metodę.
@@ -129,8 +130,9 @@ namespace Urbexer.ViewModels {
                 case (int)LayoutTypeEnum.Wloczykij:
                     return "wloczykij_avatar.png";
                 default:
-                    return "";
+                    break;
             }
+            return "";
         }
         #endregion
     }

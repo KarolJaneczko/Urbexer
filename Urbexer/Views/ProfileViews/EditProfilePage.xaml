@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="Urbexer.Views.EditProfilePage">
+             x:Class="Urbexer.Views.EditProfilePage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -93,16 +93,20 @@
             </Grid>
         </Frame>
         <Frame BorderColor="#363636" Margin="10,0,10,0" Grid.Row="2" CornerRadius="10" Padding="8">
-            <Picker Title="Wybierz profesję" TitleColor="Black">
-                <Picker.Items>
-                    <x:String>Domyślny</x:String>
-                    <x:String>Fotograf</x:String>
-                    <x:String>Historyk</x:String>
-                    <x:String>Łowca przygód</x:String>
-                    <x:String>Obieżyświat</x:String>
-                    <x:String>Poszukiwacz</x:String>
-                    <x:String>Włóczykij</x:String>
-                </Picker.Items>
+            <Picker Title="Wybierz profesję" 
+                    TitleColor="Black"
+                    SelectedItem="{Binding EditLayout}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Domyślny</x:String>
+                        <x:String>Fotograf</x:String>
+                        <x:String>Historyk</x:String>
+                        <x:String>Łowca przygód</x:String>
+                        <x:String>Obieżyświat</x:String>
+                        <x:String>Poszukiwacz</x:String>
+                        <x:String>Włóczykij</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
             </Picker>
         </Frame>
         <Frame Style="{StaticResource UserInfoStyle}">
@@ -152,9 +156,6 @@
                 <Image Source="instagram_icon" Style="{StaticResource SocialIcon}"/>
             </Grid>
         </Frame>
-
-
-        <Button Text="ZAPISZ"/>
+        <Button Text="ZAPISZ" Command="{Binding SubmitEdit}" IsEnabled="True"/>
     </StackLayout>
-
 </ContentPage>
