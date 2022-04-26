@@ -83,28 +83,29 @@ namespace Urbexer.ViewModels {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
                 profilePosition = "Miejsce w rankingu #" + profileData.LeaderboardPosition.ToString();
-                profileDescription = profileData.Description;
-                profileFirstName = profileData.FirstName;
-                profileLastName = profileData.LastName;
+                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileDescription;
+                profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
+                profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
             }
         }
         public void OnClickedInstagram() {
-            if (UserInfo.yourProfile.InstagramLink != null) {
+            if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
                 Device.OpenUri(new Uri(UserInfo.yourProfile.InstagramLink));
             }
         }
         public void OnClickedYoutube() {
-            if (UserInfo.yourProfile.YoutubeLink != null) {
+            if (!string.IsNullOrEmpty(UserInfo.yourProfile.YoutubeLink)) {
                 Device.OpenUri(new Uri(UserInfo.yourProfile.YoutubeLink));
             }
         }
         public void OnClickedFacebook() {
-            if (UserInfo.yourProfile.FacebookLink != null) {
+            if (!string.IsNullOrEmpty(UserInfo.yourProfile.FacebookLink)) {
                 Device.OpenUri(new Uri(UserInfo.yourProfile.FacebookLink));
             }
         }
         public void OnClickedEdit() {
+            EditProfileViewModel.FillEdit(UserInfo.yourProfile);
             Shell.Current.GoToAsync(nameof(EditProfilePage));
         }
         // Jeśli dodamy miejsce do odwiedzonych lub ranking się odświeży po jakimś okresie to wywołujemy metodę.
@@ -129,8 +130,9 @@ namespace Urbexer.ViewModels {
                 case (int)LayoutTypeEnum.Wloczykij:
                     return "wloczykij_avatar.png";
                 default:
-                    return "";
+                    break;
             }
+            return "";
         }
         #endregion
     }

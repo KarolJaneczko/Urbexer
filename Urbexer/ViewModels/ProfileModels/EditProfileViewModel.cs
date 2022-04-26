@@ -1,10 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Input;
+using Urbexer.Models;
+using Urbexer.Models.UserModels;
+using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class EditProfileViewModel : BaseViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        private string editDescription, editFirstName, editLastName, editFacebook, editYoutube, editInstagram;
+        private static string editDescription, editFirstName, editLastName, editFacebook, editYoutube, editInstagram, editLayout;
         public string EditDescription {
             get { return editDescription; }
             set {
@@ -47,9 +52,43 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("EditInstagram"));
             }
         }
+        public string EditLayout {
+            get { return editLayout; }
+            set {
+                editLayout = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("EditLayout"));
+            }
+        }
+        public ICommand SubmitEdit { protected set; get; }
         #endregion
         public EditProfileViewModel() {
-
+            SubmitEdit = new Command(OnSubmit);
+        }
+        public void OnSubmit() {
+            try {
+                ValidateLength(EditFirstName, "Imię", "e", 20);
+                ValidateLength(EditLastName, "Nazwisko", "e", 20);
+                ValidateLength(EditDescription, "Opis", "y", 255);
+                ValidateLink("facebook", EditFacebook);
+                ValidateLink("youtube", EditYoutube);
+                ValidateLink("instagram", EditInstagram);
+                var layout = ProfileData.GetLayoutNumberFromName(EditLayout);
+            }
+            catch (AppException exception) {
+                DisplayError(exception.title, exception.message);
+            }
+            catch (Exception exception) {
+                DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
+            }
+        }
+        public static void FillEdit(ProfileData myProfile) {
+            editDescription = myProfile.Description;
+            editFirstName = myProfile.FirstName;
+            editLastName = myProfile.LastName;
+            editFacebook = myProfile.FacebookLink;
+            editYoutube = myProfile.YoutubeLink;
+            editInstagram = myProfile.InstagramLink;
+            editLayout = ProfileData.GetLayoutNameFromNumber(myProfile.ProfileLayout);
         }
     }
 }

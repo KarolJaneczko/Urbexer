@@ -13,6 +13,6 @@ namespace Urbexer.Models {
         RegistrationError = 8,
         InvalidLength = 9,
         InvalidDataFormat = 10,
-        ActivateAccountError = 11,
+        ActivateAccountError = 11
     }
 }

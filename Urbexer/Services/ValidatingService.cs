@@ -46,6 +46,31 @@ namespace Urbexer.Services {
                 throw new AppException("Hasło nie może być dłuższe niż 12 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
         }
+        public void ValidateLength(string word, string field, string suffix, int max, int? min = null) {
+            if (word.Length > max) {
+                throw new AppException(field + " nie może być dłuższ" + suffix + " niż " + max + " znaków.", AppExceptionTypeEnum.InvalidLength);
+            }
+            else if (min.HasValue) {
+                if (word.Length < min.Value) {
+                    throw new AppException(field + " nie może być krótsz" + suffix + " niż " + min.Value + " znaków.", AppExceptionTypeEnum.InvalidLength);
+                }
+            }
+        }
+        public void ValidateLink(string site, string link) {
+            if (!string.IsNullOrEmpty(link)) {
+                Regex regex = new Regex(@"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
+                Match match = regex.Match(link);
+                if (!match.Success) {
+                    throw new AppException("Nieprawidłowy format wprowadzonego linku.", AppExceptionTypeEnum.InvalidDataFormat);
+                }
+                else {
+                    var temp = link.ToLower();
+                    if (!temp.Contains(site + ".com")) {
+                        throw new AppException("Nieprawidłowy format wprowadzonego linku.", AppExceptionTypeEnum.InvalidDataFormat);
+                    }
+                }
+            }
+        }
         #endregion
         #region Walidacje formatu wprowadzanych danych
         public static bool CheckMailFormat(string mail) {
