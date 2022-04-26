@@ -8,5 +8,8 @@ namespace Urbexer.Views {
             Routing.RegisterRoute(nameof(EditProfilePage), typeof(EditProfilePage));
             BindingContext = new ProfileViewModel();
         }
+        protected override void OnAppearing() {
+            BindingContext = new ProfileViewModel();
+        }
     }
 }

@@ -64,7 +64,7 @@ namespace Urbexer.ViewModels {
         public EditProfileViewModel() {
             SubmitEdit = new Command(OnSubmit);
         }
-        public void OnSubmit() {
+        public async void OnSubmit() {
             try {
                 ValidateLength(EditFirstName, "Imię", "e", 20);
                 ValidateLength(EditLastName, "Nazwisko", "e", 20);
@@ -73,6 +73,14 @@ namespace Urbexer.ViewModels {
                 ValidateLink("youtube", EditYoutube);
                 ValidateLink("instagram", EditInstagram);
                 var layout = ProfileData.GetLayoutNumberFromName(EditLayout);
+                if (await connectionService.UpdateProfile(new Models.ApiModels.APIedytujProfil(UserInfo.Login, EditFirstName,
+                    EditLastName, EditDescription, EditFacebook, EditInstagram, EditYoutube, layout), httpClient)) {
+                    await ProfileViewModel.RefreshProfileAsync();
+                    await Shell.Current.GoToAsync("..");
+                }
+                else {
+                    DisplayError("Błąd aktualizacji profilu", "Wystąpił błąd podczas połączenia z serwerem.");
+                }
             }
             catch (AppException exception) {
                 DisplayError(exception.title, exception.message);

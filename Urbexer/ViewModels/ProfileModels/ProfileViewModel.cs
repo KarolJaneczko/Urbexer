@@ -10,7 +10,7 @@ using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
-    public class ProfileViewModel : BaseViewModel {
+    public class ProfileViewModel : BaseViewModel, INotifyPropertyChanged {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private static string profileAvatarSource, profileLogin, profilePosition, profileDescription, profileFirstName, profileLastName, profileVisitedPlaces;
@@ -31,35 +31,35 @@ namespace Urbexer.ViewModels {
         public string ProfilePosition {
             get { return profilePosition; }
             set {
-                profileLogin = value;
+                profilePosition = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfilePosition"));
             }
         }
         public string ProfileDescription {
             get { return profileDescription; }
             set {
-                profileLogin = value;
+                profileDescription = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileDescription"));
             }
         }
         public string ProfileFirstName {
             get { return profileFirstName; }
             set {
-                profileLogin = value;
+                profileFirstName = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileFirstName"));
             }
         }
         public string ProfileLastName {
             get { return profileLastName; }
             set {
-                profileLogin = value;
+                profileLastName = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileLastName"));
             }
         }
         public string ProfileVisitedPlaces {
             get { return profileVisitedPlaces; }
             set {
-                profileLogin = value;
+                profileVisitedPlaces = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileVisitedPlaces"));
             }
         }

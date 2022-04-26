@@ -5,6 +5,7 @@ using Urbexer.Models;
 using Urbexer.Models.ApiModels;
 using Newtonsoft.Json;
 using Urbexer.Models.UserModels;
+using System.Net.Http.Headers;
 
 namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
@@ -44,6 +45,13 @@ namespace Urbexer.Services {
                 return null;
             else
                 return new ProfileData(JsonConvert.DeserializeObject<APIProfile>(result));
+        }
+        public async Task<bool> UpdateProfile(APIedytujProfil request, HttpClient httpClient) {
+            var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/profile/edytujProfil", SerializeToJson(request));
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                return true;
+            else
+                return false;
         }
         #endregion
         #region Pomocnicze metody
