@@ -113,7 +113,7 @@ namespace Urbexer.ViewModels {
             UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
             FillProfile(UserInfo.yourProfile);
         }
-        private static string GetAvatarByLayout(int layout) {
+        public static string GetAvatarByLayout(int layout) {
             switch (layout) {
                 case (int)LayoutTypeEnum.Default:
                     return "fotograf_avatar.png";

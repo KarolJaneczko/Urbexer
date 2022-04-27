@@ -87,7 +87,8 @@
                       
                     <Picker Title="D Developer" Grid.Column="2"
                     TitleColor="Black"               
-                    SelectedItem="{Binding EditLayout}">
+                    SelectedItem="{Binding EditLayout}" 
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Domyślny</x:String>
