@@ -56,6 +56,10 @@ namespace APIpz.Services
             {
                 profil.Nazwisko = dto.Nazwisko;
             }
+            if (dto.Opis != null)
+            {
+                profil.Opis = dto.Opis;
+            }
             if (dto.LinkFacebook != null)
             {
                 profil.LinkFacebook = dto.LinkFacebook;
