@@ -4,8 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    Title="{Binding Name}"
-    >
+    Title="{Binding Name}">
 
     <!--  Strona wyświetlania po kliknięciu w karte lokacji. Wyświetla szczegóły dotyczące danej lokacji.  -->
 
@@ -24,7 +23,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <AbsoluteLayout HeightRequest="250" x:DataType="models:LocationDetailed">
+                <AbsoluteLayout x:DataType="models:LocationDetailed" HeightRequest="250">
                     <!--  AbsoluteLayout jest tylko po to żeby obrazek był tłem. Jeżeli to zmieniasz to usuń AbsoluteLayout  -->
                     <StackLayout Padding="10" VerticalOptions="StartAndExpand">
                         <!--  opis, adres itd, wszystko co nie jest zdjęciami ani recenzjami  -->
@@ -41,19 +40,24 @@
                         Opacity="0.15"
                         Source="{Binding CategoryIconPath}" />
                 </AbsoluteLayout>
+                <Button Pressed="Button_Pressed" Text="Dodaj recenzje" />
                 <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
-                <StackLayout BackgroundColor="Gray" VerticalOptions="StartAndExpand">
-                    <!--  przerobić to na collectionview i tutaj będą recenzje  -->
-                    <Label Text="Tutaj będą recenzje" />
-                    <Label Text="Tutaj będą recenzje" />
-                    <Label Text="Tutaj będą recenzje" />
-                    <Label Text="Tutaj będą recenzje" />
-                    <Label Text="Tutaj będą recenzje" />
-                    <Label Text="Tutaj będą recenzje" />
-                    <Label Text="Tutaj będą recenzje" />
-                </StackLayout>
+                <CollectionView
+                    x:DataType="models:LocationDetailed"
+                    BackgroundColor="Gray"
+                    ItemsSource="{Binding Reviews}"
+                    VerticalOptions="StartAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Review">
+                            <StackLayout>
+                                <Label Text="{Binding UserName}" />
+                                <Label Text="{Binding Score}" />
+                                <Label Text="{Binding Message}" VerticalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
-
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

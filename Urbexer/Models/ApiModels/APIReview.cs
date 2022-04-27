@@ -7,6 +7,6 @@ namespace Urbexer.Models.ApiModels {
         public string ktoOdwiedzil;
         public string miejsce;
         public int ocena;
-        public string tekst;
+        public string? tekst;
     }
 }

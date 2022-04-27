@@ -4,7 +4,7 @@ using System.Text;
 using Urbexer.Models.ApiModels;
 
 namespace Urbexer.Models {
-    internal class Review {
+    public class Review {
         // Klasa reprezentująca opinię o miejscu
         public string UserName { get; set; }
         public int Score { get; set; }

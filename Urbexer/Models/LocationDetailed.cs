@@ -8,6 +8,7 @@ namespace Urbexer.Models {
     public class LocationDetailed : Location{
         public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
         public string Description { get; set; }
+        public List<Review> Reviews { get; set; }
         public class ImageLink {
             // To istnieje, bo z jakiegoś powodu nie mogłem bindować CarouselView z obarazmi do kolekcji stringów
             // Natomiast jeżeli stworzyłem klasę która przechowuje string i binduję do kolekcji tej klasy to działa

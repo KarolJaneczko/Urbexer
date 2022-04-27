@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Urbexer.Services;
+using Urbexer.Views.LocationViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,6 +23,11 @@ namespace Urbexer.Views {
             // Pobierz dane i zbinduj do lokacji 
             int.TryParse(LocationId, out var id);
             BindingContext = await LocationService.GetLocationById(id, detailed: true);
+        }
+
+        private void Button_Pressed(object sender, System.EventArgs e) {
+            var route = $"{nameof(WriteReviewPage)}?LocationId={LocationId}";
+            Shell.Current.GoToAsync(route);
         }
     }
 }
