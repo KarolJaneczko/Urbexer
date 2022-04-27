@@ -4,7 +4,7 @@ namespace APIpz.Models
 {
     public class DodajOpinieDto
     {
-        public string Odwiedzony { get; set; }
+        public int Id { get; set; }
 
         public int Ocena { get; set; } // może w gwiazdkach lub opisowo
 
