@@ -117,7 +117,7 @@ namespace APIpz.Services
 
         public PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto)
         {
-            var zapytanie = _context.Opinia.Where(o => o.Odwiedzony.OdwiedzonyUrbex.Nazwa == dto.NazwaMiejsca);
+            var zapytanie = _context.Opinia.Where(o => o.Odwiedzony.OdwiedzonyUrbex.Id == dto.Id);
 
 
             var opinie = zapytanie
