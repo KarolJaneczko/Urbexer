@@ -4,8 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    Title="{Binding Name}"
-    x:DataType="models:LocationDetailed">
+    
+    Title="{Binding Name}">
 
     <!--  Strona wyświetlania po kliknięciu w karte lokacji. Wyświetla szczegóły dotyczące danej lokacji.  -->
 
@@ -24,7 +24,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <AbsoluteLayout HeightRequest="250">
+                <AbsoluteLayout HeightRequest="250"  x:DataType="models:LocationDetailed">
                     <!--  AbsoluteLayout jest tylko po to żeby obrazek był tłem. Jeżeli to zmieniasz to usuń AbsoluteLayout  -->
                     <StackLayout Padding="10" VerticalOptions="StartAndExpand">
                         <!--  opis, adres itd, wszystko co nie jest zdjęciami ani recenzjami  -->
