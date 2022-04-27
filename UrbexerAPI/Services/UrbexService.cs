@@ -101,7 +101,7 @@ namespace APIpz.Services
         public void DodajOpinie(DodajOpinieDto dto)
         {
             var odwiedzony = _context.Odwiedzone.
-                FirstOrDefault(o => o.OdwiedzonyUrbex.Nazwa == dto.Odwiedzony && o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
+                FirstOrDefault(o => o.OdwiedzonyUrbex.Id == dto.Id && o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
             _context.Attach(odwiedzony);
 
             var nowaOpinia = new Opinia()
