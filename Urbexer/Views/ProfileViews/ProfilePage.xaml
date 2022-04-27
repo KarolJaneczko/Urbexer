@@ -86,7 +86,7 @@
                     </Frame>
                 </Grid>
                 <!--Login-->
-                <Label Text="{Binding ProfileLogin}" TextColor="Silver" FontSize="22" HorizontalOptions="Center"/>
+                <Label Text="{Binding ProfileLogin}" FontFamily="Bree" TextColor="Silver" FontSize="22" HorizontalOptions="Center"/>
                 <!--Pozycja w rankingu-->
                 <Label Text="{Binding ProfilePosition}" TextColor="White" FontSize="17" HorizontalOptions="Center"/>
             </StackLayout>
