@@ -21,7 +21,7 @@
             <Style x:Key="CategoryFrame" TargetType="Frame">
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="CornerRadius" Value="30"></Setter>
-                <Setter Property="BackgroundColor" Value="#bf0603"/>
+                <Setter Property="BackgroundColor" Value="#ff0603"/>
             </Style>
             <Style x:Key="CategoryIcon" TargetType="ImageButton">
                 <Setter Property="HorizontalOptions" Value="Center" />
