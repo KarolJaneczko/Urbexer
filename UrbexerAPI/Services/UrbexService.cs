@@ -14,6 +14,7 @@ namespace APIpz.Services
         PageResult<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
         void DodajOpinie(DodajOpinieDto dto);
         PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto);
+        int IluLudziOdwiedziloMiejsce(IluLudziOdwiedziloMiejsceDto dto);
 
     }
     public class UrbexService : IUrbexService
@@ -132,6 +133,12 @@ namespace APIpz.Services
             var result = new PageResult<OpiniaDto>(opinieDtos, totalitemsCount, dto.PageSize, dto.PageNumber);
             return result;
             
+        }
+
+        public int IluLudziOdwiedziloMiejsce(IluLudziOdwiedziloMiejsceDto dto)
+        {
+            var ile = _context.Odwiedzone.Where(i => i.OdwiedzonyUrbex.Id == dto.Id).Count();
+            return ile;
         }
     }
 }
