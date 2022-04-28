@@ -5,7 +5,6 @@
              Title="Kategorie"
              BackgroundColor="#777777">
 
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="CategoryName" TargetType="Label">
