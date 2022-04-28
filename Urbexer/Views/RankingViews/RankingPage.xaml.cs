@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Urbexer.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
@@ -6,6 +7,8 @@ namespace Urbexer.Views {
     public partial class RankingPage : ContentPage {
         public RankingPage() {
             InitializeComponent();
+            BindingContext = new RankingViewModel();
+            Routing.RegisterRoute(nameof(LeaderboardPage), typeof(LeaderboardPage));
         }
     }
 }

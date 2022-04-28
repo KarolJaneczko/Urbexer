@@ -2,9 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"     
              x:Class="Urbexer.Views.LeaderboardPage"         
-             Title="Lista Rankingowa">
-
-
+             Title="Lista rankingowa">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -50,8 +48,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
-
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -67,11 +63,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <StackLayout Orientation="Vertical" 
-                         Margin="0,20"
-                         HorizontalOptions="Center" 
-                         VerticalOptions="Center">
+
+            <StackLayout Orientation="Vertical" Margin="0,20" HorizontalOptions="Center" VerticalOptions="Center">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -89,7 +82,7 @@
                                  Orientation="Vertical" 
                                  VerticalOptions="Start" 
                                  WidthRequest="150"
-                         HorizontalOptions="Center">
+                                 HorizontalOptions="Center">
                         <Frame BackgroundColor="Gold" 
                                HeightRequest="75"
                                WidthRequest="75"
@@ -101,9 +94,7 @@
                                    HorizontalOptions="Center"
                                    Padding="0"
                                    IsClippedToBounds="True">
-                                <Image Source="app_icon" 
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center" />
+                                <Image Source="app_icon" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Frame>
                         </Frame>
                         <Label Text="Kulfoneek"
@@ -111,18 +102,13 @@
                                LineBreakMode="WordWrap"
                                TextTransform="Uppercase"
                                FontAttributes="Bold"
-                   FontSize="Large" 
-                   HorizontalOptions="Center"/>
-                        <!--imie nazwisko lub cokolwiek innego najlepiej z jednej kolumny z bazy ze wzgledu na formatowanie ( wiek lub miasto)-->
-
+                               FontSize="Large" 
+                               HorizontalOptions="Center"/>
                     </StackLayout>
                 </Grid>
-                <!--nick-->    
             </StackLayout>
 
-
-
-            <ListView x:Name="WeatherForecastList" ItemsSource="{Binding Weathers}" SeparatorVisibility="None"
+            <ListView x:Name="RankingList" ItemsSource="{Binding RankingList}" SeparatorVisibility="None"
                   Grid.Row="3" Margin="20,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate >
@@ -169,9 +155,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
         </Grid>
     </ScrollView>
-
 </ContentPage>
