@@ -1,27 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Urbexer.Models.ApiModels;
 
 namespace Urbexer.ViewModels {
     internal class LeaderboardViewModel : BaseViewModel {
-        public List<Weather> RankingList { get => WeatherData(); }
+        public List<Rekord> RankingList { get => GetRanking(); }
         public static int RankingType;
 
         public LeaderboardViewModel() {
 
         }
-        private List<Weather> WeatherData() {
-            var tempList = new List<Weather>();
-            tempList.Add(new Weather { Temp = "22", Date = "Sunday 16", Icon = "hotel_icon" });
-            tempList.Add(new Weather { Temp = "21", Date = "Monday 17", Icon = "tunnel_icon.png" });
-            tempList.Add(new Weather { Temp = "20", Date = "Tuesday 18", Icon = "tunnel_icon.png" });
-            tempList.Add(new Weather { Temp = "12", Date = "Wednesday 19", Icon = "tunnel_icon.png" });
-            tempList.Add(new Weather { Temp = "17", Date = "Thursday 20", Icon = "tunnel_icon.png" });
-            tempList.Add(new Weather { Temp = "20", Date = "Friday 21", Icon = "tunnel_icon.png" });
+
+        private List<Rekord> GetRanking() {
+            var result = connectionService.GetRankingList(RankingType, httpClient).Result;
+            var tempList = Rekord.ZmapowanaLista(result);
             return tempList;
         }
     }
-    public class Weather {
-        public string Temp { get; set; }
-        public string Date { get; set; }
-        public string Icon { get; set; }
+    public class Rekord {
+        public string login { get; set; }
+        public int liczbaMiejsc { get; set; }
+        public Rekord(string Login, int LiczbaMiejsc) {
+            login = Login;
+            liczbaMiejsc = LiczbaMiejsc;
+        }
+        public static List<Rekord> ZmapowanaLista(List<APIRanking> list) {
+            var result = new List<Rekord>();
+            foreach(var x in list) {
+                var item = new Rekord(x.login, x.liczbaMiejsc);
+                result.Add(item);
+            }
+            return result;
+        }
     }
 }
