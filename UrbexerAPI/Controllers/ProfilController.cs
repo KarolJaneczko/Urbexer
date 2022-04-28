@@ -19,14 +19,6 @@ namespace APIpz.Controllers
             _profileService = profileService;
         }
 
-        [HttpPut("stworzPustyProfil")]
-        public ActionResult StworzOdwiedzone([FromBody] StworzPustyProfilDto dto)
-        {
-
-            _profileService.StworzPustyProfil(dto);
-            return Ok();
-        }
-
         [HttpPut("edytujProfil")]
         public ActionResult EdytujProfil([FromBody] EdytujProfilDto dto)
         {

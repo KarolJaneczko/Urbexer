@@ -41,10 +41,5 @@ namespace APIpz.Controllers
             _loginService.TestowyConfirmUser(dto);
             return Ok();
         }
-       /* [HttpGet("rozruch")]
-        public ActionResult rozruch()
-        {
-            return Ok();
-        }*/
     }
 }

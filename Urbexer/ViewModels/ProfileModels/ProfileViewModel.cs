@@ -83,7 +83,7 @@ namespace Urbexer.ViewModels {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
                 profilePosition = "Miejsce w rankingu #" + profileData.LeaderboardPosition.ToString();
-                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileDescription;
+                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
                 profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
                 profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
@@ -113,7 +113,7 @@ namespace Urbexer.ViewModels {
             UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
             FillProfile(UserInfo.yourProfile);
         }
-        private static string GetAvatarByLayout(int layout) {
+        public static string GetAvatarByLayout(int layout) {
             switch (layout) {
                 case (int)LayoutTypeEnum.Default:
                     return "fotograf_avatar.png";

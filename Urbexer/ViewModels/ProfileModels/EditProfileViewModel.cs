@@ -3,18 +3,19 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.UserModels;
+using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class EditProfileViewModel : BaseViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        private static string editDescription, editFirstName, editLastName, editFacebook, editYoutube, editInstagram, editLayout;
+        private static string editDescription, editFirstName, editLastName, editFacebook, editYoutube, editInstagram, editLayout, profileAvatarSource;
         public string EditDescription {
             get { return editDescription; }
             set {
                 editDescription = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("ProfileDescription"));
+                PropertyChanged(this, new PropertyChangedEventArgs("EditDescription"));
             }
         }
         public string EditFirstName {
@@ -56,7 +57,16 @@ namespace Urbexer.ViewModels {
             get { return editLayout; }
             set {
                 editLayout = value;
+                profileAvatarSource = ProfileViewModel.GetAvatarByLayout(ProfileData.GetLayoutNumberFromName(editLayout));
                 PropertyChanged(this, new PropertyChangedEventArgs("EditLayout"));
+                PropertyChanged(this, new PropertyChangedEventArgs("ProfileAvatarSource"));
+            }
+        }
+        public string ProfileAvatarSource {
+            get { return profileAvatarSource; }
+            set {
+                profileAvatarSource = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ProfileAvatarSource"));
             }
         }
         public ICommand SubmitEdit { protected set; get; }
@@ -97,6 +107,7 @@ namespace Urbexer.ViewModels {
             editYoutube = myProfile.YoutubeLink;
             editInstagram = myProfile.InstagramLink;
             editLayout = ProfileData.GetLayoutNameFromNumber(myProfile.ProfileLayout);
+            profileAvatarSource = ProfileViewModel.GetAvatarByLayout(myProfile.ProfileLayout);
         }
     }
 }

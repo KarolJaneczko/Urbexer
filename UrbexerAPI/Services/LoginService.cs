@@ -15,7 +15,6 @@ namespace APIpz.Services
     {
         Task RegisterUser(RegisterUserDto dto, string host);
         string GenerateJwt(LoginDto dto);
-
         void ConfirmUser(ConfirmUserDto dto);
         void TestowyConfirmUser(TestowyConfirmUserDto dto);
     }
@@ -48,7 +47,6 @@ namespace APIpz.Services
             }
 
             var wlasciwykod = new String(kod);
-            //await _emailSender.SendEmailAsync("marcinkwozniak@wp.pl", "mail testowy", "to jest mail testowy");
             var newUzytkownik = new Uzytkownik()
             {
                 Email = dto.Email,
@@ -57,19 +55,32 @@ namespace APIpz.Services
                 CzyKontoAktywne = false,
                 KodPotwierdzajacyRejestracje = wlasciwykod
             };
-
             var HashOdHasla = _passwordHasher.HashPassword(newUzytkownik, dto.HasloHash);
             newUzytkownik.HasloHash = HashOdHasla;
-            
+
             //generowanie kodu którym potwierdzimy rejestracje
-            
             _context.Uzytkownik.Add(newUzytkownik);
+            _context.SaveChanges();
+            var uzytkownik = _context.Uzytkownik.FirstOrDefault(u => u.Login == dto.Login);
+            var nowyProfil = new Profil()
+            {
+                Uzytkownik = uzytkownik,
+                Imie = null,
+                Nazwisko = null,
+                Opis = null,
+                LinkFacebook = null,
+                LinkInstagram = null,
+                LinkYouTube = null,
+                Layout = null,
+            };
+            _context.Profil.Add(nowyProfil);
+            _context.Attach(uzytkownik);
+            
             _context.SaveChanges();
             var url = $"{host}/api/account/confirm?email={WebUtility.UrlEncode(dto.Email)}&kod={wlasciwykod}";
             var tresc = $"Aby aktywować konto, kliknij w link: {url}";
             await _emailSender.SendEmailAsync(newUzytkownik.Email, "Link do potwierdzenia rejestracji", tresc);
         }
-
         public string GenerateJwt(LoginDto dto)
         {
             var user = _context.Uzytkownik.FirstOrDefault(u =>  u.Login == dto.Login);
@@ -105,7 +116,6 @@ namespace APIpz.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
         }
-
         public void ConfirmUser(ConfirmUserDto dto)
         {
             var user = _context.Uzytkownik.FirstOrDefault(u => u.Email == dto.Email);

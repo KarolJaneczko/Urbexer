@@ -48,6 +48,14 @@
     </ContentPage.Resources>
 
     <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush>
+                <GradientStopCollection>
+                    <GradientStop Color="#161616" Offset="0"/>
+                    <GradientStop Color="#363636" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush>
+        </ScrollView.Background>
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -55,23 +63,26 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="overlay.png" Aspect="Fill" HeightRequest="300" VerticalOptions="StartAndExpand"/>
-            <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="20,50"/>
+            <Image Source="overlay.png" Aspect="Fill" HeightRequest="380" VerticalOptions="StartAndExpand"/>
+            <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="20,50"/>
             <StackLayout Orientation="Vertical" Margin="0,20" HorizontalOptions="Center" VerticalOptions="Center">
                 <Grid ColumnDefinitions="*,auto,Auto,auto,*">
-                    <StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                        <Frame BackgroundColor="silver" CornerRadius="50" HorizontalOptions="Center">
-                            <!--Avatar-->
-                            <Image Source="{Binding ProfileAvatarSource}" WidthRequest="100" HeightRequest="100" VerticalOptions="Center"/>
+                    <StackLayout Grid.Column="2" VerticalOptions="Start" HorizontalOptions="Center" Margin="0,-50,0,0" >
+                        <Frame Padding="0" CornerRadius="100">
+                            <Image Source="{Binding ProfileAvatarSource}"
+                                   HeightRequest="150" 
+                                   WidthRequest="150"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
                         </Frame>
                     </StackLayout>
                     <Frame Grid.Column="4" 
                            Margin="0,0,50,0"
-                           WidthRequest="50" 
+                           WidthRequest="60" 
                            Padding="-3" 
                            CornerRadius="50" 
                            BackgroundColor="#c4dfce" 
-                           HeightRequest="50" 
+                           HeightRequest="60" 
                            VerticalOptions="Start"
                            HorizontalOptions="Start">
                         <ImageButton Source="editprofile_icon"
@@ -86,7 +97,7 @@
                     </Frame>
                 </Grid>
                 <!--Login-->
-                <Label Text="{Binding ProfileLogin}" TextColor="Silver" FontSize="22" HorizontalOptions="Center"/>
+                <Label Text="{Binding ProfileLogin}" FontFamily="Bree" TextColor="Silver" FontSize="22" HorizontalOptions="Center"/>
                 <!--Pozycja w rankingu-->
                 <Label Text="{Binding ProfilePosition}" TextColor="White" FontSize="17" HorizontalOptions="Center"/>
             </StackLayout>
@@ -98,7 +109,7 @@
                    Padding="0"
                    HeightRequest="120"
                    VerticalOptions="Center"
-                   BackgroundColor="#F9EAC5"
+                   BackgroundColor="#F4F1DE"
                    BorderColor="silver">
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                     <Grid.RowDefinitions>
@@ -108,7 +119,9 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!--Link do Instagrama-->
                     <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
@@ -117,43 +130,45 @@
                                      HorizontalOptions="Center"
                                      BackgroundColor="Transparent"
                                      Command="{Binding ClickedInstagram}"/>
-                        <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
+                        
                             <Label Text="Instagram" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
-                        </StackLayout>
+                        
                     </StackLayout>
+                    <BoxView Grid.Column="1" Grid.RowSpan="3" HeightRequest="55" WidthRequest="2" Color="#363636" VerticalOptions="Center"/>
                     <!--Link do kanału YouTube-->
-                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <StackLayout Grid.Column="2" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
                         <ImageButton Source="youtube_icon.png"
                                      HeightRequest="35"
                                      HorizontalOptions="Center"
                                      BackgroundColor="Transparent"
                                      Command="{Binding ClickedYoutube}"/>
-                        <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
+                        
                             <Label Text="Youtube" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
-                        </StackLayout>
+                       
                     </StackLayout>
+                    <BoxView Grid.Column="3" Grid.RowSpan="3" HeightRequest="55" WidthRequest="2" Color="#363636" VerticalOptions="Center"/>
                     <!--Link do profilu na Facebooku-->
-                    <StackLayout Grid.Column="2" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <StackLayout Grid.Column="4" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
                         <ImageButton Source="facebook_icon.png" 
                                      HeightRequest="35"
                                      HorizontalOptions="Center"
                                      BackgroundColor="Transparent"
                                      Command="{Binding ClickedFacebook}"/>
-                        <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
+                        
                             <Label Text="Facebook"
                                TextColor="Black"
                                FontSize="16" 
                                FontAttributes="Bold" 
                                HorizontalOptions="Center"/>
-                        </StackLayout>
+                        
                     </StackLayout>
                 </Grid>
             </Frame>
             <!--Opis proflu-->
-            <Frame BorderColor="#363636" Margin="10" Grid.Row="2" CornerRadius="10" Padding="8">
+            <Frame BorderColor="#363636" Margin="20,0,20,0" Grid.Row="2"  Padding="8">
                 <StackLayout>
                     <Label Text="Biogram" HorizontalOptions="Start" FontSize="Large"/>
-                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill"/>
+                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill" Margin="0,0,140,0"/>
                     <Label Text="{Binding ProfileDescription}" Margin="5,0,5,0"/>
                 </StackLayout>
             </Frame>
@@ -171,18 +186,18 @@
                        HeightRequest="50">
                     <Grid HeightRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0"
-                               Text="Imię" 
+                               Text="IMIĘ" 
                                TextColor="black" 
                                FontSize="15"
                                FontAttributes="Bold"
                                VerticalOptions="Center"
                                HorizontalOptions="Start" 
                                Margin="10,0"/>
-                        <Label Grid.Column="1"
+                        <Label Grid.Column="2"
                                Text="{Binding ProfileFirstName}"
                                TextColor="#BF0603"
                                FontAttributes="Bold" 
@@ -199,18 +214,18 @@
                        HeightRequest="50">
                     <Grid HeightRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0"
-                               Text="Nazwisko" 
+                               Text="NAZWISKO" 
                                TextColor="black" 
                                FontSize="15"
                                FontAttributes="Bold"
                                VerticalOptions="Center"
                                HorizontalOptions="Start" 
                                Margin="10,0"/>
-                        <Label Grid.Column="1"
+                        <Label Grid.Column="2"
                                Text="{Binding ProfileLastName}"
                                TextColor="#BF0603"
                                FontAttributes="Bold" 
@@ -227,18 +242,18 @@
                        HeightRequest="50">
                     <Grid HeightRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0"
-                               Text="Odwiedzone miejsca" 
+                               Text="ODWIEDZONE MIEJSCA" 
                                TextColor="black" 
                                FontSize="15"
                                FontAttributes="Bold"
                                VerticalOptions="Center"
                                HorizontalOptions="Start" 
                                Margin="10,0"/>
-                        <Label Grid.Column="1"
+                        <Label Grid.Column="2"
                                Text="{Binding ProfileVisitedPlaces}"
                                TextColor="#BF0603"
                                FontAttributes="Bold" 

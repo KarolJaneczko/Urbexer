@@ -11,7 +11,7 @@
 
     <Shell.Resources>
         <ResourceDictionary>
-            <Color x:Key="SelectedColor">#ef233c</Color>
+            <Color x:Key="SelectedColor">#bf0603</Color>
             <Color x:Key="WhiteColor">White</Color>
             <Color x:Key="GrayColor">Gray</Color>
             <Color x:Key="BlackColor">Black</Color>
@@ -47,7 +47,7 @@
 
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#B52435" />
+                                    <Setter Property="BackgroundColor" Value="#bf0603" />
                                     <Setter Property="Padding"  Value="5"/>
                                     <Setter Property="MinimumHeightRequest" Value="60"/>
                                 </VisualState.Setters>
@@ -78,7 +78,7 @@
                 </Grid.Background>
 
                 <Frame Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="1" Padding="1" CornerRadius="35" HasShadow="True">
-                    <Frame Background="#B52435" 
+                    <Frame Background="#bf0603" 
                        Grid.Column="2" 
                        Grid.Row="1" 
                        VerticalOptions="Center" 
