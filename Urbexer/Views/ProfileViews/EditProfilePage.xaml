@@ -55,19 +55,16 @@
                     </Grid>
                 </StackLayout>
             </Grid>
-            <StackLayout HorizontalOptions="Center" Margin="0,-130,0,50">
+            <StackLayout HorizontalOptions="Center" Margin="0,-110,0,50">
                 <Grid HeightRequest="150" WidthRequest="150" HorizontalOptions="End">
-                    <Frame Padding="2" CornerRadius="25">
-                        <Image Source="{Binding ProfileAvatarSource}" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center"
-                    VerticalOptions="Center" />
+                    <Frame Padding="0" CornerRadius="100">
+                        <Image Source="{Binding ProfileAvatarSource}" HeightRequest="150" 
+                               WidthRequest="150"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
                     </Frame>
-
                 </Grid>
-                <StackLayout HorizontalOptions="Center" Spacing="15">
-
-                </StackLayout>
             </StackLayout>
-
             <Frame Margin="15,0,15,0" CornerRadius="20">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -83,9 +80,9 @@
                                    VerticalOptions="Center"
                                    FontAttributes="Bold"             
                                    FontSize="Large" />
-                    <Frame Grid.Column="2" Padding="2" HorizontalOptions="Fill"> 
-                      
-                    <Picker Title="D Developer" Grid.Column="2"
+                    <Frame Grid.Column="3" Padding="2" HorizontalOptions="FillAndExpand">
+
+                        <Picker Title="Profesja"  FontAttributes="Bold" TextColor="#363636"  HorizontalTextAlignment="Center"
                     TitleColor="Black"               
                     SelectedItem="{Binding EditLayout}" 
                     SelectedIndexChanged="OnPickerSelectedIndexChanged">
@@ -204,16 +201,14 @@
                     <StackLayout>
                             <Frame Style="{StaticResource UserInfoStyle}">
                                 <Grid Style="{StaticResource GridSocial}">
-                                   
                                     <Entry x:Name="entryName"
-                           Text="{Binding EditFirstName}"
-                           Placeholder="Imię"
-                           Style="{StaticResource EntrySocial}"/>
-                                                     
-                          
-                          
+                                           Text="{Binding EditFirstName}"
+                                           Placeholder="Imię"
+                                           FontSize="20"
+                                           Style="{StaticResource EntrySocial}"/>
                                     <Entry x:Name="entrySurname"
                            Text="{Binding EditLastName}"
+                                           FontSize="20"
                            Grid.Row="2"
                            Placeholder="Nazwisko"
                            Style="{StaticResource EntrySocial}"/>
@@ -340,7 +335,7 @@
             </xct:Expander>
 
             
-            <Button Text="ZAPISZ PROFIL" Command="{Binding SubmitEdit}" IsEnabled="True" Margin="30" CornerRadius="25"/>
+            <Button Text="ZAPISZ PROFIL" Command="{Binding SubmitEdit}" IsEnabled="True" Margin="30" CornerRadius="25" FontSize="20"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>
