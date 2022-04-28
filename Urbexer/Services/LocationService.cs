@@ -13,16 +13,21 @@ namespace Urbexer.Services {
         // Klasa do pobierania lokacji i pobiązanych danych z bazy.
 
         // Pobierz konkretną lokacje o danym id
-        public static async Task<Location> GetLocationById(int id, bool detailed = false) {
+        public static async Task<Location> GetLocationById(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
             if (result == null)
                 return null;
-            return detailed
-                ? new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result))
-                : new Location(JsonConvert.DeserializeObject<APILocation>(result));
-
+            return new Location(JsonConvert.DeserializeObject<APILocation>(result));
+        }
+        public static async Task<LocationDetailed> GetLocationByIdDetailed(int id) {
+            string path = "/api/place/pokazMiejscePoId";
+            string args = "?id=" + id;
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            if (result == null)
+                return null;
+            return new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result));
         }
 
         // Funkcje do pobierania list lokacji
