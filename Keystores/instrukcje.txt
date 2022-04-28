@@ -1,0 +1,11 @@
+1. Zapoznaj się z podpisywaniem aplikacji: https://docs.microsoft.com/en-us/xamarin/android/deploy-test/signing/?tabs=windows
+2. Przy tworzeniu archivum, wybierz distribution channel ad hoc
+3. W oknie podawania certyfikatu kliknij import i wybierz plik bplokarz_map_keystore.keystore
+4. Jeżeli będą okienka z pytaniami o dane keystore:
+alias: bplokarz_map_keystore
+password: urbex123
+key password: urbex123
+5. Wybierz zaimportowany certyfikat w okienku i kliknij save as.
+6. Wybierz ścieżke tworzonego archiwum.
+7. Przy zapytaniu o hasło, podaj "urbex123"
+8. Gotowe! W miejscu podanym w punkcie 6. znajduje się gotowe do zainstalowania archiwum

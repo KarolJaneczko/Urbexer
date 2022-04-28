@@ -1,45 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Urbexer.Views.EditProfilePage">
+             x:Class="Urbexer.Views.EditProfilePage"
+             Title="Edycja Profilu"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="TitleLabelStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="HorizontalOptions" Value="Start" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Start" />
-                <Setter Property="FontAttributes" Value="Bold" />
-            </Style>
-            <Style x:Key="BoxViewGrayLine" TargetType="BoxView">
-                <Setter Property="HeightRequest" Value="2"/>
-                <Setter Property="BackgroundColor" Value="#363636"/>
-                <Setter Property="Grid.Row" Value="1"/>
-                <Setter Property="Margin" Value="5,0,150,0"/>
-            </Style>
-            <Style x:Key="EntryTitle" TargetType="Label">
-                <Setter Property="Grid.Column" Value="0"/>
-                <Setter Property="Grid.Row" Value="0"/>
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="black" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-            </Style>
             <Style x:Key="UserInfoStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="Padding" Value="10"/>
                 <Setter Property="HasShadow" Value="True"/>
-                <Setter Property="Margin" Value="10,0,10,0"/>
-                <Setter Property="BorderColor" Value="#363636"/>
-                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Margin" Value="30,-10,30,0"/>
+                <Setter Property="CornerRadius" Value="5"/>
             </Style>
             <Style x:Key="SocialIcon" TargetType="Image">
-                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="HeightRequest" Value="35"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Start"/>
-                <Setter Property="Grid.Column" Value="1"/>
-                <Setter Property="Grid.Row" Value="0"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
             </Style>
             <Style x:Key="GridUserInfo" TargetType="Grid">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
@@ -54,108 +32,315 @@
             <Style x:Key="EntrySocial" TargetType="Entry">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="Keyboard" Value="Default"/>
-                <Setter Property="Grid.Row" Value="1"/>
+                <Setter Property="Grid.Row" Value="0"/>
             </Style>
-            <Style x:Key="ThemeStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="TextColor" Value="#363636"/>
-                <Setter Property="HorizontalOptions" Value="Start"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="Grid.Column" Value="0"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="Margin" Value="10,0"/>
-            </Style>
-            <Style x:Key="Category" TargetType="Label">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="TextColor" Value="#BF0603"/>
-                <Setter Property="HorizontalOptions" Value="End"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="Grid.Column" Value="1"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="Margin" Value="10,0"/>
-            </Style>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <StackLayout Margin="0,0,0,0">
-        <Frame BorderColor="#363636" Margin="10,0,10,0" Grid.Row="2" CornerRadius="10" Padding="8">
-            <Grid Style="{StaticResource GridUserInfo}">
-                <StackLayout>
-                    <Label Style="{StaticResource ThemeStyle}" Grid.Row="0" Grid.Column="1" Text="Opis:"/>
-                    <Editor x:Name="opisEditor" 
-                            Placeholder="Opis"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            AutoSize="TextChanges"
-                            MaxLength="255"
-                            Text="{Binding EditDescription}"/>
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush>
+                <GradientStopCollection>
+                    <GradientStop Color="#161616" Offset="0"/>
+                    <GradientStop Color="#363636" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush>
+        </ScrollView.Background>
+        <StackLayout Margin="0,0,0,0">
+            <Grid>
+                <Path Data="M0,0H375V129.651s-9.025,2.382-55.426-5.3-70.141-41.09-130.3-41.176-83.544,33.5-130.893,41.176S0,129.651,0,129.651Z"
+                  Aspect="Fill" Fill="#BF0603"/>
+                <StackLayout Orientation="Horizontal" Margin="10" Spacing="10" VerticalOptions="Center">
+                    <Grid HorizontalOptions="Center">
+                    </Grid>
                 </StackLayout>
             </Grid>
-        </Frame>
-        <Frame BorderColor="#363636" Margin="10,0,10,0" Grid.Row="2" CornerRadius="10" Padding="8">
-            <Picker Title="Wybierz profesję" 
-                    TitleColor="Black"
-                    SelectedItem="{Binding EditLayout}">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Domyślny</x:String>
-                        <x:String>Fotograf</x:String>
-                        <x:String>Historyk</x:String>
-                        <x:String>Łowca przygód</x:String>
-                        <x:String>Obieżyświat</x:String>
-                        <x:String>Poszukiwacz</x:String>
-                        <x:String>Włóczykij</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-        </Frame>
-        <Frame Style="{StaticResource UserInfoStyle}">
-            <Grid Style="{StaticResource GridSocial}">
-                <Label Style="{StaticResource TitleLabelStyle}" Text="Dane osobowe:"/>
-                <Entry x:Name="entryName"
-                       Text="{Binding EditFirstName}"
-                       Placeholder="Imię"
-                       Style="{StaticResource EntrySocial}"/>
-                <Image Source="profiledetails_icon" Aspect="AspectFill"                  
-                       BackgroundColor="silver"
-                       Style="{StaticResource SocialIcon}"/>
-                <Entry x:Name="entrySurname"
-                       Text="{Binding EditLastName}"
-                       Grid.Row="2"
-                       Placeholder="Nazwisko"
-                       Style="{StaticResource EntrySocial}"/>
-            </Grid>
-        </Frame>
-        <Frame Style="{StaticResource UserInfoStyle}">
-            <Grid Style="{StaticResource GridSocial}">
-                <Label Style="{StaticResource TitleLabelStyle}" Text="Facebook:"/>
-                <Entry x:Name="entryFacebookLink"
-                       Placeholder="http://www.facebook.com"
-                       Text="{Binding EditFacebook}"
-                       Style="{StaticResource EntrySocial}"/>
-                <Image Source="facebook_icon" Style="{StaticResource SocialIcon}"/>
-            </Grid>
-        </Frame>
-        <Frame Style="{StaticResource UserInfoStyle}">
-            <Grid Style="{StaticResource GridSocial}">
-                <Label Style="{StaticResource TitleLabelStyle}" Text="YouTube:"/>
-                <Entry x:Name="entryYoutubeLink"
-                       Placeholder="http://www.youtube.com"
-                       Text="{Binding EditYoutube}"
-                       Style="{StaticResource EntrySocial}"/>
-                <Image Source="youtube_icon" Style="{StaticResource SocialIcon}"/>
-            </Grid>
-        </Frame>
-        <Frame Style="{StaticResource UserInfoStyle}">
-            <Grid Style="{StaticResource GridSocial}">
-                <Label Style="{StaticResource TitleLabelStyle}" Text="Instagram:"/>
-                <Entry x:Name="entryInstagramLink"
-                       Placeholder="http://www.instagram.com"
-                       Text="{Binding EditInstagram}"
-                       Style="{StaticResource EntrySocial}"/>
-                <Image Source="instagram_icon" Style="{StaticResource SocialIcon}"/>
-            </Grid>
-        </Frame>
-        <Button Text="ZAPISZ" Command="{Binding SubmitEdit}" IsEnabled="True"/>
-    </StackLayout>
+            <StackLayout HorizontalOptions="Center" Margin="0,-130,0,50">
+                <Grid HeightRequest="150" WidthRequest="150" HorizontalOptions="End">
+                    <Frame Padding="2" CornerRadius="25">
+                        <Image Source="{Binding ProfileAvatarSource}" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+                    </Frame>
+
+                </Grid>
+                <StackLayout HorizontalOptions="Center" Spacing="15">
+
+                </StackLayout>
+            </StackLayout>
+
+            <Frame Margin="15,0,15,0" CornerRadius="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame BackgroundColor="#BF0603" Padding="5">
+                        <Image Source="profile_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
+                    </Frame>
+                    <Label Text="PROFESJA" 
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold"             
+                                   FontSize="Large" />
+                    <Frame Grid.Column="2" Padding="2" HorizontalOptions="Fill"> 
+                      
+                    <Picker Title="D Developer" Grid.Column="2"
+                    TitleColor="Black"               
+                    SelectedItem="{Binding EditLayout}" 
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Domyślny</x:String>
+                                <x:String>Fotograf</x:String>
+                                <x:String>Historyk</x:String>
+                                <x:String>Łowca przygód</x:String>
+                                <x:String>Obieżyświat</x:String>
+                                <x:String>Poszukiwacz</x:String>
+                                <x:String>Włóczykij</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                        
+                    </Frame>
+
+
+                </Grid>
+            </Frame>
+          
+
+            <xct:Expander  ExpandAnimationLength="1000">
+                <xct:Expander.Header>
+                    <Frame Margin="15,0,15,0" CornerRadius="20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame BackgroundColor="#BF0603" Padding="5">
+                                <Image Source="desc_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
+                            </Frame>
+                            <Label Text="OPIS" 
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold"             
+                                   FontSize="Large" />
+                            <Image Source="expand_icon.png"
+                                   HeightRequest="35"
+                                   Grid.Column="3"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Center">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                     Value="True">
+                                        <Setter Property="Source"
+                                    Value="collapse_icon.png" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </Grid>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.ContentTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame Style="{StaticResource UserInfoStyle}" HeightRequest="280">
+                                <Grid Style="{StaticResource GridUserInfo}">
+                                    <StackLayout>
+                                        <Editor x:Name="opisEditor"  
+                                                    Placeholder="Opis"
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    AutoSize="TextChanges"
+                                                    MaxLength="255"
+                                                    Text="{Binding EditDescription}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </xct:Expander.ContentTemplate>
+            </xct:Expander>
+
+            <xct:Expander  ExpandAnimationLength="1000">
+            <xct:Expander.Header>
+                <Frame Margin="15,0,15,0" CornerRadius="20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame BackgroundColor="#BF0603" Padding="5">
+                                <Image Source="profiledetails_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
+                            </Frame>
+                        <Label Text="DANE OSOBOWE" 
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold"             
+                                   FontSize="Large" />
+                        <Image Source="expand_icon.png"
+                                   HeightRequest="35"
+                                   Grid.Column="3"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Center">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                     Value="True">
+                                    <Setter Property="Source"
+                                    Value="collapse_icon.png" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Frame>
+            </xct:Expander.Header>
+            <xct:Expander.ContentTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                            <Frame Style="{StaticResource UserInfoStyle}">
+                                <Grid Style="{StaticResource GridSocial}">
+                                   
+                                    <Entry x:Name="entryName"
+                           Text="{Binding EditFirstName}"
+                           Placeholder="Imię"
+                           Style="{StaticResource EntrySocial}"/>
+                                                     
+                          
+                          
+                                    <Entry x:Name="entrySurname"
+                           Text="{Binding EditLastName}"
+                           Grid.Row="2"
+                           Placeholder="Nazwisko"
+                           Style="{StaticResource EntrySocial}"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                </DataTemplate>
+            </xct:Expander.ContentTemplate>
+            </xct:Expander>
+
+            <xct:Expander  ExpandAnimationLength="1000">
+                <xct:Expander.Header>
+                    <Frame Margin="15,0,15,0" CornerRadius="20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame BackgroundColor="#BF0603" Padding="5">
+                                <Image Source="socjal_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
+                            </Frame>
+                            <Label Text="SOCIAL MEDIA" 
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold"             
+                                   FontSize="Large" />
+                            <Image Source="expand_icon.png"
+                                   HeightRequest="35"
+                                   Grid.Column="3"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Center">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                     Value="True">
+                                        <Setter Property="Source"
+                                    Value="collapse_icon.png" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </Grid>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.ContentTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource UserInfoStyle}">
+                            <StackLayout>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Entry x:Name="entryInstagramLink" 
+                                           Grid.Column="0" 
+                                           Grid.Row="1"  
+                                           Grid.ColumnSpan="2"
+                                           Placeholder="http://www.instagram.com"
+                                           Text="{Binding EditInstagram}"
+                                           Style="{StaticResource EntrySocial}"/>
+                                    <Image Source="instagram_icon" 
+                                           Style="{StaticResource SocialIcon}" 
+                                           Grid.Row="1" 
+                                           Grid.Column="2"/>
+                                </Grid>
+
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Entry x:Name="entryFacebookLink" 
+                                           Grid.Column="0" 
+                                           Grid.Row="1"  
+                                           Grid.ColumnSpan="2"
+                                           Placeholder="http://www.facebook.com"
+                                           Text="{Binding EditFacebook}"
+                                           Style="{StaticResource EntrySocial}"/>
+                                    <Image Source="facebook_icon" 
+                                           Style="{StaticResource SocialIcon}" 
+                                           Grid.Row="1" 
+                                           Grid.Column="2"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                 
+                                    <Entry x:Name="entryYoutubeLink" 
+                                           Grid.Column="0" 
+                                           Grid.Row="1"  
+                                           Grid.ColumnSpan="2"
+                                           Placeholder="http://www.youtube.com"
+                                           Text="{Binding EditYoutube}"
+                                           Style="{StaticResource EntrySocial}"/>
+                                    <Image Source="youtube_icon" 
+                                           Style="{StaticResource SocialIcon}" 
+                                           Grid.Row="1" 
+                                           Grid.Column="2"/>
+                                    </Grid>
+
+                                
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </xct:Expander.ContentTemplate>
+            </xct:Expander>
+
+            
+            <Button Text="ZAPISZ PROFIL" Command="{Binding SubmitEdit}" IsEnabled="True" Margin="30" CornerRadius="25"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
