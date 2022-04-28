@@ -10,6 +10,7 @@ namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationDetailsPage : ContentPage {
         public string LocationId { get; set; }
+        private LocationDetailed location;
         public LocationDetailsPage() {
             InitializeComponent();
         }
@@ -23,14 +24,13 @@ namespace Urbexer.Views {
         private async Task SetBinding() {
             // Pobierz dane i zbinduj do lokacji 
             int.TryParse(LocationId, out var id);
-            LocationDetailed location = await LocationService.GetLocationByIdDetailed(id);
-            
+            location = await LocationService.GetLocationByIdDetailed(id);
             await location.LoadReviews();
             BindingContext = location;
         }
 
         private void Button_Pressed(object sender, System.EventArgs e) {
-            var route = $"{nameof(WriteReviewPage)}?LocationId={LocationId}";
+            var route = $"{nameof(WriteReviewPage)}?LocationId={LocationId}&LocationName={location.Name}";
             Shell.Current.GoToAsync(route);
         }
 
