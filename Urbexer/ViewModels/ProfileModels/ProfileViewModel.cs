@@ -83,7 +83,7 @@ namespace Urbexer.ViewModels {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
                 profilePosition = "Miejsce w rankingu #" + profileData.LeaderboardPosition.ToString();
-                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileDescription;
+                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
                 profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
                 profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
