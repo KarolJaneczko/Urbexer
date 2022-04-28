@@ -51,5 +51,11 @@ namespace APIpz.Controllers
             _urbexService.DodajOpinie(dto);
             return Ok();
         }
+        [HttpGet("iluLudziOdwiedziloMiejsce")]
+        public ActionResult<int> IluLudziOdwiedziloMiejsce(IluLudziOdwiedziloMiejsceDto dto)
+        {
+            var wynik = _urbexService.IluLudziOdwiedziloMiejsce(dto);
+            return Ok(wynik);
+        }
     }
 }
