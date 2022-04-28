@@ -29,11 +29,8 @@
     <Compile Update="Views\ProfileViews\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\InfoPage.xaml.cs">
+    <Compile Update="Views\OtherViews\InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SearchPage.xaml.cs">
-      <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LocationViews\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
@@ -41,7 +38,7 @@
     <Compile Update="Views\ProfileViews\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\LeaderboardPage.xaml.cs">
+    <Compile Update="Views\RankingViews\LeaderboardPage.xaml.cs">
       <DependentUpon>LeaderboardPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StartViews\SignInPage.xaml.cs">
@@ -69,7 +66,7 @@
     <EmbeddedResource Update="Views\LocationViews\MapPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\RankingPage.xaml">
+    <EmbeddedResource Update="Views\RankingViews\RankingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
