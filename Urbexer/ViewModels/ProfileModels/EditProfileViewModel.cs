@@ -15,7 +15,7 @@ namespace Urbexer.ViewModels {
             get { return editDescription; }
             set {
                 editDescription = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("ProfileDescription"));
+                PropertyChanged(this, new PropertyChangedEventArgs("EditDescription"));
             }
         }
         public string EditFirstName {
