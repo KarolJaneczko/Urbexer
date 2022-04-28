@@ -207,16 +207,16 @@
     <AndroidResource Include="Resources\drawable\tips_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\backgroundMain.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\backgroundMain.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\BackgroundKit.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\BackgroundKit.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\backgroundTips.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\backgroundTips.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\backgroundRules.jpeg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\backgroundRules.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\swipe_icon.png" />
