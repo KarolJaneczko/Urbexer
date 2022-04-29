@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Urbexer.Models;
 
 namespace Urbexer.Services {
     public class HttpService {
@@ -18,14 +19,21 @@ namespace Urbexer.Services {
         public static async Task<string> SendApiRequest(HttpMethod method, string path, string json = "") {
             string uri = "https://urbexerapi.azurewebsites.net" + path;
             var request = new HttpRequestMessage {
+                //Headers = { { "Authorization", "Bearer " + UserInfo.LoginToken } },
+                //Headers = { { "Authorization", UserInfo.LoginToken } },
+                //Headers = { { "Bearer", UserInfo.LoginToken } },
                 Method = method,
                 RequestUri = new Uri(uri),
                 Content = new StringContent(json, Encoding.UTF8, "application/json"),
             };
+            if (UserInfo.LoginToken != null)
+                //request.Headers.Add("Authorization", UserInfo.LoginToken);
+                //request.Headers.Add("Authorization", "Bearer " + UserInfo.LoginToken);
+                request.Headers.Add("Bearer", UserInfo.LoginToken);
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
-            return response.StatusCode == System.Net.HttpStatusCode.OK
-                ? await response.Content.ReadAsStringAsync()
-                : null;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return await response.Content.ReadAsStringAsync();
+            return null;
         }
     }
 }

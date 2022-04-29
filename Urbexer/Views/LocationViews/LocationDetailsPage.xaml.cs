@@ -11,6 +11,7 @@ namespace Urbexer.Views {
     public partial class LocationDetailsPage : ContentPage {
         public string LocationId { get; set; }
         private LocationDetailed location;
+        private bool hasVisited = false;
         public LocationDetailsPage() {
             InitializeComponent();
         }
@@ -18,24 +19,36 @@ namespace Urbexer.Views {
         protected override void OnAppearing() {
             base.OnAppearing();
 
-            Device.InvokeOnMainThreadAsync(async () => await SetBinding());
+            Device.InvokeOnMainThreadAsync(async () => await PreparePage());
         }
 
-        private async Task SetBinding() {
-            // Pobierz dane i zbinduj do lokacji 
-            int.TryParse(LocationId, out var id);
-            location = await LocationService.GetLocationByIdDetailed(id);
+        private async Task PreparePage() {
+            // Pobierz dane i ustaw binding
+            location = await LocationService.GetLocationByIdDetailed(int.Parse(LocationId));
             await location.LoadReviews();
             BindingContext = location;
+
+            //return;
+            if (hasVisited) {
+                MarkVisitedButton.IsVisible = false;
+                WriteReviewButton.IsVisible = true;
+            }
+            else {
+                MarkVisitedButton.IsVisible = true;
+                WriteReviewButton.IsVisible = false;
+            }
         }
 
-        private void Button_Pressed(object sender, System.EventArgs e) {
+        private void GoToWriteReviewPage(object sender, System.EventArgs e) {
             var route = $"{nameof(WriteReviewPage)}?LocationId={LocationId}&LocationName={location.Name}";
             Shell.Current.GoToAsync(route);
         }
+        private async void MarkVisited(object sender, System.EventArgs e) {
+            await ReviewService.MarkLocationAsVisited(location.Name);
+        }
 
         private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
-            //BindingContext.LoadReviews();
+            //Wczytaj więcej recenzji
         }
     }
 }

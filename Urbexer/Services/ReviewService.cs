@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Urbexer.Models;
 
@@ -12,6 +13,16 @@ namespace Urbexer.Services {
 
         };
 
+        // Oznacz daną lokacje jako oznaczona. Bez tego nie da się wystawiać recenzji
+        //public static async Task MarkLocationAsVisited(int locationId) {
+        public static async Task MarkLocationAsVisited(string locationName) {
+            // po poprawce metody w api trzeba będzie poprawić te pola
+            string path = "/api/urbex/dodajodwiedzone"; // poprawić literówke
+            //string args = "?id=" + id;
+            string json = string.Format("{{\"nazwaUrbexu\": \"{0}\" }}", locationName); // usunąć
+            await HttpService.SendApiRequest(HttpMethod.Put, path, json); // usunąć
+            //await HttpService.SendApiRequest(HttpMethod.Put, path + args);
+        }
         // Wystaw recenzję lokacji o danym id
         public static async Task PostReview(int locationId, int scoreQuality, string reviewMessage) {
             string path = "/api/urbex/dodajOpinie";
@@ -22,7 +33,7 @@ namespace Urbexer.Services {
                 locationId,
                 scoreQuality,
                 reviewMessage);
-            await HttpService.SendApiRequest(System.Net.Http.HttpMethod.Put, path, json);
+            await HttpService.SendApiRequest(HttpMethod.Put, path, json);
         }
         // Pobierz recenzje lokacji o danym id
         // pageNumber decyduje którą stronę recenzji z kolei pobierać, poczynając od 1

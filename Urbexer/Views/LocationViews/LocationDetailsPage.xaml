@@ -40,7 +40,14 @@
                         Opacity="0.15"
                         Source="{Binding CategoryIconPath}" />
                 </AbsoluteLayout>
-                <Button Pressed="Button_Pressed" Text="Dodaj recenzje" />
+                <Button
+                    x:Name="WriteReviewButton"
+                    Pressed="GoToWriteReviewPage"
+                    Text="Dodaj recenzje" />
+                <Button
+                    x:Name="MarkVisitedButton"
+                    Pressed="MarkVisited"
+                    Text="Dodaj do odwiedzonych" />
                 <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
                 <Label FontSize="30" Text="Recenzje użytkowników" />
                 <CollectionView
