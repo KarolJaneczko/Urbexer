@@ -52,13 +52,15 @@
             </Grid>
             <Label Text="Treść recenzji:" />
             <Editor
+                x:Name="Editor"
                 AutoSize="TextChanges"
                 IsSpellCheckEnabled="True"
                 Keyboard="Text"
-                MaxLength="300"
+                MaxLength="100"
                 Placeholder="Podziel się swoją opinią"
                 VerticalOptions="StartAndExpand" />
             <Button
+                x:Name="SendButton"
                 Clicked="Button_Clicked"
                 Text="Prześlij recenzje"
                 VerticalOptions="End" />

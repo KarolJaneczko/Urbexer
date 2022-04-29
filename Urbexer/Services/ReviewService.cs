@@ -13,7 +13,16 @@ namespace Urbexer.Services {
         };
 
         // Wystaw recenzję lokacji o danym id
-        public static async Task PostReview(int locationId, int reviewScore, string reviewMessage) {
+        public static async Task PostReview(int locationId, int scoreQuality, string reviewMessage) {
+            string path = "/api/urbex/dodajOpinie";
+            string json = string.Format("{{" +
+                "\"id\":{0}," +
+                "\"ocena\":{1}," +
+                "\"tekst\":\"{2}\"}}",
+                locationId,
+                scoreQuality,
+                reviewMessage);
+            await HttpService.SendApiRequest(System.Net.Http.HttpMethod.Put, path, json);
         }
         // Pobierz recenzje lokacji o danym id
         // pageNumber decyduje którą stronę recenzji z kolei pobierać, poczynając od 1
