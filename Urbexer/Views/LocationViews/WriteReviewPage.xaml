@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.LocationViews.WriteReviewPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:locationviews="clr-namespace:Urbexer.Views.LocationViews"
+    Title="Napisz recenzje"
+    x:DataType="locationviews:WriteReviewPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label HorizontalOptions="Center" Text="{Binding LocationName}" />
+            <Label IsVisible="false" Text="{Binding Path=LocationId, StringFormat='Id: {0}'}" />
+            <Grid ColumnDefinitions="2" RowDefinitions="2">
+                <!--  ocena jakości  -->
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Ocena: "
+                    VerticalOptions="Center" />
+                <Picker
+                    x:Name="ScoreQuality"
+                    Title="Wybierz ocene"
+                    Grid.Row="1"
+                    Grid.Column="2">
+                    <Picker.Items>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                    </Picker.Items>
+                </Picker>
+                <!--  ocena niebezpieczeństwa  -->
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="Niebezpieczeństwo: "
+                    VerticalOptions="Center" />
+                <Picker
+                    x:Name="ScoreDanger"
+                    Title="Wybierz ocene"
+                    Grid.Row="2"
+                    Grid.Column="2">
+                    <Picker.Items>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Grid>
+            <Label Text="Treść recenzji:" />
+            <Editor
+                AutoSize="TextChanges"
+                IsSpellCheckEnabled="True"
+                Keyboard="Text"
+                MaxLength="300"
+                Placeholder="Podziel się swoją opinią"
+                VerticalOptions="StartAndExpand" />
+            <Button
+                Clicked="Button_Clicked"
+                Text="Prześlij recenzje"
+                VerticalOptions="End" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
