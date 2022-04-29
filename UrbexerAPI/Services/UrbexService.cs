@@ -9,7 +9,7 @@ namespace APIpz.Services
 {
     public interface IUrbexService
     {
-        void DodajOdwiedzone(DodajOdwiedzoneDto dto);
+        void DodajOdwiedzone(int id);
         PageResult<ZwracaneOdwiedzoneDto> PokazMojeOdwiedzone(PokazMojeOdwiedzoneDto dto);
         PageResult<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
         void DodajOpinie(DodajOpinieDto dto);
@@ -42,12 +42,12 @@ namespace APIpz.Services
             return wynik;
         }
 
-          public void DodajOdwiedzone(DodajOdwiedzoneDto dto)
+          public void DodajOdwiedzone(int id)
         {
             var urbex = _context.Miejsce
                 .Include(t=>t.Miejsce_Kategoria)
                 .Include(t=>t.Wojewodztwo)
-                .FirstOrDefault(u => u.Nazwa == dto.NazwaUrbexu);
+                .FirstOrDefault(u => u.Id == id);
             _context.Attach(urbex);
 
             var noweOdwiedzone = new Odwiedzony()
@@ -101,18 +101,29 @@ namespace APIpz.Services
 
         public void DodajOpinie(DodajOpinieDto dto)
         {
-            var odwiedzony = _context.Odwiedzone.
-                FirstOrDefault(o => o.OdwiedzonyUrbex.Id == dto.Id && o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
-            _context.Attach(odwiedzony);
-
-            var nowaOpinia = new Opinia()
+            var szukanaOpinia = _context.Opinia.FirstOrDefault(o => o.Odwiedzony.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.Odwiedzony.OdwiedzonyUrbex.Id == dto.Id);
+            if (szukanaOpinia is null)
             {
-                Odwiedzony = odwiedzony,
-                Ocena = dto.Ocena,
-                Tekst = dto.Tekst
-            };
-            _context.Opinia.Add(nowaOpinia);
-            _context.SaveChanges();
+                var odwiedzony = _context.Odwiedzone.
+                    FirstOrDefault(o => o.OdwiedzonyUrbex.Id == dto.Id && o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
+
+
+                _context.Attach(odwiedzony);
+
+                var nowaOpinia = new Opinia()
+                {
+                    Odwiedzony = odwiedzony,
+                    Ocena = dto.Ocena,
+                    Tekst = dto.Tekst
+                };
+                _context.Opinia.Add(nowaOpinia);
+            }
+            else
+            {
+                szukanaOpinia.Ocena = dto.Ocena;
+                szukanaOpinia.Tekst = dto.Tekst;
+            }
+                _context.SaveChanges();
                               
         }
 
