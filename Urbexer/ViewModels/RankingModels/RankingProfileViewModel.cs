@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
@@ -77,26 +78,40 @@ namespace Urbexer.ViewModels {
             if (profileData != null) {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
-                profilePosition = "Miejsce w rankingu #" + profileData.LeaderboardPosition.ToString();
+                profilePosition = "Miejsce w rankingu ogólnym - #" + profileData.LeaderboardPosition.ToString();
                 profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
                 profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
                 profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
             }
         }
+        public static int GetLeaderboardPositionByLogin(string login) {
+            var result = connectionService2.GetRankingList(0, httpClient2).Result;
+            List<string> tempList = new List<string>();
+            foreach (var x in result) {
+                tempList.Add(x.login);
+            }
+            var index = tempList.IndexOf(login);
+            if (index != -1) {
+                return index + 1;
+            }
+            else {
+                return 0;
+            }
+        }
         public void OnClickedInstagram() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
-                Launcher.TryOpenAsync(new Uri(UserInfo.yourProfile.InstagramLink));
+                Browser.OpenAsync(new Uri(UserInfo.yourProfile.InstagramLink));
             }
         }
         public void OnClickedYoutube() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.YoutubeLink)) {
-                Launcher.TryOpenAsync(new Uri(UserInfo.yourProfile.YoutubeLink));
+                Browser.OpenAsync(new Uri(UserInfo.yourProfile.YoutubeLink));
             }
         }
         public void OnClickedFacebook() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.FacebookLink)) {
-                Launcher.TryOpenAsync(new Uri(UserInfo.yourProfile.FacebookLink));
+                Browser.OpenAsync(new Uri(UserInfo.yourProfile.FacebookLink));
             }
         }
         public static string GetAvatarByLayout(int layout) {

@@ -105,7 +105,7 @@ namespace Urbexer.ViewModels {
             else if (tempList.FindIndex(x => x.Login == UserInfo.Login) == -1) {
                 temp += "brak danych";
             } else {
-                temp += (tempList.FindIndex(x => x.Login == UserInfo.Login) + 1).ToString();
+                temp += "#" + (tempList.FindIndex(x => x.Login == UserInfo.Login) + 1).ToString();
             }
             return temp;
         }
@@ -136,9 +136,11 @@ namespace Urbexer.ViewModels {
         }
         public async void GoToProfileClicked() {
             ProfileData profileData = await ConnectionService.GetProfileByLogin(Login, httpClient);
+            profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login);
             RankingProfileViewModel.FillProfile(profileData);
             await Shell.Current.GoToAsync(nameof(RankingProfile));
         }
+
         #endregion
     }
 }
