@@ -40,7 +40,7 @@ namespace Urbexer.Services {
             string path = "/api/urbex/pokazOpinieDoMiejsca";
             string args = string.Format("?Id={0}&PageNumber={1}&PageSize={2}",
                 locationId, pageNumber, pageSize);
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            //string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
 
             // poniższy segment to placeholder
             List<Review> output = new List<Review>();

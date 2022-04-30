@@ -26,10 +26,12 @@ namespace Urbexer.Services {
                 RequestUri = new Uri(uri),
                 Content = new StringContent(json, Encoding.UTF8, "application/json"),
             };
+            /*
             if (UserInfo.LoginToken != null)
                 //request.Headers.Add("Authorization", UserInfo.LoginToken);
                 //request.Headers.Add("Authorization", "Bearer " + UserInfo.LoginToken);
                 request.Headers.Add("Bearer", UserInfo.LoginToken);
+            */
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return await response.Content.ReadAsStringAsync();
