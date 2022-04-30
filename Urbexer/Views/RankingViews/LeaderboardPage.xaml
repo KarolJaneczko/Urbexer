@@ -144,6 +144,10 @@
                                                FontSize="30" 
                                                FontAttributes="Bold" 
                                                VerticalOptions="Center"/>
+                                        <Button Text="Podgląd"
+                                                FontSize="10"
+                                                IsEnabled="True"
+                                                Command="{Binding goToProfile}"/>
                                     </StackLayout>
                                 </Grid>
                             </Frame>

@@ -5,7 +5,6 @@ using Urbexer.Models;
 using Urbexer.Models.ApiModels;
 using Newtonsoft.Json;
 using Urbexer.Models.UserModels;
-using System.Net.Http.Headers;
 using System.Collections.Generic;
 
 namespace Urbexer.Services {
