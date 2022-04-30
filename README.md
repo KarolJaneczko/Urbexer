@@ -1,5 +1,5 @@
 # Urbexer
-Urbexer to aplikacja mobilna skierowana na telefony z systemem Android zrealizowana w ramach przedmiotu _Programowanie Zespołowe_.
+Urbexer to aplikacja mobilna skierowana na telefony z systemem Android zrealizowana w ramach przedmiotu _Programowanie Zespołowe_ III roku studiów informatycznych na Uniwersytecie Mikołaja Kopernika w Toruniu.
 
 Aplikacja jest skierowana do osób zainteresowanych pozyskaniem informacji o najbliższych miejscach do uprawiania [urban exploringu]. Korzystanie z aplikacji jest darmowe a twórcy aplikacji nie uzyskują żadnych korzyści finansowych z udostępniania aplikacji.<br><br>
 Skład zespołu:
