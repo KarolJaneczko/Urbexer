@@ -4,41 +4,52 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:locationviews="clr-namespace:Urbexer.Views.LocationViews"
-    Shell.TabBarIsVisible="False"
     Title="Napisz Recenzję"
-    x:DataType="locationviews:WriteReviewPage">
+    x:DataType="locationviews:WriteReviewPage"
+    Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout.Background>
                 <LinearGradientBrush>
                     <GradientStopCollection>
-                        <GradientStop Color="#161616" Offset="0"/>
-                        <GradientStop Color="#363636" Offset="1"/>
+                        <GradientStop Offset="0" Color="#161616" />
+                        <GradientStop Offset="1" Color="#363636" />
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </StackLayout.Background>
-            <StackLayout BackgroundColor="#ffffff" Margin="10,0,10,0" Padding="0,0,0,10" >
-            <Label HorizontalOptions="CenterAndExpand" 
-                   Text="{Binding LocationName}"
-                   FontAttributes="Bold"
-                   TextColor="#BF0603"
-                   FontSize="24"/>
-            <!--<Label IsVisible="false" Text="{Binding Path=LocationId, StringFormat='Id: {0}'}" />-->
+            <StackLayout
+                Margin="10,0,10,0"
+                Padding="0,0,0,10"
+                BackgroundColor="#ffffff">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding LocationName}"
+                    TextColor="#BF0603" />
                 <Frame>
                     <Frame Padding="2">
                         <StackLayout HorizontalOptions="CenterAndExpand">
-                            <Label Text="Ocena" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
-
-                            <StackLayout Orientation="Horizontal" Grid.Column="1"  Grid.Row="1"  HorizontalOptions="Center">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                HorizontalOptions="Center"
+                                Text="Ocena" />
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                Orientation="Horizontal">
                                 <Frame Padding="10,0,10,0">
-                                    <Picker FontAttributes="Bold" 
-                                             TextColor="#363636"
-                                             SelectedItem="None"
-                                             HorizontalTextAlignment="Center"
-                                             x:Name="ScoreQuality"
-                                             Title="0"
-                                             Grid.Row="1"
-                                             FontSize="40">
+                                    <Picker
+                                        x:Name="ScoreQuality"
+                                        Title="-"
+                                        Grid.Row="1"
+                                        FontAttributes="Bold"
+                                        FontSize="40"
+                                        HorizontalTextAlignment="Center"
+                                        SelectedItem="None"
+                                        TextColor="#363636">
                                         <Picker.Items>
                                             <x:String>1</x:String>
                                             <x:String>2</x:String>
@@ -48,39 +59,43 @@
                                         </Picker.Items>
                                     </Picker>
                                 </Frame>
-                                <Label Text="/ 5"  TextColor="#363636"
-                                       FontAttributes="Bold" 
-                                       VerticalOptions="Center"
-                                       FontSize="40"></Label>
-                                <Image Source="starfilledgold_icon.png"
-                                       WidthRequest="40" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    Text="/ 5"
+                                    TextColor="#363636"
+                                    VerticalOptions="Center" />
+                                <Image Source="starfilledgold_icon.png" WidthRequest="40" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
                 </Frame>
-                <Frame Margin="10"
-                       Padding="2">
+                <Frame Margin="10" Padding="2">
                     <StackLayout>
-                        <Label Text="Treść recenzji:"
-                               FontAttributes="Bold"
-                               FontSize="20" 
-                               Margin="5,0,0,0"/>
-                        <Editor AutoSize="TextChanges"
-                                IsSpellCheckEnabled="True"
-                                Keyboard="Text"
-                                MaxLength="300"
-                                Placeholder="Podziel się swoją opinią"
-                                VerticalOptions="StartAndExpand"/>  
+                        <Label
+                            Margin="5,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Text="Treść recenzji:" />
+                        <Editor
+                            x:Name="Editor"
+                            AutoSize="TextChanges"
+                            IsSpellCheckEnabled="True"
+                            Keyboard="Text"
+                            MaxLength="300"
+                            Placeholder="Podziel się swoją opinią"
+                            VerticalOptions="StartAndExpand" />
                     </StackLayout>
                 </Frame>
-                <Button Margin="50,0,50,0"
-                BackgroundColor="#BF0603"
-                CornerRadius="20"
-                FontSize="20"
-                FontAttributes="Bold"
-                Clicked="Button_Clicked"
-                Text="Upublikuj"
-                VerticalOptions="End" />
+                <Button
+                    Margin="50,0,50,0"
+                    BackgroundColor="#BF0603"
+                    Clicked="Button_Clicked"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Upublikuj"
+                    VerticalOptions="End" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

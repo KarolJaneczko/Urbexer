@@ -28,7 +28,7 @@ namespace Urbexer.Views {
             await location.LoadReviews();
             BindingContext = location;
 
-            //return;
+            return;
             if (hasVisited) {
                 MarkVisitedButton.IsVisible = false;
                 WriteReviewButton.IsVisible = true;
@@ -40,11 +40,11 @@ namespace Urbexer.Views {
         }
 
         private void GoToWriteReviewPage(object sender, System.EventArgs e) {
-            var route = $"{nameof(WriteReviewPage)}?LocationId={LocationId}&LocationName={location.Name}";
+            var route = $"{nameof(WriteReviewPage)}?LocationId={location.Id}&LocationName={location.Name}";
             Shell.Current.GoToAsync(route);
         }
         private async void MarkVisited(object sender, System.EventArgs e) {
-            await ReviewService.MarkLocationAsVisited(location.Name);
+            await ReviewService.MarkLocationAsVisited(location.Id);
         }
 
         private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
