@@ -43,7 +43,7 @@
                 </LinearGradientBrush>
             </ScrollView.Background>
 
-            <Frame BackgroundColor="#21ffffff"
+            <Frame BackgroundColor="#aaffffff"
                    Padding="5"
                    CornerRadius="25">
             <Grid x:Name="MainGrid" RowSpacing="30" ColumnSpacing="25" >
