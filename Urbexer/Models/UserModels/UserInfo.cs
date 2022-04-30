@@ -10,7 +10,10 @@ namespace Urbexer.Models {
             get => AppSettings.GetValueOrDefault(nameof(Login), null);
             set => AppSettings.AddOrUpdateValue(nameof(Login), value);
         }
-        public static string LoginToken { get; set; }
+        public static string LoginToken {
+            get => AppSettings.GetValueOrDefault(nameof(LoginToken), null);
+            set => AppSettings.AddOrUpdateValue(nameof(LoginToken), value);
+        }
         public static bool IsAdmin { get; set; }
         public static Position CurrentPosition = new Position(53.0138, 18.5984);
         public static ProfileData yourProfile;
