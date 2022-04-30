@@ -57,7 +57,7 @@ namespace Urbexer.ViewModels {
             get { return editLayout; }
             set {
                 editLayout = value;
-                profileAvatarSource = ProfileViewModel.GetAvatarByLayout(ProfileData.GetLayoutNumberFromName(editLayout));
+                profileAvatarSource = RankingProfileViewModel.GetAvatarByLayout(ProfileData.GetLayoutNumberFromName(editLayout));
                 PropertyChanged(this, new PropertyChangedEventArgs("EditLayout"));
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileAvatarSource"));
             }
@@ -107,7 +107,7 @@ namespace Urbexer.ViewModels {
             editYoutube = myProfile.YoutubeLink;
             editInstagram = myProfile.InstagramLink;
             editLayout = ProfileData.GetLayoutNameFromNumber(myProfile.ProfileLayout);
-            profileAvatarSource = ProfileViewModel.GetAvatarByLayout(myProfile.ProfileLayout);
+            profileAvatarSource = RankingProfileViewModel.GetAvatarByLayout(myProfile.ProfileLayout);
         }
     }
 }

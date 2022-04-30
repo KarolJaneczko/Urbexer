@@ -5,7 +5,7 @@ using Urbexer.Models;
 using Urbexer.Models.ApiModels;
 using Newtonsoft.Json;
 using Urbexer.Models.UserModels;
-using System.Net.Http.Headers;
+using System.Collections.Generic;
 
 namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
@@ -52,6 +52,16 @@ namespace Urbexer.Services {
                 return true;
             else
                 return false;
+        }
+        public async Task<List<APIRanking>> GetRankingList(int type, HttpClient httpClient) {
+            string result;
+            if (type == 0) {
+                result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/").Result.Content.ReadAsStringAsync();
+            } else {
+                result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/WedlugKategorii?kategoriaId=" + type).Result.Content.ReadAsStringAsync();
+            }
+            var resultList = JsonConvert.DeserializeObject<List<APIRanking>>(result);
+            return resultList;
         }
         #endregion
         #region Pomocnicze metody
