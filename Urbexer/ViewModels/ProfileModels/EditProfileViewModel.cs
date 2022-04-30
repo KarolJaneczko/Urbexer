@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.UserModels;
-using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -71,9 +70,12 @@ namespace Urbexer.ViewModels {
         }
         public ICommand SubmitEdit { protected set; get; }
         #endregion
+        #region Konstruktory
         public EditProfileViewModel() {
             SubmitEdit = new Command(OnSubmit);
         }
+        #endregion
+        #region Metody
         public async void OnSubmit() {
             try {
                 ValidateLength(EditFirstName, "Imię", "e", 20);
@@ -85,7 +87,7 @@ namespace Urbexer.ViewModels {
                 var layout = ProfileData.GetLayoutNumberFromName(EditLayout);
                 if (await connectionService.UpdateProfile(new Models.ApiModels.APIedytujProfil(UserInfo.Login, EditFirstName,
                     EditLastName, EditDescription, EditFacebook, EditInstagram, EditYoutube, layout), httpClient)) {
-                    await ProfileViewModel.RefreshProfileAsync();
+                    await ProfileViewModel.RefreshProfile();
                     await Shell.Current.GoToAsync("..");
                 }
                 else {
@@ -109,5 +111,6 @@ namespace Urbexer.ViewModels {
             editLayout = ProfileData.GetLayoutNameFromNumber(myProfile.ProfileLayout);
             profileAvatarSource = RankingProfileViewModel.GetAvatarByLayout(myProfile.ProfileLayout);
         }
+        #endregion
     }
 }
