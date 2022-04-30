@@ -1,5 +1,15 @@
-# Urbexer - aplikacja mobilna w ramach przedmiotu Programowanie Zespołowe
+# Urbexer
+Urbexer to aplikacja mobilna skierowana na telefony z systemem Android zrealizowana w ramach przedmiotu _Programowanie Zespołowe_.
 
+Aplikacja jest skierowana do osób zainteresowanych pozyskaniem informacji o najbliższych miejscach do uprawiania [urban exploringu]. Korzystanie z aplikacji jest darmowe a twórcy aplikacji nie uzyskują żadnych korzyści finansowych z udostępniania aplikacji.
+Skład zespołu:
+- Michał Burzański - opiekun zespołu.
+- Marcin Woźniak (@MarcinWozniak345) - kierownik zespołu, API.
+- Monika Banaszczak (@MonikaBanaszczak) - sekretarz zespołu, baza danych.
+- Bartosz Jarząb (@bartekjarzab) - front-end, grafiki.
+- Bartosz Mierzyński (@imwpe) - back-end.
+- Bartłomiej Płókarz (@TheEggmo) - front-end, back-end.
+- Karol Janeczko (@KarolJaneczko) - front-end, back-end.
 
 Źródła grafik\
 Ekran powitalny & logowanie z rejestracją:
@@ -11,3 +21,6 @@ Ekran powitalny & logowanie z rejestracją:
   - https://www.pexels.com/photo/set-of-various-supplies-for-traveling-4993235/ kit
   - https://www.pexels.com/photo/person-wearing-blue-denim-jeans-above-black-surface-92236/ tips
   - https://www.pexels.com/photo/graffiti-painted-on-wall-in-abandoned-building-1029696/
+
+
+[urban exploringu]: https://pl.wikipedia.org/wiki/Urban_exploration
