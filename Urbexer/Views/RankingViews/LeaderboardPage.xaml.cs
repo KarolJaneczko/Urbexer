@@ -8,5 +8,8 @@ namespace Urbexer.Views {
             Routing.RegisterRoute(nameof(RankingProfile), typeof(RankingProfile));
             BindingContext = new LeaderboardViewModel();
         }
+        protected override void OnAppearing() {
+            BindingContext = new LeaderboardViewModel();
+        }
     }
 }

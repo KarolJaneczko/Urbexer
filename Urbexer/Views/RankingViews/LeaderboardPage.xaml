@@ -94,16 +94,19 @@
                                    HorizontalOptions="Center"
                                    Padding="0"
                                    IsClippedToBounds="True">
-                                <Image Source="app_icon" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Image Source="{Binding LeaderboardMyAvatar}" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Frame>
                         </Frame>
-                        <Label Text="Kulfoneek"
+                        <Label Text="{Binding LeaderboardMyLogin}"
                                TextColor="Gold"
                                LineBreakMode="WordWrap"
                                TextTransform="Uppercase"
                                FontAttributes="Bold"
                                FontSize="Large" 
                                HorizontalOptions="Center"/>
+                        <Label Text="{Binding LeaderboardMyPlace}"
+                               TextColor="Black"
+                               FontSize="Large"/>
                     </StackLayout>
                 </Grid>
             </StackLayout>
@@ -123,7 +126,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label Text="{Binding login}" 
+                                    <Label Text="{Binding Login}" 
                                            TextColor="#757575" 
                                            FontSize="12"
                                            VerticalOptions="Center" 
@@ -139,7 +142,7 @@
                                                  Margin="20,0"
                                                  HorizontalOptions="End" 
                                                  VerticalOptions="Center">
-                                        <Label Text="{Binding liczbaMiejsc}"
+                                        <Label Text="{Binding LiczbaMiejsc}"
                                                TextColor="Black"
                                                FontSize="30" 
                                                FontAttributes="Bold" 
@@ -147,7 +150,7 @@
                                         <Button Text="Podgląd"
                                                 FontSize="10"
                                                 IsEnabled="True"
-                                                Command="{Binding goToProfile}"/>
+                                                Command="{Binding GoToProfile}"/>
                                     </StackLayout>
                                 </Grid>
                             </Frame>

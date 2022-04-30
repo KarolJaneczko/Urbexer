@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.Enums;
 using Urbexer.Models.UserModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -85,17 +86,17 @@ namespace Urbexer.ViewModels {
         }
         public void OnClickedInstagram() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
-                Device.OpenUri(new Uri(UserInfo.yourProfile.InstagramLink));
+                Launcher.TryOpenAsync(new Uri(UserInfo.yourProfile.InstagramLink));
             }
         }
         public void OnClickedYoutube() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.YoutubeLink)) {
-                Device.OpenUri(new Uri(UserInfo.yourProfile.YoutubeLink));
+                Launcher.TryOpenAsync(new Uri(UserInfo.yourProfile.YoutubeLink));
             }
         }
         public void OnClickedFacebook() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.FacebookLink)) {
-                Device.OpenUri(new Uri(UserInfo.yourProfile.FacebookLink));
+                Launcher.TryOpenAsync(new Uri(UserInfo.yourProfile.FacebookLink));
             }
         }
         public static string GetAvatarByLayout(int layout) {
