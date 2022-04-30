@@ -89,7 +89,7 @@ namespace Urbexer.ViewModels {
                     temp += "'Militarne'";
                     break;
                 case 11:
-                    temp += "'Szpitalne'";
+                    temp += "'Szpitale'";
                     break;
                 case 12:
                     temp += "'Tunele'";
