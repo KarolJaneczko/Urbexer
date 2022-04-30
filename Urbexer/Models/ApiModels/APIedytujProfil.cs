@@ -1,4 +1,5 @@
 ﻿using System;
+#nullable enable
 
 namespace Urbexer.Models.ApiModels {
     public class APIedytujProfil {
