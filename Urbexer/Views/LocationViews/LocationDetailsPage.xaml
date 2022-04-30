@@ -88,6 +88,7 @@
                 <StackLayout
                     Margin="10,-6,10,20"
                     Padding="0,0,0,20"
+                    x:DataType="models:LocationDetailed"
                     BackgroundColor="White">
                     <!--#region Wspolrzedne-->
 
@@ -122,9 +123,9 @@
                                     BackgroundColor="Black"
                                     CornerRadius="50"
                                     HeightRequest="65"
+                                    Pressed="OpenGoogleMapsOnLocation"
                                     Source="navigate_icon"
-                                    VerticalOptions="Center" 
-                                    Pressed="OpenGoogleMapsOnLocation"/>
+                                    VerticalOptions="Center" />
                                 <StackLayout
                                     Grid.Column="2"
                                     HorizontalOptions="Center"
@@ -203,7 +204,7 @@
                             <Label
                                 Grid.Column="1"
                                 FontSize="15"
-                                Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+                                Text="{Binding Description}" />
                         </Grid>
                     </Frame>
                     <!--#endregion-->
@@ -230,7 +231,7 @@
                                 Grid.Column="1"
                                 FontAttributes="Bold"
                                 FontSize="25"
-                                Text="Kategoria"
+                                Text="{Binding CategoryName}"
                                 TextColor="#BF0603"
                                 VerticalOptions="Center" />
                         </Grid>

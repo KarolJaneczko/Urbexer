@@ -16,8 +16,12 @@ namespace Urbexer.Models {
             // Natomiast jeżeli stworzyłem klasę która przechowuje string i binduję do kolekcji tej klasy to działa
             public string Link { get; set; }
         }
+        private int currentReviewsPage = 0; // Używane w LoadMoreReviews()
         public LocationDetailed() : base(){ }
         public LocationDetailed(APILocation apiLocation) : base(apiLocation){
+            if (!string.IsNullOrEmpty(apiLocation.opis)) 
+                Description = apiLocation.opis;
+
             ImageLinks = new ObservableRangeCollection<ImageLink>() {
             new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" },
             new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967839054794223646/20211017_131032-100x100.jpg" },
@@ -25,8 +29,10 @@ namespace Urbexer.Models {
             new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967840380840210532/279028066_708718033656815_8015671028846047975_n.jpg" },
             };
         }
-        public async Task LoadReviews() {
-            Reviews = new ObservableRangeCollection<Review>(await ReviewService.GetReviews(Id, 1, 50));
+        public async Task LoadMoreReviews() {
+            if (Reviews == null)
+                Reviews = new ObservableRangeCollection<Review>();
+            Reviews.AddRange(new ObservableRangeCollection<Review>(await ReviewService.GetReviews(Id, ++currentReviewsPage, 50)));
         }
     }
 }

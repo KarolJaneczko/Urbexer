@@ -26,7 +26,7 @@ namespace Urbexer.Views {
         private async Task PreparePage() {
             // Pobierz dane i ustaw binding
             location = await LocationService.GetLocationByIdDetailed(int.Parse(LocationId));
-            await location.LoadReviews();
+            await location.LoadMoreReviews();
             BindingContext = location;
 
             return;
@@ -48,8 +48,8 @@ namespace Urbexer.Views {
             await ReviewService.MarkLocationAsVisited(location.Id);
         }
 
-        private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
-            //Wczytaj więcej recenzji
+        private async Task CollectionView_RemainingItemsThresholdReachedAsync(object sender, System.EventArgs e) {
+            await location.LoadMoreReviews();
         }
 
         private async void OpenGoogleMapsOnLocation(object sender, System.EventArgs e) {
