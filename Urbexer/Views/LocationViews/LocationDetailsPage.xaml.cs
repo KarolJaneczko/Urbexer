@@ -48,8 +48,8 @@ namespace Urbexer.Views {
             await ReviewService.MarkLocationAsVisited(location.Id);
         }
 
-        private async Task CollectionView_RemainingItemsThresholdReachedAsync(object sender, System.EventArgs e) {
-            await location.LoadMoreReviews();
+        private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
+            Task.Run(async () => await location.LoadMoreReviews());
         }
 
         private async void OpenGoogleMapsOnLocation(object sender, System.EventArgs e) {

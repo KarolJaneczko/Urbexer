@@ -116,7 +116,7 @@
                                         Text="{Binding Path=Position.Latitude, StringFormat='{0:F4}'}"
                                         TextColor="Black" />
                                 </StackLayout>
-                                <!--  Przycisk do nawigacji jeśli uda Ci się obsluzyc  -->
+                                <!--  Przycisk do nawigacji -->
                                 <ImageButton
                                     Grid.Column="1"
                                     Padding="0,10,5,0"
@@ -226,7 +226,6 @@
                                         WidthRequest="35" />
                                 </Frame>
                             </StackLayout>
-                            <!--  tu powiązanie  -->
                             <Label
                                 Grid.Column="1"
                                 FontAttributes="Bold"
