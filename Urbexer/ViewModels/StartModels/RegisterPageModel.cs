@@ -53,7 +53,7 @@ namespace Urbexer.ViewModels {
                 ValidatePassword(Password);
                 if (string.Equals(password, passwordRepeat)) {
                     if (await connectionService.Register(new RegisterUser {
-                        email = Email,
+                        email = Email.Trim(),
                         login = Login,
                         potwierdzHaslo = Password,
                         hasloHash = PasswordRepeat,
