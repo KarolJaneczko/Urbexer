@@ -19,10 +19,10 @@ namespace APIpz.Controllers
             _urbexService = urbexService;
         }
 
-        [HttpPut("dodajodwiedzone")]
-        public ActionResult DodajOdwiedzone([FromBody] DodajOdwiedzoneDto dto)
+        [HttpPut("dodajOdwiedzone")]
+        public ActionResult DodajOdwiedzone([FromQuery] int id)
         {
-            _urbexService.DodajOdwiedzone(dto);
+            _urbexService.DodajOdwiedzone(id);
             return Ok();
         }
         [HttpGet("pokazMojeOdwiedzone")]
@@ -31,7 +31,7 @@ namespace APIpz.Controllers
             var wynik = _urbexService.PokazMojeOdwiedzone(dto);
             return Ok(wynik);
         }
-        [HttpGet("pokazOninieDoMiejsca")]
+        [HttpGet("pokazOpinieDoMiejsca")]
         public ActionResult<PageResult<OpiniaDto>> PokazOninieDoMiejsca([FromQuery] PokazOpinieDoMiejscaDto dto)
         {
             var wynik = _urbexService.PokazOpinieDoMiejsca(dto);
