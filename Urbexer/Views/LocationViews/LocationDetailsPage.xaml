@@ -123,7 +123,8 @@
                                     CornerRadius="50"
                                     HeightRequest="65"
                                     Source="navigate_icon"
-                                    VerticalOptions="Center" />
+                                    VerticalOptions="Center" 
+                                    Pressed="OpenGoogleMapsOnLocation"/>
                                 <StackLayout
                                     Grid.Column="2"
                                     HorizontalOptions="Center"

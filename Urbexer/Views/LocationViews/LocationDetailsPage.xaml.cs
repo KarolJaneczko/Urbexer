@@ -2,6 +2,7 @@
 using Urbexer.Models;
 using Urbexer.Services;
 using Urbexer.Views.LocationViews;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -49,6 +50,10 @@ namespace Urbexer.Views {
 
         private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
             //Wczytaj więcej recenzji
+        }
+
+        private async void OpenGoogleMapsOnLocation(object sender, System.EventArgs e) {
+            await Map.OpenAsync(location.Position.Latitude, location.Position.Longitude);
         }
     }
 }
