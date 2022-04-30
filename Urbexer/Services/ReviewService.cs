@@ -19,7 +19,7 @@ namespace Urbexer.Services {
         public static async Task MarkLocationAsVisited(int id) {
             string path = "/api/urbex/dodajOdwiedzone";
             string args = "?id=" + id;
-            await HttpService.SendApiRequest(HttpMethod.Put, path + args);
+            await HttpService.SendApiRequest(HttpMethod.Put, path + args, requresToken:true);
         }
         // Wystaw recenzję lokacji o danym id
         public static async Task PostReview(int locationId, int scoreQuality, string reviewMessage) {
@@ -31,7 +31,7 @@ namespace Urbexer.Services {
                 locationId,
                 scoreQuality,
                 reviewMessage);
-            await HttpService.SendApiRequest(HttpMethod.Put, path, json);
+            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requresToken:true);
         }
         // Pobierz recenzje lokacji o danym id
         // pageNumber decyduje którą stronę recenzji z kolei pobierać, poczynając od 1
