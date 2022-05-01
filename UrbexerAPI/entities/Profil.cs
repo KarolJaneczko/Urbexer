@@ -6,9 +6,8 @@ namespace APIpz.Entities
     public class Profil
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-        public int Id { get; set; }
+        public int UzytkownikId { get; set; }
 
         public Uzytkownik Uzytkownik { get; set; }
 
