@@ -23,7 +23,7 @@ namespace Urbexer.Views.LocationViews {
         }
 
         private async void Button_Clicked(object sender, EventArgs e) {
-            int score = ScoreQuality.SelectedIndex;
+            int score = ScoreQuality.SelectedIndex + 1; // +1, bo indeks jest o 1 mniejszy niż ocena
             if (score == -1) {
                 // Jeżeli użytkownik nie wybrał żadnej oceny
                 await DisplayAlert("Podaj ocenę", "Przed wysłaniem recenzji musisz podać ocenę", "OK");

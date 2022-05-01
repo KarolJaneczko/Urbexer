@@ -39,8 +39,9 @@ namespace Urbexer.Services {
         // Dodaj token autoryzacji
         // Zwraca true jeżeli autoryzacja jest dodana, false w przeciwnym wypadku
         static private bool TryAddAuthorization() {
-            if (httpClient.DefaultRequestHeaders.Authorization.Parameter != null
-                & httpClient.DefaultRequestHeaders.Authorization.Scheme != null)
+            if (httpClient.DefaultRequestHeaders.Authorization != null
+                && httpClient.DefaultRequestHeaders.Authorization.Scheme != null
+                && httpClient.DefaultRequestHeaders.Authorization.Parameter != null)
                 return true; // Token autoryzacji już jest ustawiony
             if (UserInfo.LoginToken != null) {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);

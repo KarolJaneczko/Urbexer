@@ -14,10 +14,25 @@
                 <Setter Property="Margin" Value="30,-10,30,0"/>
                 <Setter Property="CornerRadius" Value="5"/>
             </Style>
+            <Style x:Key="ramkaGlowna" TargetType="Frame">
+                <Setter Property="Margin" Value="15,0,15,0"/>
+                <Setter Property="CornerRadius" Value="20"/>
+            </Style>
             <Style x:Key="SocialIcon" TargetType="Image">
                 <Setter Property="HeightRequest" Value="35"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="Grid.Row" Value="1"/>
+                <Setter Property="Grid.Column" Value="2"/>
+            </Style>
+            <Style x:Key="ikonaNaglowka" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill"/>
+                <Setter Property="HeightRequest" Value="35"/>
+                <Setter Property="WidthRequest" Value="35"/>
+            </Style>
+            <Style x:Key="ramkaIkonyNaglowka" TargetType="Frame">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="BackgroundColor"  Value="#BF0603"/>
             </Style>
             <Style x:Key="GridUserInfo" TargetType="Grid">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
@@ -32,7 +47,20 @@
             <Style x:Key="EntrySocial" TargetType="Entry">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="Keyboard" Value="Default"/>
-                <Setter Property="Grid.Row" Value="0"/>
+                <Setter Property="Grid.Row" Value="1"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Grid.ColumnSpan" Value="2"/>
+            </Style>
+            <Style x:Key="naglowek" TargetType="Label">
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style x:Key="gridSocial" TargetType="Grid">
+                <Setter Property="Grid.ColumnDefinitions" Value="*,*,Auto"/>
+                <Setter Property="Grid.RowDefinitions" Value="Auto"/>
+            
             </Style>
             
         </ResourceDictionary>
@@ -65,277 +93,160 @@
                     </Frame>
                 </Grid>
             </StackLayout>
-            <Frame Margin="15,0,15,0" CornerRadius="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Frame BackgroundColor="#BF0603" Padding="5">
-                        <Image Source="profile_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
+            
+            <!--region avatar picker-->
+            <Frame Style="{StaticResource ramkaGlowna}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                    <Frame Style="{StaticResource ramkaIkonyNaglowka}">
+                        <Image Source="profile_icon" 
+                               Style="{StaticResource ikonaNaglowka}"/>
                     </Frame>
                     <Label Text="PROFESJA" 
-                                   Grid.Column="1"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold"             
-                                   FontSize="Large" />
+                           Style="{DynamicResource naglowek}"/>
                     <Frame Grid.Column="3" Padding="2" HorizontalOptions="FillAndExpand">
-
-                        <Picker Title="Profesja"  FontAttributes="Bold" TextColor="#363636"  HorizontalTextAlignment="Center"
-                    TitleColor="Black"               
-                    SelectedItem="{Binding EditLayout}" 
-                    SelectedIndexChanged="OnPickerSelectedIndexChanged">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Domyślny</x:String>
-                                <x:String>Fotograf</x:String>
-                                <x:String>Historyk</x:String>
-                                <x:String>Łowca przygód</x:String>
-                                <x:String>Obieżyświat</x:String>
-                                <x:String>Poszukiwacz</x:String>
-                                <x:String>Włóczykij</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                        
+                        <Picker Title="Profesja" 
+                                FontAttributes="Bold"
+                                TextColor="#363636" 
+                                HorizontalTextAlignment="Center"
+                                TitleColor="Black"               
+                                SelectedItem="{Binding EditLayout}" 
+                                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Domyślny</x:String>
+                                    <x:String>Fotograf</x:String>
+                                    <x:String>Historyk</x:String>
+                                    <x:String>Łowca przygód</x:String>
+                                    <x:String>Obieżyświat</x:String>
+                                    <x:String>Poszukiwacz</x:String>
+                                    <x:String>Włóczykij</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
                     </Frame>
-
-
                 </Grid>
             </Frame>
-          
+<!--endregion-->
 
-            <xct:Expander  ExpandAnimationLength="1000">
-                <xct:Expander.Header>
-                    <Frame Margin="15,0,15,0" CornerRadius="20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="desc_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
-                            </Frame>
-                            <Label Text="OPIS" 
-                                   Grid.Column="1"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold"             
-                                   FontSize="Large" />
-                            <Image Source="expand_icon.png"
-                                   HeightRequest="35"
-                                   Grid.Column="3"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Center">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                     Value="True">
-                                        <Setter Property="Source"
-                                    Value="collapse_icon.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </Grid>
+            <!--region opis-->
+            <Frame Style="{StaticResource ramkaGlowna}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                    <Frame Style="{StaticResource ramkaIkonyNaglowka}">
+                        <Image Source="desc_icon" 
+                               Style="{StaticResource ikonaNaglowka}"/>
                     </Frame>
-                </xct:Expander.Header>
-                <xct:Expander.ContentTemplate>
-                    <DataTemplate>
+                    <Label Text="OPIS" 
+                           Style="{DynamicResource naglowek}"/>
+                </Grid>
+            </Frame>
+            <StackLayout>
+                <Frame Style="{StaticResource UserInfoStyle}">
+                    <Grid Style="{StaticResource GridUserInfo}">
                         <StackLayout>
-                            <Frame Style="{StaticResource UserInfoStyle}" HeightRequest="280">
-                                <Grid Style="{StaticResource GridUserInfo}">
-                                    <StackLayout>
-                                        <Editor x:Name="opisEditor"  
-                                                    Placeholder="Opis"
-                                                    Grid.Row="1"
-                                                    Grid.Column="1"
-                                                    AutoSize="TextChanges"
-                                                    MaxLength="255"
-                                                    Text="{Binding EditDescription}"/>
-                                        </StackLayout>
-                                    </Grid>
-                                
-                            </Frame>
+                            <Editor x:Name="opisEditor"  
+                                    Placeholder="Opis"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    AutoSize="TextChanges"
+                                    MaxLength="255"
+                                    Text="{Binding EditDescription}"/>
                         </StackLayout>
-                    </DataTemplate>
-                </xct:Expander.ContentTemplate>
-            </xct:Expander>
-
-            <xct:Expander  ExpandAnimationLength="1000">
-            <xct:Expander.Header>
-                <Frame Margin="15,0,15,0" CornerRadius="20">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="profiledetails_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
-                            </Frame>
-                        <Label Text="DANE OSOBOWE" 
-                                   Grid.Column="1"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold"             
-                                   FontSize="Large" />
-                        <Image Source="expand_icon.png"
-                                   HeightRequest="35"
-                                   Grid.Column="3"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Center">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                     Value="True">
-                                    <Setter Property="Source"
-                                    Value="collapse_icon.png" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
                     </Grid>
                 </Frame>
-            </xct:Expander.Header>
-            <xct:Expander.ContentTemplate>
-                <DataTemplate>
+             </StackLayout>
+                    <!--endregion-->
+            
+            <!--region Dane Osobowe-->
+            <Frame Style="{StaticResource ramkaGlowna}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                    <Frame Style="{StaticResource ramkaIkonyNaglowka}">
+                        <Image Source="profiledetails_icon" 
+                               Style="{StaticResource ikonaNaglowka}"/>
+                    </Frame>
+                    <Label Text="DANE OSOBOWE" 
+                           Style="{DynamicResource naglowek}"/>
+                </Grid>
+            </Frame>
+            <StackLayout>
+                  <Frame Style="{StaticResource UserInfoStyle}">
                     <StackLayout>
-                            <Frame Style="{StaticResource UserInfoStyle}">
-                                <Grid Style="{StaticResource GridSocial}">
-                                    <Entry x:Name="entryName"
-                                           Text="{Binding EditFirstName}"
-                                           Placeholder="Imię"
-                                           FontSize="20"
-                                           Style="{StaticResource EntrySocial}"/>
-                                    <Entry x:Name="entrySurname"
+                        <Label Text="Imię" Margin="0,0,0,-12"/>
+                        <Entry x:Name="entryName"
+                               Text="{Binding EditFirstName}"
+                               Placeholder="Imię"
+                               FontSize="20"
+                               Style="{StaticResource EntrySocial}"/>
+                        <Label Text="Nazwisko" Margin="0,0,0,-12"/>
+                        <Entry x:Name="entrySurname"
                            Text="{Binding EditLastName}"
-                                           FontSize="20"
-                           Grid.Row="2"
+                           FontSize="20"
                            Placeholder="Nazwisko"
                            Style="{StaticResource EntrySocial}"/>
-                                </Grid>
-                            </Frame>
                         </StackLayout>
-                </DataTemplate>
-            </xct:Expander.ContentTemplate>
-            </xct:Expander>
+                  </Frame>
+             </StackLayout>
+<!--endregion-->
 
-            <xct:Expander  ExpandAnimationLength="1000">
-                <xct:Expander.Header>
-                    <Frame Margin="15,0,15,0" CornerRadius="20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="socjal_icon" Aspect="AspectFill"  HeightRequest="35" WidthRequest="35"/>
-                            </Frame>
-                            <Label Text="SOCIAL MEDIA" 
-                                   Grid.Column="1"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold"             
-                                   FontSize="Large" />
-                            <Image Source="expand_icon.png"
-                                   HeightRequest="35"
-                                   Grid.Column="3"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Center">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                     Value="True">
-                                        <Setter Property="Source"
-                                    Value="collapse_icon.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </Grid>
+            <!--region Sociale-->
+            <Frame Style="{StaticResource ramkaGlowna}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                    <Frame Style="{StaticResource ramkaIkonyNaglowka}">
+                        <Image Source="socjal_icon" 
+                               Style="{StaticResource ikonaNaglowka}"/>
                     </Frame>
-                </xct:Expander.Header>
-                <xct:Expander.ContentTemplate>
-                    <DataTemplate>
-                        <Frame Style="{StaticResource UserInfoStyle}">
-                            <StackLayout>
+                    <Label Text="SOCIAL MEDIA" 
+                           Style="{DynamicResource naglowek}"/>
+                </Grid>
+            </Frame>
 
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Entry x:Name="entryInstagramLink" 
+            <Frame Style="{StaticResource UserInfoStyle}">
+                <StackLayout>
+                    <Grid Style="{DynamicResource gridSocial}">
+                        <Entry x:Name="entryInstagramLink" 
                                            Grid.Column="0" 
                                            Grid.Row="1"  
                                            Grid.ColumnSpan="2"
                                            Placeholder="http://www.instagram.com"
                                            Text="{Binding EditInstagram}"
                                            Style="{StaticResource EntrySocial}"/>
-                                    <Image Source="instagram_icon" 
-                                           Style="{StaticResource SocialIcon}" 
-                                           Grid.Row="1" 
-                                           Grid.Column="2"/>
-                                </Grid>
-
-
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Entry x:Name="entryFacebookLink" 
+                        <Image Source="instagram_icon" 
+                               Style="{StaticResource SocialIcon}"/>
+                    </Grid>
+                    <Grid Style="{DynamicResource gridSocial}">
+                        <Entry x:Name="entryFacebookLink" 
                                            Grid.Column="0" 
                                            Grid.Row="1"  
                                            Grid.ColumnSpan="2"
                                            Placeholder="http://www.facebook.com"
                                            Text="{Binding EditFacebook}"
                                            Style="{StaticResource EntrySocial}"/>
-                                    <Image Source="facebook_icon" 
-                                           Style="{StaticResource SocialIcon}" 
-                                           Grid.Row="1" 
-                                           Grid.Column="2"/>
-                                </Grid>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                 
-                                    <Entry x:Name="entryYoutubeLink" 
+                        <Image Source="facebook_icon" 
+                               Style="{StaticResource SocialIcon}"/>
+                    </Grid>
+
+                    <Grid Style="{DynamicResource gridSocial}">
+                        <Entry x:Name="entryYoutubeLink" 
                                            Grid.Column="0" 
                                            Grid.Row="1"  
                                            Grid.ColumnSpan="2"
                                            Placeholder="http://www.youtube.com"
                                            Text="{Binding EditYoutube}"
                                            Style="{StaticResource EntrySocial}"/>
-                                    <Image Source="youtube_icon" 
-                                           Style="{StaticResource SocialIcon}" 
-                                           Grid.Row="1" 
-                                           Grid.Column="2"/>
-                                    </Grid>
-
-                                
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </xct:Expander.ContentTemplate>
-            </xct:Expander>
-
+                        <Image Source="youtube_icon" 
+                               Style="{StaticResource SocialIcon}"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <!--endregion-->
             
-            <Button Text="ZAPISZ PROFIL" Command="{Binding SubmitEdit}" IsEnabled="True" Margin="30" CornerRadius="25" FontSize="20"/>
+            <Button Text="ZAPISZ PROFIL" 
+                    Command="{Binding SubmitEdit}"
+                    IsEnabled="True" 
+                    BackgroundColor="#BF0603"
+                    FontAttributes="Bold"
+                    Margin="30" 
+                    CornerRadius="25"
+                    FontSize="20"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>
