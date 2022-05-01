@@ -154,7 +154,7 @@
                                            BackgroundColor="#BF0603">
                                         <Frame  Padding="0"
                                                 CornerRadius="50">
-                                            <Image Source="obiezyswiat_avatar.png"/>
+                                            <Image Source="{Binding AvatarSource}"/>
                                         </Frame>
                                     </Frame>
                                     

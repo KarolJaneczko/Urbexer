@@ -114,21 +114,23 @@ namespace Urbexer.ViewModels {
         #region Zmienne
         public string Login { get; set; }
         public int LiczbaMiejsc { get; set; }
+        public string AvatarSource { get; set; }
         public ICommand GoToProfile { protected set; get; }
         public System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient(ConnectionService.clientHandler);
         #endregion
         #region Konstruktory
-        public Rekord(string login, int liczbaMiejsc) {
+        public Rekord(string login, int liczbaMiejsc, int layout) {
             Login = login;
             LiczbaMiejsc = liczbaMiejsc;
             GoToProfile = new Command(GoToProfileClicked);
+            AvatarSource = ProfileViewModel.GetAvatarByLayout(layout);
         }
         #endregion
         #region Metody
         public static List<Rekord> ZmapowanaLista(List<APIRanking> list) {
             var result = new List<Rekord>();
             foreach (var x in list) {
-                var item = new Rekord(x.login, x.liczbaMiejsc);
+                var item = new Rekord(x.login, x.liczbaMiejsc, x.layout);
                 result.Add(item);
             }
             return result;
