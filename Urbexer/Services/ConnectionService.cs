@@ -53,6 +53,10 @@ namespace Urbexer.Services {
             else
                 return false;
         }
+        public async Task<int> GetVisitedPlacesCountByLogin(string login, HttpClient httpClient) {
+            var result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/pokazCzyjesOdwiedzone?Login=" + login + "&PageNumber=1&PageSize=" + sizeof(int)).Result.Content.ReadAsStringAsync();
+            return 0;
+        }
         public async Task<List<APIRanking>> GetRankingList(int type, HttpClient httpClient) {
             string result;
             if (type == 0) {
