@@ -132,6 +132,9 @@
                                    HasShadow="False">
                                 <Grid  HorizontalOptions="FillAndExpand"
                                        VerticalOptions="CenterAndExpand">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding GoToProfile}"/>
+                                    </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -169,10 +172,6 @@
                                                FontSize="30" 
                                                FontAttributes="Bold" 
                                                VerticalOptions="Center"/>
-                                        <ImageButton Source="preview_icon"
-                                                IsEnabled="True"
-                                                Command="{Binding GoToProfile}"/>
-                                  
                                 </Grid>
                             </Frame>
                             
