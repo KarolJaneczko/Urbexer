@@ -100,7 +100,7 @@ namespace Urbexer.ViewModels {
             }
             temp += " - ";
             if (tempList.Count == 0) {
-                temp += "brak danych";
+                temp += "0";
             }
             else if (tempList.FindIndex(x => x.Login == UserInfo.Login) == -1) {
                 temp += "brak danych";
