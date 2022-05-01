@@ -26,19 +26,19 @@ namespace APIpz.Services
             {
                 wynik = _context.Odwiedzone
                     .Where(x => x.OdwiedzonyUrbex.Miejsce_Kategoria.Id == kategoriaId.Value)
-                    .GroupBy(o => o.OdwiedzonePrzez.Login)
-                    .Select(t => new PozycjaWRankinguDto { Login = t.Key, LiczbaMiejsc = t.Count() })
+                    .GroupBy(o => new { o.OdwiedzonePrzez.Login, o.OdwiedzonePrzez.Profil.Layout })
+                    .Select(t => new PozycjaWRankinguDto { Login = t.Key.Login, Layout = t.Key.Layout, LiczbaMiejsc = t.Count() })
                     .OrderByDescending(o => o.LiczbaMiejsc)
-                    .Take(20)
+                    //.Take(20)
                     .ToList();
             }
             else
             {
                 wynik = _context.Odwiedzone
-                .GroupBy(o => o.OdwiedzonePrzez.Login)
-                .Select(t => new PozycjaWRankinguDto { Login = t.Key, LiczbaMiejsc = t.Count() })
+                .GroupBy(o => new { o.OdwiedzonePrzez.Login, o.OdwiedzonePrzez.Profil.Layout })
+                .Select(t => new PozycjaWRankinguDto { Login = t.Key.Login, Layout = t.Key.Layout, LiczbaMiejsc = t.Count() })
                 .OrderByDescending(o => o.LiczbaMiejsc)
-                .Take(20)
+                //.Take(20)
                 .ToList();
             }
 
