@@ -1,12 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Urbexer.Models;
+using Urbexer.Models.ApiModels;
 
 namespace Urbexer.Services {
     internal static class ReviewService {
         // Klasa do pobierania recenzji/opini o lokacjach z api
-
+        private class APIReviewPage {
+            public APIReview[] items;
+            public int totalPages;
+            public int itemFrom;
+            public int itemsTo;
+            public int totalItemsCount;
+        }
         // placeholder recenzje, ostatecznie usunąć
         private static List<Review> dummyReviews = new List<Review>() {
                 new Review(){ Score = 5, UserName = "Adam", Message = "Test"},
@@ -19,7 +27,7 @@ namespace Urbexer.Services {
         public static async Task MarkLocationAsVisited(int id) {
             string path = "/api/urbex/dodajOdwiedzone";
             string args = "?id=" + id;
-            await HttpService.SendApiRequest(HttpMethod.Put, path + args, requresToken:true);
+            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requresToken:true);
         }
         // Wystaw recenzję lokacji o danym id
         public static async Task PostReview(int locationId, int scoreQuality, string reviewMessage) {
@@ -40,12 +48,12 @@ namespace Urbexer.Services {
             string path = "/api/urbex/pokazOpinieDoMiejsca";
             string args = string.Format("?Id={0}&PageNumber={1}&PageSize={2}",
                 locationId, pageNumber, pageSize);
-            //string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            APIReviewPage page = JsonConvert.DeserializeObject<APIReviewPage>(result);
 
-            // poniższy segment to placeholder
             List<Review> output = new List<Review>();
-            foreach (Review review in dummyReviews) {
-                output.Add(review);
+            foreach (APIReview apiReview in page.items) {
+                output.Add(new Review(apiReview));
             }
             return output;
         }
