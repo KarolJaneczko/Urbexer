@@ -104,7 +104,7 @@
                     <Label Text="PROFESJA" 
                            Style="{DynamicResource naglowek}"/>
                     <Frame Grid.Column="3" Padding="2" HorizontalOptions="FillAndExpand">
-                        <Picker Title="Profesja"
+                        <Picker Title="Profesja" 
                                 FontAttributes="Bold"
                                 TextColor="#363636" 
                                 HorizontalTextAlignment="Center"
