@@ -19,7 +19,7 @@ namespace APIpz.Controllers
             _urbexService = urbexService;
         }
 
-        [HttpPut("dodajOdwiedzone")]
+        [HttpPost("dodajOdwiedzone")]
         public ActionResult DodajOdwiedzone([FromQuery] int id)
         {
             _urbexService.DodajOdwiedzone(id);
