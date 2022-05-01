@@ -49,10 +49,11 @@ namespace APIpz.Services
                // .Include(t=>t.Wojewodztwo)
                 .FirstOrDefault(u => u.Id == id);
             _context.Attach(urbex);
-
+            var odwiedzajacy = _context.Uzytkownik.FirstOrDefault(o => o.Id == (int)_userContextService.GetUserId); // dzięki JWT wyciągamy id
+            _context.Attach(odwiedzajacy);
             var noweOdwiedzone = new Odwiedzony()
             {
-                OdwiedzonePrzez = new Uzytkownik { Id = (int)_userContextService.GetUserId }, // dzięki JWT wyciągamy id
+                OdwiedzonePrzez = odwiedzajacy, 
                 OdwiedzonyUrbex = urbex
             };
 
