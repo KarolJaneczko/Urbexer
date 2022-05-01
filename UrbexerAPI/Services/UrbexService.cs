@@ -45,14 +45,15 @@ namespace APIpz.Services
           public void DodajOdwiedzone(int id)
         {
             var urbex = _context.Miejsce
-                .Include(t=>t.Miejsce_Kategoria)
-                .Include(t=>t.Wojewodztwo)
+               // .Include(t=>t.Miejsce_Kategoria)
+               // .Include(t=>t.Wojewodztwo)
                 .FirstOrDefault(u => u.Id == id);
             _context.Attach(urbex);
-
+            var odwiedzajacy = _context.Uzytkownik.FirstOrDefault(o => o.Id == (int)_userContextService.GetUserId); // dzięki JWT wyciągamy id
+            _context.Attach(odwiedzajacy);
             var noweOdwiedzone = new Odwiedzony()
             {
-                OdwiedzonePrzez = new Uzytkownik { Id = (int)_userContextService.GetUserId }, // dzięki JWT wyciągamy id
+                OdwiedzonePrzez = odwiedzajacy, 
                 OdwiedzonyUrbex = urbex
             };
 
@@ -65,6 +66,8 @@ namespace APIpz.Services
         {
             var zapytanie = _context.Odwiedzone
                                             .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .Include(o => o.OdwiedzonePrzez)
                                             .ToList();
 
             var ListaOdwiedzonych = zapytanie
@@ -83,6 +86,8 @@ namespace APIpz.Services
         {
             var zapytanie = _context.Odwiedzone
                                             .Where(o => o.OdwiedzonePrzez.Login == dto.Login)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .Include(o => o.OdwiedzonePrzez)
                                             .ToList();
 
             var ListaOdwiedzonych = zapytanie
@@ -129,8 +134,11 @@ namespace APIpz.Services
 
         public PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto)
         {
-            var zapytanie = _context.Opinia.Where(o => o.Odwiedzony.OdwiedzonyUrbex.Id == dto.Id);
-
+            var zapytanie = _context.Opinia.Where(o => o.Odwiedzony.OdwiedzonyUrbex.Id == dto.Id)
+                                            .Include(o => o.Odwiedzony)
+                                            .ThenInclude(o => o.OdwiedzonePrzez)
+                                            .Include(o => o.Odwiedzony)
+                                            .ThenInclude(o => o.OdwiedzonyUrbex);
 
             var opinie = zapytanie
                 .Skip(dto.PageSize * (dto.PageNumber - 1))

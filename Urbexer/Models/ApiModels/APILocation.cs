@@ -6,6 +6,7 @@ namespace Urbexer.Models.ApiModels {
         public int id;
         public string nazwa = "";
         public string? adres;
+        public string opis = "";
         public int kategoriaId;
         public int wojewodztwoId;
         public float wspolrzedneLAT;

@@ -51,6 +51,7 @@ namespace Urbexer.Models {
         public int CategoryId { get; set; }
         public int ProvinceId { get; set; }
         public string CategoryIconPath { get; set; }
+        public string CategoryName => CategoryDict[CategoryId];
         #endregion
 
         #region Klasy
