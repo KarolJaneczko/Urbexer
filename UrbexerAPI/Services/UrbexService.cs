@@ -66,8 +66,8 @@ namespace APIpz.Services
         {
             var zapytanie = _context.Odwiedzone
                                             .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId)
-                                            .Include(o => o.OdwiedzonyUrbex).Include(o => o.OdwiedzonyUrbex.Nazwa)
-                                            .Include(o => o.OdwiedzonePrzez).Include(o => o.OdwiedzonePrzez.Login)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .Include(o => o.OdwiedzonePrzez)
                                             .ToList();
 
             var ListaOdwiedzonych = zapytanie
@@ -86,8 +86,8 @@ namespace APIpz.Services
         {
             var zapytanie = _context.Odwiedzone
                                             .Where(o => o.OdwiedzonePrzez.Login == dto.Login)
-                                            .Include(o => o.OdwiedzonyUrbex).Include(o => o.OdwiedzonyUrbex.Nazwa)
-                                            .Include(o => o.OdwiedzonePrzez).Include(o => o.OdwiedzonePrzez.Login)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .Include(o => o.OdwiedzonePrzez)
                                             .ToList();
 
             var ListaOdwiedzonych = zapytanie
@@ -135,7 +135,10 @@ namespace APIpz.Services
         public PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto)
         {
             var zapytanie = _context.Opinia.Where(o => o.Odwiedzony.OdwiedzonyUrbex.Id == dto.Id)
-                                            .Include(o => o.Odwiedzony);
+                                            .Include(o => o.Odwiedzony)
+                                            .ThenInclude(o => o.OdwiedzonePrzez)
+                                            .Include(o => o.Odwiedzony)
+                                            .ThenInclude(o => o.OdwiedzonyUrbex);
 
             var opinie = zapytanie
                 .Skip(dto.PageSize * (dto.PageNumber - 1))
