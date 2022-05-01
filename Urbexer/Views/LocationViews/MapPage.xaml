@@ -6,7 +6,6 @@
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="Mapa"
     x:DataType="viewmodels:MapViewModel">
 
@@ -22,11 +21,10 @@
             ItemsSource="{Binding LocationsFiltered}"
             MapType="Hybrid"
             VerticalOptions="Fill">
-
             <maps:Map.BindingContext>
                 <viewmodels:MapViewModel />
             </maps:Map.BindingContext>
-
+            <!--  Pinezki  -->
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="models:Location">
                     <models:DataPin
@@ -38,21 +36,16 @@
                         Position="{Binding Position}" />
                 </DataTemplate>
             </maps:Map.ItemTemplate>
+            <!--  Kółko pokazujące zasięg w którym użytkownik musi być aby oznaczyc lokacje jako odwiedzoną  -->
+            <maps:Map.MapElements>
+                <!--  Pamiętaj o kanale alfa w kolorze wypełnienia, żeby kółko nie zakrywało mapy  -->
+                <maps:Circle
+                    x:Name="Map_CurrentPinRange"
+                    FillColor="#32FF0000"
+                    StrokeColor="Red" />
+            </maps:Map.MapElements>
         </maps:Map>
-        <Frame
-            Margin="0"
-            Padding="0"
-            AbsoluteLayout.LayoutBounds="5,5,0.96,0.07"
-            AbsoluteLayout.LayoutFlags="SizeProportional"
-            CornerRadius="20"
-            HasShadow="True"
-            IsClippedToBounds="True"
-            IsVisible="false">
-            <SearchBar
-                Margin="5"
-                Background="White"
-                HorizontalOptions="Fill" />
-        </Frame>
+        <!--  Karta lokacji, pokazywana po kliknięciu na pinezkę  -->
         <Frame
             x:Name="LocationInfo"
             x:DataType="models:Location"
@@ -60,19 +53,35 @@
             AbsoluteLayout.LayoutFlags="All"
             BackgroundColor="White"
             CornerRadius="20">
-            <StackLayout Orientation="Horizontal">
+            <StackLayout x:DataType="models:Location" Orientation="Horizontal">
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                 </StackLayout.GestureRecognizers>
+                <!--  Miniaturka  -->
                 <Image
                     HorizontalOptions="Start"
                     Source="{Binding Thumbnail}"
                     WidthRequest="100" />
-                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
-                    <Label Text="{Binding Name}" VerticalOptions="Center" />
-                    <Label Text="{Binding Address}" VerticalOptions="Center" />
-
-                </StackLayout>
+                <AbsoluteLayout HorizontalOptions="FillAndExpand">
+                    <!--  Obrazek-tło  -->
+                    <Image
+                        AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HeightRequest="75"
+                        Opacity="0.2"
+                        Source="{Binding CategoryIconPath}"
+                        WidthRequest="75" />
+                    <!--  Nazwa i adres  -->
+                    <StackLayout
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center">
+                        <Label Text="{Binding Name}" VerticalOptions="Start" />
+                        <Label Text="{Binding Address}" VerticalOptions="Start" />
+                    </StackLayout>
+                </AbsoluteLayout>
+                <!--  Odległość  -->
                 <Label
                     Padding="15"
                     HorizontalOptions="End"
@@ -80,17 +89,6 @@
                     Text="{Binding Path=Distance, StringFormat='{0} km'}"
                     VerticalOptions="Center" />
             </StackLayout>
-            <!--
-            <Frame
-            x:Key="LocationCard"
-            Margin="5"
-            Padding="3"
-            CornerRadius="10"
-            VerticalOptions="FillAndExpand">
-
-            </Frame>
-            -->
         </Frame>
-
     </AbsoluteLayout>
 </ContentPage>

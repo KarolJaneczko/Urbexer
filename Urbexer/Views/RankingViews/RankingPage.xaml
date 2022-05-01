@@ -43,235 +43,196 @@
                 </LinearGradientBrush>
             </ScrollView.Background>
 
-            <Frame BackgroundColor="#aaffffff"
-                   Padding="5"
-                   CornerRadius="25">
-            <Grid x:Name="MainGrid" RowSpacing="30" ColumnSpacing="25" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+            <Frame BackgroundColor="#21ffffff" Padding="5" CornerRadius="25">
+                <Grid x:Name="MainGrid" RowSpacing="30" ColumnSpacing="25" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0" Grid.ColumnSpan="2">
+                        <Label Style="{StaticResource CategoryName}" Text="Wybierz Kategorię" FontSize="Large"/>
+                    </StackLayout>
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Kolejowe"            
+                                   Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoKolejowe}" Source="railway_icon" Padding="0,-30,0,25"/>
+                    </Grid>
 
-                <StackLayout Grid.Row="0" Grid.ColumnSpan="2">
-                    <Label Style="{StaticResource CategoryName}"
-                           Text="Wybierz Kategorię"
-                           FontSize="Large">
-                    </Label>
-                </StackLayout>
-                <Grid Grid.Column="0" Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Kolejowe"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="railway_icon"
-                                 Padding="0,-30,0,25"/>
-                </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Hotele" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoHotele}" Source="hotel_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="1" Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Hotele"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="hotel_icon"/>
-                </Grid>
+                    <Grid Grid.Column="0" Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Domy" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoDomy}" Source="house_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="0" Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Domy"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="house_icon"
-                                 />
-                </Grid>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Industrialne" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoIndustrialne}" Source="industrial_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="1" Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Industrialne"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="industrial_icon"/>
-                </Grid>
+                    <Grid Grid.Column="0" Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Restauracje i kluby" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoRestauracje}" Source="restaurant_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="0" Grid.Row="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Restauracje i kluby"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="restaurant_icon"/>
-                </Grid>
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Rolnicze" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoRolnicze}" Source="farm_icon" Padding="0,0,0,35"/>
+                    </Grid>
 
-                <Grid Grid.Column="1" Grid.Row="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Rolnicze"            
-                                   Style ="{StaticResource CategoryName}"
-                                  />
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="farm_icon"
-                                  Padding="0,0,0,35"/>
-                </Grid>
+                    <Grid Grid.Column="0" Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Zamki i pałace" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoZamki}" Source="castle_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="0" Grid.Row="4">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Zamki i pałace"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="castle_icon"/>
-                </Grid>
+                    <Grid Grid.Column="1" Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Podziemia" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoPodziemia}" Source="underground_icon" Padding="0,-20,0,30"/>
+                    </Grid>
 
-                <Grid Grid.Column="1" Grid.Row="4">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Podziemia"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="underground_icon"
-                                 Padding="0,-20,0,30"/>
-                </Grid>
+                    <Grid Grid.Column="0" Grid.Row="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Biurowce" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoBiurowce}" Source="office_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="0" Grid.Row="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Biurowce"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="office_icon"/>
-                </Grid>
+                    <Grid Grid.Column="1" Grid.Row="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Militarne" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoMilitarne}" Source="military_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="1" Grid.Row="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Militarne"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="military_icon"/>
-                </Grid>
+                    <Grid Grid.Column="0" Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Szpitale" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoSzpitale}" Source="hospital_icon"/>
+                    </Grid>
 
-                <Grid Grid.Column="0" Grid.Row="6">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Szpitale"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="hospital_icon"/>
-                </Grid>
-                
-                <Grid Grid.Column="1" Grid.Row="6">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="TUNELE"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="tunnel_icon"/>
-                </Grid>
-                
-                <Grid Grid.Column="0" Grid.Row="7">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackLayout VerticalOptions="End">
-                        <Frame Style="{StaticResource CategoryFrame}">
-                            <Label Text="Inne"            
-                                   Style ="{StaticResource CategoryName}"/>
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="other_icon"/>
-                </Grid>
+                    <Grid Grid.Column="1" Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Tunele" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoTunele}" Source="tunnel_icon"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="7">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout VerticalOptions="End">
+                            <Frame Style="{StaticResource CategoryFrame}">
+                                <Label Text="Inne" Style ="{StaticResource CategoryName}"/>
+                            </Frame>
+                        </StackLayout>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoInne}" Source="other_icon"/>
+                    </Grid>
+                    
                     <Grid Grid.Column="1" Grid.Row="7">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <StackLayout VerticalOptions="End">
                             <Frame Style="{StaticResource CategoryFrame}">
-                                <Label Text="Wszystkie"            
-                                   Style ="{StaticResource CategoryName}"/>
+                                <Label Text="Wszystkie" Style ="{StaticResource CategoryName}"/>
                             </Frame>
                         </StackLayout>
-                        <ImageButton Style="{StaticResource CategoryIcon}"
-                                 Source="summary_icon"
-                                 Padding="0,-30,0,25"/>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoWszystkie}" Source="summary_icon" Padding="0,-30,0,25"/>
                     </Grid>
-
-
+                    
                 </Grid>
             </Frame>
         </ScrollView>

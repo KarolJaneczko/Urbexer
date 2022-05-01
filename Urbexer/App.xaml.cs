@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Services;
+using Urbexer.ViewModels;
 using Urbexer.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -24,7 +25,7 @@ namespace Urbexer {
         protected override void OnStart() {
             if (UserInfo.IsLoggedIn) {
                 UserInfo.CheckedInternetConnection = false;
-                GetMyProfile();
+                ProfileViewModel.RefreshProfile();
                 System.Threading.Thread.Sleep(5);
                 Shell.Current.GoToAsync("..//HomePage");
             }
@@ -37,9 +38,6 @@ namespace Urbexer {
             if (UserInfo.IsLoggedIn) {
                 UserInfo.CheckedInternetConnection = false;
             }
-        }
-        public async Task GetMyProfile() {
-            UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
         }
         public void CheckConnection() {
             if (!CrossConnectivity.Current.IsConnected && !UserInfo.CheckedInternetConnection) {

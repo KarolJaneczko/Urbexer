@@ -28,8 +28,8 @@ namespace Urbexer.Services {
             else if (email.Length < 6) {
                 throw new AppException("Email nie może być krótszy niż 6 znaków.", AppExceptionTypeEnum.InvalidMinCredLength);
             }
-            else if (email.Length > 30) {
-                throw new AppException("Email nie może być dłuższy niż 30 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
+            else if (email.Length > 50) {
+                throw new AppException("Email nie może być dłuższy niż 50 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
             else if (CheckMailFormat(email)) {
                 throw new AppException("Zły format adresu mailowego.", AppExceptionTypeEnum.InvalidMailFormat);
@@ -74,7 +74,7 @@ namespace Urbexer.Services {
         #endregion
         #region Walidacje formatu wprowadzanych danych
         public static bool CheckMailFormat(string mail) {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10})+)$");
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,15})+)$");
             Match match = regex.Match(mail);
             if (match.Success)
                 return false;

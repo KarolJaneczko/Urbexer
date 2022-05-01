@@ -25,9 +25,7 @@ namespace Urbexer.Models.UserModels {
             InstagramLink = string.IsNullOrEmpty(apiProfile.linkInstagram) ? string.Empty : apiProfile.linkInstagram;
             YoutubeLink = string.IsNullOrEmpty(apiProfile.linkYoutube) ? string.Empty : apiProfile.linkYoutube;
             ProfileLayout = apiProfile.layout;
-            //Pozycja w rankingu - do zrobienia.
             LeaderboardPosition = 0;
-            //Ilosc zwiedzonych miejsc - do zrobienia.
             VisitedPlaces = 0;
         }
         #endregion
