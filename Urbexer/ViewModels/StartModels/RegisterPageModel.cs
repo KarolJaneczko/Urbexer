@@ -49,7 +49,7 @@ namespace Urbexer.ViewModels {
         public async void OnSubmit() {
             try {
                 ValidateLogin(Login);
-                ValidateEmail(Email);
+                ValidateEmail(Email.Trim());
                 ValidatePassword(Password);
                 if (string.Equals(password, passwordRepeat)) {
                     if (await connectionService.Register(new RegisterUser {
