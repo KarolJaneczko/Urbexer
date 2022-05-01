@@ -85,8 +85,8 @@ namespace Urbexer.ViewModels {
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
             }
         }
-        public static int GetLeaderboardPositionByLogin(string login) {
-            var result = connectionService2.GetRankingList(0, httpClient2).Result;
+        public static int GetLeaderboardPositionByLogin(string login, int type) {
+            var result = connectionService2.GetRankingList(type, httpClient2).Result;
             List<string> tempList = new List<string>();
             foreach (var x in result) {
                 tempList.Add(x.login);

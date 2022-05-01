@@ -45,7 +45,7 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
-        private List<Rekord> GetRanking() {
+        public List<Rekord> GetRanking() {
             var result = connectionService.GetRankingList(RankingType, httpClient).Result;
             var tempList = Rekord.ZmapowanaLista(result);
             return tempList;
@@ -115,6 +115,7 @@ namespace Urbexer.ViewModels {
         public string Login { get; set; }
         public int LiczbaMiejsc { get; set; }
         public string AvatarSource { get; set; }
+        public int Miejsce { get; set; }
         public ICommand GoToProfile { protected set; get; }
         public System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient(ConnectionService.clientHandler);
         #endregion
@@ -124,6 +125,7 @@ namespace Urbexer.ViewModels {
             LiczbaMiejsc = liczbaMiejsc;
             GoToProfile = new Command(GoToProfileClicked);
             AvatarSource = ProfileViewModel.GetAvatarByLayout(layout);
+            Miejsce = RankingProfileViewModel.GetLeaderboardPositionByLogin(Login, LeaderboardViewModel.RankingType);
         }
         #endregion
         #region Metody
@@ -137,7 +139,7 @@ namespace Urbexer.ViewModels {
         }
         public async void GoToProfileClicked() {
             ProfileData profileData = await ConnectionService.GetProfileByLogin(Login, httpClient);
-            profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login);
+            profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login, 0);
             RankingProfileViewModel.FillProfile(profileData);
             await Shell.Current.GoToAsync(nameof(RankingProfile));
         }

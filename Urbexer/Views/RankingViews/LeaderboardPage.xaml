@@ -114,7 +114,7 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-           
+
             <ListView x:Name="RankingLista"
                       Grid.Row="3"
                       RowHeight="75"
@@ -157,10 +157,15 @@
                                             <Image Source="{Binding AvatarSource}"/>
                                         </Frame>
                                     </Frame>
-                                    
-                                        <Label Text="{Binding LiczbaMiejsc}"
+                                    <Label Text="{Binding Miejsce}"
                                                TextColor="Black"
                                                Grid.Column="2"
+                                               FontSize="30"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+                                    <Label Text="{Binding LiczbaMiejsc}"
+                                               TextColor="Black"
+                                               Grid.Column="3"
                                                FontSize="30" 
                                                FontAttributes="Bold" 
                                                VerticalOptions="Center"/>
