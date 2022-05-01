@@ -4,69 +4,369 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    Title="{Binding Name}">
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    Title="{Binding Name}"
+    Shell.TabBarIsVisible="False">
 
     <!--  Strona wyświetlania po kliknięciu w karte lokacji. Wyświetla szczegóły dotyczące danej lokacji.  -->
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!--#region Style-->
+            <Style x:Key="UserInfoStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Margin" Value="30,-10,30,0" />
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+            <Style x:Key="Default" TargetType="Frame">
+                <Setter Property="Padding" Value="5,10,5,10" />
+                <Setter Property="Margin" Value="10,10,10,0" />
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+            <Style x:Key="SocialIcon" TargetType="Image">
+                <Setter Property="HeightRequest" Value="35" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+            <Style x:Key="GridUserInfo" TargetType="Grid">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
+            </Style>
+            <Style x:Key="GridSocial" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="*,Auto" />
+                <Setter Property="RowDefinitions" Value="Auto,Auto" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
+            </Style>
+            <Style x:Key="EntrySocial" TargetType="Entry">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Keyboard" Value="Default" />
+                <Setter Property="Grid.Row" Value="0" />
+            </Style>
+            <Style x:Key="Cordinates" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+            <!--#endregion-->
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView VerticalOptions="Start">
+        <ScrollView>
+            <ScrollView.Background>
+                <LinearGradientBrush>
+                    <GradientStopCollection>
+                        <GradientStop Offset="0" Color="#161616" />
+                        <GradientStop Offset="1" Color="#363636" />
+                    </GradientStopCollection>
+                </LinearGradientBrush>
+            </ScrollView.Background>
+
+            <!--#region Zdjecia-->
             <StackLayout>
                 <CarouselView
                     x:Name="ImageCarousel"
-                    BackgroundColor="Red"
-                    HeightRequest="250"
+                    Margin="10,0,10,0"
+                    HeightRequest="220"
                     ItemsSource="{Binding ImageLinks}"
                     VerticalOptions="Start">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Link}" />
+                            <Frame Padding="0" HasShadow="True">
+                                <Image Aspect="Fill" Source="{Binding Link}" />
+                            </Frame>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <AbsoluteLayout x:DataType="models:LocationDetailed" HeightRequest="250">
-                    <!--  AbsoluteLayout jest tylko po to żeby obrazek był tłem. Jeżeli to zmieniasz to usuń AbsoluteLayout  -->
-                    <StackLayout Padding="10" VerticalOptions="StartAndExpand">
-                        <!--  opis, adres itd, wszystko co nie jest zdjęciami ani recenzjami  -->
-                        <Label Text="{Binding Description}" />
-                        <Label FontSize="25" Text="Adres:" />
-                        <Label FontSize="15" Text="{Binding Address}" />
-                        <Label Text="{Binding Path=ProvinceId, StringFormat='Id województwa(placeholder): {0}'}" />
-                    </StackLayout>
-                    <Image
-                        AbsoluteLayout.LayoutBounds="0,0,1,1"
-                        AbsoluteLayout.LayoutFlags="All"
-                        HeightRequest="100"
-                        HorizontalOptions="FillAndExpand"
-                        Opacity="0.15"
-                        Source="{Binding CategoryIconPath}" />
-                </AbsoluteLayout>
-                <Button Pressed="Button_Pressed" Text="Dodaj recenzje" />
-                <!--  wstawić gdzieś tutaj przycisk do włączenia google maps i nawigowania do celu?  -->
-                <Label FontSize="30" Text="Recenzje użytkowników" />
-                <CollectionView
+                <!--#endregion-->
+                <!--  region Info  -->
+                <StackLayout
+                    Margin="10,-6,10,20"
+                    Padding="0,0,0,20"
                     x:DataType="models:LocationDetailed"
-                    BackgroundColor="LightGray"
-                    ItemsSource="{Binding Reviews}"
-                    RemainingItemsThreshold="1"
-                    RemainingItemsThresholdReached="CollectionView_RemainingItemsThresholdReached"
-                    VerticalOptions="Start">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Review">
-                            <StackLayout Padding="5">
-                                <BoxView HeightRequest="5" Color="Red" />
-                                <StackLayout Orientation="Horizontal">
+                    BackgroundColor="White">
+                    <!--#region Wspolrzedne-->
+
+                    <Grid Padding="-1" HeightRequest="115">
+                        <Path
+                            Aspect="Fill"
+                            Data="m261.00225,103.3325l172.30789,0l0,19.69233l-86.154,4.92309l-86.15399,-4.92309l0.0001,-19.69233z"
+                            Fill="#BF0603" />
+                        <Frame
+                            Margin="10,10,10,0"
+                            Padding="5,10,5,10"
+                            BackgroundColor="Transparent"
+                            CornerRadius="5">
+                            <Grid ColumnDefinitions="*,Auto,*" RowDefinitions="*,Auto">
+                                <StackLayout
+                                    Grid.Column="0"
+                                    HorizontalOptions="Center"
+                                    Spacing="1">
+                                    <Label Style="{DynamicResource Cordinates}" Text="SZEROKOŚĆ" />
+                                    <Label Style="{DynamicResource Cordinates}" Text="GEOGRAFICZNA" />
                                     <Label
-                                        FontSize="20"
-                                        Text="{Binding Path=Score, StringFormat='{0}/5'}"
-                                        VerticalOptions="Center" />
-                                    <Image Source="starfilledgold_icon.png" WidthRequest="20" />
-                                    <Label FontSize="20" Text="{Binding UserName}" />
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Path=Position.Latitude, StringFormat='{0:F4}'}"
+                                        TextColor="Black" />
                                 </StackLayout>
-                                <Label Text="{Binding Message}" VerticalOptions="FillAndExpand" />
+                                <!--  Przycisk do nawigacji -->
+                                <ImageButton
+                                    Grid.Column="1"
+                                    Padding="0,10,5,0"
+                                    BackgroundColor="Black"
+                                    CornerRadius="50"
+                                    HeightRequest="65"
+                                    Pressed="OpenGoogleMapsOnLocation"
+                                    Source="navigate_icon"
+                                    VerticalOptions="Center" />
+                                <StackLayout
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    Spacing="1">
+                                    <Label Style="{DynamicResource Cordinates}" Text="DŁUGOŚĆ" />
+                                    <Label Style="{DynamicResource Cordinates}" Text="GEOGRAFICZNA" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Path=Position.Longitude, StringFormat='{0:F4}'}"
+                                        TextColor="Black" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+
+                    <!--#endregion-->
+
+                    <!--#region Adres-->
+                    <Frame Style="{DynamicResource Default}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Adres"
+                                    TextColor="Black" />
+                                <Frame Padding="5" BackgroundColor="#BF0603">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="35"
+                                        Source="pin_icon"
+                                        WidthRequest="35" />
+                                </Frame>
                             </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                            <Label
+                                Grid.Column="1"
+                                FontSize="15"
+                                Text="{Binding Address}" />
+                        </Grid>
+                    </Frame>
+                    <!--#endregion-->
+
+                    <!--#region Opis-->
+                    <Frame Style="{DynamicResource Default}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Opis"
+                                    TextColor="Black" />
+                                <Frame Padding="5" BackgroundColor="#BF0603">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="35"
+                                        Source="desc_icon"
+                                        WidthRequest="35" />
+                                </Frame>
+                            </StackLayout>
+                            <Label
+                                Grid.Column="1"
+                                FontSize="15"
+                                Text="{Binding Description}" />
+                        </Grid>
+                    </Frame>
+                    <!--#endregion-->
+
+                    <!--#region Kategoria-->
+                    <Frame Style="{DynamicResource Default}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout>
+                                <Frame Padding="5" BackgroundColor="White">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="35"
+                                        Source="{Binding CategoryIconPath}"
+                                        WidthRequest="35" />
+                                </Frame>
+                            </StackLayout>
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="25"
+                                Text="{Binding CategoryName}"
+                                TextColor="#BF0603"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+                    <!--#endregion-->
+                    <!--  Przycisk oznaczania odwiedzonych  -->
+                    <Frame
+                        x:Name="MarkVisitedButton"
+                        Margin="50,0,50,0"
+                        Padding="0"
+                        CornerRadius="20">
+                        <Button
+                            BackgroundColor="#BF0603"
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Pressed="MarkVisited"
+                            Text="Oznacz miejsce jako odwiedzone"
+                            TextColor="White" />
+                    </Frame>
+                    <!--  Przycisk pisania recenzji  -->
+                    <Frame
+                        x:Name="WriteReviewButton"
+                        Margin="50,0,50,0"
+                        Padding="0"
+                        CornerRadius="20">
+                        <Button
+                            BackgroundColor="#BF0603"
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Pressed="GoToWriteReviewPage"
+                            Text="Dodaj opinię"
+                            TextColor="White" />
+                    </Frame>
+                    <!--#region Recenzje-->
+                    <xct:Expander Margin="0,0,0,0" ExpandAnimationLength="1000">
+                        <xct:Expander.Header>
+                            <Frame
+                                Margin="10,0,10,0"
+                                Padding="5"
+                                CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Frame Padding="5" BackgroundColor="#BF0603">
+                                        <Image
+                                            Aspect="AspectFill"
+                                            HeightRequest="35"
+                                            Source="review_icon"
+                                            WidthRequest="35" />
+                                    </Frame>
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="RECENZJE UŻYTKOWNIKÓW"
+                                        VerticalOptions="Center" />
+                                    <Image
+                                        Grid.Column="3"
+                                        HeightRequest="35"
+                                        HorizontalOptions="End"
+                                        Source="expand_icon.png"
+                                        VerticalOptions="Center">
+                                        <Image.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                TargetType="Image"
+                                                Value="True">
+                                                <Setter Property="Source" Value="collapse_icon.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </xct:Expander.Header>
+                        <xct:Expander.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Frame
+                                        Margin="20,-10,20,0"
+                                        Padding="0"
+                                        HeightRequest="350"
+                                        Style="{StaticResource UserInfoStyle}">
+                                        <Grid Padding="0" Style="{StaticResource GridUserInfo}">
+                                            <StackLayout Padding="0">
+
+                                                <CollectionView
+                                                    x:DataType="models:LocationDetailed"
+                                                    BackgroundColor="White"
+                                                    ItemsSource="{Binding Reviews}"
+                                                    RemainingItemsThreshold="1"
+                                                    RemainingItemsThresholdReached="CollectionView_RemainingItemsThresholdReached"
+                                                    VerticalOptions="Start">
+                                                    <CollectionView.ItemTemplate>
+                                                        <DataTemplate x:DataType="models:Review">
+                                                            <StackLayout Padding="2">
+                                                                <BoxView
+                                                                    Margin="0,10,50,0"
+                                                                    HeightRequest="1"
+                                                                    Color="#363636" />
+                                                                <StackLayout Orientation="Horizontal">
+                                                                    <Label
+                                                                        Margin="2,0,0,0"
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="20"
+                                                                        HorizontalOptions="End"
+                                                                        Text="{Binding UserName}"
+                                                                        TextColor="#BF0603" />
+                                                                    <Label
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="20"
+                                                                        Text="{Binding Path=Score, StringFormat='{0}/5'}"
+                                                                        TextColor="Black"
+                                                                        VerticalOptions="Center" />
+                                                                    <Image Source="starfilledgold_icon.png" WidthRequest="20" />
+                                                                </StackLayout>
+                                                                <Label
+                                                                    Margin="7,0,0,0"
+                                                                    Text="{Binding Message}"
+                                                                    VerticalOptions="FillAndExpand" />
+                                                            </StackLayout>
+                                                        </DataTemplate>
+                                                    </CollectionView.ItemTemplate>
+                                                </CollectionView>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </xct:Expander.ContentTemplate>
+                    </xct:Expander>
+                    <!--#endregion-->
+                </StackLayout>
+                <!--  endregion  -->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

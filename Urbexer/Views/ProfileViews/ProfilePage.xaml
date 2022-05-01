@@ -93,7 +93,7 @@
                                      CornerRadius="50"
                                      Opacity="0.9"
                                      Command="{Binding ClickedEdit}" 
-                                     BackgroundColor="#023047"/>
+                                     BackgroundColor="#BF0603"/>
                     </Frame>
                 </Grid>
                 <!--Login-->

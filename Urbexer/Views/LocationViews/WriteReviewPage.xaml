@@ -4,64 +4,99 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:locationviews="clr-namespace:Urbexer.Views.LocationViews"
-    Title="Napisz recenzje"
-    x:DataType="locationviews:WriteReviewPage">
+    Title="Napisz Recenzję"
+    x:DataType="locationviews:WriteReviewPage"
+    Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label HorizontalOptions="Center" Text="{Binding LocationName}" />
-            <Label IsVisible="false" Text="{Binding Path=LocationId, StringFormat='Id: {0}'}" />
-            <Grid ColumnDefinitions="2" RowDefinitions="2">
-                <!--  ocena jakości  -->
+            <StackLayout.Background>
+                <LinearGradientBrush>
+                    <GradientStopCollection>
+                        <GradientStop Offset="0" Color="#161616" />
+                        <GradientStop Offset="1" Color="#363636" />
+                    </GradientStopCollection>
+                </LinearGradientBrush>
+            </StackLayout.Background>
+            <StackLayout
+                Margin="10,0,10,0"
+                Padding="0,0,0,10"
+                BackgroundColor="#ffffff">
                 <Label
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Text="Ocena: "
-                    VerticalOptions="Center" />
-                <Picker
-                    x:Name="ScoreQuality"
-                    Title="Wybierz ocene"
-                    Grid.Row="1"
-                    Grid.Column="2">
-                    <Picker.Items>
-                        <x:String>1</x:String>
-                        <x:String>2</x:String>
-                        <x:String>3</x:String>
-                        <x:String>4</x:String>
-                        <x:String>5</x:String>
-                    </Picker.Items>
-                </Picker>
-                <!--  ocena niebezpieczeństwa  -->
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Text="Niebezpieczeństwo: "
-                    VerticalOptions="Center" />
-                <Picker
-                    x:Name="ScoreDanger"
-                    Title="Wybierz ocene"
-                    Grid.Row="2"
-                    Grid.Column="2">
-                    <Picker.Items>
-                        <x:String>1</x:String>
-                        <x:String>2</x:String>
-                        <x:String>3</x:String>
-                        <x:String>4</x:String>
-                        <x:String>5</x:String>
-                    </Picker.Items>
-                </Picker>
-            </Grid>
-            <Label Text="Treść recenzji:" />
-            <Editor
-                AutoSize="TextChanges"
-                IsSpellCheckEnabled="True"
-                Keyboard="Text"
-                MaxLength="300"
-                Placeholder="Podziel się swoją opinią"
-                VerticalOptions="StartAndExpand" />
-            <Button
-                Clicked="Button_Clicked"
-                Text="Prześlij recenzje"
-                VerticalOptions="End" />
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding LocationName}"
+                    TextColor="#BF0603" />
+                <Frame>
+                    <Frame Padding="2">
+                        <StackLayout HorizontalOptions="CenterAndExpand">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                HorizontalOptions="Center"
+                                Text="Ocena" />
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                Orientation="Horizontal">
+                                <Frame Padding="10,0,10,0">
+                                    <Picker
+                                        x:Name="ScoreQuality"
+                                        Title="-"
+                                        Grid.Row="1"
+                                        FontAttributes="Bold"
+                                        FontSize="40"
+                                        HorizontalTextAlignment="Center"
+                                        SelectedItem="None"
+                                        TextColor="#363636">
+                                        <Picker.Items>
+                                            <x:String>1</x:String>
+                                            <x:String>2</x:String>
+                                            <x:String>3</x:String>
+                                            <x:String>4</x:String>
+                                            <x:String>5</x:String>
+                                        </Picker.Items>
+                                    </Picker>
+                                </Frame>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    Text="/ 5"
+                                    TextColor="#363636"
+                                    VerticalOptions="Center" />
+                                <Image Source="starfilledgold_icon.png" WidthRequest="40" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Frame>
+                <Frame Margin="10" Padding="2">
+                    <StackLayout>
+                        <Label
+                            Margin="5,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Text="Treść recenzji:" />
+                        <Editor
+                            x:Name="Editor"
+                            AutoSize="TextChanges"
+                            IsSpellCheckEnabled="True"
+                            Keyboard="Text"
+                            MaxLength="300"
+                            Placeholder="Podziel się swoją opinią"
+                            VerticalOptions="StartAndExpand" />
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Margin="50,0,50,0"
+                    BackgroundColor="#BF0603"
+                    Clicked="Button_Clicked"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Upublikuj"
+                    VerticalOptions="End" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

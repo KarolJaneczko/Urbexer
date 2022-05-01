@@ -175,6 +175,7 @@ Urbex służy przede wszystkim osobom, którym los opuszczonych budynków nie je
                                    Padding="5"
                                    TextColor="Black"
                                    FontAttributes="Bold"
+                                   VerticalOptions="FillAndExpand"
                                    Grid.Row="1"/>
 
                             </Grid>
@@ -245,6 +246,7 @@ Urbex służy przede wszystkim osobom, którym los opuszczonych budynków nie je
 Możesz to zrobić na stronie urbexy.pl – znajdziesz tu cenne pomoce, jak mapa urbexów, historie innych eksploratorów oraz ich materiały zdjęciowe. Sam również możesz dzielić się tu swoimi przygodami, by uzyskać ocenę i radę osób, które z urbexem mierzą się od lat. Zamiast działać na własną rękę, dołącz do społeczności, która pozwoli ci się rozwijać w tej wyjątkowej pasji."
                                    FontSize="18"
                                    Padding="5"
+                                   VerticalOptions="FillAndExpand"
                                    TextColor="Black"
                                    FontAttributes="Bold"
                                    Grid.Row="1"/>
@@ -317,6 +319,7 @@ Leave only footprints.
 Sprowadzają się one do głównego przesłania: eksplorator pełni jedynie funkcję obserwatora. Z miejsc urbexu nie należy niczego wynosić. Niedopuszczalne są akty dewastacji. Jedyne pamiątki, które powinny pozostać po tobie w miejscu eksploracji, to ślady butów oraz zdjęcia, które wykonasz."
                                    FontSize="18"
                                    Padding="5"
+                                   VerticalOptions="FillAndExpand"
                                    TextColor="Black"
                                    FontAttributes="Bold"
                                    Grid.Row="1"/>
@@ -392,6 +395,7 @@ Sprowadzają się one do głównego przesłania: eksplorator pełni jedynie funk
                                             - Rękawice
                                        "
                                    FontSize="18"
+                                   VerticalOptions="FillAndExpand"
                                    Padding="5"
                                    TextColor="Black"
                                    FontAttributes="Bold"

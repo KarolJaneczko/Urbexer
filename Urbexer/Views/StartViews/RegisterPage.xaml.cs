@@ -19,9 +19,6 @@ namespace Urbexer.Views {
             Password.Completed += (object sender, EventArgs e) => {
                 PasswordRepeat.Focus();
             };
-            PasswordRepeat.Completed += (object sender, EventArgs e) => {
-                vm.SubmitCommand.Execute(null);
-            };
         }
         #endregion
         #region Metody
