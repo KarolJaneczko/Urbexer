@@ -15,6 +15,7 @@ namespace APIpz.Services
         void DodajOpinie(DodajOpinieDto dto);
         PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto);
         int IluLudziOdwiedziloMiejsce(IluLudziOdwiedziloMiejsceDto dto);
+        bool CzyUzytkownikBylWMiejscu(int id);
 
     }
     public class UrbexService : IUrbexService
@@ -158,6 +159,12 @@ namespace APIpz.Services
         {
             var ile = _context.Odwiedzone.Where(i => i.OdwiedzonyUrbex.Id == dto.Id).Count();
             return ile;
+        }
+        public bool CzyUzytkownikBylWMiejscu(int id)
+        {
+            var czybyl = _context.Odwiedzone.FirstOrDefault(o => o.OdwiedzonyUrbex.Id == id && o.Id == (int)_userContextService.GetUserId);
+            if (czybyl == null) return false;
+            else return true;
         }
     }
 }

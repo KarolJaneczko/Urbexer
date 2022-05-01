@@ -57,5 +57,11 @@ namespace APIpz.Controllers
             var wynik = _urbexService.IluLudziOdwiedziloMiejsce(dto);
             return Ok(wynik);
         }
+        [HttpGet("czyUzytkownikBylWMiejscu")]
+        public ActionResult<bool> CzuUzytkownikBylWMiejscu([FromQuery] int id)
+        {
+            var wynik = _urbexService.CzyUzytkownikBylWMiejscu(id);
+            return Ok(wynik);
+        }
     }
 }
