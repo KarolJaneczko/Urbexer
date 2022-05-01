@@ -42,7 +42,6 @@ namespace Urbexer.ViewModels {
             leaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
             leaderboardMyLogin = UserInfo.Login;
             leaderboardMyPlace = GetMyLeaderboardPlace(RankingType);
-
         }
         #endregion
         #region Metody

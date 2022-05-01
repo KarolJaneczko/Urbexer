@@ -4,7 +4,6 @@ using Urbexer.Models;
 using Xamarin.Forms;
 using System.ComponentModel;
 using Urbexer.Models.ApiModels;
-using Urbexer.Services;
 
 namespace Urbexer.ViewModels {
     public class SignInPageViewModel : BaseViewModel {

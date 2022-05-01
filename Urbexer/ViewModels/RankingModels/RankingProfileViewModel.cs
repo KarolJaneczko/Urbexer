@@ -117,7 +117,7 @@ namespace Urbexer.ViewModels {
         public static string GetAvatarByLayout(int layout) {
             switch (layout) {
                 case (int)LayoutTypeEnum.Default:
-                    return "fotograf_avatar.png";
+                    return "default_avatar.png";
                 case (int)LayoutTypeEnum.Fotograf:
                     return "fotograf_avatar.png";
                 case (int)LayoutTypeEnum.Historyk:
