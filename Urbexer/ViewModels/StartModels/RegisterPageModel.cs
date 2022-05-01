@@ -60,7 +60,6 @@ namespace Urbexer.ViewModels {
                         czyAdmin = false
                     }, httpClient) == true) {
                         await Application.Current.MainPage.DisplayAlert("Sukces", "Na podany adres mailowy otrzymasz link potwierdzający aktywację konta.", "OK");
-                        //Tu będzie metoda generująca rekord w tabeli z profilami.
                     }
                 }
                 else
