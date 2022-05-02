@@ -114,6 +114,9 @@
                         <Label Text="{Binding LeaderboardMyPlace}"
                                TextColor="Black"
                                FontSize="Large"/>
+                        <Label Text="{Binding LeaderboardMyCount}"
+                               TextColor="Black"
+                               FontSize="Large"/>
                     </StackLayout>
                 </Grid>
             </StackLayout>
