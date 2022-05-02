@@ -30,32 +30,27 @@
             Margin="5"
             Background="White"
             HorizontalOptions="Fill"
+            IsVisible="false"
             SearchCommand="{Binding FilterLocationsByNameCommand}"
             SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
         <CollectionView
             x:Name="CollectionView"
             BackgroundColor="LightGray"
+            EmptyView="Wczytywanie lokacji"
             HorizontalOptions="End"
             ItemsSource="{Binding LocationsFiltered}"
-            RemainingItemsThreshold="1"
+            RemainingItemsThreshold="5"
             RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
             SelectionChanged="CollectionView_SelectionChanged"
             SelectionMode="Single"
             VerticalOptions="CenterAndExpand">
-            <CollectionView.EmptyView>
-                <StackLayout>
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="Brak lokacji :("
-                        VerticalOptions="Center" />
-                </StackLayout>
-            </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Frame
                             Margin="5"
                             Padding="3"
+                            MinimumHeightRequest="75"
                             VerticalOptions="FillAndExpand">
                             <StackLayout x:DataType="models:Location" Orientation="Horizontal">
                                 <Image
