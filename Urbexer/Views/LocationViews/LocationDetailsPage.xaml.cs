@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Services;
 using Urbexer.Views.LocationViews;
@@ -45,7 +46,23 @@ namespace Urbexer.Views {
             Shell.Current.GoToAsync(route);
         }
         private async void MarkVisited(object sender, System.EventArgs e) {
-            await ReviewService.MarkLocationAsVisited(location.Id);
+            int requiredDistance = 200; // w metrach
+            Xamarin.Essentials.Location userLocation = await Geolocation.GetLastKnownLocationAsync().ConfigureAwait(false);
+            
+            // Sprawdź, czy użytkownik jest w zasięgu pinezki
+            double distance = Math.Sqrt(
+                Math.Pow(userLocation.Latitude - location.Position.Latitude,2)
+                + Math.Pow(userLocation.Longitude - location.Position.Longitude,2));
+            if (KmToDegrees(requiredDistance) < distance) {
+                // Jeżeli użytkownik jest w zasięgu pinezki oznacz ją jako odwiedzoną
+                await ReviewService.MarkLocationAsVisited(location.Id);
+                WriteReviewButton.IsVisible = true;
+                MarkVisitedButton.IsVisible = false;
+            }
+            else {
+                // Wyświetl komunikat, że użytkownik jest za daleko
+                await DisplayAlert("Za daleko!", $"Musisz być w zasięgu {requiredDistance} metrów żeby oznaczyć lokację jako odwiedzoną.", "OK");
+            }
         }
 
         private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
@@ -54,6 +71,10 @@ namespace Urbexer.Views {
 
         private async void OpenGoogleMapsOnLocation(object sender, System.EventArgs e) {
             await Map.OpenAsync(location.Position.Latitude, location.Position.Longitude);
+        }
+        private static float KmToDegrees(float km) {
+            // 1 stopień to ok 111.111km
+            return (float)km / 111.111f;
         }
     }
 }
