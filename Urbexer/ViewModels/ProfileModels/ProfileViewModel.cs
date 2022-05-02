@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Urbexer.Models;
-using Urbexer.Models.ApiModels;
 using Urbexer.Models.Enums;
 using Urbexer.Models.UserModels;
 using Urbexer.Services;

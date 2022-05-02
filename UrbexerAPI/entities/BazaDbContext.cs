@@ -21,9 +21,12 @@ namespace APIpz.Entities
         public DbSet<Odwiedzony> Odwiedzone { get; set; }
         public DbSet<Profil> Profil { get; set; }
         public DbSet<Miejsce_wojewodztwo> Miejsce_wojewodztwa { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            modelbuilder.Entity<Uzytkownik>()
+            .HasOne(u => u.Profil)
+            .WithOne(p => p.Uzytkownik)
+            .HasForeignKey<Profil>(p=>p.UzytkownikId);
+        }
     }
-    //protected override void OnModelCreating(ModelBuilder modelbuilder)
-    //{
-       
-    //}
 }

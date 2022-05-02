@@ -164,11 +164,8 @@ namespace APIpz.Migrations
 
             modelBuilder.Entity("APIpz.Entities.Profil", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UzytkownikId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Imie")
                         .HasColumnType("nvarchar(max)");
@@ -191,12 +188,7 @@ namespace APIpz.Migrations
                     b.Property<string>("Opis")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UzytkownikId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UzytkownikId");
+                    b.HasKey("UzytkownikId");
 
                     b.ToTable("Profil");
                 });
@@ -331,12 +323,18 @@ namespace APIpz.Migrations
             modelBuilder.Entity("APIpz.Entities.Profil", b =>
                 {
                     b.HasOne("APIpz.Entities.Uzytkownik", "Uzytkownik")
-                        .WithMany()
-                        .HasForeignKey("UzytkownikId")
+                        .WithOne("Profil")
+                        .HasForeignKey("APIpz.Entities.Profil", "UzytkownikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Uzytkownik");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Uzytkownik", b =>
+                {
+                    b.Navigation("Profil")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
