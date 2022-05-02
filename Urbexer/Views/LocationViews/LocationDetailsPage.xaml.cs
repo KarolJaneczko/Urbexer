@@ -29,14 +29,14 @@ namespace Urbexer.Views {
             await location.LoadMoreReviews();
             BindingContext = location;
 
-            return;
-            if (hasVisited) {
-                MarkVisitedButton.IsVisible = false;
+            // Sprawdź, czy lokacja jest odwiedzona
+            if (await ReviewService.IsLocationVisited(location.Id)) {
+                // Lokacja jest już odwiedzona, pokaż przycisk wstawiania opinii
                 WriteReviewButton.IsVisible = true;
             }
             else {
+                // Lokacja nie jest odwiedzona, pokaż przycisk odwiedzenia miejsca
                 MarkVisitedButton.IsVisible = true;
-                WriteReviewButton.IsVisible = false;
             }
         }
 
