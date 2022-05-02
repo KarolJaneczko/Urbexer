@@ -1,1 +1,194 @@
+<<<<<<< HEAD
 ﻿
+=======
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"     
+             x:Class="Urbexer.Views.LeaderboardPage"         
+             Title="Lista rankingowa">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="black" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="UserInfoStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="Margin" Value="10,0,10,0"/>
+                <Setter Property="BorderColor" Value="#363636"/>
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+            <Style x:Key="GridUserInfo" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="*,*"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="ThemeStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="#363636"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10,0"/>
+            </Style>
+            <Style x:Key="Info" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor" Value="#BF0603"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush>
+                <GradientStopCollection>
+                    <GradientStop Color="#161616" Offset="0"/>
+                    <GradientStop Color="#363636" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush>
+        </ScrollView.Background>
+        <Grid VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical"
+                         Margin="0,20"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Column="1" Grid.Row="1" 
+                                 Orientation="Vertical" 
+                                 VerticalOptions="Start" 
+                                 WidthRequest="150"
+                                 HorizontalOptions="Center">
+                        <Frame BackgroundColor="Gold" 
+                               HeightRequest="75"
+                               WidthRequest="75"
+                               CornerRadius="100" 
+                               Padding="5"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+                            <Frame CornerRadius="100"           
+                                   HorizontalOptions="Center"
+                                   Padding="0"
+                                   IsClippedToBounds="True">
+                                <Image Source="{Binding LeaderboardMyAvatar}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                        </Frame>
+                        <Label Text="{Binding LeaderboardMyLogin}"
+                               TextColor="Gold"
+                               LineBreakMode="WordWrap"
+                               TextTransform="Uppercase"
+                               FontAttributes="Bold"
+                               FontSize="Large" 
+                               HorizontalOptions="Center"/>
+                        <Label Text="{Binding LeaderboardCategory}"
+                               TextColor="Black"
+                               FontSize="Large"/>
+                        <Label Text="{Binding LeaderboardMyPlace}"
+                               TextColor="Black"
+                               FontSize="Large"/>
+                        <Label Text="{Binding LeaderboardMyCount}"
+                               TextColor="Black"
+                               FontSize="Large"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+
+            <ListView x:Name="RankingLista"
+                      Grid.Row="3"
+                      RowHeight="75"
+                      ItemsSource="{Binding RankingList}" 
+                      SeparatorVisibility="Default"
+                      VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="White"
+                                   BorderColor="#F0F0F0"
+                                   Padding="5"
+                                   Margin="0,0,0,5"
+                                   HasShadow="False">
+                                <Grid  HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="CenterAndExpand">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding GoToProfile}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Login}"
+                                           Grid.Column="3"
+                                           TextColor="#757575" 
+                                           FontSize="12"
+                                           VerticalOptions="Center" 
+                                           Margin="0,0"/>
+                                    <Frame Grid.Column="1"
+                                           Padding="2" 
+                                           CornerRadius="50"
+                                           BackgroundColor="#BF0603">
+                                        <Frame  Padding="0"
+                                                CornerRadius="50">
+                                            <Image Source="{Binding AvatarSource}"/>
+                                        </Frame>
+                                    </Frame>
+                                    <Label Text="{Binding Miejsce}"
+                                               TextColor="Black"
+                                               Grid.Column="2"
+                                               FontSize="30"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+                                    <Label Text="{Binding LiczbaMiejsc}"
+                                               TextColor="Black"
+                                               Grid.Column="3"
+                                               FontSize="30" 
+                                               FontAttributes="Bold" 
+                                               VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollView>
+</ContentPage>
+>>>>>>> origin/main

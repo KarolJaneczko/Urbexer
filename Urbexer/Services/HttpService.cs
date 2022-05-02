@@ -32,7 +32,7 @@ namespace Urbexer.Services {
             // Wyślij zapytanie i zwróć wynik
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return null;
         }
 

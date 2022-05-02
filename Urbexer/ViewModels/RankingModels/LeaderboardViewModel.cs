@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
@@ -14,7 +15,15 @@ namespace Urbexer.ViewModels {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public List<Rekord> RankingList { get => GetRanking(); }
         public static int RankingType;
-        public string leaderboardMyAvatar, leaderboardMyLogin, leaderboardMyPlace;
+        public int leaderboardMyCount;
+        public string leaderboardMyAvatar, leaderboardMyLogin, leaderboardMyPlace, leaderboardCategory;
+        public int LeaderboardMyCount {
+            get { return leaderboardMyCount; }
+            set {
+                leaderboardMyCount = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyCount"));
+            }
+        }
         public string LeaderboardMyAvatar {
             get { return leaderboardMyAvatar; }
             set {
@@ -36,12 +45,21 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyPlace"));
             }
         }
+        public string LeaderboardCategory {
+            get { return leaderboardCategory; }
+            set {
+                leaderboardCategory = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardCategory"));
+            }
+        }
         #endregion
         #region Konstruktory
         public LeaderboardViewModel() {
             leaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
             leaderboardMyLogin = UserInfo.Login;
             leaderboardMyPlace = GetMyLeaderboardPlace(RankingType);
+            leaderboardCategory = GetLeaderboardCategory(RankingType);
+            leaderboardMyCount = GetLeaderboardMyCount(UserInfo.Login);
         }
         #endregion
         #region Metody
@@ -50,61 +68,79 @@ namespace Urbexer.ViewModels {
             var tempList = Rekord.ZmapowanaLista(result);
             return tempList;
         }
-        private string GetMyLeaderboardPlace(int leaderboardType) {
-            string temp = "Moje miejsce w rankingu ";
-            var tempList = GetRanking();
+        private string GetLeaderboardCategory(int leaderboardType) {
+            var temp = string.Empty;
             switch (leaderboardType) {
                 case 0:
-                    temp += "ogólnym";
+                    temp += "Ogólny";
                     break;
                 case 1:
-                    temp += "'Kolejowe'";
+                    temp += "Kolejowe";
                     break;
                 case 2:
-                    temp += "'Hotele'";
+                    temp += "Hotele";
                     break;
                 case 3:
-                    temp += "'Domy'";
+                    temp += "Domy";
                     break;
                 case 4:
-                    temp += "'Industrialne'";
+                    temp += "Industrialne";
                     break;
                 case 5:
-                    temp += "'Restauracje'";
+                    temp += "Restauracje";
                     break;
                 case 6:
-                    temp += "'Rolnicze'";
+                    temp += "Rolnicze";
                     break;
                 case 7:
-                    temp += "'Zamki'";
+                    temp += "Zamki";
                     break;
                 case 8:
-                    temp += "'Podziemia'";
+                    temp += "Podziemia";
                     break;
                 case 9:
-                    temp += "'Biurowce'";
+                    temp += "Biurowce";
                     break;
                 case 10:
-                    temp += "'Militarne'";
+                    temp += "Militarne";
                     break;
                 case 11:
-                    temp += "'Szpitale'";
+                    temp += "Szpitale";
                     break;
                 case 12:
-                    temp += "'Tunele'";
+                    temp += "Tunele";
                     break;
                 case 13:
-                    temp += "'Inne'";
+                    temp += "Inne";
                     break;
             }
-            temp += " - ";
+            return temp;
+        }
+        private string GetMyLeaderboardPlace(int leaderboardType) {
+            string temp = string.Empty;
+            var tempList = GetRanking();
             if (tempList.Count == 0) {
-                temp += "0";
+                temp += "brak danych";
             }
             else if (tempList.FindIndex(x => x.Login == UserInfo.Login) == -1) {
                 temp += "brak danych";
-            } else {
-                temp += "#" + (tempList.FindIndex(x => x.Login == UserInfo.Login) + 1).ToString();
+            }
+            else {
+                temp += (tempList.FindIndex(x => x.Login == UserInfo.Login) + 1).ToString();
+            }
+            return temp;
+        }
+        private int GetLeaderboardMyCount(string login) {
+            int temp = 0;
+            var tempList = GetRanking();
+            if (tempList.Count == 0) {
+                return temp;
+            }
+            else if (tempList.FindIndex(x => x.Login == login) == -1) {
+                return temp;
+            }
+            else {
+                temp = (tempList.FirstOrDefault(x => x.Login == login).LiczbaMiejsc);
             }
             return temp;
         }
@@ -140,6 +176,7 @@ namespace Urbexer.ViewModels {
         public async void GoToProfileClicked() {
             ProfileData profileData = await ConnectionService.GetProfileByLogin(Login, httpClient);
             profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login, 0);
+            profileData.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(profileData.Login, httpClient);
             RankingProfileViewModel.FillProfile(profileData);
             await Shell.Current.GoToAsync(nameof(RankingProfile));
         }
