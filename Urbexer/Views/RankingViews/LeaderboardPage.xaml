@@ -108,6 +108,9 @@
                                FontAttributes="Bold"
                                FontSize="Large" 
                                HorizontalOptions="Center"/>
+                        <Label Text="{Binding LeaderboardCategory}"
+                               TextColor="Black"
+                               FontSize="Large"/>
                         <Label Text="{Binding LeaderboardMyPlace}"
                                TextColor="Black"
                                FontSize="Large"/>
