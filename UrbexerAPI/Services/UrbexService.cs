@@ -164,7 +164,9 @@ namespace APIpz.Services
         }
         public bool CzyUzytkownikBylWMiejscu(int id)
         {
-            var czybyl = _context.Odwiedzone.FirstOrDefault(o => o.OdwiedzonyUrbex.Id == id && o.Id == (int)_userContextService.GetUserId);
+            var czybyl = _context.Odwiedzone.Include(c => c.OdwiedzonyUrbex)
+                                            .Include(c => c.OdwiedzonePrzez)
+                                            .FirstOrDefault(o => o.OdwiedzonyUrbex.Id == id && o.Id == (int)_userContextService.GetUserId);
             if (czybyl == null) return false;
             else return true;
         }
