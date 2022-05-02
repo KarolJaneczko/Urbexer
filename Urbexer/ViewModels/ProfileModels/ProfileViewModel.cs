@@ -113,7 +113,7 @@ namespace Urbexer.ViewModels {
         public static async Task RefreshProfile() {
             UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
             UserInfo.yourProfile.LeaderboardPosition = GetLeaderboardPositionByLogin(UserInfo.Login);
-            UserInfo.yourProfile.VisitedPlaces = await connectionService2.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
+            UserInfo.yourProfile.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
             FillProfile(UserInfo.yourProfile);
         }
         public static int GetLeaderboardPositionByLogin(string login) {
