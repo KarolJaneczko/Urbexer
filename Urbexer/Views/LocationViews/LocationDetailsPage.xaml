@@ -43,11 +43,12 @@
                 <Setter Property="VerticalOptions" Value="Start" />
             </Style>
             <Style x:Key="CordsTitle" TargetType="Label">
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="18" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="TextTransform" Value="Uppercase" />
+                <Setter Property="FontFamily" Value="Bebas" />
             </Style>
             <Style x:Key="Cords" TargetType="Label">
                 <Setter Property="FontSize" Value="15" />
@@ -76,13 +77,13 @@
                 <CarouselView
                     x:Name="ImageCarousel"
                     Margin="10,0,10,0"
-                    HeightRequest="220"
+                    HeightRequest="360"
                     ItemsSource="{Binding ImageLinks}"
                     VerticalOptions="Start">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="0" HasShadow="True">
-                                <Image Aspect="Fill" Source="{Binding Link}" />
+                                <Image Aspect="AspectFill" Source="{Binding Link}" />
                             </Frame>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
@@ -212,6 +213,7 @@
                     <!--  Przycisk oznaczania odwiedzonych  -->
                     <Frame
                         x:Name="MarkVisitedButton"
+                        Margin="50,10,50,0"
                         Padding="0"
                         CornerRadius="20"
                         IsVisible="False">
