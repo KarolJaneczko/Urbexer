@@ -83,11 +83,23 @@
                                 <StackLayout Orientation="Horizontal"
                                                  Margin="10"
                                                  VerticalOptions="End">
-                                        <Label FontSize="30"     
+                                        <StackLayout HorizontalOptions="StartAndExpand" >
+                                            
+                                        
+                                        <Label FontSize="24"     
                                                FontFamily="Bebas"
-                                               HorizontalOptions="StartAndExpand" 
                                                Text="{Binding Path=Distance, StringFormat='{0} km'}"
                                                VerticalOptions="End" />
+                                            <Frame CornerRadius="10" Padding="3" HeightRequest="20" Margin="-5,-5">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Image Source="odwiedzone_icon" Margin="-2"/>
+                                                    <BoxView WidthRequest="1"
+                                                     Color="#363636"/>
+                                                    <Image Source="true_icon.png" IsVisible="{Binding IsVisited}"/>
+                                                    <Image Source="false_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
                                         <Frame Padding="5"                                           
                                            BackgroundColor="White"
                                            HasShadow="True"
