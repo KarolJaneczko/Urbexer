@@ -55,6 +55,11 @@ namespace Urbexer.Models {
         public string CategoryIconPath { get; set; }
         public string CategoryName => CategoryDict[CategoryId];
         public bool IsVisited { get; set; }
+        public bool IsNotVisited { get {
+                return !IsVisited; // Good enough
+            }
+            set { }
+        }
         #endregion
 
         #region Klasy
