@@ -16,7 +16,7 @@ namespace Urbexer.Services {
         public static async Task<Location> GetLocationById(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             if (result == null)
                 return null;
             return new Location(JsonConvert.DeserializeObject<APILocation>(result));
@@ -24,7 +24,7 @@ namespace Urbexer.Services {
         public static async Task<LocationDetailed> GetLocationByIdDetailed(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             if (result == null)
                 return null;
             return new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result));
@@ -34,12 +34,12 @@ namespace Urbexer.Services {
         #region ListyLokacji
         // Pobierz wszystkie lokacje z bazy danych
         public static async Task<List<Location>> GetLocationListAll() {
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, "/api/place/getall");
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, "/api/place/getall").ConfigureAwait(false);
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
-            string result = await HttpService.SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json);
+            string result = await HttpService.SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json).ConfigureAwait(false);
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         #endregion ListyLokacji
@@ -57,7 +57,7 @@ namespace Urbexer.Services {
                 latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             if (result == null)
                 return null;
             // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
@@ -77,7 +77,7 @@ namespace Urbexer.Services {
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
             string args = "?id=" + categoryId;
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId

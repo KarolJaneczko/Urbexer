@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
@@ -14,7 +15,15 @@ namespace Urbexer.ViewModels {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public List<Rekord> RankingList { get => GetRanking(); }
         public static int RankingType;
+        public int leaderboardMyCount;
         public string leaderboardMyAvatar, leaderboardMyLogin, leaderboardMyPlace, leaderboardCategory;
+        public int LeaderboardMyCount {
+            get { return leaderboardMyCount; }
+            set {
+                leaderboardMyCount = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyCount"));
+            }
+        }
         public string LeaderboardMyAvatar {
             get { return leaderboardMyAvatar; }
             set {
@@ -50,6 +59,7 @@ namespace Urbexer.ViewModels {
             leaderboardMyLogin = UserInfo.Login;
             leaderboardMyPlace = GetMyLeaderboardPlace(RankingType);
             leaderboardCategory = GetLeaderboardCategory(RankingType);
+            leaderboardMyCount = GetLeaderboardMyCount(UserInfo.Login);
         }
         #endregion
         #region Metody
@@ -117,6 +127,20 @@ namespace Urbexer.ViewModels {
             }
             else {
                 temp += (tempList.FindIndex(x => x.Login == UserInfo.Login) + 1).ToString();
+            }
+            return temp;
+        }
+        private int GetLeaderboardMyCount(string login) {
+            int temp = 0;
+            var tempList = GetRanking();
+            if (tempList.Count == 0) {
+                return temp;
+            }
+            else if (tempList.FindIndex(x => x.Login == login) == -1) {
+                return temp;
+            }
+            else {
+                temp = (tempList.FirstOrDefault(x => x.Login == login).LiczbaMiejsc);
             }
             return temp;
         }

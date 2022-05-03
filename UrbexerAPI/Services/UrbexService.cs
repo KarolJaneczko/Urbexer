@@ -70,6 +70,8 @@ namespace APIpz.Services
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .ThenInclude(o => o.Miejsce_Kategoria)
                                             .Include(o => o.OdwiedzonePrzez)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .ThenInclude(o => o.Zdjecia)
                                             .ToList();
 
             //var ListaOdwiedzonych = zapytanie
@@ -91,6 +93,8 @@ namespace APIpz.Services
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .ThenInclude(o => o.Miejsce_Kategoria)
                                             .Include(o => o.OdwiedzonePrzez)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .ThenInclude(o => o.Zdjecia)
                                             .ToList();
 
             //var ListaOdwiedzonych = zapytanie
@@ -166,7 +170,7 @@ namespace APIpz.Services
         {
             var czybyl = _context.Odwiedzone.Include(c => c.OdwiedzonyUrbex)
                                             .Include(c => c.OdwiedzonePrzez)
-                                            .FirstOrDefault(o => o.OdwiedzonyUrbex.Id == id && o.Id == (int)_userContextService.GetUserId);
+                                            .FirstOrDefault(o => o.OdwiedzonyUrbex.Id == id && o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId);
             if (czybyl == null) return false;
             else return true;
         }
