@@ -1,18 +1,27 @@
 
-SET IDENTITY_INSERT [dbo].[Miejsce] ON 
+DELETE FROM [dbo].[Miejsce2];
+GO
+
+SET IDENTITY_INSERT [dbo].[Miejsce2] ON 
 GO
 
 /****** Script for SelectTopNRows command from SSMS  ******/
-Insert into Miejsce (Id, Nazwa, Miejsce_KategoriaId, Adres, WspolrzedneLAT, WspolrzedneLNG, DataDodania, Miasto,  WojewodztwoId, Opis)
-SELECT TOP (100) [id]
-      ,[Nazwa]
-      ,[Miejsce_Kategoria] as Miejsce_KategoriaId
-      ,[Adres]
-      ,Convert(real, Replace([WspolrzedneLAT],',','.')) as WspolrzedneLAT
-      ,Convert(real, Replace([WspolrzedneLNG],',','.')) as WspolrzedneLNG
-      ,[DataDodania]
-      ,[Miasto]
-      ,[WojewodztwoId]
+Insert into Miejsce2 (Id, Nazwa, Miejsce_KategoriaId, Adres, WspolrzedneLAT, WspolrzedneLNG, DataDodania, Miasto,  WojewodztwoId, Opis)
+SELECT [id],
+	REPLACE(
+		REPLACE(
+			REPLACE([title], '&#8211;', '-')
+		, '&#8220;', '"')
+	  , '&#8221;', '"')
+	  
+	  as [Nazwa]
+	  , (select Id from Miejsce_kategoria mk where Replace(dane2.category,'wybierz','Inne') = mk.Nazwa) as Miejsce_KategoriaId
+      ,[address] as Adres
+      ,Convert(real, Replace([lat],',','.')) as WspolrzedneLAT
+      ,Convert(real, Replace([lng],',','.')) as WspolrzedneLNG
+      ,[date] as [DataDodania]
+      ,[town] as [Miasto]
+      , (select Id from Miejsce_wojewodztwa mw where mw.Nazwa = dane2.[voivodeship]) as [WojewodztwoId]
       , 
 	  Replace(
 		Replace(
@@ -35,7 +44,7 @@ SELECT TOP (100) [id]
 																			Replace(
 																				Replace(
 																					Replace(
-																						Replace([Opis], '<p>', ''),
+																						Replace([desc], '<p>', ''),
 																					'<br />', ''),
 																				'\xf3', 'ó'),
 																			'</p>', ''),
@@ -60,9 +69,9 @@ SELECT TOP (100) [id]
 	  
 
 	  as Opis
-  FROM [dbo].[TempMiejsca]
+  FROM [dbo].[dane2]
 
 GO
 
-SET IDENTITY_INSERT [dbo].[Miejsce] OFF 
+SET IDENTITY_INSERT [dbo].[Miejsce2] OFF 
 GO
