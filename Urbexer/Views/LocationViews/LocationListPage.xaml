@@ -79,9 +79,8 @@
                                         Text="{Binding Address}"
                                         TextColor="Black"
                                         VerticalOptions="Start" />
-
-                                    <Image Source="greenPin60x40_icon.png" IsVisible="{Binding IsVisited}"/>
-                                    <Image Source="redPin60x40_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                                    
+                                    
                                 </StackLayout>
                                 <StackLayout Margin="10,5,10,5">
                                     <Label
@@ -91,11 +90,20 @@
                                         MinimumWidthRequest="100"
                                         Text="{Binding Path=Distance, StringFormat='{0} km'}"
                                         VerticalOptions="End" />
-                                    <Image
-                                        HeightRequest="45"
-                                        Opacity="0.4"
+                                    <Image Margin="0,0,-20,0"
+                                        HeightRequest="35"
+                                        Opacity="0.5"
                                         Source="{Binding CategoryIconPath}"
                                         VerticalOptions="EndAndExpand" />
+                                    <Frame CornerRadius="10" Padding="3" HeightRequest="20">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="odwiedzone_icon" Margin="-2"/>
+                                            <BoxView WidthRequest="1"
+                                                     Color="#363636"/>
+                                            <Image Source="true_icon.png" IsVisible="{Binding IsVisited}"/>
+                                            <Image Source="false_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
