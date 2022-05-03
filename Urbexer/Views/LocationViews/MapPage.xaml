@@ -5,14 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     xmlns:models="clr-namespace:Urbexer.Models"
-    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels" xmlns:mapscustom="clr-namespace:Urbexer.Controls"
     Title="Mapa"
     x:DataType="viewmodels:MapViewModel">
 
     <!--  Strona mapy  -->
 
     <AbsoluteLayout>
-        <maps:Map
+        <mapscustom:CustomMap
             x:Name="map"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
@@ -27,7 +27,7 @@
             <!--  Pinezki  -->
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="models:Location">
-                    <models:DataPin
+                    <models:LocationPin
                         x:Name="DataPin"
                         Address="{Binding Address}"
                         Label="{Binding Name}"
@@ -44,7 +44,7 @@
                     FillColor="#32FF0000"
                     StrokeColor="Red" />
             </maps:Map.MapElements>
-        </maps:Map>
+        </mapscustom:CustomMap>
         <!--  Karta lokacji, pokazywana po kliknięciu na pinezkę  -->
         <Frame
             x:Name="LocationInfo"

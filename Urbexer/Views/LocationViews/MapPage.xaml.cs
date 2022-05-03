@@ -74,7 +74,7 @@ namespace Urbexer.Views {
 
         private void Pin_MarkerClicked(object sender, PinClickedEventArgs e) {
             e.HideInfoWindow = true;
-            SetCurrentPin(sender as DataPin);
+            SetCurrentPin(sender as LocationPin);
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
@@ -88,7 +88,7 @@ namespace Urbexer.Views {
             return true;
         }
 
-        private void SetCurrentPin(DataPin pin) {
+        private void SetCurrentPin(LocationPin pin) {
             CurrentPinId = pin.LocationId;
             Map_CurrentPinRange.Center = pin.Position;
             Map_CurrentPinRange.Radius = new Distance(200); // pokazuje zasięg, w którym można oznaczyć miejsce jako odwiedzone, w metrach

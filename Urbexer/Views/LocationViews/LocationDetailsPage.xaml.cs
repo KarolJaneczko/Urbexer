@@ -61,7 +61,7 @@ namespace Urbexer.Views {
             }
             else {
                 // Wyświetl komunikat, że użytkownik jest za daleko
-                await DisplayAlert("Za daleko!", $"Musisz być w zasięgu {requiredDistance} metrów żeby oznaczyć lokację jako odwiedzoną.", "OK");
+                await DisplayAlert("Za daleko!", $"Musisz być w zasięgu {requiredDistance} metrów żeby oznaczyć lokacje jako odwiedzoną.", "OK");
             }
         }
 
