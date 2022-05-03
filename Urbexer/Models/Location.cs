@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace Urbexer.Models {
     public class Location {
+        #region Słowniki
         public readonly Dictionary<int, string> CategoryDict = new Dictionary<int, string>() {
             { 1, "Kolejowe"},
             { 2, "Hotele i pensjonaty"},
@@ -41,6 +42,7 @@ namespace Urbexer.Models {
             { 15, "Wielkopolskie"},
             { 16, "Zachodniopomorskie"},
         };
+        #endregion Słowniki
         #region Zmienne
         public int Id { get; set; }
         public string Name { get; set; }
@@ -52,6 +54,7 @@ namespace Urbexer.Models {
         public int ProvinceId { get; set; }
         public string CategoryIconPath { get; set; }
         public string CategoryName => CategoryDict[CategoryId];
+        public bool IsVisited { get; set; }
         #endregion
 
         #region Klasy
