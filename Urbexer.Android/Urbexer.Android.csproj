@@ -79,6 +79,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Renderers\CustomMapRenderer.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Properties\MapAPI.cs" />
@@ -287,6 +288,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\preview_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\greenPin_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\redPin_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
