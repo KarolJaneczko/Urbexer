@@ -46,7 +46,19 @@ namespace APIpz.Services
                 .Include(t=>t.Miejsce_Kategoria)
                 .Include(t=>t.Wojewodztwo)
                 .FirstOrDefault( m => m.Id == id);
-            return _mapper.Map<MiejsceDto>(miejsce);
+            var miejsceDto = _mapper.Map<MiejsceDto>(miejsce);
+
+            var odwiedzony = _context.Odwiedzone
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .Include(o => o.OdwiedzonePrzez)
+                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
+            if (odwiedzony is null) miejsceDto.CzyOdwiedzone = false;
+            else miejsceDto.CzyOdwiedzone = true;
+
+            return miejsceDto;
+
+                                            
+
         }
         public List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
         {
@@ -54,6 +66,17 @@ namespace APIpz.Services
                 .Include(t => t.Miejsce_Kategoria)
                 .Include(t => t.Wojewodztwo)
                 .Where(m => dto.listaId.Contains(m.Id)).Select(t=> _mapper.Map<MiejsceDto>(t)).ToList();
+
+            foreach (MiejsceDto i in miejsca)
+            {
+                var odwiedzony = _context.Odwiedzone
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .Include(o => o.OdwiedzonePrzez)
+                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id);
+                if (odwiedzony is null) i.CzyOdwiedzone = false;
+                else i.CzyOdwiedzone = true;
+            }
+
             return miejsca;
         }
         public IEnumerable<int> PokazMiejscaZKategorii(int id)

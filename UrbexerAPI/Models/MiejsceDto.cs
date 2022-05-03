@@ -32,5 +32,6 @@ namespace APIpz.Entities
         public int? Doswiadczenie { get; set; } //Punkty doświadczenia zdobyte (być może wyciągnąć z kolumną "Trudnosci" do oddzielnej tabli (Ranking? nowa Doswiadczenie?)
 
         public string? Link { get; set; } //link do google maps??
+        public bool CzyOdwiedzone { get; set; }
     }
 }
