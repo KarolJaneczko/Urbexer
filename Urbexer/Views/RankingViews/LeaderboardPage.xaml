@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"     
              x:Class="Urbexer.Views.LeaderboardPage"         
-             Title="Lista rankingowa">
+             Title="{Binding Path=LeaderboardCategory, StringFormat=' Lista Rankingowa - {0} '}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -57,40 +57,32 @@
                 </GradientStopCollection>
             </LinearGradientBrush>
         </ScrollView.Background>
+      
+        
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-            <StackLayout Orientation="Vertical"
-                         Margin="0,20"
-                         HorizontalOptions="Center"
+            <Image Source="overlayranking"
+                   Opacity="0.5"
+                   Aspect="Fill"
+                   HeightRequest="200"
+                   VerticalOptions="StartAndExpand"/>
+            <StackLayout VerticalOptions="Center">
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,10"
+                         HorizontalOptions="Fill"
                          VerticalOptions="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <StackLayout Grid.Column="1" Grid.Row="1" 
-                                 Orientation="Vertical" 
-                                 VerticalOptions="Start" 
-                                 WidthRequest="150"
-                                 HorizontalOptions="Center">
-                        <Frame BackgroundColor="Gold" 
-                               HeightRequest="75"
-                               WidthRequest="75"
-                               CornerRadius="100" 
+                
+                <StackLayout  Orientation="Vertical" 
+                                 VerticalOptions="Center" 
+                                 WidthRequest="120"
+                                 HorizontalOptions="Start">
+                        <Frame BackgroundColor="Black" 
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               CornerRadius="50" 
                                Padding="5"
                                HorizontalOptions="Center"
                                VerticalOptions="Center">
@@ -101,31 +93,43 @@
                                 <Image Source="{Binding LeaderboardMyAvatar}" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Frame>
                         </Frame>
+                </StackLayout>
+                    <StackLayout Margin="0"
+                             VerticalOptions="Center">
                         <Label Text="{Binding LeaderboardMyLogin}"
-                               TextColor="Gold"
+                               TextColor="White"
                                LineBreakMode="WordWrap"
-                               TextTransform="Uppercase"
                                FontAttributes="Bold"
-                               FontSize="Large" 
-                               HorizontalOptions="Center"/>
-                        <Label Text="{Binding LeaderboardCategory}"
-                               TextColor="Black"
-                               FontSize="Large"/>
-                        <Label Text="{Binding LeaderboardMyPlace}"
-                               TextColor="Black"
-                               FontSize="Large"/>
+                               FontSize="24"
+                               HorizontalOptions="Start"/>
+                        <Label Text="{Binding Path=LeaderboardCategory, StringFormat='Odwiedzone {0} '}"
+                           Margin="0,8,0,0"
+                           TextColor="White"/>
                         <Label Text="{Binding LeaderboardMyCount}"
-                               TextColor="Black"
-                               FontSize="Large"/>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>
+                           
+                               TextColor="White"
+                               Margin="0,-8,0,0"
+                               FontAttributes="Bold"
+                               FontSize="25"/>
 
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout VerticalOptions="End"
+                             Spacing="-10"
+                             HorizontalOptions="End">
+                    <!--<Label Text="Pozycja" TextColor="White"/>-->
+                    <Label Text="{Binding Path=LeaderboardMyPlace, StringFormat='#{0}'}"
+                           FontSize="56"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                </StackLayout>
+            </StackLayout>
+            <!--region Lista Rankingowa-->
             <ListView x:Name="RankingLista"
-                      Grid.Row="3"
+                      Grid.Row="1"
                       RowHeight="75"
                       ItemsSource="{Binding RankingList}" 
-                      SeparatorVisibility="Default"
+                      SeparatorVisibility="None"
                       VerticalOptions="FillAndExpand" 
                       HorizontalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
@@ -133,31 +137,32 @@
                         <ViewCell>
                             <Frame BackgroundColor="White"
                                    BorderColor="#F0F0F0"
-                                   Padding="5"
-                                   Margin="0,0,0,5"
-                                   HasShadow="False">
+                                   Padding="10,3,5,3"
+                                   Margin="10,3"
+                                   CornerRadius="20"
+                                   HasShadow="True">
                                 <Grid  HorizontalOptions="FillAndExpand"
                                        VerticalOptions="CenterAndExpand">
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding GoToProfile}"/>
                                     </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label Text="{Binding Login}"
-                                           Grid.Column="3"
-                                           TextColor="#757575" 
-                                           FontSize="12"
-                                           VerticalOptions="Center" 
-                                           Margin="0,0"/>
-                                    <Frame Grid.Column="1"
+                                    <Label Text="{Binding Miejsce}"
+                                               TextColor="Black"
+                                               FontSize="26"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+                                    <BoxView Grid.Column="1" Margin="0,-5" WidthRequest="3" BackgroundColor="#363636"/>
+                                    <Frame Grid.Column="2"
                                            Padding="2" 
                                            CornerRadius="50"
                                            BackgroundColor="#BF0603">
@@ -166,25 +171,34 @@
                                             <Image Source="{Binding AvatarSource}"/>
                                         </Frame>
                                     </Frame>
-                                    <Label Text="{Binding Miejsce}"
-                                               TextColor="Black"
-                                               Grid.Column="2"
-                                               FontSize="30"
-                                               FontAttributes="Bold"
-                                               VerticalOptions="Center"/>
-                                    <Label Text="{Binding LiczbaMiejsc}"
-                                               TextColor="Black"
-                                               Grid.Column="3"
-                                               FontSize="30" 
+                                    <Label Text="{Binding Login}"
+                                           Grid.Column="3"
+                                           TextColor="#BF0603"
+                                           FontAttributes="Bold"
+                                           FontSize="15"
+                                           VerticalOptions="Center" 
+                                           Margin="0,0"/>
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="End"
+                                                 Grid.Column="5"
+                                                 Spacing="2">
+                                        <Label Text="{Binding LiczbaMiejsc}"
+                                               TextColor="Black" 
+                                               FontSize="20" 
                                                FontAttributes="Bold" 
                                                VerticalOptions="Center"/>
+                                        <Image Source="showPassword_icon" 
+                                                   HeightRequest="20"/>
+                                       
+                                    </StackLayout>
                                 </Grid>
                             </Frame>
-                            
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <!--endregion-->
         </Grid>
     </ScrollView>
 </ContentPage>
