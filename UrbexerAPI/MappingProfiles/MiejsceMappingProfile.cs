@@ -21,7 +21,7 @@ namespace APIpz.MappingProfiles
                 .ForMember(o => o.WojewodztwoId, c => c.MapFrom(s => s.Wojewodztwo.Id))
                 .ForMember(o => o.WspolrzedneLAT, c => c.MapFrom(s => s.WspolrzedneLAT))
                 .ForMember(o => o.WspolrzedneLNG, c => c.MapFrom(s => s.WspolrzedneLNG))
-                .ForMember(o => o.Zdjecia, c => c.MapFrom(s => s.Zdjecie));
+                .ForMember(o => o.Zdjecia, c => c.MapFrom(s => s.Zdjecia));
 
             CreateMap<Zdjecie, ZdjecieDto>()
                 .ForMember(o => o.Id, c => c.MapFrom(s => s.Id))

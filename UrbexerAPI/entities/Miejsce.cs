@@ -27,6 +27,6 @@ namespace APIpz.Entities
         public float WspolrzedneLNG { get; set; }
         public string? Opis { get; set; }
 
-        public IList<Zdjecie>? Zdjecie { get; set; }
+        public IList<Zdjecie>? Zdjecia { get; set; }
     }
 }

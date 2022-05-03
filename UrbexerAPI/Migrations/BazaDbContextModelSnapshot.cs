@@ -64,7 +64,7 @@ namespace APIpz.Migrations
 
                     b.HasIndex("WojewodztwoId");
 
-                    b.ToTable("Miejsce");
+                    b.ToTable("Miejsce", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Miejsce_kategoria", b =>
@@ -81,7 +81,7 @@ namespace APIpz.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Miejsce_kategoria");
+                    b.ToTable("Miejsce_kategoria", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Miejsce_wojewodztwo", b =>
@@ -98,7 +98,7 @@ namespace APIpz.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Miejsce_wojewodztwa");
+                    b.ToTable("Miejsce_wojewodztwa", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Odwiedzony", b =>
@@ -121,7 +121,7 @@ namespace APIpz.Migrations
 
                     b.HasIndex("OdwiedzonyUrbexId");
 
-                    b.ToTable("Odwiedzone");
+                    b.ToTable("Odwiedzone", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Opinia", b =>
@@ -145,7 +145,7 @@ namespace APIpz.Migrations
 
                     b.HasIndex("OdwiedzonyId");
 
-                    b.ToTable("Opinia");
+                    b.ToTable("Opinia", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Profil", b =>
@@ -176,7 +176,7 @@ namespace APIpz.Migrations
 
                     b.HasKey("UzytkownikId");
 
-                    b.ToTable("Profil");
+                    b.ToTable("Profil", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Ranking_slownik", b =>
@@ -193,7 +193,7 @@ namespace APIpz.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ranking_slownik");
+                    b.ToTable("Ranking_slownik", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Uzytkownik", b =>
@@ -228,7 +228,7 @@ namespace APIpz.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Uzytkownik");
+                    b.ToTable("Uzytkownik", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Zdjecie", b =>
@@ -262,7 +262,7 @@ namespace APIpz.Migrations
 
                     b.HasIndex("MiejsceId");
 
-                    b.ToTable("Zdjecie");
+                    b.ToTable("Zdjecie", (string)null);
                 });
 
             modelBuilder.Entity("APIpz.Entities.Miejsce", b =>

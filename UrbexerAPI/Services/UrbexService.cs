@@ -70,6 +70,8 @@ namespace APIpz.Services
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .ThenInclude(o => o.Miejsce_Kategoria)
                                             .Include(o => o.OdwiedzonePrzez)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .ThenInclude(o => o.Zdjecia)
                                             .ToList();
 
             //var ListaOdwiedzonych = zapytanie
@@ -91,6 +93,8 @@ namespace APIpz.Services
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .ThenInclude(o => o.Miejsce_Kategoria)
                                             .Include(o => o.OdwiedzonePrzez)
+                                            .Include(o => o.OdwiedzonyUrbex)
+                                            .ThenInclude(o => o.Zdjecia)
                                             .ToList();
 
             //var ListaOdwiedzonych = zapytanie

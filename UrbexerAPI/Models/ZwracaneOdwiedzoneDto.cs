@@ -7,5 +7,7 @@
         public string Miejsce_Kategoria { get; set; }
 
         public string? Adres { get; set; }
+
+        public IList<ZdjecieDto> Zdjecia { get; set;}
     }
 }
