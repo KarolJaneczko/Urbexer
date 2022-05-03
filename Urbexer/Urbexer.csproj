@@ -6,11 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\Samantha.ttf" />
+    <None Remove="Fonts\Bebas.ttf" />
+    <None Remove="Fonts\Hallo.otf" />
+    <None Remove="Fonts\Lato.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Fonts\Samantha.ttf" />
+    <EmbeddedResource Include="Fonts\Bebas.ttf" />
+    <EmbeddedResource Include="Fonts\Hallo.otf" />
+    <EmbeddedResource Include="Fonts\Lato.ttf" />
   </ItemGroup>
 
   <ItemGroup>
