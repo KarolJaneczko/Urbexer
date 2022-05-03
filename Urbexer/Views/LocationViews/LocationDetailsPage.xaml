@@ -269,6 +269,7 @@
                                     <CollectionView
                                         x:DataType="models:LocationDetailed"
                                         BackgroundColor="White"
+                                        EmptyView="Brak recenzji"
                                         ItemsSource="{Binding Reviews}"
                                         RemainingItemsThreshold="1"
                                         RemainingItemsThresholdReached="CollectionView_RemainingItemsThresholdReached"
