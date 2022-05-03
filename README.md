@@ -9,7 +9,9 @@ Skład zespołu:
 - Bartosz Jarząb (@bartekjarzab) - front-end, grafiki.
 - Bartosz Mierzyński (@imwpe) - back-end.
 - Bartłomiej Płókarz (@TheEggmo) - front-end, back-end.
-- Karol Janeczko (@KarolJaneczko) - front-end, back-end.
+
+Źródła Czcionek:
+  - https://github.com/dharmatype/Bebas-Neue
 
 Źródła grafik:
   - https://www.pexels.com/photo/person-going-through-a-broken-wire-fence-2953898/
