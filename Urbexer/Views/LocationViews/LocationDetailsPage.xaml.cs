@@ -39,6 +39,11 @@ namespace Urbexer.Views {
                 // Lokacja nie jest odwiedzona, pokaż przycisk odwiedzenia miejsca
                 MarkVisitedButton.IsVisible = true;
             }
+
+            // Wyłącz scrollowanie karuzeli jeżeli jest za mało zdjęć
+            if (location.ImageLinks.Count <= 1) {
+                ImageCarousel.IsSwipeEnabled = false;
+            }
         }
 
         private void GoToWriteReviewPage(object sender, System.EventArgs e) {
@@ -66,6 +71,7 @@ namespace Urbexer.Views {
         }
 
         private void CollectionView_RemainingItemsThresholdReached(object sender, System.EventArgs e) {
+            if (location == null) return;
             Task.Run(async () => await location.LoadMoreReviews());
         }
 

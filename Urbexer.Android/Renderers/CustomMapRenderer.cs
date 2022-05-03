@@ -36,12 +36,16 @@ namespace Urbexer.Droid.Renderers {
             marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
             marker.SetTitle(pin.Label);
             marker.SetSnippet(pin.Address);
-            if (pin.Type == PinType.SavedPin) {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.greenPin_icon));
+
+            switch (pin.Type) {
+                case PinType.SavedPin:
+                    marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.greenPin_icon));
+                    break;
+                case PinType.Generic:
+                    marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.redPin_icon));
+                    break;
             }
-            else {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.redPin_icon));
-            }
+
             return marker;
         }
     }

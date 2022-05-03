@@ -32,6 +32,7 @@
                         Address="{Binding Address}"
                         Label="{Binding Name}"
                         LocationId="{Binding Id}"
+                        IsVisited="{Binding IsVisited}"
                         MarkerClicked="Pin_MarkerClicked"
                         Position="{Binding Position}" />
                 </DataTemplate>
