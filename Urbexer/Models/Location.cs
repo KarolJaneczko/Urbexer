@@ -74,12 +74,12 @@ namespace Urbexer.Models {
             CategoryIconPath = GetCategoryIconPath(CategoryId);
             RecalculateDistance();
 
-            if (apiLocation.zdjecie != null) {
-
+            if (apiLocation.zdjecia == null || apiLocation.zdjecia.Length == 0) {
+                // Wczytaj placeholder
+                Thumbnail = "noPhotos.png";
             }
             else {
-                // Wczytaj placeholder
-                Thumbnail = "https://cdn.discordapp.com/attachments/967515297705779200/967515764414382132/placeholder.png";
+                Thumbnail = apiLocation.zdjecia[0].link;
             }
         }
         #endregion

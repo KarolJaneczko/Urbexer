@@ -19,12 +19,16 @@ namespace Urbexer.Models {
             if (!string.IsNullOrEmpty(apiLocation.opis)) 
                 Description = apiLocation.opis;
 
-            ImageLinks = new ObservableRangeCollection<ImageLink>() {
-            new ImageLink { Link = "https://media.discordapp.net/attachments/129713358382301184/925902767485235220/spider-man-spider-man-rekawica-6007312.webp?width=530&height=530" },
-            new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967839054794223646/20211017_131032-100x100.jpg" },
-            new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967839116714737764/20211017_131032-220x220.jpg" },
-            new ImageLink { Link = "https://cdn.discordapp.com/attachments/909835960852807713/967840380840210532/279028066_708718033656815_8015671028846047975_n.jpg" },
-            };
+            ImageLinks = new ObservableRangeCollection<ImageLink>();
+
+            if (apiLocation.zdjecia == null || apiLocation.zdjecia.Length == 0) {
+                ImageLinks.Add(new ImageLink { Link = "noPhotos.png" });
+            }
+            else {
+                foreach (APIPhoto photo in apiLocation.zdjecia) {
+                    ImageLinks.Add(new ImageLink { Link = photo.link });
+                }
+            }
         }
         public async Task LoadMoreReviews() {
             if (Reviews == null)
