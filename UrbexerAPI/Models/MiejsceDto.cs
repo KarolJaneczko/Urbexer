@@ -24,5 +24,6 @@
         public string? Opis { get; set; }
 
         public IList<ZdjecieDto> Zdjecia { get; set; }
+        public bool CzyOdwiedzone { get; set; }
     }
 }

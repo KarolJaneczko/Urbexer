@@ -47,35 +47,55 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Frame 
+                        <Frame
                             Margin="1"
                             Padding="3"
-                            MinimumHeightRequest="100" 
-                            VerticalOptions="FillAndExpand"
-                            HorizontalOptions="FillAndExpand">
+                            HorizontalOptions="FillAndExpand"
+                            MinimumHeightRequest="100"
+                            VerticalOptions="FillAndExpand">
                             <StackLayout x:DataType="models:Location" Orientation="Horizontal">
                                 <Frame Padding="1">
-                                    <Image  WidthRequest="100" HeightRequest="100"
-                                    HorizontalOptions="Start"
-                                    Aspect="AspectFill"
-                                    Source="{Binding Thumbnail}" />
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="100"
+                                        HorizontalOptions="Start"
+                                        Source="{Binding Thumbnail}"
+                                        WidthRequest="100" />
                                 </Frame>
-                                <StackLayout  HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Name}" VerticalOptions="Start"  FontFamily="Bebas" FontSize="Medium" TextColor="#BF0603"/> 
-                                    <BoxView HeightRequest="1" Color="#363636" Margin="0,-5,40,0" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="{Binding Address}" VerticalOptions="Start" FontFamily="Opis" TextColor="Black"/>
-                                    </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label
+                                        FontFamily="Bebas"
+                                        FontSize="Medium"
+                                        Text="{Binding Name}"
+                                        TextColor="#BF0603"
+                                        VerticalOptions="Start" />
+                                    <BoxView
+                                        Margin="0,-5,40,0"
+                                        HeightRequest="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        Color="#363636" />
+                                    <Label
+                                        FontFamily="Opis"
+                                        Text="{Binding Address}"
+                                        TextColor="Black"
+                                        VerticalOptions="Start" />
+
+                                    <Image Source="greenPin60x40_icon.png" IsVisible="{Binding IsVisited}"/>
+                                    <Image Source="redPin60x40_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                                </StackLayout>
                                 <StackLayout Margin="10,5,10,5">
-                                <Label HorizontalOptions="End"
-                                    MinimumWidthRequest="100"
-                                    FontFamily="Bebas"
-                                    FontSize="Large"
-                                    Text="{Binding Path=Distance, StringFormat='{0} km'}"
-                                    VerticalOptions="End" />
-                                <Image VerticalOptions="EndAndExpand"
+                                    <Label
+                                        FontFamily="Bebas"
+                                        FontSize="Large"
+                                        HorizontalOptions="End"
+                                        MinimumWidthRequest="100"
+                                        Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                                        VerticalOptions="End" />
+                                    <Image
                                         HeightRequest="45"
                                         Opacity="0.4"
-                                        Source="{Binding CategoryIconPath}"/>
+                                        Source="{Binding CategoryIconPath}"
+                                        VerticalOptions="EndAndExpand" />
                                 </StackLayout>
                             </StackLayout>
                         </Frame>

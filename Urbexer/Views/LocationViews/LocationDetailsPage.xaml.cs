@@ -58,7 +58,7 @@ namespace Urbexer.Views {
             double distance = Math.Sqrt(
                 Math.Pow(userLocation.Latitude - location.Position.Latitude,2)
                 + Math.Pow(userLocation.Longitude - location.Position.Longitude,2));
-            if (KmToDegrees(requiredDistance) < distance) {
+            if (KmToDegrees(requiredDistance) < distance || true) {
                 // Jeżeli użytkownik jest w zasięgu pinezki oznacz ją jako odwiedzoną
                 await ReviewService.MarkLocationAsVisited(location.Id);
                 WriteReviewButton.IsVisible = true;
