@@ -10,8 +10,17 @@ namespace APIpz.Entities
 
         public int Id { get; set; }
 
+        public Miejsce Miejsce { get; set; }
+
+        public int NumerKolejny { get; set; }
+
+        public RozmiaryZdjec Rozmiar { get; set; } 
+        
+        public int Wysokosc { get; set; }
+
+        public int Szerokosc { get; set; }
+
         public string Link { get; set; }
 
-        public byte[]? Obraz { get; set; }
     }
 }

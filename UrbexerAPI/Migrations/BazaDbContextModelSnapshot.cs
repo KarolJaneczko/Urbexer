@@ -36,12 +36,6 @@ namespace APIpz.Migrations
                     b.Property<DateTime?>("DataDodania")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("Doswiadczenie")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Miasto")
                         .HasColumnType("nvarchar(max)");
 
@@ -55,9 +49,6 @@ namespace APIpz.Migrations
                     b.Property<string>("Opis")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Trudnosc")
-                        .HasColumnType("int");
-
                     b.Property<int>("WojewodztwoId")
                         .HasColumnType("int");
 
@@ -67,16 +58,11 @@ namespace APIpz.Migrations
                     b.Property<float>("WspolrzedneLNG")
                         .HasColumnType("real");
 
-                    b.Property<int?>("ZdjecieId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Miejsce_KategoriaId");
 
                     b.HasIndex("WojewodztwoId");
-
-                    b.HasIndex("ZdjecieId");
 
                     b.ToTable("Miejsce");
                 });
@@ -98,7 +84,7 @@ namespace APIpz.Migrations
                     b.ToTable("Miejsce_kategoria");
                 });
 
-            modelBuilder.Entity("APIpz.entities.Miejsce_wojewodztwo", b =>
+            modelBuilder.Entity("APIpz.Entities.Miejsce_wojewodztwo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,10 +243,24 @@ namespace APIpz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Obraz")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<int>("MiejsceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumerKolejny")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rozmiar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Szerokosc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Wysokosc")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MiejsceId");
 
                     b.ToTable("Zdjecie");
                 });
@@ -273,21 +273,15 @@ namespace APIpz.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APIpz.entities.Miejsce_wojewodztwo", "Wojewodztwo")
+                    b.HasOne("APIpz.Entities.Miejsce_wojewodztwo", "Wojewodztwo")
                         .WithMany()
                         .HasForeignKey("WojewodztwoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APIpz.Entities.Zdjecie", "Zdjecie")
-                        .WithMany()
-                        .HasForeignKey("ZdjecieId");
-
                     b.Navigation("Miejsce_Kategoria");
 
                     b.Navigation("Wojewodztwo");
-
-                    b.Navigation("Zdjecie");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Odwiedzony", b =>
@@ -329,6 +323,22 @@ namespace APIpz.Migrations
                         .IsRequired();
 
                     b.Navigation("Uzytkownik");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Zdjecie", b =>
+                {
+                    b.HasOne("APIpz.Entities.Miejsce", "Miejsce")
+                        .WithMany("Zdjecie")
+                        .HasForeignKey("MiejsceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Miejsce");
+                });
+
+            modelBuilder.Entity("APIpz.Entities.Miejsce", b =>
+                {
+                    b.Navigation("Zdjecie");
                 });
 
             modelBuilder.Entity("APIpz.Entities.Uzytkownik", b =>
