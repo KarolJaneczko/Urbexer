@@ -65,6 +65,9 @@ namespace Urbexer.ViewModels {
                 else
                     throw new AppException("Hasła się nie zgadzają.", AppExceptionTypeEnum.StringsDontMatch);
             }
+            catch (System.Net.Http.HttpRequestException exception) {
+                DisplayError("Błąd", "Brak połączenia z internetem");
+            }
             catch (AppException exception) {
                 DisplayError(exception.title, exception.message);
             }
