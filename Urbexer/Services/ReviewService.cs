@@ -24,15 +24,19 @@ namespace Urbexer.Services {
         public static async Task MarkLocationAsVisited(int locationId) {
             string path = "/api/urbex/dodajOdwiedzone";
             string args = "?id=" + locationId;
-            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requresToken:true).ConfigureAwait(false);
+            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requiresToken:true).ConfigureAwait(false);
         }
         // Sprawdź, czy lokacja jest odwiedzona
         public static async Task<bool> IsLocationVisited(int locationId) {
             string path = "/api/urbex/czyUzytkownikBylWMiejscu";
             string args = "?id=" + locationId;
-            var result = await HttpService.SendApiRequest(HttpMethod.Get, path + args, requresToken: true).ConfigureAwait(false);
-            var i = bool.Parse(result);
-            return bool.Parse(result);
+            var result = await HttpService.SendApiRequest(HttpMethod.Get, path + args, requiresToken: true).ConfigureAwait(false);
+            try {
+                return bool.Parse(result);
+            }
+            catch {
+                return false;
+            }
         }
         #endregion Odwiedzanie
 
@@ -48,7 +52,7 @@ namespace Urbexer.Services {
                 locationId,
                 scoreQuality,
                 reviewMessage);
-            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requresToken:true).ConfigureAwait(false);
+            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken:true).ConfigureAwait(false);
         }
         // Pobierz recenzje lokacji o danym id
         // pageNumber decyduje którą stronę recenzji z kolei pobierać, poczynając od 1
