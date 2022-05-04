@@ -8,9 +8,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="CategoryName" TargetType="Label">
-                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontFamily" Value="Impact" />
+                <Setter Property="FontFamily" Value="Bebas" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -62,7 +62,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackLayout Grid.Row="0" Grid.ColumnSpan="2">
-                        <Label Style="{StaticResource CategoryName}" Text="Wybierz Kategorię" FontSize="Large"/>
+                        <Label Style="{StaticResource CategoryName}" Text="Wybierz Kategorię" FontSize="50" FontFamily="Bebas"/>
                     </StackLayout>
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.RowDefinitions>
