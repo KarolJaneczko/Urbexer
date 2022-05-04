@@ -46,7 +46,7 @@ namespace APIpz.Services
             var miejsce = _context.Miejsce
                 .Include(t=>t.Miejsce_Kategoria)
                 .Include(t=>t.Wojewodztwo)
-                .Include(t => t.Zdjecia.Where(t => t.Rozmiar == RozmiaryZdjec.Size1536x1536))
+                .Include(t => t.Zdjecia.Where(t => t.Rozmiar == RozmiaryZdjec.Full))
                 .FirstOrDefault( m => m.Id == id);
             var miejsceDto = _mapper.Map<MiejsceDto>(miejsce);
 
