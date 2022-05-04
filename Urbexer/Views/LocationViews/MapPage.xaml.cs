@@ -38,11 +38,12 @@ namespace Urbexer.Views {
             InitializeComponent();
             CurrentPinId = -1;
 
-            Task.Run(async () => await MoveToUser());
+            Task.Run(async () => await MoveToUser().ConfigureAwait(false));
         }
 
         // Spróbuj ustawić pozycje mapy na pozycje użytkownika
         private async Task MoveToUser() {
+            await DefaultPositionFallback();
             try {
                 Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
                 if (location != null) {

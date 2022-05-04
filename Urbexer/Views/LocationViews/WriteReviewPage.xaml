@@ -35,30 +35,24 @@
                                 FontSize="Large"
                                 HorizontalOptions="Center"
                                 Text="Ocena" />
-                            <StackLayout
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                HorizontalOptions="Center"
-                                Orientation="Horizontal">
-                                <Frame Padding="10,0,10,0">
-                                    <Picker
-                                        x:Name="ScoreQuality"
-                                        Title="-"
-                                        Grid.Row="1"
-                                        FontAttributes="Bold"
-                                        FontSize="40"
-                                        HorizontalTextAlignment="Center"
-                                        SelectedItem="None"
-                                        TextColor="#363636">
-                                        <Picker.Items>
-                                            <x:String>1</x:String>
-                                            <x:String>2</x:String>
-                                            <x:String>3</x:String>
-                                            <x:String>4</x:String>
-                                            <x:String>5</x:String>
-                                        </Picker.Items>
-                                    </Picker>
-                                </Frame>
+                            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                                <Picker
+                                    x:Name="ScoreQuality"
+                                    Title="-"
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    SelectedItem="None"
+                                    TextColor="#363636">
+                                    <Picker.Items>
+                                        <x:String>1</x:String>
+                                        <x:String>2</x:String>
+                                        <x:String>3</x:String>
+                                        <x:String>4</x:String>
+                                        <x:String>5</x:String>
+                                    </Picker.Items>
+                                </Picker>
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="40"
@@ -94,7 +88,7 @@
                     CornerRadius="20"
                     FontAttributes="Bold"
                     FontSize="20"
-                    Text="Upublikuj"
+                    Text="Opublikuj"
                     VerticalOptions="End" />
             </StackLayout>
         </StackLayout>
