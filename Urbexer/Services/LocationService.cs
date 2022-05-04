@@ -35,11 +35,17 @@ namespace Urbexer.Services {
         // Pobierz wszystkie lokacje z bazy danych
         public static async Task<List<Location>> GetLocationListAll() {
             string result = await HttpService.SendApiRequest(HttpMethod.Get, "/api/place/getall").ConfigureAwait(false);
+            if (result != null)
+                return new List<Location>();
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
+            if (idList == null || idList.Count == 0)
+                return new List<Location>();
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
             string result = await HttpService.SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json).ConfigureAwait(false);
+            if (result == null)
+                return new List<Location>();
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         #endregion ListyLokacji
@@ -58,8 +64,10 @@ namespace Urbexer.Services {
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
+
             if (result == null)
-                return null;
+                return new List<int>();
+
             // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
             result = result.Trim(new char[] { '[', ']' });
             List<int> output = new List<int>();
@@ -70,14 +78,15 @@ namespace Urbexer.Services {
         }
         // Pobierz lokacje z danego województwa
         public static async Task<List<int>> GetIdListByProvince(string province) {
-            // Nie ma do tego metody w api, ani nawet kolumny. Możliwe, że ostatecznie będzie usunięte
-            return null;
+            throw new NotImplementedException();
         }
         // Pobierz lokacje z danej kategorii
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
             string args = "?id=" + categoryId;
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
+            if (result == null)
+                return new List<int>();
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId
