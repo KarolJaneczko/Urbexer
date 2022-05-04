@@ -21,7 +21,7 @@ namespace Urbexer.ViewModels {
                 }
             });
             Locations = new ObservableRangeCollection<Location>();
-            Task.Run(async() => await LoadLocations());
+            Task.Run(async () => await LoadLocations());
         }
         public async Task<bool> LogoutPopout() {
             var result = await Shell.Current.DisplayAlert("Uwaga", "Czy chcesz się wylogować?", "Nie", "Tak");
@@ -30,6 +30,7 @@ namespace Urbexer.ViewModels {
             else
                 return false;
         }
+
         private async Task LoadLocations() {
             int requiredLocationsCount = 10;
             int range = 0;
