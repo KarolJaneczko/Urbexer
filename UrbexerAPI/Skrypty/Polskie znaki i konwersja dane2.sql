@@ -1,12 +1,12 @@
 
-DELETE FROM [dbo].[Miejsce2];
+DELETE FROM [dbo].[Miejsce];
 GO
 
-SET IDENTITY_INSERT [dbo].[Miejsce2] ON 
+SET IDENTITY_INSERT [dbo].[Miejsce] ON 
 GO
 
 /****** Script for SelectTopNRows command from SSMS  ******/
-Insert into Miejsce2 (Id, Nazwa, Miejsce_KategoriaId, Adres, WspolrzedneLAT, WspolrzedneLNG, DataDodania, Miasto,  WojewodztwoId, Opis)
+Insert into Miejsce (Id, Nazwa, Miejsce_KategoriaId, Adres, WspolrzedneLAT, WspolrzedneLNG, DataDodania, Miasto,  WojewodztwoId, Opis)
 SELECT [id],
 	REPLACE(
 		REPLACE(
@@ -21,7 +21,7 @@ SELECT [id],
       ,Convert(real, Replace([lng],',','.')) as WspolrzedneLNG
       ,[date] as [DataDodania]
       ,[town] as [Miasto]
-      , (select Id from Miejsce_wojewodztwa mw where mw.Nazwa = dane2.[voivodeship]) as [WojewodztwoId]
+      , (select Id from Miejsce_wojewodztwa mw where mw.Nazwa = dane2.[voivodeship]) as [WojewodztwoId] 
       , 
 	  Replace(
 		Replace(
@@ -44,7 +44,13 @@ SELECT [id],
 																			Replace(
 																				Replace(
 																					Replace(
-																						Replace([desc], '<p>', ''),
+																						Replace(
+																							Replace(
+																								Replace(
+																									Replace([desc], '<p>', ''),
+																								'\n', ''),
+																							'\u201d', '"'),
+																						'\u201e', '"'),
 																					'<br />', ''),
 																				'\xf3', 'ó'),
 																			'</p>', ''),
@@ -73,5 +79,5 @@ SELECT [id],
 
 GO
 
-SET IDENTITY_INSERT [dbo].[Miejsce2] OFF 
+SET IDENTITY_INSERT [dbo].[Miejsce] OFF 
 GO

@@ -35,7 +35,13 @@ SELECT TOP (100) [id]
 																			Replace(
 																				Replace(
 																					Replace(
-																						Replace([Opis], '<p>', ''),
+																						Replace(
+																							Replace(
+																								Replace(
+																									Replace([Opis], '<p>', ''),
+																								'\n', ''),
+																							'\u201d', '"'),
+																						'\u201e', '"'),
 																					'<br />', ''),
 																				'\xf3', 'ó'),
 																			'</p>', ''),
