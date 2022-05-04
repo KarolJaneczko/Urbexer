@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             x:Class="Urbexer.Views.FaqPage"
+             Title="FAQ">
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush>
+                <GradientStopCollection>
+                    <GradientStop Color="#161616" Offset="0"/>
+                    <GradientStop Color="#363636" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush>
+        </ScrollView.Background>
+        <StackLayout  x:Name="MyStackList" VerticalOptions="StartAndExpand" BindableLayout.ItemsSource="{Binding Questions}">
+            
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10,0" HasShadow="False" CornerRadius="8" BorderColor="Gray"  BackgroundColor="Transparent" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                        <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                            <xct:Expander  x:Name="MainExpander">
+                                <xct:Expander.Header>
+                                    <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White" >
+                                        <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10"  Orientation="Horizontal">
+                                            <Label Text="{Binding Id}"  FontSize="25" FontFamily="Bebas" HorizontalOptions="Start" TextColor="#BF0603"/>
+                                            <Label Text="{Binding Title}" TextColor="Black" FontSize="25" FontFamily="Bebas" HorizontalOptions="StartAndExpand"/>
+                                            <Image Source="expand_icon.png"
+                                                   HeightRequest="30"
+                                                   Opacity="0.5"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="Center">    
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}" Value="True">
+                                                        <Setter Property="Source" Value="collapse_icon.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                    </StackLayout>
+                                    </Grid>
+                                </xct:Expander.Header>
+                                <Grid>
+                                    <Grid  x:Name="TextDetailsView"  BackgroundColor="White"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20,10" >
+                                        <StackLayout>
+                                            
+                                            <Label Text="{Binding BodyDescription}" TextColor="Black" FontSize="16" Opacity="0.85"/>
+                                        </StackLayout>
+                                    </Grid>
+
+                                </Grid>
+                            </xct:Expander>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

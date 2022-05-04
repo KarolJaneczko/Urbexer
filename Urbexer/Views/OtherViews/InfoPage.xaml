@@ -10,16 +10,18 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="o nas :)" FontSize="Title"/>
-            </StackLayout>
-        </ScrollView>
-    </Grid>
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush>
+                <GradientStopCollection>
+                    <GradientStop Color="#161616" Offset="0"/>
+                    <GradientStop Color="#363636" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush>
+        </ScrollView.Background>
+        <StackLayout>
+           
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>

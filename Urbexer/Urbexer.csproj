@@ -30,6 +30,9 @@
 
 
   <ItemGroup>
+    <Compile Update="Views\OtherViews\FaqPage.xaml.cs">
+      <DependentUpon>FaqPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ProfileViews\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>

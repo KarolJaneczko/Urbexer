@@ -45,10 +45,8 @@
                 </StackLayout>
             </StackLayout>
             
-            
-            
-            
             <CollectionView HeightRequest="420"
+                            Margin="0,-30,0,0"
             FlowDirection="LeftToRight"
             HorizontalOptions="Start"
             ItemsSource="{Binding Locations}"
@@ -119,296 +117,60 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+            
+            
+            <StackLayout  x:Name="MyStackList" VerticalOptions="StartAndExpand" BindableLayout.ItemsSource="{Binding Questions}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10,0" HasShadow="False" CornerRadius="8" BorderColor="Gray"  BackgroundColor="white" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Padding="5">
+                        <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                                <xct:Expander  x:Name="MainExpander" ExpandAnimationLength="500">
+                                <xct:Expander.Header>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame BackgroundColor="#BF0603" Padding="5">
+                                                <Image Source="{Binding ImageIcon}" HeightRequest="35" WidthRequest="35" />
+                                            </Frame>
+                                            <Label Text="{Binding Title}" 
+                                                       VerticalOptions="Center"
+                                                       FontFamily="Bebas"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       FontAttributes="Bold"             
+                                                       FontSize="Large" />
+                                            <Image Source="expand_icon.png"
+                                                   HeightRequest="35"
+                                                   Grid.Column="3"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="Center">
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image"
+                                                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                                     Value="True">
+                                                        <Setter Property="Source"
+                                                               Value="collapse_icon.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </StackLayout>
+                                    </xct:Expander.Header>
+                                <Grid>
 
-            <xct:Expander ExpandAnimationEasing="SpringIn"
-                          ExpandAnimationLength="1020"
-                          CollapseAnimationEasing="SpringOut"
-                          CollapseAnimationLength="1200"
-                          Tapped="OnExpanderTapped">
-                <xct:Expander.Header>
-                    <Frame Margin="15,0,15,0" CornerRadius="20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="pytajnik_icon" HeightRequest="35" WidthRequest="35" />
-                            </Frame>
-                            <Label Text="CO TO URBEX?" 
-                               Grid.Column="1"
-                               VerticalOptions="Center"
-                               FontAttributes="Bold"             
-                               FontSize="Large" />
-                            <Image Source="expand_icon.png"
-                               HeightRequest="35"
-                               Grid.Column="3"
-                               HorizontalOptions="End"
-                               VerticalOptions="Center">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                 Value="True">
-                                        <Setter Property="Source"
-                                Value="collapse_icon.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </Grid>
-                    </Frame>
-                </xct:Expander.Header>
-                <xct:Expander.ContentTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Grid Padding="0" Margin="35,0,35,0" BackgroundColor="silver">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Frame Padding="0">
-                                    <Image Source="backgroundMain" 
-                                           Grid.Row="0"
-                                           Aspect="AspectFill" />
-                                </Frame>
+                                        <StackLayout x:Name="TextDetailsView"  BackgroundColor="White"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,5">
+                                                <Frame Padding="5" HeightRequest="200">
+                                                    <Image Source="{Binding BackgroundSource}"
+                                                           Aspect="AspectFill" />
+                                                </Frame>
+                                                <Label Text="{Binding BodyDescription}" TextColor="Black" FontSize="16" Opacity="0.85"/>
+                                        </StackLayout>
+                                   
 
-                                <Label Text="Urbex (urban exploration), to eksploracja miejsc, które są efektem rozwoju ludzkiej cywilizacji; opuszczonych, zapomnianych, trudno dostępnych. Im obiekt jest bardziej tajemniczy, tym ciekawszy da eksploratora.
-Urbex służy przede wszystkim osobom, którym los opuszczonych budynków nie jest obojętny. Wręcz przeciwnie – jest on dla nich pasjonujący. Nie sposób pominąć również edukacyjnej funkcji eksploracji miejskiej, która przyczynia się do przywrócenia pamięci o zabytkowych obiektach, a czasem nawet do ich odratowania."
-                                   FontSize="18"
-                                   Padding="5"
-                                   TextColor="Black"
-                                   FontAttributes="Bold"
-                                   VerticalOptions="FillAndExpand"
-                                   Grid.Row="1"/>
-
-                            </Grid>
+                                </Grid>
+                            </xct:Expander>
                         </StackLayout>
-                    </DataTemplate>
-                </xct:Expander.ContentTemplate>
-            </xct:Expander>
-
-            
-            
-            
-            
-            
-            <xct:Expander ExpandAnimationEasing="SpringIn"
-          ExpandAnimationLength="1020"
-          CollapseAnimationEasing="SpringOut"
-          CollapseAnimationLength="1200"
-          Tapped="OnExpanderTapped"> 
-                <xct:Expander.Header>
-                    <Frame Margin="15,0,15,0" CornerRadius="20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="tips_icon" HeightRequest="35" WidthRequest="35"/>
-
-                            </Frame>
-                            <Label Text="WSKAZÓWKI" 
-                               Grid.Column="1"
-                               VerticalOptions="Center"
-                   FontAttributes="Bold"             
-                   FontSize="Large" />
-                            <Image Source="expand_icon.png"
-                               HeightRequest="35"
-                               Grid.Column="3"
-                               HorizontalOptions="End"
-                               VerticalOptions="Center">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                 Value="True">
-                                        <Setter Property="Source"
-                                Value="collapse_icon.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </Grid>
                     </Frame>
-                </xct:Expander.Header>
-                <xct:Expander.ContentTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Grid Padding="0" Margin="35,0,35,0" BackgroundColor="silver">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Frame Padding="0">
-                                    <Image Source="backgroundTips" 
-                                           Grid.Row="0"
-                                           Aspect="AspectFill" />
-                                </Frame>
-                                
-                                    <Label Text="Swój pierwszy urbex możesz oczywiście zaplanować samemu. Każdy eksplorator przyzna jednak, że opłaca się korzystać z wiedzy bardziej doświadczonych osób.
-Możesz to zrobić na stronie urbexy.pl – znajdziesz tu cenne pomoce, jak mapa urbexów, historie innych eksploratorów oraz ich materiały zdjęciowe. Sam również możesz dzielić się tu swoimi przygodami, by uzyskać ocenę i radę osób, które z urbexem mierzą się od lat. Zamiast działać na własną rękę, dołącz do społeczności, która pozwoli ci się rozwijać w tej wyjątkowej pasji."
-                                   FontSize="18"
-                                   Padding="5"
-                                   VerticalOptions="FillAndExpand"
-                                   TextColor="Black"
-                                   FontAttributes="Bold"
-                                   Grid.Row="1"/>
-                                
-                            </Grid>
-                        </StackLayout>
-                    </DataTemplate>
-                </xct:Expander.ContentTemplate>
-            </xct:Expander>
-
-
-
-
-            <xct:Expander ExpandAnimationEasing="SpringIn"
-          ExpandAnimationLength="1020"
-          CollapseAnimationEasing="SpringOut"
-          CollapseAnimationLength="1200"
-          Tapped="OnExpanderTapped">
-                <xct:Expander.Header>
-                    <Frame Margin="15,0,15,0" CornerRadius="20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="rules_icon" HeightRequest="35" WidthRequest="35" />
-                            </Frame>
-                            <Label Text="ZASADY" 
-                               Grid.Column="1"
-                               VerticalOptions="Center"
-                               FontAttributes="Bold"             
-                               FontSize="Large" />
-                            <Image Source="expand_icon.png"
-                               HeightRequest="35"
-                               Grid.Column="3"
-                               HorizontalOptions="End"
-                               VerticalOptions="Center">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                 Value="True">
-                                        <Setter Property="Source"
-                                Value="collapse_icon.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </Grid>
-                    </Frame>
-                </xct:Expander.Header> 
-                <xct:Expander.ContentTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Grid Padding="0" Margin="35,0,35,0" BackgroundColor="silver">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Frame Padding="0">
-                                    <Image Source="backgroundRules" 
-                                           Grid.Row="0"
-                                           Aspect="AspectFill" />
-                                </Frame>
-
-                                <Label Text="Aby rozpocząć zabawę z urbexem, nie musisz posiadać żadnej, specjalistycznej wiedzy. Nie musisz mieć też bardzo drogiego wyposażenia. Najważniejsze jest przestrzeganie dwóch zasad:
-
-Take only pictures,
-Leave only footprints.
-Sprowadzają się one do głównego przesłania: eksplorator pełni jedynie funkcję obserwatora. Z miejsc urbexu nie należy niczego wynosić. Niedopuszczalne są akty dewastacji. Jedyne pamiątki, które powinny pozostać po tobie w miejscu eksploracji, to ślady butów oraz zdjęcia, które wykonasz."
-                                   FontSize="18"
-                                   Padding="5"
-                                   VerticalOptions="FillAndExpand"
-                                   TextColor="Black"
-                                   FontAttributes="Bold"
-                                   Grid.Row="1"/>
-
-                            </Grid>
-                        </StackLayout>
-                    </DataTemplate>
-                </xct:Expander.ContentTemplate>
-            </xct:Expander>
-
-
-
-
-            <xct:Expander ExpandAnimationEasing="SpringIn"
-          ExpandAnimationLength="1020"
-          CollapseAnimationEasing="SpringOut"
-          CollapseAnimationLength="1200"
-          Tapped="OnExpanderTapped">
-                <xct:Expander.Header>
-                    <Frame Margin="15,0,15,0" CornerRadius="20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Frame BackgroundColor="#BF0603" Padding="5">
-                                <Image Source="kit_icon" HeightRequest="35" WidthRequest="35" />
-                            </Frame>
-                            <Label Text="CO ZABRAĆ?" 
-                               Grid.Column="1"
-                               VerticalOptions="Center"
-                               FontAttributes="Bold"             
-                               FontSize="Large" />
-                            <Image Source="expand_icon.png"
-                               HeightRequest="35"
-                               Grid.Column="3"
-                               HorizontalOptions="End"
-                               VerticalOptions="Center">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
-                                 Value="True">
-                                        <Setter Property="Source"
-                                Value="collapse_icon.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </Grid>
-                    </Frame>
-                </xct:Expander.Header>
-                <xct:Expander.ContentTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Grid Padding="0,0,0,10" Margin="35,0,35,0" BackgroundColor="silver">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Frame Padding="0">
-                                    <Image Source="backgroundKit" 
-                                           Grid.Row="0"
-                                           Aspect="AspectFill" />
-                                </Frame>
-
-                                <Label Text="Podczas wypraw, powinieneś mieć ze sobą przedmioty, które przede wszystkim zapewnią ci bezpieczeństwo. To między innymi:
-                                                               - Latarka
-                                       
-                                           - Telefon komórkowy
-                                           - Zapasowe baterie
-                                                          - Długie spodnie              
-                                             - Buty z grubą podeszwą
-                                            - Rękawice
-                                       "
-                                   FontSize="18"
-                                   VerticalOptions="FillAndExpand"
-                                   Padding="5"
-                                   TextColor="Black"
-                                   FontAttributes="Bold"
-                                   Grid.Row="1"/>
-
-                            </Grid>
-                        </StackLayout>
-                    </DataTemplate>
-                </xct:Expander.ContentTemplate>
-            </xct:Expander>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+                </StackLayout>
         </StackLayout>
         
     </ScrollView>
