@@ -41,7 +41,7 @@
                             Grid.ColumnSpan="2"
                             FontAttributes="Bold"
                             FontFamily="Bebas"
-                            FontSize="Medium"
+                            FontSize="Small"
                             HorizontalOptions="End"
                             Text="NAJBLIŻSZE  LOKACJE"
                             TextColor="White"
