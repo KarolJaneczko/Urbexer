@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <Color x:Key="SelectedColor">#bf0603</Color>
             <Color x:Key="WhiteColor">White</Color>
-            <Color x:Key="GrayColor">Gray</Color>
+            <Color x:Key="GrayColor">White</Color>
             <Color x:Key="BlackColor">Black</Color>
 
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -27,12 +27,14 @@
 
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="white" />
+                <Setter Property="FontFamily" Value="Bebas" />
                 <Setter Property="FontSize" Value="20"/>
+                <Setter Property="CharacterSpacing" Value="1"/>
                 <Setter Property="Padding" Value="-20"/>
             </Style>
 
             <Style TargetType="Layout" ApplyToDerivedTypes="True" Class="FlyoutItemLayoutStyle">
-                <Setter Property="HeightRequest" Value="54"/>
+                <Setter Property="HeightRequest" Value="46"/>
                 <Setter Property="Padding" Value="-20"/>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
@@ -41,7 +43,7 @@
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="#363636" />
                                     <Setter Property="Padding" Value="5"/>
-                                    <Setter Property="MinimumHeightRequest" Value="60"/>
+                                    <Setter Property="MinimumHeightRequest" Value="55"/>
                                 </VisualState.Setters>
                             </VisualState>
 
@@ -50,6 +52,7 @@
                                     <Setter Property="BackgroundColor" Value="#bf0603" />
                                     <Setter Property="Padding"  Value="5"/>
                                     <Setter Property="MinimumHeightRequest" Value="60"/>
+                                    
                                 </VisualState.Setters>
                             </VisualState>
 
@@ -134,6 +137,20 @@
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:InfoPage}"/>
     </FlyoutItem>
+    
+    <!--FAQ-->
+    <FlyoutItem Title="FAQ"
+                Icon="pytajnik_icon.png" 
+                
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:FaqPage}"/>
+    </FlyoutItem> 
+    <!--kontakt  mozna wcisnac do nas -->
+    <FlyoutItem Title="Kontakt"
+                Icon="email_icon.png"
+                FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent ContentTemplate="{DataTemplate local:InfoPage}"/>
+    </FlyoutItem>
 
     <!--Wylogowanie-->
     <MenuItem
@@ -145,6 +162,7 @@
     <!-- Stopka-->
     <Shell.FlyoutFooter>
         <Grid RowDefinitions="*,*,*"
+              Margin="0,5,0,0"
               RowSpacing="5">
             <Label Text="Urbexer" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Margin="0,0,0,0"  Grid.Row="1" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dd.MM.yyyy}'}"
