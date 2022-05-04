@@ -65,7 +65,7 @@ namespace Urbexer.Services {
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
 
-            if (result == null)
+            if (result == null || result == "[]")
                 return new List<int>();
 
             // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
