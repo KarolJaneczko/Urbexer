@@ -35,7 +35,7 @@ namespace APIpz.Services
             var wynik = _context.Miejsce
                 .Include(t=>t.Miejsce_Kategoria)
                 .Include(t=>t.Wojewodztwo)
-                .Include(t=>t.Zdjecia /*.Where(t=>t.Rozmiar==RozmiaryZdjec.PlacesListThumb)*/ )
+                .Include(t=>t.Zdjecia.Where(t=>t.Rozmiar==RozmiaryZdjec.PlacesListThumb))
                 .Take(20) // Tymczasowo!!!
                 .Select(x=> _mapper.Map<MiejsceDto>(x))
                 .ToList();
@@ -46,7 +46,7 @@ namespace APIpz.Services
             var miejsce = _context.Miejsce
                 .Include(t=>t.Miejsce_Kategoria)
                 .Include(t=>t.Wojewodztwo)
-                .Include(t => t.Zdjecia /*.Where(t => t.Rozmiar == RozmiaryZdjec.Size1536x1536)*/ )
+                .Include(t => t.Zdjecia.Where(t => t.Rozmiar == RozmiaryZdjec.Full))
                 .FirstOrDefault( m => m.Id == id);
             var miejsceDto = _mapper.Map<MiejsceDto>(miejsce);
 
@@ -67,7 +67,7 @@ namespace APIpz.Services
             var miejsca = _context.Miejsce
                 .Include(t => t.Miejsce_Kategoria)
                 .Include(t => t.Wojewodztwo)
-                .Include(t => t.Zdjecia /*.Where(t => t.Rozmiar == RozmiaryZdjec.PlacesListThumb)*/)
+                .Include(t => t.Zdjecia.Where(t => t.Rozmiar == RozmiaryZdjec.PlacesListThumb))
                 .Where(m => dto.listaId.Contains(m.Id)).Select(t=> _mapper.Map<MiejsceDto>(t)).ToList();
 
             foreach (MiejsceDto i in miejsca)
@@ -87,7 +87,7 @@ namespace APIpz.Services
             var zapytanie = _context.Miejsce
                 .Include(t => t.Miejsce_Kategoria)
                 .Include(t => t.Wojewodztwo)
-                .Include(t => t.Zdjecia /*.Where(t => t.Rozmiar == RozmiaryZdjec.PlacesListThumb)*/)
+                .Include(t => t.Zdjecia.Where(t => t.Rozmiar == RozmiaryZdjec.PlacesListThumb))
                 .Where(m => m.Miejsce_Kategoria.Id == id).ToList();
             var miejsca = zapytanie.Select(m => m.Id);
             return miejsca;
