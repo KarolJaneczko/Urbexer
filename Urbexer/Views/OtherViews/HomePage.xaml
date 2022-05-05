@@ -8,10 +8,6 @@
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     Title="Strona Główna">
 
-    <ContentPage.BindingContext>
-        <viewmodels:HomeViewModel />
-    </ContentPage.BindingContext>
-
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush>
@@ -177,9 +173,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-
-
             <StackLayout
                 x:Name="MyStackList"
                 BindableLayout.ItemsSource="{Binding Questions}"
@@ -230,7 +223,6 @@
                                         </StackLayout>
                                     </xct:Expander.Header>
                                     <Grid>
-
                                         <StackLayout
                                             x:Name="TextDetailsView"
                                             Padding="10,5"
@@ -246,8 +238,6 @@
                                                 Text="{Binding BodyDescription}"
                                                 TextColor="Black" />
                                         </StackLayout>
-
-
                                     </Grid>
                                 </xct:Expander>
                             </StackLayout>

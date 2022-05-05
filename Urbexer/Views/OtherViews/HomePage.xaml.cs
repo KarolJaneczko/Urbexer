@@ -28,6 +28,14 @@ namespace Urbexer.Views {
 
             sender.SelectedItem = null;
         }
+
+        protected override void OnAppearing() {
+            base.OnAppearing();
+
+            // Przy pierwszym uruchomienu nie wyświetlają się lokacje jeżeli BindingContext jest ustawiony w xaml albo konstruktorze
+            // To rozwiązuje ten problem
+            BindingContext = new HomeViewModel(); 
+        }
     }
 
 }
