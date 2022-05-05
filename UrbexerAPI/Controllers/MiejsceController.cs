@@ -9,6 +9,7 @@ namespace APIpz.Controllers
 {
     [Route("api/place")]
     [ApiController]
+    [Authorize]
     public class MiejsceController : ControllerBase
     {
         private readonly BazaDbContext _dbContext;

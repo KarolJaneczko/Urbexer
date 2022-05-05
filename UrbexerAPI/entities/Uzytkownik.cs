@@ -24,6 +24,7 @@ namespace APIpz.Entities
 
         public string KodPotwierdzajacyRejestracje { get; set; }
         public Profil Profil { get; set; }
+        public IList <Odwiedzony> Odwiedzony { get; set; }
 
        // public virtual List<Miejsce>? Odwiedzone { get; set; }
     }

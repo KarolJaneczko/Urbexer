@@ -31,6 +31,14 @@ namespace APIpz.Services
                     .OrderByDescending(o => o.LiczbaMiejsc)
                     //.Take(20)
                     .ToList();
+                List<PozycjaWRankinguDto> wynik2 = _context.Uzytkownik
+                    .Where(x => x.Odwiedzony
+                        .Where(t => t.OdwiedzonyUrbex.Miejsce_Kategoria.Id != kategoriaId.Value).Any())
+                    .Where(x => !x.Odwiedzony
+                        .Where(t => t.OdwiedzonyUrbex.Miejsce_Kategoria.Id == kategoriaId.Value).Any())
+                    .Select(t => new PozycjaWRankinguDto { Login = t.Login, Layout = t.Profil.Layout, LiczbaMiejsc = '0' })
+                    .ToList();
+                wynik.AddRange(wynik2);
             }
             else
             {
