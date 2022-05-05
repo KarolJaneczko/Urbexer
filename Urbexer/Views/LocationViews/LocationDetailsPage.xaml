@@ -176,6 +176,7 @@
                             <Label
                                 Grid.Column="1"
                                 FontSize="15"
+                                TextColor="Black"
                                 Text="{Binding Address}" />
                         </Grid>
                     </Frame>
@@ -196,6 +197,7 @@
                             <Label
                                 Grid.Column="1"
                                 FontSize="15"
+                                TextColor="Black"
                                 Text="{Binding Description}" />
                         </Grid>
                     </Frame>
@@ -238,7 +240,7 @@
                     <!--  Przycisk pisania recenzji  -->
                     <Frame
                         x:Name="WriteReviewButton"
-                        Padding="0"
+                        Margin="50,10,50,0"
                         CornerRadius="20"
                         IsVisible="False">
                         <Button

@@ -15,13 +15,12 @@
         <Image Source="background_image4" Aspect="AspectFill"/>
 
         <Frame Padding="0"
-               HeightRequest="125"
-               WidthRequest="125"
+               HeightRequest="100"
+               WidthRequest="100"
                HorizontalOptions="CenterAndExpand"
                VerticalOptions="CenterAndExpand"
-               CornerRadius="25"
                BackgroundColor="Transparent"
-               Margin="0,50,0,600">
+               Margin="0,80,0, 600">
             <Image Source="app_logo.png" Aspect="AspectFill"/>
         </Frame>
 
