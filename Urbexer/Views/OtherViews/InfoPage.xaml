@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Urbexer.Views.InfoPage">
+             x:Class="Urbexer.Views.InfoPage"
+             Title="O Nas">
 
     
     <ContentPage.Resources>
@@ -20,7 +21,26 @@
             </LinearGradientBrush>
         </ScrollView.Background>
         <StackLayout>
-           
+            <Frame Margin="10,10" Padding="2">
+                <StackLayout HorizontalOptions="Center">
+                    <Label TextColor="Black" Text="Zespół nr 8" FontSize="Large"/>
+                    <Label Text="Urbexer to aplikacja mobilna skierowana na telefony z systemem Android zrealizowana w ramach przedmiotu Programowanie Zespołowe III roku studiów informatycznych na Uniwersytecie Mikołaja Kopernika w Toruniu." TextColor="Black" FontSize="Medium"></Label>
+                    <Label/>
+                    <Label/>
+                    <Label Text="Aplikacja jest skierowana do osób zainteresowanych pozyskaniem informacji o najbliższych miejscach do uprawiania urban exploringu. Korzystanie z aplikacji jest darmowe a twórcy aplikacji nie uzyskują żadnych korzyści finansowych z udostępniania aplikacji." TextColor="Black" FontSize="Medium"></Label>
+                    <Label/>
+                    <Label/>
+                    <Label TextColor="Black" Text="Skład Zespołu" FontSize="Large"/>
+                    <Label Text="Michał Burzański - opiekun zespołu." TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="Marcin Woźniak - kierownik zespołu, API." TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="Monika Banaszczak - sekretarz zespołu, baza danych." TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="Bartosz Jarząb  - front-end, grafiki." TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="Bartosz Mierzyński - back-end, Strona WWW" TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="Bartłomiej Płókarz - front-end, back-end." TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="Karol Janeczko - front-end, back-end." TextColor="Black" FontSize="Medium"></Label>
+                    <Label/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 

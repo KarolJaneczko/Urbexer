@@ -26,7 +26,7 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Start"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="Padding" Value="0, -10, 0, 30"/>
+                <Setter Property="Padding" Value="0, -10, 0, 40"/>
                 <Setter Property="HeightRequest" Value="120"/>
             </Style>
         </ResourceDictionary>
@@ -134,7 +134,7 @@
                                 <Label Text="Rolnicze" Style ="{StaticResource CategoryName}"/>
                             </Frame>
                         </StackLayout>
-                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoRolnicze}" Source="farm_icon" Padding="0,0,0,35"/>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoRolnicze}" Source="farm_icon"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="4">
@@ -158,7 +158,7 @@
                                 <Label Text="Podziemia" Style ="{StaticResource CategoryName}"/>
                             </Frame>
                         </StackLayout>
-                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoPodziemia}" Source="underground_icon" Padding="0,-20,0,30"/>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoPodziemia}" Source="underground_icon" />
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="5">
@@ -230,7 +230,7 @@
                                 <Label Text="Wszystkie" Style ="{StaticResource CategoryName}"/>
                             </Frame>
                         </StackLayout>
-                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoWszystkie}" Source="summary_icon" Padding="0,-30,0,25"/>
+                        <ImageButton Style="{StaticResource CategoryIcon}" Command="{Binding GoWszystkie}" Source="summary_icon" />
                     </Grid>
                     
                 </Grid>

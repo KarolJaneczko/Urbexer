@@ -146,11 +146,11 @@
         <ShellContent ContentTemplate="{DataTemplate local:FaqPage}"/>
     </FlyoutItem> 
     <!--kontakt  mozna wcisnac do nas -->
-    <FlyoutItem Title="Kontakt"
+    <!--<FlyoutItem Title="Kontakt"
                 Icon="email_icon.png"
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:InfoPage}"/>
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <!--Wylogowanie-->
     <MenuItem

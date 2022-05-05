@@ -2,6 +2,7 @@
 <ContentPage
     x:Class="Urbexer.Views.LocationViews.WriteReviewPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:locationviews="clr-namespace:Urbexer.Views.LocationViews"
     Title="Napisz Recenzję"
@@ -34,15 +35,16 @@
                                 FontAttributes="Bold"
                                 FontSize="Large"
                                 HorizontalOptions="Center"
+                                TextColor="Black"
                                 Text="Ocena" />
-                            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-                                <Picker
+                            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+                                <Picker Margin="0,0,0,0"
+                                        WidthRequest="30"
                                     x:Name="ScoreQuality"
                                     Title="-"
                                     FontAttributes="Bold"
-                                    FontSize="40"
+                                    FontSize="35"
                                     HorizontalOptions="CenterAndExpand"
-                                    HorizontalTextAlignment="Center"
                                     SelectedItem="None"
                                     TextColor="#363636">
                                     <Picker.Items>
@@ -55,7 +57,7 @@
                                 </Picker>
                                 <Label
                                     FontAttributes="Bold"
-                                    FontSize="40"
+                                    FontSize="35"
                                     Text="/ 5"
                                     TextColor="#363636"
                                     VerticalOptions="Center" />
@@ -70,6 +72,7 @@
                             Margin="5,0,0,0"
                             FontAttributes="Bold"
                             FontSize="20"
+                            TextColor="Black"
                             Text="Treść recenzji:" />
                         <Editor
                             x:Name="Editor"
@@ -79,6 +82,7 @@
                             MaxLength="300"
                             Placeholder="Podziel się swoją opinią"
                             VerticalOptions="StartAndExpand" />
+                        <!--zbinduj jeszcze z msg z review-->
                     </StackLayout>
                 </Frame>
                 <Button

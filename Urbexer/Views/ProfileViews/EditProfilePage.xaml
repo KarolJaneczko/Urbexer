@@ -154,8 +154,8 @@
                     </Grid>
                 </Frame>
              </StackLayout>
-                    <!--endregion-->
-            
+                   <!--endregion-->
+
             <!--region Dane Osobowe-->
             <Frame Style="{StaticResource ramkaGlowna}">
                 <Grid ColumnDefinitions="Auto,Auto,Auto">

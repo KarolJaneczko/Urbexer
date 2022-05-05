@@ -21,8 +21,13 @@
 
         <IndicatorView x:Name="LandingIndicatorBackGround" IndicatorsShape="Square" SelectedIndicatorColor="Transparent"/>
 
-        <Frame Padding="0" HeightRequest="125" WidthRequest="125" BackgroundColor="Transparent"
-               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0,50,0, 600">
+        <Frame Padding="0"
+               HeightRequest="100"
+               WidthRequest="100"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               BackgroundColor="Transparent"
+               Margin="0,80,0, 600">
             <Image Source="app_logo.png" Aspect="AspectFill"/>
         </Frame>
 
