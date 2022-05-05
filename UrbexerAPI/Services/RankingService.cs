@@ -36,7 +36,7 @@ namespace APIpz.Services
                         .Where(t => t.OdwiedzonyUrbex.Miejsce_Kategoria.Id != kategoriaId.Value).Any())
                     .Where(x => !x.Odwiedzony
                         .Where(t => t.OdwiedzonyUrbex.Miejsce_Kategoria.Id == kategoriaId.Value).Any())
-                    .Select(t => new PozycjaWRankinguDto { Login = t.Login, Layout = t.Profil.Layout, LiczbaMiejsc = '0' })
+                    .Select(t => new PozycjaWRankinguDto { Login = t.Login, Layout = t.Profil.Layout, LiczbaMiejsc = 0 })
                     .ToList();
                 wynik.AddRange(wynik2);
             }
