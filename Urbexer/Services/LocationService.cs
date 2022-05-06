@@ -9,10 +9,14 @@ using Urbexer.Models.ApiModels;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
+    /// <summary>
+    /// Klasa służąca do pobierania danych o lokacjach.
+    /// </summary>
     public static class LocationService {
-        // Klasa do pobierania lokacji i pobiązanych danych z bazy.
-
-        // Pobierz konkretną lokacje o danym id
+        /// <summary>
+        /// Pobierz lokacje.
+        /// </summary>
+        /// <param name="id"> Id pobieranej lokacji. </param>
         public static async Task<Location> GetLocationById(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
@@ -21,6 +25,10 @@ namespace Urbexer.Services {
                 return null;
             return new Location(JsonConvert.DeserializeObject<APILocation>(result));
         }
+        /// <summary>
+        /// Pobierz lokacje i jej szczegóły.
+        /// </summary>
+        /// <param name="id"> Id pobieranej lokacji. </param>
         public static async Task<LocationDetailed> GetLocationByIdDetailed(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
@@ -32,13 +40,19 @@ namespace Urbexer.Services {
 
         // Funkcje do pobierania list lokacji
         #region ListyLokacji
-        // Pobierz wszystkie lokacje z bazy danych
+        /// <summary>
+        /// Pobierz wszystkie lokacje z bazy danych
+        /// </summary>
         public static async Task<List<Location>> GetLocationListAll() {
             string result = await HttpService.SendApiRequest(HttpMethod.Get, "/api/place/getall").ConfigureAwait(false);
             if (result != null)
                 return new List<Location>();
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
+        /// <summary>
+        /// Pobierz liste lokacji.
+        /// </summary>
+        /// <param name="idList"> Lista id lokacji do pobrania. </param>
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
             if (idList == null || idList.Count == 0)
                 return new List<Location>();
@@ -52,8 +66,16 @@ namespace Urbexer.Services {
 
         // Funkcje do pobierania list id lokacji
         #region ListyId 
-        // Pobierz lokacje w okolicy danej pozycji
+        // 
         // Flaga unvisitedOnly sprawia że zwracane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika
+        /// <summary>
+        /// Pobierz id lokacji w okolicy danej pozycji
+        /// </summary>
+        /// <param name="latitude"> Szerokość geograficzna pozycji. </param>
+        /// <param name="longitude"> Wysokość geograficzna pozycji. </param>
+        /// <param name="kmRadius"> Promień w jakim będą pobieranie id, w kilometrach. </param>
+        /// <param name="unvisitedOnly"> Jeśli true to pobierane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika. </param>
+        /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius, bool unvisitedOnly = false) {
             float deg = KmToDegrees(kmRadius);
             string path = "/api/place/pokazMiejscaWPoblizu";
@@ -76,11 +98,11 @@ namespace Urbexer.Services {
             }
             return output;
         }
-        // Pobierz lokacje z danego województwa
-        public static async Task<List<int>> GetIdListByProvince(string province) {
-            throw new NotImplementedException();
-        }
-        // Pobierz lokacje z danej kategorii
+        /// <summary>
+        /// Pobierz id lokacji z danej kategorii
+        /// </summary>
+        /// <param name="categoryId"> Id kategorii, zdefiniowane w klasie <see cref="Location.CategoryDict">Location</see> </param>
+        /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
             string args = "?id=" + categoryId;
