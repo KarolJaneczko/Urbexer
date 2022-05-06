@@ -1,7 +1,10 @@
 ﻿using System;
 
 namespace Urbexer.Models.ApiModels {
-    public class RegisterUser {
+    /// <summary>
+    /// Model otrzymywany przez API, wykorzystywany przy rejestracji.
+    /// </summary>
+    public class APIRegisterUser {
         public string email;
         public string login;
         public string potwierdzHaslo;

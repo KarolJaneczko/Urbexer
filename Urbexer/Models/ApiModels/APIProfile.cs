@@ -2,6 +2,9 @@
 #nullable enable
 
 namespace Urbexer.Models.ApiModels {
+    /// <summary>
+    /// Model otrzymywany przez API, wykorzystywany przy wypełnianiu profilu w zakładce ProfilePage.
+    /// </summary>
     public class APIProfile {
         public string? email;
         public string? login;

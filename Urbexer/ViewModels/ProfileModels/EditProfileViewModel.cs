@@ -85,7 +85,7 @@ namespace Urbexer.ViewModels {
                 ValidateLink("youtube", EditYoutube);
                 ValidateLink("instagram", EditInstagram);
                 var layout = ProfileData.GetLayoutNumberFromName(EditLayout);
-                if (await connectionService.UpdateProfile(new Models.ApiModels.APIedytujProfil(UserInfo.Login, EditFirstName,
+                if (await connectionService.UpdateProfile(new Models.ApiModels.APIEdytujProfil(UserInfo.Login, EditFirstName,
                     EditLastName, EditDescription, EditFacebook, EditInstagram, EditYoutube, layout), httpClient)) {
                     await ProfileViewModel.RefreshProfile();
                     await Shell.Current.GoToAsync("..");

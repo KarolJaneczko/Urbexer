@@ -37,7 +37,7 @@ namespace Urbexer.ViewModels {
             try {
                 ValidateLogin(login);
                 ValidatePassword(password);
-                if (await connectionService.Login(new Login {
+                if (await connectionService.Login(new APILogin {
                     login = login,
                     password = password
                 }, httpClient) == true) {
