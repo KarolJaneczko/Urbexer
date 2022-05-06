@@ -7,8 +7,15 @@ using Xamarin.Essentials;
 using System.Collections.Generic;
 
 namespace Urbexer.Models {
+    /// <summary>
+    /// Klasa reprezentująca lokacje.
+    /// </summary>
     public class Location {
-        public readonly Dictionary<int, string> CategoryDict = new Dictionary<int, string>() {
+        #region Słowniki
+        /// <summary>
+        /// Słownik przechowujący id i nazwy kategorii.
+        /// </summary>
+        public static readonly Dictionary<int, string> CategoryDict = new Dictionary<int, string>() {
             { 1, "Kolejowe"},
             { 2, "Hotele i pensjonaty"},
             { 3, "Domy"},
@@ -23,7 +30,10 @@ namespace Urbexer.Models {
             { 12, "Podziemia i tunele"},
             { 13, "Inne"},
         };
-        public readonly Dictionary<int, string> ProvinceDict = new Dictionary<int, string>() {
+        /// <summary>
+        /// Słownik przechowujący id i nazwy województw.
+        /// </summary>
+        public static readonly Dictionary<int, string> ProvinceDict = new Dictionary<int, string>() {
             { 1, "Dolnośląskie"},
             { 2, "Kujawsko-pomorskie"},
             { 3, "Lubelskie"},
@@ -41,26 +51,72 @@ namespace Urbexer.Models {
             { 15, "Wielkopolskie"},
             { 16, "Zachodniopomorskie"},
         };
+        #endregion Słowniki
         #region Zmienne
+        /// <summary>
+        /// Id lokacji.
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Nazwa lokacji.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Adres lokacji.
+        /// </summary>
         public string Address { get; set; }
+        /// <summary>
+        /// Adres html do miniaturki wyświetlanej na kartach lokacji.
+        /// </summary>
         public string Thumbnail { get; set; }
+        /// <summary>
+        /// Współrzędne lokacji.
+        /// </summary>
         public Position Position { get; set; }
+        /// <summary>
+        /// Odległość od użytkownika.<para/>
+        /// Nie jest obliczana dynamicznie i musi być odświeżana używając <see cref="RecalculateDistance()"/>.
+        /// </summary>
         public double Distance { get; set; }
+        /// <summary>
+        /// <see cref="CategoryDict">Kategoria</see> lokacji.
+        /// </summary>
         public int CategoryId { get; set; }
+        /// <summary>
+        /// <see cref="ProvinceDict">Województwo</see> lokacji.
+        /// </summary>
         public int ProvinceId { get; set; }
-        public string CategoryIconPath { get; set; }
+        /// <summary>
+        /// Ścieżka do ikony kategorii lokacji.
+        /// </summary>
+        public string CategoryIconPath { get {
+                return GetCategoryIconPath(CategoryId); 
+            }
+            set { }
+        }
         public string CategoryName => CategoryDict[CategoryId];
+        public bool IsVisited { get; set; }
+        public bool IsNotVisited { get {
+                return !IsVisited; // Good enough
+            }
+            set { }
+        }
         #endregion
 
         #region Klasy
         #endregion
 
         #region Konstruktory
+        /// <summary>
+        /// Utwórz pustą lokacje. <para/>
+        /// </summary>
         public Location() {
             Id = -1;
         }
+        /// <summary>
+        /// Utwórz lokację wzorowaną na danym <see cref="APILocation"/>.
+        /// </summary>
+        /// <param name="apiLocation">Wzorzec do utworzenia lokacji.</param>
         public Location(APILocation apiLocation) {
             Name = apiLocation.nazwa;
             Address = apiLocation.adres;
@@ -68,21 +124,24 @@ namespace Urbexer.Models {
             Id = apiLocation.id;
             CategoryId = apiLocation.kategoriaId;
             ProvinceId = apiLocation.wojewodztwoId;
-            CategoryIconPath = GetCategoryIconPath(CategoryId);
-            RecalculateDistance();
+            //CategoryIconPath = GetCategoryIconPath(CategoryId);
+            Task.Run(async () => await RecalculateDistance());
 
-            if (apiLocation.zdjecie != null) {
-
+            if (apiLocation.zdjecia == null || apiLocation.zdjecia.Length == 0) {
+                // Wczytaj placeholder
+                Thumbnail = "noPhotos.png";
             }
             else {
-                // Wczytaj placeholder
-                Thumbnail = "https://cdn.discordapp.com/attachments/967515297705779200/967515764414382132/placeholder.png";
+                Thumbnail = apiLocation.zdjecia[0].link;
             }
         }
         #endregion
 
         #region Metody
-        // Oblicza odległość z from do Position(zmiennej obiektu)
+        /// <summary>
+        /// Zmienia <see cref="Distance"/> na odległość z danej pozycji do <see cref="Position"/>.
+        /// </summary>
+        /// <param name="from">Punkt do obliczenia odległości.</param>
         public void RecalculateDistance(Position from) {
             var distance = Math.Sqrt(Math.Pow((Position.Latitude - from.Latitude), 2)
                 + Math.Pow((Position.Longitude - from.Longitude), 2));
@@ -90,6 +149,9 @@ namespace Urbexer.Models {
             distance = Math.Round(distance, 1); // Zaokrąglij do 1 miejsca po przecinku
             Distance = distance;
         }
+        /// <summary>
+        /// Zmienia <see cref="Distance"/> na odległość od użytkownika do <see cref="Position"/>.
+        /// </summary>
         public async Task RecalculateDistance() {
             var location = await Geolocation.GetLastKnownLocationAsync();
             RecalculateDistance(new Position(location.Latitude, location.Longitude));

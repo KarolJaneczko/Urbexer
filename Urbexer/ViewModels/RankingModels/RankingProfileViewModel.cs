@@ -78,15 +78,15 @@ namespace Urbexer.ViewModels {
             if (profileData != null) {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
-                profilePosition = "Miejsce w rankingu ogólnym - #" + profileData.LeaderboardPosition.ToString();
+                profilePosition = "#" + profileData.LeaderboardPosition.ToString();
                 profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
                 profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
                 profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
             }
         }
-        public static int GetLeaderboardPositionByLogin(string login) {
-            var result = connectionService2.GetRankingList(0, httpClient2).Result;
+        public static int GetLeaderboardPositionByLogin(string login, int type) {
+            var result = connectionService2.GetRankingList(type, httpClient2).Result;
             List<string> tempList = new List<string>();
             foreach (var x in result) {
                 tempList.Add(x.login);
@@ -117,7 +117,7 @@ namespace Urbexer.ViewModels {
         public static string GetAvatarByLayout(int layout) {
             switch (layout) {
                 case (int)LayoutTypeEnum.Default:
-                    return "fotograf_avatar.png";
+                    return "default_avatar.png";
                 case (int)LayoutTypeEnum.Fotograf:
                     return "fotograf_avatar.png";
                 case (int)LayoutTypeEnum.Historyk:

@@ -17,7 +17,8 @@ namespace APIpz.MappingProfiles
             CreateMap<Odwiedzony, ZwracaneOdwiedzoneDto>()
                 .ForMember(o => o.Nazwa, c => c.MapFrom(s => s.OdwiedzonyUrbex.Nazwa))
                 .ForMember(o => o.Miejsce_Kategoria, c => c.MapFrom(s => s.OdwiedzonyUrbex.Miejsce_Kategoria.Nazwa))
-                .ForMember(o => o.Adres, c => c.MapFrom(s => s.OdwiedzonyUrbex.Adres));
+                .ForMember(o => o.Adres, c => c.MapFrom(s => s.OdwiedzonyUrbex.Adres))
+                .ForMember(o => o.Zdjecia, c => c.MapFrom(s => s.OdwiedzonyUrbex.Zdjecia));
 
             CreateMap<Profil, PokazProfilDto>()
                 .ForMember(o => o.UzytkownikId, c => c.MapFrom(s => s.Uzytkownik.Id))

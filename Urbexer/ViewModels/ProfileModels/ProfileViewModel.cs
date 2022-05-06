@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Urbexer.Models;
-using Urbexer.Models.ApiModels;
 using Urbexer.Models.Enums;
 using Urbexer.Models.UserModels;
 using Urbexer.Services;
@@ -85,7 +84,7 @@ namespace Urbexer.ViewModels {
             if (profileData != null) {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
                 profileLogin = profileData.Login;
-                profilePosition = "Miejsce w rankingu ogólnym - #" + profileData.LeaderboardPosition.ToString();
+                profilePosition = " #" + profileData.LeaderboardPosition.ToString();
                 profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
                 profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
                 profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
@@ -114,6 +113,7 @@ namespace Urbexer.ViewModels {
         public static async Task RefreshProfile() {
             UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
             UserInfo.yourProfile.LeaderboardPosition = GetLeaderboardPositionByLogin(UserInfo.Login);
+            UserInfo.yourProfile.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
             FillProfile(UserInfo.yourProfile);
         }
         public static int GetLeaderboardPositionByLogin(string login) {

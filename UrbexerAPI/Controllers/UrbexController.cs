@@ -9,6 +9,7 @@ namespace APIpz.Controllers
 {
     [Route("api/urbex")]
     [ApiController]
+    [Authorize]
     public class UrbexController : ControllerBase
     {
         private readonly BazaDbContext _dbContext;

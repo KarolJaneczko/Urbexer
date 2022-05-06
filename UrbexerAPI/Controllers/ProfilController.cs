@@ -9,6 +9,7 @@ namespace APIpz.Controllers
 {
     [Route("api/profile")]
     [ApiController]
+    [Authorize]
     public class ProfilController : ControllerBase
     {
         private readonly BazaDbContext _dbContext;

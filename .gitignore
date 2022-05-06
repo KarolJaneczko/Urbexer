@@ -8,3 +8,5 @@ obj
 /Builds
 /Urbexer/bin/Release/
 /Urbexer.Android/bin/Release/
+*.tex
+*.eps

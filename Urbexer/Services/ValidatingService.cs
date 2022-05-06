@@ -100,10 +100,7 @@ namespace Urbexer.Services {
         #endregion
         #region Walidacje techniczne
         public static bool CheckForInternetConnection() {
-            if (!CrossConnectivity.Current.IsConnected)
-                return false;
-            else
-                return true;
+            return CrossConnectivity.Current.IsConnected;
         }
         public async void ValidateConnectionResult(HttpResponseMessage result, OperationTypeEnum operation) {
             try {

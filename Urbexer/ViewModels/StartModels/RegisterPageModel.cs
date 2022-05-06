@@ -60,11 +60,13 @@ namespace Urbexer.ViewModels {
                         czyAdmin = false
                     }, httpClient) == true) {
                         await Application.Current.MainPage.DisplayAlert("Sukces", "Na podany adres mailowy otrzymasz link potwierdzający aktywację konta.", "OK");
-                        //Tu będzie metoda generująca rekord w tabeli z profilami.
                     }
                 }
                 else
                     throw new AppException("Hasła się nie zgadzają.", AppExceptionTypeEnum.StringsDontMatch);
+            }
+            catch (System.Net.Http.HttpRequestException exception) {
+                DisplayError("Błąd", "Brak połączenia z internetem");
             }
             catch (AppException exception) {
                 DisplayError(exception.title, exception.message);

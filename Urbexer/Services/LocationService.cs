@@ -9,22 +9,30 @@ using Urbexer.Models.ApiModels;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
+    /// <summary>
+    /// Klasa służąca do pobierania danych o lokacjach.
+    /// </summary>
     public static class LocationService {
-        // Klasa do pobierania lokacji i pobiązanych danych z bazy.
-
-        // Pobierz konkretną lokacje o danym id
+        /// <summary>
+        /// Pobierz lokacje.
+        /// </summary>
+        /// <param name="id"> Id pobieranej lokacji. </param>
         public static async Task<Location> GetLocationById(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             if (result == null)
                 return null;
             return new Location(JsonConvert.DeserializeObject<APILocation>(result));
         }
+        /// <summary>
+        /// Pobierz lokacje i jej szczegóły.
+        /// </summary>
+        /// <param name="id"> Id pobieranej lokacji. </param>
         public static async Task<LocationDetailed> GetLocationByIdDetailed(int id) {
             string path = "/api/place/pokazMiejscePoId";
             string args = "?id=" + id;
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             if (result == null)
                 return null;
             return new LocationDetailed(JsonConvert.DeserializeObject<APILocation>(result));
@@ -32,22 +40,42 @@ namespace Urbexer.Services {
 
         // Funkcje do pobierania list lokacji
         #region ListyLokacji
-        // Pobierz wszystkie lokacje z bazy danych
+        /// <summary>
+        /// Pobierz wszystkie lokacje z bazy danych
+        /// </summary>
         public static async Task<List<Location>> GetLocationListAll() {
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, "/api/place/getall");
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, "/api/place/getall").ConfigureAwait(false);
+            if (result != null)
+                return new List<Location>();
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
+        /// <summary>
+        /// Pobierz liste lokacji.
+        /// </summary>
+        /// <param name="idList"> Lista id lokacji do pobrania. </param>
         public static async Task<List<Location>> GetLocationListByIds(List<int> idList) {
+            if (idList == null || idList.Count == 0)
+                return new List<Location>();
             string json = string.Format("{{\"listaId\": [{0}]}}", string.Join(",", idList));
-            string result = await HttpService.SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json);
+            string result = await HttpService.SendApiRequest(HttpMethod.Post, "/api/place/pokazMiejscaZListy", json).ConfigureAwait(false);
+            if (result == null)
+                return new List<Location>();
             return APILocationsToLocations(JsonConvert.DeserializeObject<List<APILocation>>(result));
         }
         #endregion ListyLokacji
 
         // Funkcje do pobierania list id lokacji
         #region ListyId 
-        // Pobierz lokacje w okolicy danej pozycji
+        // 
         // Flaga unvisitedOnly sprawia że zwracane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika
+        /// <summary>
+        /// Pobierz id lokacji w okolicy danej pozycji
+        /// </summary>
+        /// <param name="latitude"> Szerokość geograficzna pozycji. </param>
+        /// <param name="longitude"> Wysokość geograficzna pozycji. </param>
+        /// <param name="kmRadius"> Promień w jakim będą pobieranie id, w kilometrach. </param>
+        /// <param name="unvisitedOnly"> Jeśli true to pobierane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika. </param>
+        /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius, bool unvisitedOnly = false) {
             float deg = KmToDegrees(kmRadius);
             string path = "/api/place/pokazMiejscaWPoblizu";
@@ -57,9 +85,11 @@ namespace Urbexer.Services {
                 latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 deg.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
-            if (result == null)
-                return null;
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
+
+            if (result == null || result == "[]")
+                return new List<int>();
+
             // Result ma postać tablicy typu string. Potnij na części i przerób na liste intów
             result = result.Trim(new char[] { '[', ']' });
             List<int> output = new List<int>();
@@ -68,16 +98,17 @@ namespace Urbexer.Services {
             }
             return output;
         }
-        // Pobierz lokacje z danego województwa
-        public static async Task<List<int>> GetIdListByProvince(string province) {
-            // Nie ma do tego metody w api, ani nawet kolumny. Możliwe, że ostatecznie będzie usunięte
-            return null;
-        }
-        // Pobierz lokacje z danej kategorii
+        /// <summary>
+        /// Pobierz id lokacji z danej kategorii
+        /// </summary>
+        /// <param name="categoryId"> Id kategorii, zdefiniowane w  <see cref="Location.CategoryDict"/></param>
+        /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
             string args = "?id=" + categoryId;
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
+            if (result == null)
+                return new List<int>();
             return JsonConvert.DeserializeObject<List<int>>(result);
         }
         #endregion ListyId

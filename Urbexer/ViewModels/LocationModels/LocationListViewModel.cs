@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Connectivity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,9 @@ namespace Urbexer.ViewModels {
         public AsyncCommand LoadMoreCommand { get; }
         private List<int> loadedLocationsIds = new List<int>();
         private int currentLoadRange = 0;
+        private bool isLoading = false;
+        private bool noInternet = false;
         public LocationListViewModel() : base(){
-            LoadMore();
             LoadMoreCommand = new AsyncCommand(LoadMore);
         }
 
@@ -28,22 +30,28 @@ namespace Urbexer.ViewModels {
                 currentNameFilter = query;
                 ReapplyFilters();
             });
+
         // Powiększ zasięg wczytywania lokacji i pobierz nowe lokacje
         async Task LoadMore() {
+            if (!CrossConnectivity.Current.IsConnected) noInternet = true;
+            if (noInternet) return;
+            if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie
+            isLoading = true;
+
             List<int> newIds = new List<int>();
+            Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
             while (newIds.Count() == 0) {
                 currentLoadRange += 30;
-                Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
-                newIds = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, currentLoadRange);
+                newIds = await LocationService.GetIdListInArea(
+                    (float)location.Latitude, (float)location.Longitude, currentLoadRange).ConfigureAwait(false);
                 newIds = newIds.Except(loadedLocationsIds).ToList();
             }
-            var newLocations = await LocationService.GetLocationListByIds(newIds);
+            var newLocations = await LocationService.GetLocationListByIds(newIds).ConfigureAwait(false);
             SortLocationsByDistance(newLocations);
-            //Locations.AddRange(newLocations);
             LocationsFiltered.AddRange(newLocations);
             loadedLocationsIds.AddRange(newIds);
             
-            //ReapplyFilters();
+            isLoading = false;
         }
         #endregion Komendy
 

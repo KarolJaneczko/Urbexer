@@ -8,6 +8,8 @@ using Urbexer.Models.ApiModels;
 namespace Urbexer.Services {
     internal static class ReviewService {
         // Klasa do pobierania recenzji/opini o lokacjach z api
+
+        // Template zwracany przez api
         private class APIReviewPage {
             public APIReview[] items;
             public int totalPages;
@@ -15,20 +17,31 @@ namespace Urbexer.Services {
             public int itemsTo;
             public int totalItemsCount;
         }
-        // placeholder recenzje, ostatecznie usunąć
-        private static List<Review> dummyReviews = new List<Review>() {
-                new Review(){ Score = 5, UserName = "Adam", Message = "Test"},
-                new Review(){ Score = 2, UserName = "Janusz", Message = "Test2\nTest2"},
-                new Review(){ Score = 3, UserName = "Rafał", Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-        };
 
+        // Funkcje związane z odwiedzaniem lokacji
+        #region Odwiedzanie
         // Oznacz daną lokacje jako oznaczona. Bez tego nie da się wystawiać recenzji
-        //public static async Task MarkLocationAsVisited(int locationId) {
-        public static async Task MarkLocationAsVisited(int id) {
+        public static async Task MarkLocationAsVisited(int locationId) {
             string path = "/api/urbex/dodajOdwiedzone";
-            string args = "?id=" + id;
-            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requresToken:true);
+            string args = "?id=" + locationId;
+            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requiresToken:true).ConfigureAwait(false);
         }
+        // Sprawdź, czy lokacja jest odwiedzona
+        public static async Task<bool> IsLocationVisited(int locationId) {
+            string path = "/api/urbex/czyUzytkownikBylWMiejscu";
+            string args = "?id=" + locationId;
+            var result = await HttpService.SendApiRequest(HttpMethod.Get, path + args, requiresToken: true).ConfigureAwait(false);
+            try {
+                return bool.Parse(result);
+            }
+            catch {
+                return false;
+            }
+        }
+        #endregion Odwiedzanie
+
+        // Funkcje związane z recenzjami
+        #region Recenzje
         // Wystaw recenzję lokacji o danym id
         public static async Task PostReview(int locationId, int scoreQuality, string reviewMessage) {
             string path = "/api/urbex/dodajOpinie";
@@ -39,7 +52,7 @@ namespace Urbexer.Services {
                 locationId,
                 scoreQuality,
                 reviewMessage);
-            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requresToken:true);
+            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken:true).ConfigureAwait(false);
         }
         // Pobierz recenzje lokacji o danym id
         // pageNumber decyduje którą stronę recenzji z kolei pobierać, poczynając od 1
@@ -48,7 +61,7 @@ namespace Urbexer.Services {
             string path = "/api/urbex/pokazOpinieDoMiejsca";
             string args = string.Format("?Id={0}&PageNumber={1}&PageSize={2}",
                 locationId, pageNumber, pageSize);
-            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
             APIReviewPage page = JsonConvert.DeserializeObject<APIReviewPage>(result);
 
             List<Review> output = new List<Review>();
@@ -57,5 +70,6 @@ namespace Urbexer.Services {
             }
             return output;
         }
+        #endregion Recenzje
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Urbexer</name>
+    </assembly>
+    <members>
+        <member name="M:Urbexer.Services.HttpService.SendApiRequest(System.Net.Http.HttpMethod,System.String,System.String,System.Boolean)">
+            <summary>
+            Funkcja do wysyłania zapytań do api.
+            </summary>
+            <param name="method"> Typ zapytania jakie zostanie wysłane </param>
+            <param name="path">
+            Ścieżka metody z argumentami.
+            <para> Na przykład: "/api/place/pokazMiejscePoId?id=1". </para>
+            </param>
+            <param name="body"> Ciało zapytania. </param>
+            <param name="requiresToken"> 
+            Jeżeli true, to zapytanie zadba o obecność tokenu autoryzacyjnego.
+            W przeciwnym wypadku zapytanie zostanie anulowane. <para/>
+            Jeżeli false, to zapytanie nadal może mieć autoryzacje, ale nie będzie się upewniało o jej obecność.
+            </param>
+            <returns>
+            String zawierający wynik zapytania przy sukcesie (kod 200).
+            W przypadku problemów zwracany jest null.
+            </returns>
+        </member>
+        <member name="M:Urbexer.Services.HttpService.TryAddAuthorization">
+            <summary>
+            Dodaj token autoryzacji
+            </summary>
+            <returns>
+            True jeżeli autoryzacja już jest lub została dodana. <para/>
+            False w przeciwnym wypadku .
+            </returns>
+        </member>
+        <member name="T:Urbexer.GlobalStaticResources">
+            <summary>
+            Contains all the static resources defined for the application
+            </summary>
+        </member>
+    </members>
+</doc>

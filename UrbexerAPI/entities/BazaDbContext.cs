@@ -1,5 +1,4 @@
-﻿using APIpz.entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace APIpz.Entities
 {
@@ -26,7 +25,7 @@ namespace APIpz.Entities
             modelbuilder.Entity<Uzytkownik>()
             .HasOne(u => u.Profil)
             .WithOne(p => p.Uzytkownik)
-            .HasForeignKey<Profil>(p=>p.UzytkownikId);
+            .HasForeignKey<Profil>(p => p.UzytkownikId);
         }
     }
 }

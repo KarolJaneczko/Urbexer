@@ -4,7 +4,6 @@ using Urbexer.Models;
 using Xamarin.Forms;
 using System.ComponentModel;
 using Urbexer.Models.ApiModels;
-using Urbexer.Services;
 
 namespace Urbexer.ViewModels {
     public class SignInPageViewModel : BaseViewModel {
@@ -45,6 +44,9 @@ namespace Urbexer.ViewModels {
                     await ProfileViewModel.RefreshProfile();
                     await Shell.Current.GoToAsync("../../..///HomePage");
                 }
+            }
+            catch (System.Net.Http.HttpRequestException exception) {
+                DisplayError("Błąd", "Brak połączenia z internetem");
             }
             catch (AppException exception) {
                 DisplayError(exception.title, exception.message);

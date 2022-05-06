@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Connectivity;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -14,11 +15,28 @@ namespace Urbexer.Services {
             TryAddAuthorization();
         }
 
-        // Funkcja do wysyłania zapytań do api
-        // Zwraca wynik zapytania przy sukcesie (kod 200), null w przeciwnym przypadku
-        public static async Task<string> SendApiRequest(HttpMethod method, string path, string json = "", bool requresToken = false) {
+
+        /// <summary>
+        /// Funkcja do wysyłania zapytań do api.
+        /// </summary>
+        /// <param name="method"> Typ zapytania jakie zostanie wysłane </param>
+        /// <param name="path">
+        /// Ścieżka metody z argumentami.
+        /// <para> Na przykład: "/api/place/pokazMiejscePoId?id=1". </para>
+        /// </param>
+        /// <param name="body"> Ciało zapytania. </param>
+        /// <param name="requiresToken"> 
+        /// Jeżeli true, to zapytanie zadba o obecność tokenu autoryzacyjnego.
+        /// W przeciwnym wypadku zapytanie zostanie anulowane. <para/>
+        /// Jeżeli false, to zapytanie nadal może mieć autoryzacje, ale nie będzie się upewniało o jej obecność.
+        /// </param>
+        /// <returns>
+        /// String zawierający wynik zapytania przy sukcesie (kod 200).
+        /// W przypadku problemów zwracany jest null.
+        /// </returns>
+        public static async Task<string> SendApiRequest(HttpMethod method, string path, string body = "", bool requiresToken = true) {
             // Niektóre metody nie działają bez tokena. Upewnij się że token jest dodany
-            if (requresToken && !TryAddAuthorization())
+            if (requiresToken && !TryAddAuthorization())
                 return null;
             
             // Utwórz zapytanie
@@ -26,18 +44,26 @@ namespace Urbexer.Services {
             var request = new HttpRequestMessage {
                 Method = method,
                 RequestUri = new Uri(uri),
-                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+                Content = new StringContent(body, Encoding.UTF8, "application/json"),
             };
+
+            if (!CrossConnectivity.Current.IsConnected)
+                return null;
 
             // Wyślij zapytanie i zwróć wynik
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return null;
         }
 
-        // Dodaj token autoryzacji
-        // Zwraca true jeżeli autoryzacja jest dodana, false w przeciwnym wypadku
+        /// <summary>
+        /// Dodaj token autoryzacji
+        /// </summary>
+        /// <returns>
+        /// True jeżeli autoryzacja już jest lub została dodana. <para/>
+        /// False w przeciwnym wypadku .
+        /// </returns>
         static private bool TryAddAuthorization() {
             if (httpClient.DefaultRequestHeaders.Authorization != null
                 && httpClient.DefaultRequestHeaders.Authorization.Scheme != null

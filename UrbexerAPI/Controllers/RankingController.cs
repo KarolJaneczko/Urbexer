@@ -9,6 +9,7 @@ namespace APIpz.Controllers
 {
     [Route("api/ranking")]
     [ApiController]
+    [Authorize]
     public class RankingController : ControllerBase
     {
         private readonly IRankingService _rankingService;

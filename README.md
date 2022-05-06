@@ -11,6 +11,11 @@ Skład zespołu:
 - Bartłomiej Płókarz (@TheEggmo) - front-end, back-end.
 - Karol Janeczko (@KarolJaneczko) - front-end, back-end.
 
+Źródła Czcionek:
+  - https://github.com/dharmatype/Bebas-Neue
+  - https://fonts.google.com/specimen/Merriweather
+  - https://freebiesbug.com/free-fonts/hallo-sans-free-font/
+  
 Źródła grafik:
   - https://www.pexels.com/photo/person-going-through-a-broken-wire-fence-2953898/
   - https://www.pexels.com/photo/photo-of-abandoned-building-3137571/
