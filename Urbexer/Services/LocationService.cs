@@ -101,7 +101,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Pobierz id lokacji z danej kategorii
         /// </summary>
-        /// <param name="categoryId"> Id kategorii, zdefiniowane w klasie <see cref="Location.CategoryDict">Location</see> </param>
+        /// <param name="categoryId"> Id kategorii, zdefiniowane w  <see cref="Location.CategoryDict"/></param>
         /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
