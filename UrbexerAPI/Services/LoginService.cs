@@ -71,7 +71,7 @@ namespace APIpz.Services
                 LinkFacebook = null,
                 LinkInstagram = null,
                 LinkYouTube = null,
-                Layout = null,
+                Layout = 0,
             };
             _context.Profil.Add(nowyProfil);
             _context.Attach(uzytkownik);
