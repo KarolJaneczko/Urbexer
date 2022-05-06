@@ -6,10 +6,16 @@ using Urbexer.Models;
 using Urbexer.Models.ApiModels;
 
 namespace Urbexer.Services {
-    internal static class ReviewService {
-        // Klasa do pobierania recenzji/opini o lokacjach z api
+    /// <summary>
+    /// Klasa służąca do pobierania i wysyłania recenzji oraz kontrolowania stanu odwiedzenia lokacji. <para/>
+    /// Obecny użytkownik jest przekazywany jako token w headerze zapytania.
+    /// Szczegóły są opisane w <see cref="HttpService"/>.
+    /// </summary>
+    public static class ReviewService {
 
-        // Template zwracany przez api
+#pragma warning disable CS0649
+        // Template strony z recenzjami zwracanej przez api
+        // Jedyne co nas interesuje to items
         private class APIReviewPage {
             public APIReview[] items;
             public int totalPages;
@@ -17,16 +23,26 @@ namespace Urbexer.Services {
             public int itemsTo;
             public int totalItemsCount;
         }
+#pragma warning restore CS0649
 
         // Funkcje związane z odwiedzaniem lokacji
         #region Odwiedzanie
-        // Oznacz daną lokacje jako oznaczona. Bez tego nie da się wystawiać recenzji
+        /// <summary>
+        /// Oznacz lokacje o danym id jako odwiedzoną.
+        /// </summary>
+        /// <param name="locationId"></param>
         public static async Task MarkLocationAsVisited(int locationId) {
             string path = "/api/urbex/dodajOdwiedzone";
             string args = "?id=" + locationId;
             await HttpService.SendApiRequest(HttpMethod.Post, path + args, requiresToken:true).ConfigureAwait(false);
         }
-        // Sprawdź, czy lokacja jest odwiedzona
+        /// <summary>
+        /// Sprawdź, czy lokacja o danym id jest odwiedzona.
+        /// </summary>
+        /// <returns>
+        /// True jeżeli obecny użytkownik odwiedził daną lokację. <para/>
+        /// False w przeciwnym wypadku. 
+        /// </returns>
         public static async Task<bool> IsLocationVisited(int locationId) {
             string path = "/api/urbex/czyUzytkownikBylWMiejscu";
             string args = "?id=" + locationId;
@@ -42,7 +58,12 @@ namespace Urbexer.Services {
 
         // Funkcje związane z recenzjami
         #region Recenzje
-        // Wystaw recenzję lokacji o danym id
+        /// <summary>
+        /// Wystaw recenzję lokacji o danym id
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <param name="scoreQuality">Wystawiana ocena</param>
+        /// <param name="reviewMessage">Treść recenzji.</param>
         public static async Task PostReview(int locationId, int scoreQuality, string reviewMessage) {
             string path = "/api/urbex/dodajOpinie";
             string json = string.Format("{{" +
@@ -54,9 +75,13 @@ namespace Urbexer.Services {
                 reviewMessage);
             await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken:true).ConfigureAwait(false);
         }
-        // Pobierz recenzje lokacji o danym id
-        // pageNumber decyduje którą stronę recenzji z kolei pobierać, poczynając od 1
-        // pageSize decyduje ile recenzji na stronę
+        /// <summary>
+        /// Pobierz recenzje lokacji o danym id
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <param name="pageNumber">Decyduje którą stronę recenzji z kolei pobierać, poczynając od 1.</param>
+        /// <param name="pageSize">Decyduje ile recenzji ma mieć pobrana strona.</param>
+        /// <returns></returns>
         public static async Task<List<Review>> GetReviews(int locationId, int pageNumber, int pageSize) {
             string path = "/api/urbex/pokazOpinieDoMiejsca";
             string args = string.Format("?Id={0}&PageNumber={1}&PageSize={2}",
