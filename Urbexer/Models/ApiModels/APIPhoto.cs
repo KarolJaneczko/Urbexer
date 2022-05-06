@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Urbexer.Models.ApiModels {
     /// <summary>
-    /// Klasa reprezentująca zdjęcie pobrane z bazy <para/>
+    /// Zdjęcie pobrane z bazy <para/>
     /// Ze strony front-endu wykorzystywany jest tylko <see cref="link"/>
     /// </summary>
     public class APIPhoto {

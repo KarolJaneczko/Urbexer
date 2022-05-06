@@ -3,7 +3,7 @@
 
 namespace Urbexer.Models.ApiModels {
     /// <summary>
-    /// Klasa reprezentująca lokację pobraną z bazy.
+    /// Lokacja pobrana z bazy.
     /// </summary>
     public class APILocation {
         public int id;
