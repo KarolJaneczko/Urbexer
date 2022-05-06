@@ -168,7 +168,7 @@ namespace Urbexer.ViewModels {
         public static List<Rekord> ZmapowanaLista(List<APIRanking> list) {
             var result = new List<Rekord>();
             foreach (var x in list) {
-                var item = new Rekord(x.login, x.liczbaMiejsc, x.layout);
+                var item = new Rekord(x.login, (int)x.liczbaMiejsc, (int)x.layout);
                 result.Add(item);
             }
             return result;

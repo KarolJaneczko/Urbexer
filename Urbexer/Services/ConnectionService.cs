@@ -6,6 +6,7 @@ using Urbexer.Models.ApiModels;
 using Newtonsoft.Json;
 using Urbexer.Models.UserModels;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
@@ -40,6 +41,7 @@ namespace Urbexer.Services {
                 return false;
         }
         public static async Task<ProfileData> GetProfileByLogin(string login, HttpClient httpClient) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
             var result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/profile/pokazProfil?login=" + login).Result.Content.ReadAsStringAsync();
             if (result == null)
                 return null;
@@ -47,6 +49,7 @@ namespace Urbexer.Services {
                 return new ProfileData(JsonConvert.DeserializeObject<APIProfile>(result));
         }
         public async Task<bool> UpdateProfile(APIedytujProfil request, HttpClient httpClient) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
             var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/profile/edytujProfil", SerializeToJson(request));
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
@@ -54,11 +57,13 @@ namespace Urbexer.Services {
                 return false;
         }
         public static async Task<int> GetVisitedPlacesCountByLogin(string login, HttpClient httpClient) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
             var result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/pokazCzyjesOdwiedzone?Login=" + login + "&PageNumber=1&PageSize=" + sizeof(int)).Result.Content.ReadAsStringAsync();
             var resultList = JsonConvert.DeserializeObject<List<APICzyjesOdwiedzone>>(result);
             return resultList.Count;
         }
         public async Task<List<APIRanking>> GetRankingList(int type, HttpClient httpClient) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
             string result;
             if (type == 0) {
                 result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/").Result.Content.ReadAsStringAsync();
