@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using Urbexer.Models;
 
 namespace Urbexer.Services {
+    /// <summary>
+    /// Klasa przechowująca ustawienia <see cref="HttpClient">klienta http</see> 
+    /// oraz metody związane z wysyłaniem zapytań http.
+    /// </summary>
     public class HttpService {
         private static readonly HttpClient httpClient;
         static HttpService() {
