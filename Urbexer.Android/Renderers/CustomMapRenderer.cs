@@ -20,7 +20,6 @@ using Xamarin.Forms.Maps;
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace Urbexer.Droid.Renderers {
     public class CustomMapRenderer : MapRenderer {
-        List<LocationPin> locationPins;
         public CustomMapRenderer(Context context) : base(context) {
         }
 
@@ -37,6 +36,7 @@ namespace Urbexer.Droid.Renderers {
             marker.SetTitle(pin.Label);
             marker.SetSnippet(pin.Address);
 
+            /*
             switch (pin.Type) {
                 case PinType.SavedPin:
                     marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.greenPin_icon));
@@ -44,7 +44,8 @@ namespace Urbexer.Droid.Renderers {
                 case PinType.Generic:
                     marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.redPin_icon));
                     break;
-            }
+            }*/
+            marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.redPin_icon));
 
             return marker;
         }

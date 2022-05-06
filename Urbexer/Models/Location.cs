@@ -94,8 +94,20 @@ namespace Urbexer.Models {
             }
             set { }
         }
+        /// <summary>
+        /// Zwraca nazwe kategorii tego miejsca. Używane przez bindingi w xaml.
+        /// </summary>
         public string CategoryName => CategoryDict[CategoryId];
+        /// <summary>
+        /// Oznacza stan odwiedzenia lokacji przez tego użytkownika. <para/>
+        /// Lokacje mają odpowiednią ikonkę na kartach i na stronie lokacji oznaczającą czy dany użytkownik ją odwiedził. <para/>
+        /// Dodatkowo recenzje mogą być wysyłane tylko jeżeli lokacja została odwiedzona.
+        /// </summary>
         public bool IsVisited { get; set; }
+        /// <summary>
+        /// Zwraca negacje <see cref="IsVisited"/>.<para/>
+        /// Używane jako hack w bindingach xaml.
+        /// </summary>
         public bool IsNotVisited { get {
                 return !IsVisited; // Good enough
             }
@@ -107,9 +119,6 @@ namespace Urbexer.Models {
         #endregion
 
         #region Konstruktory
-        /// <summary>
-        /// Utwórz pustą lokacje. <para/>
-        /// </summary>
         public Location() {
             Id = -1;
         }
