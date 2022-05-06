@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>D:\Projects\Coding\C#\Urbexer\Dokumentacja\docs.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
