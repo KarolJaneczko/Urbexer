@@ -2,6 +2,9 @@
 
 namespace Urbexer.Models {
     public class AppException : Exception {
+        /// <summary>
+        /// Klasa dziedzicząca po klasie <see cref="Exception"/>, wykorzystywana przy przechwytywaniu błędów w aplikacji.
+        /// </summary>
         #region Zmienne
         public string message;
         public string title;
@@ -19,6 +22,9 @@ namespace Urbexer.Models {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda określająca tytuł komunikatu po przyjmującym w parametrze (<see cref="AppExceptionTypeEnum"/>) typie błędu. 
+        /// </summary>
         public string SetTitle(AppExceptionTypeEnum type) {
             switch (type) {
                 case AppExceptionTypeEnum.UnspecifiedError:

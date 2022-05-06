@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace Urbexer.Models {
+    /// <summary>
+    /// Enum wykorzystywany przy tworzeniu komunikatu przechwyconego błędu i dostosowywaniu tytułu okna powiadomienia.
+    /// </summary>
     public enum AppExceptionTypeEnum {
         UnspecifiedError = 0,
         EmptyField = 1,

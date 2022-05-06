@@ -1,5 +1,4 @@
 ﻿using Xamarin.Forms.Maps;
-using Xamarin.CommunityToolkit.ObjectModel;
 using Urbexer.Models.ApiModels;
 using System;
 using System.Threading.Tasks;
@@ -114,10 +113,8 @@ namespace Urbexer.Models {
             set { }
         }
         #endregion
-
         #region Klasy
         #endregion
-
         #region Konstruktory
         public Location() {
             Id = -1;
@@ -145,7 +142,6 @@ namespace Urbexer.Models {
             }
         }
         #endregion
-
         #region Metody
         /// <summary>
         /// Zmienia <see cref="Distance"/> na odległość z danej pozycji do <see cref="Position"/>.

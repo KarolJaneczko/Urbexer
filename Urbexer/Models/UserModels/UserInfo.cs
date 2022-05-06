@@ -4,18 +4,33 @@ using Urbexer.Models.UserModels;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Models {
+    /// <summary>
+    /// Klasa zawierająca wszystkie dane dotyczące bieżącego, zalogowanego użytkownika.
+    /// </summary>
     public static class UserInfo {
         #region Zmienne - dane użytkownika
+        /// <summary>
+        /// Zmienna typu string, przechowująca login użytkownika.
+        /// </summary>
         public static string Login {
             get => AppSettings.GetValueOrDefault(nameof(Login), null);
             set => AppSettings.AddOrUpdateValue(nameof(Login), value);
         }
+        /// <summary>
+        /// Zmienna typu string, przechowująca token wykorzystywany przy wysyłaniu requestów do API.
+        /// </summary>
         public static string LoginToken {
             get => AppSettings.GetValueOrDefault(nameof(LoginToken), null);
             set => AppSettings.AddOrUpdateValue(nameof(LoginToken), value);
         }
         public static bool IsAdmin { get; set; }
+        /// <summary>
+        /// Zmienna przechowująca aktualną lokalizację użytkownika, domyślnie przypisywana lokalizacja Torunia.
+        /// </summary>
         public static Position CurrentPosition = new Position(53.0138, 18.5984);
+        /// <summary>
+        /// Obiekt przechowujący dane dotyczące profilu zalogowanego użytkownika.
+        /// </summary>
         public static ProfileData yourProfile;
         #endregion
         #region Zmienne - ustawienia
@@ -34,16 +49,25 @@ namespace Urbexer.Models {
                 AppSettings.AddOrUpdateValue(SettingsKey, value);
             }
         }
+        /// <summary>
+        /// Flaga zawierająca informacje o tym, czy użytkownik jest nadal zalogowany.
+        /// </summary>
         public static bool IsLoggedIn {
             get => AppSettings.GetValueOrDefault(nameof(IsLoggedIn), false);
             set => AppSettings.AddOrUpdateValue(nameof(IsLoggedIn), value);
         }
+        /// <summary>
+        /// Flaga zawierająca informacje o tym, czy podczas bieżącej sesji sprawdziliśmy połączenie internetowe.
+        /// </summary>
         public static bool CheckedInternetConnection {
             get => AppSettings.GetValueOrDefault(nameof(CheckedInternetConnection), false);
             set => AppSettings.AddOrUpdateValue(nameof(CheckedInternetConnection), value);
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda przypisująca informacje o bieżącym użytkowniku.
+        /// </summary>
         public static void SetLoginCredentials(string login, string loginToken) {
             Login = login;
             LoginToken = loginToken;
@@ -53,6 +77,9 @@ namespace Urbexer.Models {
         public static void SetCurrentPosition(Position position) {
             CurrentPosition = position;
         }
+        /// <summary>
+        /// Metoda wywoływana przy wylogowaniu - usuwa wszystkie dane o zalogowanym użytkowniku.
+        /// </summary>
         public static void Logout() {
             Login = null;
             LoginToken = null;
