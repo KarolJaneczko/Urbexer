@@ -1,5 +1,6 @@
 ﻿using Plugin.Connectivity;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -15,7 +16,10 @@ namespace Urbexer.Services {
         private static readonly HttpClient httpClient;
         static HttpService() {
             HttpClientHandler clientHandler = new HttpClientHandler { UseProxy = false };
-            httpClient = new HttpClient(clientHandler);
+            httpClient = new HttpClient(clientHandler) {
+                BaseAddress = new Uri("https://urbexerapi.azurewebsites.net"),
+            };
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             TryAddAuthorization();
         }
 
@@ -25,7 +29,7 @@ namespace Urbexer.Services {
         /// </summary>
         /// <param name="method"> Typ zapytania jakie zostanie wysłane </param>
         /// <param name="path">
-        /// Ścieżka metody z argumentami.
+        /// Względna ścieżka metody z argumentami.
         /// <para> Na przykład: "/api/place/pokazMiejscePoId?id=1". </para>
         /// </param>
         /// <param name="body"> Ciało zapytania. </param>
@@ -39,24 +43,20 @@ namespace Urbexer.Services {
         /// W przypadku problemów zwracany jest null.
         /// </returns>
         public static async Task<string> SendApiRequest(HttpMethod method, string path, string body = "", bool requiresToken = true) {
+            if (!CrossConnectivity.Current.IsConnected) return null;
             // Niektóre metody nie działają bez tokena. Upewnij się że token jest dodany
-            if (requiresToken && !TryAddAuthorization())
-                return null;
+            if (requiresToken && !TryAddAuthorization()) return null;
 
             // Utwórz zapytanie
-            string uri = "https://urbexerapi.azurewebsites.net" + path;
             var request = new HttpRequestMessage {
                 Method = method,
-                RequestUri = new Uri(uri),
+                RequestUri = new Uri(path),
                 Content = new StringContent(body, Encoding.UTF8, "application/json"),
             };
 
-            if (!CrossConnectivity.Current.IsConnected)
-                return null;
-
             // Wyślij zapytanie i zwróć wynik
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
                 return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return null;
         }

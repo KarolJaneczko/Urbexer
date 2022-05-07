@@ -9,6 +9,7 @@ using Xamarin.Forms.Maps;
 
 namespace Urbexer {
     public partial class App : Application {
+        #region Konstruktory
         public App() {
             InitializeComponent();
             MainPage = new AppShell();
@@ -20,6 +21,8 @@ namespace Urbexer {
             });
             Current.PageAppearing += OnPageAppearing;
         }
+        #endregion
+        #region Metody
         protected override void OnStart() {
             if (UserInfo.IsLoggedIn) {
                 UserInfo.CheckedInternetConnection = false;
@@ -37,6 +40,9 @@ namespace Urbexer {
                 UserInfo.CheckedInternetConnection = false;
             }
         }
+        /// <summary>
+        /// Metoda sprawdzająca połączenie z internetem podczas korzystania z aplikacji.
+        /// </summary>
         public void CheckConnection() {
             if (!CrossConnectivity.Current.IsConnected && !UserInfo.CheckedInternetConnection) {
                 Current.MainPage.DisplayAlert("Błąd połączenia", "Do poprawnego działania aplikacji jest wymagane połączenie z internetem.", "OK");
@@ -45,6 +51,9 @@ namespace Urbexer {
             else
                 return;
         }
+        /// <summary>
+        /// Metoda zapisująca bieżącą lokalizację użytkownika.
+        /// </summary>
         public static void CacheCurrentPosition(object state = null) {
             var status = Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
             if (status.Result != PermissionStatus.Denied && status.Result != PermissionStatus.Disabled) {
@@ -54,6 +63,9 @@ namespace Urbexer {
                 UserInfo.SetCurrentPosition(new Position(location.Latitude, location.Longitude));
             }
         }
+        /// <summary>
+        /// Metoda wywoływana przy każdym uruchomieniu aplikacji.
+        /// </summary>
         private void OnPageAppearing(object sender, Page page) {
             if (page is MapPage) {
                 var status = Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
@@ -62,5 +74,6 @@ namespace Urbexer {
                 }
             }
         }
+        #endregion
     }
 }

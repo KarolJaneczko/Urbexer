@@ -6,6 +6,9 @@ using Urbexer.Models.UserModels;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony z edycją profilu obecnie zalogowanego użytkownika.
+    /// </summary>
     public class EditProfileViewModel : BaseViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -76,6 +79,9 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda wywoływana podczas potwierdzenia edycji profilu. Po udanej edycji jesteśmy przenoszeni z powrotem na stronę profilu.
+        /// </summary>
         public async void OnSubmit() {
             try {
                 ValidateLength(EditFirstName, "Imię", "e", 20);
@@ -101,6 +107,9 @@ namespace Urbexer.ViewModels {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
         }
+        /// <summary>
+        /// Metoda wypełniająca edytowalne dane z profilu które możemy zmienić, bez potrzeby ponownego ich przepisywania z profilu.
+        /// </summary>
         public static void FillEdit(ProfileData myProfile) {
             editDescription = myProfile.Description;
             editFirstName = myProfile.FirstName;

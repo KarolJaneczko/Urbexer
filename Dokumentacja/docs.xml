@@ -100,6 +100,31 @@
             Treść recenzji.
             </summary>
         </member>
+        <member name="F:Urbexer.Models.AppException.message">
+            <summary>
+            Klasa dziedzicząca po klasie <see cref="T:System.Exception"/>, wykorzystywana przy przechwytywaniu błędów w aplikacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.AppException.SetTitle(Urbexer.Models.AppExceptionTypeEnum)">
+            <summary>
+            Metoda określająca tytuł komunikatu po przyjmującym w parametrze (<see cref="T:Urbexer.Models.AppExceptionTypeEnum"/>) typie błędu. 
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.AppExceptionTypeEnum">
+            <summary>
+            Enum wykorzystywany przy tworzeniu komunikatu przechwyconego błędu i dostosowywaniu tytułu okna powiadomienia.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.Enums.LayoutTypeEnum">
+            <summary>
+            Enum wykorzystywany przy wyborze "profesji" (zdjęcia profilowego) w oknie edycji profilu.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.OperationTypeEnum">
+            <summary>
+            Enum wykorzystywany przy dostosowywaniu tytułu okna powiadomienia dla przechwyconego błędu z API.
+            </summary>
+        </member>
         <member name="T:Urbexer.Models.Location">
             <summary>
             Klasa reprezentująca lokacje.
@@ -255,6 +280,81 @@
             </summary>
             <param name="apiReview">Wzorzec do utworzenia recenzji.</param>
         </member>
+        <member name="T:Urbexer.Models.UserModels.ProfileData">
+            <summary>
+            Klasa zawierająca dane o profilu użytkownika.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserModels.ProfileData.ProfileLayout">
+            <summary>
+            Numer wybranego zdjęcia profilowego.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserModels.ProfileData.LeaderboardPosition">
+            <summary>
+            Zmienna odpowiadająca zajmowanemu miejscu na tabeli rankingowej.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserModels.ProfileData.VisitedPlaces">
+            <summary>
+            Zmienna odpowiadająca liczbie odwiedzonych miejsc przez użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.UserModels.ProfileData.GetLayoutNameFromNumber(System.Int32)">
+            <summary>
+            Metoda pozwalająca zamienić numer layoutu na odpowiednią nazwę "profesji".
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.UserModels.ProfileData.GetLayoutNumberFromName(System.String)">
+            <summary>
+            Metoda pozwalająca zamienić nazwę "profesji" na numer layoutu.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.UserInfo">
+            <summary>
+            Klasa zawierająca wszystkie dane dotyczące bieżącego, zalogowanego użytkownika.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserInfo.Login">
+            <summary>
+            Zmienna typu string, przechowująca login użytkownika.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserInfo.LoginToken">
+            <summary>
+            Zmienna typu string, przechowująca token wykorzystywany przy wysyłaniu requestów do API.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.UserInfo.CurrentPosition">
+            <summary>
+            Zmienna przechowująca aktualną lokalizację użytkownika, domyślnie przypisywana lokalizacja Torunia.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.UserInfo.yourProfile">
+            <summary>
+            Obiekt przechowujący dane dotyczące profilu zalogowanego użytkownika.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserInfo.IsLoggedIn">
+            <summary>
+            Flaga zawierająca informacje o tym, czy użytkownik jest nadal zalogowany.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.UserInfo.CheckedInternetConnection">
+            <summary>
+            Flaga zawierająca informacje o tym, czy podczas bieżącej sesji sprawdziliśmy połączenie internetowe.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.UserInfo.SetLoginCredentials(System.String,System.String)">
+            <summary>
+            Metoda przypisująca informacje o bieżącym użytkowniku.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.UserInfo.Logout">
+            <summary>
+            Metoda wywoływana przy wylogowaniu - usuwa wszystkie dane o zalogowanym użytkowniku.
+            </summary>
+        </member>
         <member name="T:Urbexer.Services.GeocoderService">
             <summary>
             Klasa upraszczająca korzystanie z <see cref="T:Xamarin.Forms.Maps.Geocoder"/>
@@ -385,6 +485,16 @@
             <param name="scoreQuality">Wystawiana ocena</param>
             <param name="reviewMessage">Treść recenzji.</param>
         </member>
+        <member name="M:Urbexer.Services.ReviewService.GetReview(System.Int32)">
+            <summary>
+            Pobiera recenzje obecnego użytkownika odpowiadającą danemu id lokacji.
+            </summary>
+            <param name="locationId"></param>
+            <returns>
+            Jeśli dana recenzja istnieje to ją zwraca. <para/>
+            W przeciwnym wypadku zwraca null.
+            </returns>
+        </member>
         <member name="M:Urbexer.Services.ReviewService.GetReviews(System.Int32,System.Int32,System.Int32)">
             <summary>
             Pobierz recenzje lokacji o danym id
@@ -393,6 +503,266 @@
             <param name="pageNumber">Decyduje którą stronę recenzji z kolei pobierać, poczynając od 1.</param>
             <param name="pageSize">Decyduje ile recenzji ma mieć pobrana strona.</param>
             <returns></returns>
+        </member>
+        <member name="T:Urbexer.ViewModels.LocationModels.BaseLocationViewModel">
+            <summary>
+            Podstawowy ViewModel do wyświetlania lokacji
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.Locations">
+            <summary>
+            Przechowuje wszystkie wczytane lokacje.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.LocationsFiltered">
+            <summary>
+            Przechowuje wyświetlane lokacje.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.CardSelectedCommand">
+            <summary>
+            Wywoływana, gdy karta lokacji zostanie kliknięta.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.ClearFilter">
+            <summary>
+            Usuń filtrowanie lokacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.ReapplyFilters">
+            <summary>
+            Odśwież filtry
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.SetNameFilter">
+            <summary>
+            Ukrzyj lokacje, które nie zawierają stringa <see cref="F:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.currentNameFilter"/>. <para/>
+            Jeżeli jest pusty, to lokacje nie są filtrowane.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LocationModels.BaseLocationViewModel.CardSelected(Urbexer.Models.Location)">
+            <summary>
+            Przenosi do strony szczegółów danej lokacji.
+            </summary>
+            <param name="location"></param>
+        </member>
+        <member name="T:Urbexer.ViewModels.LocationListViewModel">
+            <summary>
+            ViewModel listy lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.LocationListViewModel.LoadMoreCommand">
+            <summary>
+            Wczytaj dodatkowe lokacje. <para/>
+            Wywoływane, gdy użytkownik zescrolluje na sam dół listy.
+            </summary>
+        </member>
+        <member name="F:Urbexer.ViewModels.LocationListViewModel.currentLoadRange">
+            <summary>
+            Obecny zasięg wczytywania.
+            </summary>
+        </member>
+        <member name="F:Urbexer.ViewModels.LocationListViewModel.isLoading">
+            <summary>
+            Blokuje duplikatowe wywołania <see cref="M:Urbexer.ViewModels.LocationListViewModel.LoadMore"/>.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.LocationListViewModel.FilterLocationsByNameCommand">
+            <summary>
+            Sortuj lokacje używając <see cref="!:BaseLocationViewModel.SetFilterByName(string)"/>
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LocationListViewModel.LoadMore">
+            <summary>
+            Powiększ zasięg wczytywania lokacji i pobierz nowe lokacje.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.MapViewModel.#ctor">
+            <summary>
+            ViewModel mapy.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.MapViewModel.InitializeLocations">
+            <summary>
+            Funkcja do pierwotnego zapełnienia mapy. <para/>
+            Pobiera wszystkie lokacje w zasięgu 100km.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.HomeViewModel.Question">
+            <summary>
+            Przechowuje elementy expandera na HomePage.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.HomeViewModel.Question.ImageIcon">
+            <summary>
+            Ścieżka do ikony.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.HomeViewModel.Question.BackgroundSource">
+            <summary>
+            Zdjęcie pokazywane nad tekstem w expanderze.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.HomeViewModel.Question.Title">
+            <summary>
+            Tytuł zakładki.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.HomeViewModel.Question.BodyDescription">
+            <summary>
+            Tekst przechowywany w expanderze.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.HomeViewModel.Locations">
+            <summary>
+            Przechowuje lokacje pobrane używając <see cref="M:Urbexer.ViewModels.HomeViewModel.LoadLocations"/>.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.HomeViewModel.Questions">
+            <summary>
+            Przechowuje faq o urbexach.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.HomeViewModel.LoadLocations">
+            <summary>
+            Pobiera i wyświetla 10 najbliższych nieodwiedzonych lokacji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.LocationDetailsPage">
+            <summary>
+            Strona ze szczegółami o lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Views.LocationDetailsPage.LocationId">
+            <summary>
+            Id lokacji o której jest ta strona.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationDetailsPage.PreparePage">
+            <summary>
+            Przygotowuje strone. <para/>
+            Pobiera dane o lokacji, ustawia binding, odpowiednio dostosowuje elementy strony.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationDetailsPage.GoToWriteReviewPage(System.Object,System.EventArgs)">
+            <summary>
+            Przenosi na stronę pisania recenzji o tej lokacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationDetailsPage.MarkVisited(System.Object,System.EventArgs)">
+            <summary>
+            Oznacza tą lokacje jako odwiedzoną.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationDetailsPage.CollectionView_RemainingItemsThresholdReached(System.Object,System.EventArgs)">
+            <summary>
+            Wczytuje dodatkowe recenzje. <para/>
+            Wywoływane kiedy użytkownik przewinie na sam dół listy recenzji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationDetailsPage.OpenGoogleMapsOnLocation(System.Object,System.EventArgs)">
+            <summary>
+            Po kliknięciu na odpowiedni przycisk otwiera zewnętrzną aplikacje mapy na współrzędnych tej lokacji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.LocationListPage">
+            <summary>
+            Strona listy lokacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationListPage.CollectionView_SelectionChanged(Xamarin.Forms.CollectionView,Xamarin.Forms.SelectionChangedEventArgs)">
+            <summary>
+            Wywoływane przy kliknięciu na karte lokacji. <para/>
+            Przenosi na odpowiednią stronę lokacji.
+            </summary>
+            <param name="sender">Karta, która wywołałą event.</param>
+        </member>
+        <member name="T:Urbexer.Views.MapPage">
+            <summary>
+            Strona mapy.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Views.MapPage.currentPinId">
+            <summary>
+            Id lokacji, na którą wskazuje ostatnia kliknięta pinezka. <para/>
+            -1 oznacza brak wybranej pinezki.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Views.MapPage.CurrentPinId">
+            <summary>
+            Kontroluje wyświetlanie karty lokacji przy klikaniu na pinezki.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.MapPage.MoveToUser">
+            <summary>
+            Próbuje ustawić pozycje mapy na pozycje użytkownika. <para/>
+            W przypadku niepowodzenia ustawia na domyślną pozycje używając <see cref="M:Urbexer.Views.MapPage.DefaultPositionFallback"/>
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.MapPage.DefaultPositionFallback">
+            <summary>
+            Ustawia mape na domyślną lokacje. <para/>
+            Obecnie jest to środek Polski.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.MapPage.MoveToPosition(Xamarin.Forms.Maps.Position)">
+            <summary>
+            Zmienia pozycje mapy bez zmieniania poziomu przybliżenia.
+            </summary>
+            <param name="position">Nowa pozycja mapy.</param>
+        </member>
+        <member name="M:Urbexer.Views.MapPage.TapGestureRecognizer_Tapped(System.Object,System.EventArgs)">
+            <summary>
+            Wywoływane przy kliknięciu na karte lokacji. <para/>
+            Otwiera stronę danej lokacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.MapPage.OnBackButtonPressed">
+            <summary>
+            Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.MapPage.SetCurrentPin(Urbexer.Models.LocationPin)">
+            <summary>
+            Przesuwa mape na pinezke,
+            pokazuje zasięg, w którym można oznaczyć lokacje jako odwiedzoną,
+            oraz ustawia <see cref="P:Urbexer.Views.MapPage.CurrentPinId"/>.<para/>
+            Wywoływane przy kliknięciu na pinezke. 
+            </summary>
+            <param name="pin">Pinezka, która została aktywowana.</param>
+        </member>
+        <member name="T:Urbexer.Views.LocationViews.WriteReviewPage">
+            <summary>
+            Strona pisania recenzji o lokacji
+            </summary>
+        </member>
+        <member name="P:Urbexer.Views.LocationViews.WriteReviewPage.LocationId">
+            <summary>
+            Id lokacji, której dotyczy się pisana recenzja.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Views.LocationViews.WriteReviewPage.LocationName">
+            <summary>
+            Służy do wyświetlania nazwy lokacji na stronie.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationViews.WriteReviewPage.TryActivateEditMode">
+            <summary>
+            Sprawdź czy istnieje już recenzja od tego użytkownika dla tego miejsca. <para/>
+            Jeśli tak, to wczytaj jej treść.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.LocationViews.WriteReviewPage.SubmitReview(System.Object,System.EventArgs)">
+            <summary>
+            Funkcja wysyłająca recenzje do API. <para/>
+            Dba o poprawny format recenzji. <para/>
+            Wywoływana przy kliknięciu odpowiedniego przycisku na stronie.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Views.InfoPage.OpenMail(System.Object,System.EventArgs)">
+            <summary>
+            Otwiera klienta poczty i odpala "pisanie maila" do urbexer@onet.pl
+            </summary>
         </member>
         <member name="T:Urbexer.GlobalStaticResources">
             <summary>

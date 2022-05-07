@@ -9,6 +9,9 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony RankingProfile - podglądu profilu ze strony rankingowej.
+    /// </summary>
     public class RankingProfileViewModel : BaseViewModel, INotifyPropertyChanged {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -74,6 +77,9 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda wypełniająca profil który wybraliśmy do podglądu.
+        /// </summary>
         public static void FillProfile(ProfileData profileData) {
             if (profileData != null) {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
@@ -85,6 +91,9 @@ namespace Urbexer.ViewModels {
                 profileVisitedPlaces = profileData.VisitedPlaces.ToString();
             }
         }
+        /// <summary>
+        /// Metody wyliczająca pozycję wybranego użytkownika w rankingu ogólnym.
+        /// </summary>
         public static int GetLeaderboardPositionByLogin(string login, int type) {
             var result = connectionService2.GetRankingList(type, httpClient2).Result;
             List<string> tempList = new List<string>();
@@ -114,6 +123,9 @@ namespace Urbexer.ViewModels {
                 Browser.OpenAsync(new Uri(UserInfo.yourProfile.FacebookLink));
             }
         }
+        /// <summary>
+        /// Metoda przyjmująca w parametrze numer layoutu i wyznaczająca wyświetlany avatar.
+        /// </summary>
         public static string GetAvatarByLayout(int layout) {
             switch (layout) {
                 case (int)LayoutTypeEnum.Default:
