@@ -53,7 +53,7 @@ namespace APIpz.Services
             var odwiedzony = _context.Odwiedzone
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .Include(o => o.OdwiedzonePrzez)
-                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
+                                            .FirstOrDefault(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
             if (odwiedzony is null) miejsceDto.CzyOdwiedzone = false;
             else miejsceDto.CzyOdwiedzone = true;
 
@@ -75,7 +75,7 @@ namespace APIpz.Services
                 var odwiedzony = _context.Odwiedzone
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .Include(o => o.OdwiedzonePrzez)
-                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id);
+                                            .FirstOrDefault(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id);
                 if (odwiedzony is null) i.CzyOdwiedzone = false;
                 else i.CzyOdwiedzone = true;
             }

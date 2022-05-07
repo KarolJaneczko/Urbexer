@@ -35,11 +35,11 @@ namespace APIpz.Controllers
             _loginService.ConfirmUser(dto);
             return Content("Dziękujemy za aktywację konta");
         }
-        [HttpPut("Testconfirm")]
-        public ActionResult TestConfirm([FromBody] TestowyConfirmUserDto dto)
-        {
-            _loginService.TestowyConfirmUser(dto);
-            return Ok();
-        }
+        //[HttpPut("Testconfirm")]
+        //public ActionResult TestConfirm([FromBody] TestowyConfirmUserDto dto)
+        //{
+        //    _loginService.TestowyConfirmUser(dto);
+        //    return Ok();
+        //}
     }
 }
