@@ -168,7 +168,15 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Frame BackgroundColor="#BF0603">
+                <Label Text="Baza wiedzy" FontSize="Title" TextColor="White" HorizontalOptions="CenterAndExpand" FontFamily="Bebas"/>
+            </Frame>
+            
+
+
             <StackLayout
+                Margin="0,5"
                 x:Name="MyStackList"
                 BindableLayout.ItemsSource="{Binding Questions}"
                 VerticalOptions="StartAndExpand">

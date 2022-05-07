@@ -150,11 +150,12 @@
                     <!--  tu z lewej bedzie jeszcze srednia ocen jak starcyz czasu  -->
                     <Frame
                         Margin="0,0,20,0"
-                        Padding="3"
-                        CornerRadius="10"
+                        Padding="10,5"
+                        BackgroundColor="#eeffff"
+                        CornerRadius="20"
                         HeightRequest="40"
-                        HorizontalOptions="End">
-                        <StackLayout Orientation="Horizontal">
+                        HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal" >
                             <Image Margin="-2" Source="odwiedzone_icon" />
                             <Label
                                 Style="{DynamicResource Cords}"
