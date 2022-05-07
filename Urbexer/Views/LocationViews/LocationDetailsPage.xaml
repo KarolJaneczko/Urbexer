@@ -156,6 +156,10 @@
                         HorizontalOptions="End">
                         <StackLayout Orientation="Horizontal">
                             <Image Margin="-2" Source="odwiedzone_icon" />
+                            <Label
+                                Style="{DynamicResource Cords}"
+                                Text="Odwiedzone"
+                                VerticalOptions="Center" />
                             <BoxView WidthRequest="1" Color="#363636" />
                             <Image
                                 x:Name="IsVisitedButton"
