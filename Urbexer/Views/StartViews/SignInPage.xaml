@@ -11,10 +11,41 @@
              Shell.NavBarIsVisible="False"
              x:Class="Urbexer.Views.SignInPage">
 
-    <Grid>
-        <Image Source="background_image4" Aspect="AspectFill"/>
 
-        <Frame Padding="0"
+    <!--region Style-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+
+            <Style x:Key="EntryFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#cfffffff" />
+                <Setter Property="Padding" Value="0,0,50,0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="CornerRadius" Value="50" />
+            </Style>
+            <Style x:Key="iconFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#BF0603" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HeightRequest" Value="35" />
+                <Setter Property="WidthRequest" Value="35" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="CornerRadius" Value="50" />
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="#BF0603" />
+                <Setter Property="TextColor" Value="#BF0603" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <!--endregion-->
+
+        <Grid>
+            <Image Source="background_image4" Aspect="AspectFill"/>
+
+            <!--<Frame Padding="0"
                HeightRequest="100"
                WidthRequest="100"
                HorizontalOptions="CenterAndExpand"
@@ -22,79 +53,101 @@
                BackgroundColor="Transparent"
                Margin="0,80,0, 600">
             <Image Source="app_logo.png" Aspect="AspectFill"/>
-        </Frame>
+        </Frame>-->
 
-        <BoxView>
-            <BoxView.Background>
-                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                    <GradientStop Color="Transparent" Offset="0"/>
-                    <GradientStop Color="black" Offset="0.8"/>
-                    <GradientStop Color="black" Offset="1.6"/>
-                </LinearGradientBrush>
-            </BoxView.Background>
-        </BoxView>
+            <BoxView>
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                        <GradientStop Color="Transparent" Offset="0"/>
+                        <GradientStop Color="black" Offset="0.8"/>
+                        <GradientStop Color="black" Offset="1.6"/>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
 
-        <StackLayout Margin="30,225,30,125">
-            <Frame BackgroundColor="#cfffffff"
-                   HeightRequest="500"
+            <StackLayout VerticalOptions="CenterAndExpand" Margin="30,0">
+                <Frame BackgroundColor="#cfffffff"
+                  
                    CornerRadius="25"
                    HorizontalOptions="FillAndExpand"
                    HasShadow="True"
                    BorderColor="black">
-                <StackLayout>
-                    <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Label Text="Zaloguj się" TextColor="Black" FontSize="Title" FontAttributes="Bold"/>
-                    </StackLayout>
+                    <StackLayout>
 
-                    <StackLayout Margin="0,25,0,20" Spacing="3">
-                        <Label Text="Login"/>
-                        <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Frame BackgroundColor="#B52435" CornerRadius="50"  HeightRequest="40" WidthRequest="40" Padding="0" Margin="5">
-                                    <Image Source="profile_icon.png" Aspect="AspectFill"   Margin="5"/>
-                                </Frame>
-                                <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login" PlaceholderColor="#B52435" Keyboard="Email"  TextColor="#B52435" HorizontalOptions="FillAndExpand" Margin="0,0,50,0"/>
-                            </StackLayout>
-                        </Frame>
-                        <Label Text="Hasło"/>
-                        <Frame BackgroundColor="#cfffffff"  CornerRadius="50" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Frame BackgroundColor="#B52435" CornerRadius="50" HeightRequest="40" WidthRequest="40" Padding="0" Margin="5">
-                                    <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
-                                </Frame>
-                                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#B52435" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" HorizontalOptions="FillAndExpand"  TextColor="#B52435" />
-                                <ImageButton BackgroundColor="Transparent" Source="showPassword_icon.png" Margin="0,0,10,0" WidthRequest="35" HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End">
-                                    <ImageButton.Triggers>
-                                        <EventTrigger Event="Clicked">
-                                            <local:TriggerActions ShowIcon="hidePassword_icon.png" HideIcon="showPassword_icon.png" x:Name="ShowPasswordActualTrigger"/>
-                                        </EventTrigger>
-                                    </ImageButton.Triggers>
-                                </ImageButton>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Frame BackgroundColor="#BF0603"
+                                   CornerRadius="50" 
+                                   HorizontalOptions="Start"
+                                   HeightRequest="35" 
+                                   WidthRequest="35"   
+                                   Padding="0" 
+                                   Margin="0">
+                                <ImageButton Source="back_icon.png" 
+                                             Margin="0" 
+                                             WidthRequest="30"
+                                             HeightRequest="30" 
+                                             VerticalOptions="FillAndExpand" 
+                                             Clicked="GoBack" 
+                                             BackgroundColor="Transparent"
+                                             BorderColor="Black" 
+                                             CornerRadius="50"/>
+                            </Frame>
+                            <Label Text="LOGOWANIE" 
+                                   Margin="-20,0,0,0"
+                           TextColor="Black" 
+                           FontSize="Title" 
+                           FontAttributes="Bold"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        
 
-                    <Button Command="{Binding SubmitCommand}"                                      
+                        <StackLayout Margin="0,20" Spacing="0">
+                            <Label Text="Login"/>
+                            <Frame Style="{DynamicResource EntryFrame}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{DynamicResource iconFrame}">
+                                        <Image Source="profile_icon.png" Aspect="AspectFill"   Margin="5"/>
+                                    </Frame>
+                                    <Entry x:Name="Login" Text="{Binding Login}" 
+                                           Placeholder="Login" 
+                                           Style="{DynamicResource EntryStyle}"/>
+                                </StackLayout>
+                            </Frame>
+                            <Label Text="Hasło"/>
+                            <Frame Style="{DynamicResource EntryFrame}"  Padding="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{DynamicResource iconFrame}">
+                                        <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
+                                    </Frame>
+                                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#BF0603" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"  Style="{DynamicResource EntryStyle}" HorizontalOptions="FillAndExpand" /> 
+                                    <ImageButton BackgroundColor="Transparent" Source="showPassword_icon.png" Margin="0,0,10,0" WidthRequest="35" HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" >
+                                        <ImageButton.Triggers>
+                                            <EventTrigger Event="Clicked">
+                                                <local:TriggerActions ShowIcon="hidePassword_icon.png" HideIcon="showPassword_icon.png" x:Name="ShowPasswordActualTrigger"/>
+                                            </EventTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                        <Button Command="{Binding SubmitCommand}"                                      
                             Text="ZALOGUJ"                                                       
                             BorderColor="Black"                           
-                            BackgroundColor="#B52435"
+                            BackgroundColor="#BF0603"
                             TextColor="White" 
-                            CornerRadius="25"  
+                            CornerRadius="25" 
+                            TextTransform="None"
+                            FontSize="Medium"
                             FontAttributes="Bold"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Nie masz jeszcze konta?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                        <Button  Text="Zarejestruj się" TextColor="#B52435" BackgroundColor="Transparent" FontAttributes="Bold"  Clicked="GoToSignUp"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label Text="Nie masz jeszcze konta?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Button  Text="Zarejestruj się" TextColor="#BF0603" BackgroundColor="Transparent" FontAttributes="Bold"  Clicked="GoToSignUp"/>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout Margin=" 0,0,0,0" Spacing="50">
-                        <Grid>
-                            <BoxView BackgroundColor="#B52435" HeightRequest="1" Margin="20" HorizontalOptions="CenterAndExpand" WidthRequest="120" />
-                            <Frame BackgroundColor="#B52435" CornerRadius="50" HorizontalOptions="Center" HeightRequest="35" WidthRequest="50" Padding="0" Margin="0">
-                                <ImageButton Source="back_icon.png" Margin="0" WidthRequest="30" HeightRequest="30" VerticalOptions="FillAndExpand" Clicked="GoBack" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="50"/>
-                            </Frame>
-                        </Grid>
-                    </StackLayout>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

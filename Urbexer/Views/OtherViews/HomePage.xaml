@@ -19,7 +19,7 @@
         </ScrollView.Background>
 
 
-        <StackLayout Margin="0,0,20,0">
+        <StackLayout>
             <Grid HeightRequest="100">
                 <Path
                     Aspect="Fill"
