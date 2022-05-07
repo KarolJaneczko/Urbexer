@@ -2,6 +2,9 @@
 #nullable enable
 
 namespace Urbexer.Models.UserModels {
+    /// <summary>
+    /// Klasa zawierająca dane o profilu użytkownika.
+    /// </summary>
     public class ProfileData {
         #region Zmienne
         public string Login { get; set; }
@@ -11,8 +14,17 @@ namespace Urbexer.Models.UserModels {
         public string FacebookLink { get; set; }
         public string InstagramLink { get; set; }
         public string YoutubeLink { get; set; }
+        /// <summary>
+        /// Numer wybranego zdjęcia profilowego.
+        /// </summary>
         public int ProfileLayout { get; set; }
+        /// <summary>
+        /// Zmienna odpowiadająca zajmowanemu miejscu na tabeli rankingowej.
+        /// </summary>
         public int LeaderboardPosition { get; set; }
+        /// <summary>
+        /// Zmienna odpowiadająca liczbie odwiedzonych miejsc przez użytkownika.
+        /// </summary>
         public int VisitedPlaces { get; set; }
         #endregion
         #region Konstruktory
@@ -30,6 +42,9 @@ namespace Urbexer.Models.UserModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda pozwalająca zamienić numer layoutu na odpowiednią nazwę "profesji".
+        /// </summary>
         public static string GetLayoutNameFromNumber(int layout) {
             switch (layout) {
                 case 0:
@@ -51,6 +66,9 @@ namespace Urbexer.Models.UserModels {
             }
             return "Domyślny";
         }
+        /// <summary>
+        /// Metoda pozwalająca zamienić nazwę "profesji" na numer layoutu.
+        /// </summary>
         public static int GetLayoutNumberFromName(string layout) {
             switch (layout) {
                 case "Domyślny":

@@ -1,11 +1,13 @@
 ﻿using System;
 using Urbexer.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
     public partial class RegisterPage : ContentPage {
         #region Konstruktory
         public RegisterPage() {
+            Routing.RegisterRoute(nameof(PolicyPage), typeof(PolicyPage));
             var vm = new RegisterPageModel();
             BindingContext = vm;
             InitializeComponent();
@@ -27,6 +29,9 @@ namespace Urbexer.Views {
         }
         public void GoBack(object sender, EventArgs e) {
             Shell.Current.GoToAsync("..//");
+        }
+        public async void ShowPolicy(object sender, EventArgs e) {
+            await Shell.Current.GoToAsync(nameof(PolicyPage));
         }
         protected override bool OnBackButtonPressed() {
             return true;

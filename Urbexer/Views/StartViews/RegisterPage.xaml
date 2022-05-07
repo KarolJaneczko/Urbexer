@@ -163,7 +163,28 @@
                                     <CheckBox Color="#B52435" IsChecked="False" CheckedChanged="OnCheckBoxCheckedChanged"/>
                                 </Frame>
                                 <Label x:Name="Pxdd"
-                                       Text="Oświadczam, że jestem osobą pełnoletnią i mam ukończone 18 lat."
+                                       Text="Administratorem danych osobowych aplikacji Ubexer jest Karol Janeczko.
+Z administratorem danych osobowych można skontaktować się pocztą elektroniczną pod adresem urbexer@outlook.com
+Państwa dane będą przetwarzane w celu:
+a) realizacji usługi prowadzonej drogą elektroniczną
+b) prowadzenia z Państwem komunikacji za pomocą poczty elektronicznej w związku z funkcjonowaniem aplikacji Urbexer;
+Podstawą prawną przetwarzania danych w celach określonych powyżej jest art. 6 ust. 1 lit. c Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) (RODO).
+Państwa dane osobowe są przetwarzane przez Urbexer z siedzibą w Toruniu (87-100) przy ul. Fryderyka Chopina 12/18 jako podmiotowi przetwarzającemu, realizującemu na rzecz administratora danych zadania w zakresie przetwarzania danych aplikacji Urbexer.
+Z Urbexer możesz się skontaktować:
+listownie na adres: 87-100 Toruń, ul. Fryderyka Chopina 12/18;
+przez e-mail: urbexer@outlook.com;
+Korzystanie z funkcjonalności aplikacji Urbexer powoduje przetwarzanie Państwa danych przechowywanych w ramach usługi.
+Państwa dane osobowe będą przetwarzane przez okres conajmniej 6 miesięcy od rejestracji konta bądź dluższy wymagany przez prawo właściwe. 
+Państwa dane osobowe wykorzystywane w ramach komunikacji e-mail będą przetwarzanie przez okres prowadzenia tej komunikacji.
+Przysługuje państwu prawo dostępu do Państwa danych, a w ramach komunikacji e-mail prowadzonej z Państwa także prawo żądania ich sprostowania. 
+Jest to możliwe po uwierzytelnieniu się na założonym przez siebie koncie bądź pocztą elektroniczną. 
+Przysługuje państwu również prawo wniesienia skargi do organu nadzorczego Prezesa Urzędu Ochrony Danych Osobowych zajmującego się ochroną danych osobowych w państwie członkowskim Państwa zwykłego pobytu, miejsca pracy lub miejsca popełnienia domniemanego naruszenia.
+Prezes Urzędu Ochrony Danych Osobowych (PUODO)
+ul. Stawki 2
+00-193 Warszawa.
+Dane osobowe poza wymaganym adresem e-mail nie są wymagane do realizacji usługi prowadzonej drogą elektroniczną i jej poprawnego działania.
+Adres poczty elektronicznej umożliwia równierz administratorowi prowadzenie komunikacji z Państwem. 
+Niepodanie wymaganych danych (adres e-mail) będzie skutkowało niemożnością korzystania z usługi."
                                        TextColor="Black"
                                        HorizontalOptions="FillAndExpand" 
                                        Margin="0,0,50,0"/>
@@ -175,6 +196,15 @@
                     <Button Command="{Binding SubmitCommand}"
                             x:Name="RejestracjaPrzycisk"
                             Text="Zarejestruj"                                                       
+                            BorderColor="Black"                           
+                            BackgroundColor="#B52435"
+                            TextColor="White" 
+                            CornerRadius="25" 
+                            FontAttributes="Bold"/>
+                    <!-- Przycisk do pokazania regulaminu aplikacji-->
+                    <Button Clicked="ShowPolicy"
+                            x:Name="RegulaminPrzycisk"
+                            Text="Regulamin"                                                       
                             BorderColor="Black"                           
                             BackgroundColor="#B52435"
                             TextColor="White" 

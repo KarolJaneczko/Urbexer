@@ -11,8 +11,8 @@ namespace Urbexer.Services {
             if (string.IsNullOrEmpty(login)) {
                 throw new AppException("Login nie może być pusty.", AppExceptionTypeEnum.EmptyField);
             }
-            else if (login.Length < 6) {
-                throw new AppException("Login nie może być krótszy niż 6 znaków.", AppExceptionTypeEnum.InvalidMinCredLength);
+            else if (login.Length < 2) {
+                throw new AppException("Login nie może być krótszy niż 2 znaki.", AppExceptionTypeEnum.InvalidMinCredLength);
             }
             else if (login.Length > 30) {
                 throw new AppException("Login nie może być dłuższy niż 30 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
@@ -42,8 +42,8 @@ namespace Urbexer.Services {
             else if (password.Length < 6) {
                 throw new AppException("Hasło nie może być krótsze niż 6 znaków.", AppExceptionTypeEnum.InvalidMinCredLength);
             }
-            else if (password.Length > 12) {
-                throw new AppException("Hasło nie może być dłuższe niż 12 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
+            else if (password.Length > 30) {
+                throw new AppException("Hasło nie może być dłuższe niż 30 znaków.", AppExceptionTypeEnum.InvalidMaxCredLength);
             }
         }
         public void ValidateLength(string word, string field, string suffix, int max, int? min = null) {

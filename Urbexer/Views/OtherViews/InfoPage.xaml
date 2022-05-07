@@ -41,6 +41,15 @@
                     <Label/>
                 </StackLayout>
             </Frame>
+            <!-- Przycisk do pokazania regulaminu aplikacji-->
+            <Button Clicked="ShowPolicy"
+                            x:Name="RegulaminPrzycisk"
+                            Text="Regulamin"                                                       
+                            BorderColor="Black"                           
+                            BackgroundColor="#B52435"
+                            TextColor="White" 
+                            CornerRadius="25" 
+                            FontAttributes="Bold"/>
         </StackLayout>
     </ScrollView>
 

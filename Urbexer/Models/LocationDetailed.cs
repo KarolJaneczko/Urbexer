@@ -7,7 +7,8 @@ namespace Urbexer.Models {
     /// <summary>
     /// Lokacja przechowująca dodatkowe informacje wykorzystywane w <see cref="Views.LocationDetailsPage"/>
     /// </summary>
-    public class LocationDetailed : Location {
+    public class LocationDetailed : Location{
+        #region Zmienne
         public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
         /// <summary>
         /// Przechowuje opis lokacji.
@@ -27,13 +28,15 @@ namespace Urbexer.Models {
             public string Link { get; set; }
         }
         private int currentReviewsPage = 0; // Używane w LoadMoreReviews()
-        public LocationDetailed() : base() { }
+        #endregion
+        #region Konstruktory
+        public LocationDetailed() : base(){ }
         /// <summary>
         /// Utwórz lokację wzorowaną na danym <see cref="APILocation"/>.
         /// </summary>
         /// <param name="apiLocation">Wzorzec do utworzenia lokacji.</param>
-        public LocationDetailed(APILocation apiLocation) : base(apiLocation) {
-            if (!string.IsNullOrEmpty(apiLocation.opis))
+        public LocationDetailed(APILocation apiLocation) : base(apiLocation){
+            if (!string.IsNullOrEmpty(apiLocation.opis)) 
                 Description = apiLocation.opis;
 
             ImageLinks = new ObservableRangeCollection<ImageLink>();
@@ -47,6 +50,8 @@ namespace Urbexer.Models {
                 }
             }
         }
+        #endregion
+        #region Metody
         /// <summary>
         /// Wczytuje dodatkowe recenzje. <para/>
         /// Używane przy scrollowaniu strony lokacji.
@@ -56,5 +61,6 @@ namespace Urbexer.Models {
                 Reviews = new ObservableRangeCollection<Review>();
             Reviews.AddRange(new ObservableRangeCollection<Review>(await ReviewService.GetReviews(Id, ++currentReviewsPage, 50)));
         }
+        #endregion
     }
 }
