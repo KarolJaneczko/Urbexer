@@ -55,7 +55,7 @@ namespace Urbexer.ViewModels {
             while (ids.Count < requiredLocationsCount) {
                 range += 30;
                 ids.AddRange(await LocationService.GetIdListInArea(
-                    (float)userPosition.Latitude, (float)userPosition.Longitude, range, unvisitedOnly: false));
+                    (float)userPosition.Latitude, (float)userPosition.Longitude, range, unvisitedOnly: true));
             }
             var newLocations = await LocationService.GetLocationListByIds(ids);
             SortLocationsByDistance(newLocations);

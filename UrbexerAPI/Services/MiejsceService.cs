@@ -49,14 +49,16 @@ namespace APIpz.Services
                 .Include(t => t.Zdjecia.Where(t => t.Rozmiar == RozmiaryZdjec.Full))
                 .FirstOrDefault( m => m.Id == id);
             var miejsceDto = _mapper.Map<MiejsceDto>(miejsce);
+            if (miejsceDto == null) return null;
 
-            var odwiedzony = _context.Odwiedzone
-                                            .Include(o => o.OdwiedzonyUrbex)
-                                            .Include(o => o.OdwiedzonePrzez)
-                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
-            try
+            try 
             {
-                miejsceDto.CzyOdwiedzone = Convert.ToBoolean(odwiedzony);
+                // Jeżeli kombinacja id użytkownika i lokacji pojawia się w tabeli Odwiedzone, to zwróc true.
+                var odwiedzony = _context.Odwiedzone
+                    .Include(o => o.OdwiedzonyUrbex)
+                    .Include(o => o.OdwiedzonePrzez)
+                    .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id).Count();
+                miejsceDto.CzyOdwiedzone = (odwiedzony > 0);
             }
             catch (Exception ex)
             {
@@ -64,9 +66,6 @@ namespace APIpz.Services
             }
 
             return miejsceDto;
-
-                                            
-
         }
         public List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
         {
