@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Urbexer.Models;
+using Urbexer.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
-using Urbexer.Services;
-using Xamarin.Essentials;
-using Map = Xamarin.Forms.Maps.Map;
-using System.Threading.Tasks;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -83,7 +80,7 @@ namespace Urbexer.Views {
             Shell.Current.GoToAsync(route);
         }
         // Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
-        protected override bool OnBackButtonPressed(){
+        protected override bool OnBackButtonPressed() {
             if (CurrentPinId == -1) return base.OnBackButtonPressed();
             DeselectCurrentPin();
             return true;

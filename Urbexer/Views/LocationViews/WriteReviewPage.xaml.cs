@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Urbexer.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,7 +11,7 @@ namespace Urbexer.Views.LocationViews {
         public string LocationId { get; set; }
         public string LocationName { get; set; }
         public WriteReviewPage() {
-            
+
             InitializeComponent();
         }
         protected override void OnAppearing() {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.ViewModels {
+﻿namespace Urbexer.ViewModels {
     public class InfoViewModel : BaseViewModel {
         public InfoViewModel() {
         }

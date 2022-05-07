@@ -1,7 +1,6 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using Android.App;
+using System.Reflection;
 using System.Runtime.InteropServices;
-using Android.App;
 
 [assembly: AssemblyTitle("Urbexer.Android")]
 [assembly: AssemblyDescription("")]
@@ -21,7 +20,7 @@ using Android.App;
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
 
 #if DEBUG
-[assembly: Application(Debuggable=true)]
+[assembly: Application(Debuggable = true)]
 #else
 [assembly: Application(Debuggable = false)]
 #endif

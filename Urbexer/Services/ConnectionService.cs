@@ -1,12 +1,12 @@
-﻿using System.Net.Http;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
-using Newtonsoft.Json;
 using Urbexer.Models.UserModels;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 
 namespace Urbexer.Services {
     public class ConnectionService : ValidatingService {
@@ -67,7 +67,8 @@ namespace Urbexer.Services {
             string result;
             if (type == 0) {
                 result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/").Result.Content.ReadAsStringAsync();
-            } else {
+            }
+            else {
                 result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/WedlugKategorii?kategoriaId=" + type).Result.Content.ReadAsStringAsync();
             }
             var resultList = JsonConvert.DeserializeObject<List<APIRanking>>(result);

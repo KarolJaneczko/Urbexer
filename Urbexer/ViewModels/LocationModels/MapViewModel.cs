@@ -1,18 +1,15 @@
-﻿using Urbexer.Models;
-using Xamarin.CommunityToolkit.ObjectModel;
-using Urbexer.Services;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Urbexer.Views;
-using Xamarin.Forms;
-using System.Windows.Input;
-using System.Collections.Generic;
-using Xamarin.Essentials;
-using Location = Urbexer.Models.Location;
+using Urbexer.Services;
 using Urbexer.ViewModels.LocationModels;
+using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
-    internal class MapViewModel : BaseLocationViewModel{
-        public MapViewModel() : base(){
+    internal class MapViewModel : BaseLocationViewModel {
+        public MapViewModel() : base() {
             Task.Run(async () => await InitializeLocations());
         }
 

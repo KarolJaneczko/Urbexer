@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Urbexer.Models;
@@ -51,7 +50,7 @@ namespace Urbexer.ViewModels {
             int range = 0;
             List<int> ids = new List<int>();
             Xamarin.Essentials.Location userPosition = await Geolocation.GetLastKnownLocationAsync();
-            
+
             // Pobieraj kolejne id lokacji dopóki nie jest ich tyle co wymagane
             while (ids.Count < requiredLocationsCount) {
                 range += 30;

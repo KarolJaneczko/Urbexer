@@ -1,10 +1,9 @@
-﻿using Xamarin.Forms.Maps;
-using Xamarin.CommunityToolkit.ObjectModel;
-using Urbexer.Models.ApiModels;
-using System;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
+﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Urbexer.Models.ApiModels;
+using Xamarin.Essentials;
+using Xamarin.Forms.Maps;
 
 namespace Urbexer.Models {
     /// <summary>
@@ -89,8 +88,9 @@ namespace Urbexer.Models {
         /// <summary>
         /// Ścieżka do ikony kategorii lokacji.
         /// </summary>
-        public string CategoryIconPath { get {
-                return GetCategoryIconPath(CategoryId); 
+        public string CategoryIconPath {
+            get {
+                return GetCategoryIconPath(CategoryId);
             }
             set { }
         }
@@ -108,7 +108,8 @@ namespace Urbexer.Models {
         /// Zwraca negacje <see cref="IsVisited"/>.<para/>
         /// Używane jako hack w bindingach xaml.
         /// </summary>
-        public bool IsNotVisited { get {
+        public bool IsNotVisited {
+            get {
                 return !IsVisited; // Good enough
             }
             set { }
@@ -133,8 +134,8 @@ namespace Urbexer.Models {
             Id = apiLocation.id;
             CategoryId = apiLocation.kategoriaId;
             ProvinceId = apiLocation.wojewodztwoId;
-            //CategoryIconPath = GetCategoryIconPath(CategoryId);
-            Task.Run(async () => await RecalculateDistance());
+            IsVisited = apiLocation.czyOdwiedzone;
+            RecalculateDistance(); // Bez Task.Run(), bo nie aktualizują się odległości na mapie
 
             if (apiLocation.zdjecia == null || apiLocation.zdjecia.Length == 0) {
                 // Wczytaj placeholder

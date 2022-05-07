@@ -34,7 +34,7 @@ namespace Urbexer.Services {
         public static async Task MarkLocationAsVisited(int locationId) {
             string path = "/api/urbex/dodajOdwiedzone";
             string args = "?id=" + locationId;
-            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requiresToken:true).ConfigureAwait(false);
+            await HttpService.SendApiRequest(HttpMethod.Post, path + args, requiresToken: true).ConfigureAwait(false);
         }
         /// <summary>
         /// Sprawdź, czy lokacja o danym id jest odwiedzona.
@@ -73,7 +73,7 @@ namespace Urbexer.Services {
                 locationId,
                 scoreQuality,
                 reviewMessage);
-            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken:true).ConfigureAwait(false);
+            await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken: true).ConfigureAwait(false);
         }
         /// <summary>
         /// Pobierz recenzje lokacji o danym id

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.Models {
+﻿namespace Urbexer.Models {
     public enum AppExceptionTypeEnum {
         UnspecifiedError = 0,
         EmptyField = 1,

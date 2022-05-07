@@ -1,7 +1,7 @@
-﻿using Urbexer.ViewModels;
+﻿using System.Timers;
+using Urbexer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Timers;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]

@@ -42,7 +42,7 @@ namespace Urbexer.Services {
             // Niektóre metody nie działają bez tokena. Upewnij się że token jest dodany
             if (requiresToken && !TryAddAuthorization())
                 return null;
-            
+
             // Utwórz zapytanie
             string uri = "https://urbexerapi.azurewebsites.net" + path;
             var request = new HttpRequestMessage {

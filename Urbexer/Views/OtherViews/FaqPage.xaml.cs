@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
 
 
-    public partial class FaqPage : ContentPage
-    {
-        public class Question
-        {
+    public partial class FaqPage : ContentPage {
+        public class Question {
             public int Id { get; set; }
             public string Title { get; set; }
             public string BodyDescription { get; set; }
@@ -22,19 +14,16 @@ namespace Urbexer.Views {
 
         private ObservableCollection<Question> _Questions { get; set; }
 
-        public ObservableCollection<Question> Questions
-        {
+        public ObservableCollection<Question> Questions {
             get { return _Questions; }
-            set
-            {
+            set {
                 _Questions = value;
 
                 OnPropertyChanged();
             }
         }
 
-        public FaqPage()
-        {
+        public FaqPage() {
             InitializeComponent();
             BindingContext = this;
             Questions = new ObservableCollection<Question>()
@@ -46,14 +35,13 @@ namespace Urbexer.Views {
                 new Question{Id = 5 , Title= "Czy można dodać swoje lokacje?", BodyDescription = "Jeśli ktoś chce dodać miejsc, które jest warte odwiedzenia wystarczy zgłosić je na..."},
                 new Question{Id = 6 , Title= "Jak zgłosić błąd w Aplikacji",BodyDescription = "Wystarczy wybrać w menu po lewej stronie aplikacji opcję  KONTAKT. Po kliknięciu w polu tekstowym można opisać problem. Alternatywnie można się skontaktować bezpośrednio na adres mailowy: urbexer@gmail.com "},
                 new Question{Id = 7 , Title= "Na jakich urzędzeniach jest dostępna aplikacja?",BodyDescription = "Aplikacja jest dostępna na urządzenia z sytemem Android  w wersji 4.1 oraz nowszych."},
-               
+
             };
 
         }
-        async void MainExpander_Tapped(System.Object sender, System.EventArgs e)
-        {
+        async void MainExpander_Tapped(System.Object sender, System.EventArgs e) {
             var Expcontent = ((Expander)sender).BindingContext as Question;
-            
+
             //await App.Current.MainPage.DisplayAlert("Alert", "The selected Expander Id is : " + Expcontent.Id, "Ok");
         }
 
