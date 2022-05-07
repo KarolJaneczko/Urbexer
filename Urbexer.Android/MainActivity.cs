@@ -18,6 +18,9 @@ namespace Urbexer.Droid {
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            Window.SetStatusBarColor(Android.Graphics.Color.Black);
+            Window.SetNavigationBarColor(Android.Graphics.Color.Black);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults) {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
