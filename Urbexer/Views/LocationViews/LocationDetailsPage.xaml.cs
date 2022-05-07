@@ -63,6 +63,8 @@ namespace Urbexer.Views {
                 await ReviewService.MarkLocationAsVisited(location.Id);
                 WriteReviewButton.IsVisible = true;
                 MarkVisitedButton.IsVisible = false;
+                IsVisitedButton.IsVisible = true;
+                IsNotVisitedButton.IsVisible = false;
             }
             else {
                 // Wyświetl komunikat, że użytkownik jest za daleko
