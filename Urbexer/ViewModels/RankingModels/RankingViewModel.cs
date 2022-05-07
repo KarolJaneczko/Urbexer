@@ -4,6 +4,9 @@ using Urbexer.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony RankingPage - wyboru kategorii tabeli rankingowej.
+    /// </summary>
     public class RankingViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

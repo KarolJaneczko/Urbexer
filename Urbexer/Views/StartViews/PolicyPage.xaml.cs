@@ -5,6 +5,9 @@ using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    /// <summary>
+    /// Klasa reprezentująca stronę z regulaminem aplikacji.
+    /// </summary>
     public partial class PolicyPage : ContentPage {
         #region Zmienne
         #endregion

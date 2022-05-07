@@ -5,6 +5,9 @@ using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    /// <summary>
+    /// Klasa reprezentująca stronę powitalną aplikacji.
+    /// </summary>
     public partial class WelcomePage : ContentPage {
         #region Zmienne
         Timer timer;
@@ -16,7 +19,6 @@ namespace Urbexer.Views {
             Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             AnimatedInfoCarousel();
-
             buttons.Margin = new Thickness(25, 0, 25, 50);
         }
         #endregion

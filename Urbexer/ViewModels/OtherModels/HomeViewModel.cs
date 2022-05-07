@@ -9,7 +9,11 @@ using Xamarin.Forms;
 using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony HomePage - strony startowej po zalogowaniu lub włączeniu aplikacji będąc zalogowanym.
+    /// </summary>
     public class HomeViewModel : BaseViewModel {
+        #region Zmienne
         /// <summary>
         /// Przechowuje elementy expandera na HomePage.
         /// </summary>
@@ -40,6 +44,8 @@ namespace Urbexer.ViewModels {
         /// Przechowuje faq o urbexach.
         /// </summary>
         public ObservableRangeCollection<Question> Questions { get; set; }
+        #endregion
+        #region Konstruktory
         public HomeViewModel() {
             Questions = new ObservableRangeCollection<Question>()
 {
@@ -58,6 +64,8 @@ namespace Urbexer.ViewModels {
             Locations = new ObservableRangeCollection<Location>();
             Task.Run(async () => await LoadLocations());
         }
+        #endregion
+        #region Metody
         public async Task<bool> LogoutPopout() {
             var result = await Shell.Current.DisplayAlert("Uwaga", "Czy chcesz się wylogować?", "Nie", "Tak");
             if (result != true)
@@ -98,5 +106,6 @@ namespace Urbexer.ViewModels {
                 return location1.Distance < location2.Distance ? -1 : 1;
             });
         }
+        #endregion
     }
 }

@@ -6,6 +6,9 @@ using Urbexer.Models.ApiModels;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa reprezentująca logikę strony logowania.
+    /// </summary>
     public class SignInPageViewModel : BaseViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -33,6 +36,9 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda wywoływana przy kliknięciu przycisku do logowania. Jeśli wprowadzone dane są prawidłowe, to pobieramy dane dotyczące naszego profilu i przechodzimy do strony startowej.
+        /// </summary>
         public async void OnSubmit() {
             try {
                 ValidateLogin(login);

@@ -3,6 +3,9 @@ using Urbexer.ViewModels;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
+    /// <summary>
+    /// Klasa reprezentująca stronę logowania w aplikacji.
+    /// </summary>
     public partial class SignInPage : ContentPage {
         #region Konstruktory
         public SignInPage() {

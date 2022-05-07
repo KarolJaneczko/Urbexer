@@ -12,6 +12,9 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony ProfilePage - podglądu profilu obecnie zalogowanego użytkownika.
+    /// </summary>
     public class ProfileViewModel : BaseViewModel, INotifyPropertyChanged {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -80,6 +83,9 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda wypełniająca profil danymi, pobranymi z bazy danych.
+        /// </summary>
         public static void FillProfile(ProfileData profileData) {
             if (profileData != null) {
                 profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
@@ -110,12 +116,18 @@ namespace Urbexer.ViewModels {
             EditProfileViewModel.FillEdit(UserInfo.yourProfile);
             Shell.Current.GoToAsync(nameof(EditProfilePage));
         }
+        /// <summary>
+        /// Metoda pozwalająca odświeżyć profil poprzez pobranie aktualnych informacji z bazy danych i wypełnianiu ich metodą FillProfile.
+        /// </summary>
         public static async Task RefreshProfile() {
             UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
             UserInfo.yourProfile.LeaderboardPosition = GetLeaderboardPositionByLogin(UserInfo.Login);
             UserInfo.yourProfile.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
             FillProfile(UserInfo.yourProfile);
         }
+        /// <summary>
+        /// Metoda wyliczająca miejsce użytkownika w rankingu ogólnym.
+        /// </summary>
         public static int GetLeaderboardPositionByLogin(string login) {
             var result = connectionService2.GetRankingList(0, httpClient2).Result;
             List<string> tempList = new List<string>();
@@ -130,6 +142,9 @@ namespace Urbexer.ViewModels {
                 return 0;
             }
         }
+        /// <summary>
+        /// Metoda przyjmująca numer layoutu i zwracająca odpowiednią nazwę zdjęcia profilowego, wyświetlanego w profilu.
+        /// </summary>
         public static string GetAvatarByLayout(int layout) {
             switch (layout) {
                 case (int)LayoutTypeEnum.Default:

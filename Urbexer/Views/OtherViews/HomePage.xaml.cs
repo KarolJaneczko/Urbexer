@@ -4,10 +4,16 @@ using Urbexer.ViewModels;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
+    /// <summary>
+    /// Klasa reprezentująca stronę powitalną aplikacji.
+    /// </summary>
     public partial class HomePage : ContentPage {
+        #region Konstruktory
         public HomePage() {
             InitializeComponent();
         }
+        #endregion
+        #region Metody
         void OnExpanderTapped(object sender, EventArgs e) {
         }
         protected override bool OnBackButtonPressed() {
@@ -34,6 +40,7 @@ namespace Urbexer.Views {
             // To rozwiązuje ten problem
             BindingContext = new HomeViewModel();
         }
+        #endregion
     }
 
 }

@@ -3,17 +3,17 @@ using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
-
-
+    /// <summary>
+    /// Klasa reprezentująca stronę z wybranymi pytaniami dotyczącymi użytkowania aplikacji lub urbexowania.
+    /// </summary>
     public partial class FaqPage : ContentPage {
+        #region Zmienne
         public class Question {
             public int Id { get; set; }
             public string Title { get; set; }
             public string BodyDescription { get; set; }
         }
-
         private ObservableCollection<Question> _Questions { get; set; }
-
         public ObservableCollection<Question> Questions {
             get { return _Questions; }
             set {
@@ -22,12 +22,12 @@ namespace Urbexer.Views {
                 OnPropertyChanged();
             }
         }
-
+        #endregion
+        #region Konstruktory
         public FaqPage() {
             InitializeComponent();
             BindingContext = this;
-            Questions = new ObservableCollection<Question>()
-            {
+            Questions = new ObservableCollection<Question>() {
                 new Question{Id = 1 , Title= "Czy Aplikacja jest darmowa?", BodyDescription = "Tak, URBEXER jest w pełni darmową aplikacją i nie ma wersji premium"},
                 new Question{Id = 2 , Title= "Czy do korzystania z aplikacji jest potrzebny internet?", BodyDescription = "Tak, aby korzystać z aplikacji mieć włączony internet w telefonie. "},
                 new Question{Id = 3 , Title= "Czym wyróżnia się aplikacja URBEXER?", BodyDescription = "Dzięki współpracy z serwisem urbexy.pl aplikacja na dzień premiery zawiera ponad 2000 udostępnionych lokacji na terenie całego kraju. Aplikacja pozwala również rywalizować z innymi użytkownikami w liczbie odwiedzonych miejsc. Stworzyliśmy dopracowane rankingi podzielone na poszczególne kategorie lokacji udostępnionych w aplikacji."},
@@ -37,14 +37,12 @@ namespace Urbexer.Views {
                 new Question{Id = 7 , Title= "Na jakich urzędzeniach jest dostępna aplikacja?",BodyDescription = "Aplikacja jest dostępna na urządzenia z sytemem Android  w wersji 4.1 oraz nowszych."},
 
             };
-
         }
+        #endregion
+        #region Metody
         async void MainExpander_Tapped(System.Object sender, System.EventArgs e) {
             var Expcontent = ((Expander)sender).BindingContext as Question;
-
-            //await App.Current.MainPage.DisplayAlert("Alert", "The selected Expander Id is : " + Expcontent.Id, "Ok");
         }
-
-
+        #endregion
     }
 }
