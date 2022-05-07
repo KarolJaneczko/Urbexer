@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony WelcomePage - strony startowej aplikacji.
+    /// </summary>
     public class WelcomeViewModel : BaseViewModel {
         #region Zmienne
         public List<Onboarding> Onboardings { get; set; }

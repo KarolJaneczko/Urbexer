@@ -6,6 +6,9 @@ using Urbexer.Models.ApiModels;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// Klasa implementująca logikę strony RegisterPage - ekranu rejestracji.
+    /// </summary>
     public class RegisterPageModel : BaseViewModel {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -46,6 +49,9 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda wywoływana po wciśnięciu przycisku do rejestracji. Po udanej rejestracji wyświetla się komunikat informujący o sukcesie.
+        /// </summary>
         public async void OnSubmit() {
             try {
                 ValidateLogin(Login);

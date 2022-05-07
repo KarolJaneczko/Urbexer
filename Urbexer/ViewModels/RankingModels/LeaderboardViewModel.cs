@@ -11,6 +11,9 @@ using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     internal class LeaderboardViewModel : BaseViewModel {
+        /// <summary>
+        /// Klasa implementująca logikę strony LeaderboardPage - strony z rankingiem danej kategorii.
+        /// </summary>
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public List<Rekord> RankingList { get => GetRanking(); }
@@ -57,17 +60,23 @@ namespace Urbexer.ViewModels {
         public LeaderboardViewModel() {
             leaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
             leaderboardMyLogin = UserInfo.Login;
-            leaderboardMyPlace = GetMyLeaderboardPlace(RankingType);
+            leaderboardMyPlace = GetMyLeaderboardPlace();
             leaderboardCategory = GetLeaderboardCategory(RankingType);
             leaderboardMyCount = GetLeaderboardMyCount(UserInfo.Login);
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda pobierająca ranking z bazy danych.
+        /// </summary>
         public List<Rekord> GetRanking() {
             var result = connectionService.GetRankingList(RankingType, httpClient).Result;
             var tempList = Rekord.ZmapowanaLista(result);
             return tempList;
         }
+        /// <summary>
+        /// Metoda pobierająca numeryczny typ rankingu i zwracająca nazwę kategorii.
+        /// </summary>
         private string GetLeaderboardCategory(int leaderboardType) {
             var temp = string.Empty;
             switch (leaderboardType) {
@@ -116,7 +125,10 @@ namespace Urbexer.ViewModels {
             }
             return temp;
         }
-        private string GetMyLeaderboardPlace(int leaderboardType) {
+        /// <summary>
+        /// Metoda wyliczająca pozycję w rankingu bieżącego, zalogowanego użytkownika i wyświetlająca ją na stronie rankingu.
+        /// </summary>
+        private string GetMyLeaderboardPlace() {
             string temp = string.Empty;
             var tempList = GetRanking();
             if (tempList.Count == 0) {
@@ -130,6 +142,9 @@ namespace Urbexer.ViewModels {
             }
             return temp;
         }
+        /// <summary>
+        /// Metoda pobierająca liczbę odwiedzonych miejsc z wybranej przez nas kategorii w rankingu i wyświetaljąca ją na stronie rankingu.
+        /// </summary>
         private int GetLeaderboardMyCount(string login) {
             int temp = 0;
             var tempList = GetRanking();
@@ -147,6 +162,9 @@ namespace Urbexer.ViewModels {
         #endregion
     }
     public class Rekord {
+        /// <summary>
+        /// Klasa reprezentująca rekord w tabeli rankingowej.
+        /// </summary>
         #region Zmienne
         public string Login { get; set; }
         public int LiczbaMiejsc { get; set; }
@@ -165,6 +183,9 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
+        /// <summary>
+        /// Metoda mapująca listę rankingową, pobraną z bazy danych i mapująca ją na rekordy w tabeli.
+        /// </summary>
         public static List<Rekord> ZmapowanaLista(List<APIRanking> list) {
             var result = new List<Rekord>();
             foreach (var x in list) {
@@ -175,6 +196,9 @@ namespace Urbexer.ViewModels {
             }
             return result;
         }
+        /// <summary>
+        /// Metoda wywoływana przy kliknięciu rekordu w tabeli - przenosi użytkownika do podglądu profilu użytkownika.
+        /// </summary>
         public async void GoToProfileClicked() {
             ProfileData profileData = await ConnectionService.GetProfileByLogin(Login, httpClient);
             profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login, 0);
