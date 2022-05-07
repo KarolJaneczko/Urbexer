@@ -20,12 +20,12 @@ namespace APIpz.Controllers
             _miejsceService = miejsceService;
         }
 
-        [HttpGet("getall")]
-        public ActionResult<IEnumerable<Miejsce>> GetAll()
-        {
-            var wynik = _miejsceService.GetAll();
-            return Ok(wynik);
-        }
+        //[HttpGet("getall")]
+        //public ActionResult<IEnumerable<Miejsce>> GetAll()
+        //{
+        //    var wynik = _miejsceService.GetAll();
+        //    return Ok(wynik);
+        //}
 
         [HttpGet("pokazMiejscePoId")]
         public ActionResult<Miejsce> PokazMiejscePoId([FromQuery] int id)
