@@ -134,6 +134,7 @@ namespace Urbexer.Models {
             CategoryId = apiLocation.kategoriaId;
             ProvinceId = apiLocation.wojewodztwoId;
             //CategoryIconPath = GetCategoryIconPath(CategoryId);
+            IsVisited = apiLocation.czyOdwiedzone;
             Task.Run(async () => await RecalculateDistance());
 
             if (apiLocation.zdjecia == null || apiLocation.zdjecia.Length == 0) {

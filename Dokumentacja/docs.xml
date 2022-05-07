@@ -19,6 +19,16 @@
             Przekazywane przy klikaniu na karte lokacji
             </summary>
         </member>
+        <member name="T:Urbexer.Models.ApiModels.APICzyjesOdwiedzone">
+            <summary>
+            Model otrzymywany przez API, wykorzystywany przy wylistowywaniu odwiedzonych urbexów przez innych użytkowników niż bieżący, zalogowany użytkownik.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APIEdytujProfil">
+            <summary>
+            Model otrzymywany przez API, wykorzystywany przy nadpisywaniu profilu w bazie danych po edycji.
+            </summary>
+        </member>
         <member name="T:Urbexer.Models.ApiModels.APILocation">
             <summary>
             Lokacja pobrana z bazy.
@@ -27,6 +37,26 @@
         <member name="F:Urbexer.Models.ApiModels.APILocation.opis">
             <summary>
             Opis jest wyświetlany na stronie <see cref="T:Urbexer.Views.LocationDetailsPage"/>
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APILocation.wspolrzedneLAT">
+            <summary>
+            Szerokość geograficzna.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APILocation.wspolrzedneLNG">
+            <summary>
+            Długość geograficzna.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APILocation.czyOdwiedzone">
+            <summary>
+            True, jeśli użytkownik podany w headerze odwiedził tą lokacje.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APILogin">
+            <summary>
+            Model otrzymywany przez API, wykorzystywany przy logowaniu.
             </summary>
         </member>
         <member name="T:Urbexer.Models.ApiModels.APIPhoto">
@@ -38,6 +68,21 @@
         <member name="F:Urbexer.Models.ApiModels.APIPhoto.link">
             <summary>
             Link html wskazujący na dane zdjęcie.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APIProfile">
+            <summary>
+            Model otrzymywany przez API, wykorzystywany przy wypełnianiu profilu w zakładce ProfilePage.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APIRanking">
+            <summary>
+            Model otrzymywany przez API, wykorzystywany przy wypełnianiu rankingu w zakładce LeaderboardPage.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APIRegisterUser">
+            <summary>
+            Model otrzymywany przez API, wykorzystywany przy rejestracji.
             </summary>
         </member>
         <member name="T:Urbexer.Models.ApiModels.APIReview">
