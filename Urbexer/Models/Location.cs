@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Urbexer.Models.ApiModels;
 using Xamarin.Essentials;
@@ -9,7 +11,7 @@ namespace Urbexer.Models {
     /// <summary>
     /// Klasa reprezentująca lokacje.
     /// </summary>
-    public class Location {
+    public class Location : INotifyPropertyChanged{
         #region Słowniki
         /// <summary>
         /// Słownik przechowujący id i nazwy kategorii.
@@ -98,12 +100,19 @@ namespace Urbexer.Models {
         /// Zwraca nazwe kategorii tego miejsca. Używane przez bindingi w xaml.
         /// </summary>
         public string CategoryName => CategoryDict[CategoryId];
+        private bool isVisited = false;
         /// <summary>
         /// Oznacza stan odwiedzenia lokacji przez tego użytkownika. <para/>
         /// Lokacje mają odpowiednią ikonkę na kartach i na stronie lokacji oznaczającą czy dany użytkownik ją odwiedził. <para/>
         /// Dodatkowo recenzje mogą być wysyłane tylko jeżeli lokacja została odwiedzona.
         /// </summary>
-        public bool IsVisited { get; set; }
+        public bool IsVisited {
+            get { return isVisited; }
+            set {
+                isVisited = value;
+                OnPropertyChanged(nameof(IsVisited));
+            }
+        }
         /// <summary>
         /// Zwraca negacje <see cref="IsVisited"/>.<para/>
         /// Używane jako hack w bindingach xaml.
@@ -146,6 +155,7 @@ namespace Urbexer.Models {
             }
         }
         #endregion
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Metody
         /// <summary>
@@ -217,5 +227,8 @@ namespace Urbexer.Models {
             return output;
         }
         #endregion
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
