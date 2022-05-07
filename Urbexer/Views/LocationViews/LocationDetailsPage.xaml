@@ -162,12 +162,12 @@
                                 VerticalOptions="Center" />
                             <BoxView WidthRequest="1" Color="#363636" />
                             <Image
-                                x:Name="IsVisitedButton"
-                                IsVisible="{Binding IsVisited}"
+                                x:Name="IsVisitedIcon"
+                                IsVisible="false"
                                 Source="true_icon.png" />
                             <Image
-                                x:Name="IsNotVisitedButton"
-                                IsVisible="{Binding IsNotVisited}"
+                                x:Name="IsNotVisitedIcon"
+                                IsVisible="true"
                                 Source="false_icon.png" />
                         </StackLayout>
                     </Frame>
@@ -254,6 +254,7 @@
                     <Frame
                         x:Name="WriteReviewButton"
                         Margin="50,10,50,0"
+                        Padding="0"
                         CornerRadius="20"
                         IsVisible="False">
                         <Button
