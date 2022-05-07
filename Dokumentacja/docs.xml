@@ -4,6 +4,238 @@
         <name>Urbexer</name>
     </assembly>
     <members>
+        <member name="T:Urbexer.Controls.CustomMap">
+            <summary>
+            Mapa służąca do przechowywania LocationPin i wyświetlania customowych grafik pinezek
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.LocationPin">
+            <summary>
+            Pinezka przechowująca id lokacji na którą wskazuje.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.LocationPin.LocationId">
+            <summary>
+            Przekazywane przy klikaniu na karte lokacji
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APILocation">
+            <summary>
+            Lokacja pobrana z bazy.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APILocation.opis">
+            <summary>
+            Opis jest wyświetlany na stronie <see cref="T:Urbexer.Views.LocationDetailsPage"/>
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APIPhoto">
+            <summary>
+            Zdjęcie pobrane z bazy <para/>
+            Ze strony front-endu wykorzystywany jest tylko <see cref="F:Urbexer.Models.ApiModels.APIPhoto.link"/>
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APIPhoto.link">
+            <summary>
+            Link html wskazujący na dane zdjęcie.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.ApiModels.APIReview">
+            <summary>
+            Recenzja pobrana z bazy.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APIReview.ktoOdwiedzil">
+            <summary>
+            Nazwa użytkownika.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.ApiModels.APIReview.tekst">
+            <summary>
+            Treść recenzji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.Location">
+            <summary>
+            Klasa reprezentująca lokacje.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.Location.CategoryDict">
+            <summary>
+            Słownik przechowujący id i nazwy kategorii.
+            </summary>
+        </member>
+        <member name="F:Urbexer.Models.Location.ProvinceDict">
+            <summary>
+            Słownik przechowujący id i nazwy województw.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.Id">
+            <summary>
+            Id lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.Name">
+            <summary>
+            Nazwa lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.Address">
+            <summary>
+            Adres lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.Thumbnail">
+            <summary>
+            Adres html do miniaturki wyświetlanej na kartach lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.Position">
+            <summary>
+            Współrzędne lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.Distance">
+            <summary>
+            Odległość od użytkownika.<para/>
+            Nie jest obliczana dynamicznie i musi być odświeżana używając <see cref="M:Urbexer.Models.Location.RecalculateDistance"/>.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.CategoryId">
+            <summary>
+            <see cref="F:Urbexer.Models.Location.CategoryDict">Kategoria</see> lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.ProvinceId">
+            <summary>
+            <see cref="F:Urbexer.Models.Location.ProvinceDict">Województwo</see> lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.CategoryIconPath">
+            <summary>
+            Ścieżka do ikony kategorii lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.CategoryName">
+            <summary>
+            Zwraca nazwe kategorii tego miejsca. Używane przez bindingi w xaml.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.IsVisited">
+            <summary>
+            Oznacza stan odwiedzenia lokacji przez tego użytkownika. <para/>
+            Lokacje mają odpowiednią ikonkę na kartach i na stronie lokacji oznaczającą czy dany użytkownik ją odwiedził. <para/>
+            Dodatkowo recenzje mogą być wysyłane tylko jeżeli lokacja została odwiedzona.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Location.IsNotVisited">
+            <summary>
+            Zwraca negacje <see cref="P:Urbexer.Models.Location.IsVisited"/>.<para/>
+            Używane jako hack w bindingach xaml.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.Location.#ctor(Urbexer.Models.ApiModels.APILocation)">
+            <summary>
+            Utwórz lokację wzorowaną na danym <see cref="T:Urbexer.Models.ApiModels.APILocation"/>.
+            </summary>
+            <param name="apiLocation">Wzorzec do utworzenia lokacji.</param>
+        </member>
+        <member name="M:Urbexer.Models.Location.RecalculateDistance(Xamarin.Forms.Maps.Position)">
+            <summary>
+            Zmienia <see cref="P:Urbexer.Models.Location.Distance"/> na odległość z danej pozycji do <see cref="P:Urbexer.Models.Location.Position"/>.
+            </summary>
+            <param name="from">Punkt do obliczenia odległości.</param>
+        </member>
+        <member name="M:Urbexer.Models.Location.RecalculateDistance">
+            <summary>
+            Zmienia <see cref="P:Urbexer.Models.Location.Distance"/> na odległość od użytkownika do <see cref="P:Urbexer.Models.Location.Position"/>.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.LocationDetailed">
+            <summary>
+            Lokacja przechowująca dodatkowe informacje wykorzystywane w <see cref="T:Urbexer.Views.LocationDetailsPage"/>
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.LocationDetailed.Description">
+            <summary>
+            Przechowuje opis lokacji.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.LocationDetailed.Reviews">
+            <summary>
+            Przechowuje recenzje lokajci.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.LocationDetailed.ImageLink">
+            <summary>
+            Przechowuje linki do zdjęć. <para/>
+            <see cref="T:Xamarin.Forms.CarouselView"/> nie funkcjonuje poprawnie bindingiem do kolekcji stringów. To jest workaround do tego problemu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.LocationDetailed.#ctor(Urbexer.Models.ApiModels.APILocation)">
+            <summary>
+            Utwórz lokację wzorowaną na danym <see cref="T:Urbexer.Models.ApiModels.APILocation"/>.
+            </summary>
+            <param name="apiLocation">Wzorzec do utworzenia lokacji.</param>
+        </member>
+        <member name="M:Urbexer.Models.LocationDetailed.LoadMoreReviews">
+            <summary>
+            Wczytuje dodatkowe recenzje. <para/>
+            Używane przy scrollowaniu strony lokacji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Models.Review">
+            <summary>
+            Recenzja <see cref="T:Urbexer.Models.Location"/>.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Review.UserName">
+            <summary>
+            Nazwa użytkownika.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Review.Score">
+            <summary>
+            Ocena.
+            </summary>
+        </member>
+        <member name="P:Urbexer.Models.Review.Message">
+            <summary>
+            Treść recenzji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Models.Review.#ctor(Urbexer.Models.ApiModels.APIReview)">
+            <summary>
+            Utwórz recenzję wzorowaną na danym <see cref="T:Urbexer.Models.ApiModels.APIReview"/>.
+            </summary>
+            <param name="apiReview">Wzorzec do utworzenia recenzji.</param>
+        </member>
+        <member name="T:Urbexer.Services.GeocoderService">
+            <summary>
+            Klasa upraszczająca korzystanie z <see cref="T:Xamarin.Forms.Maps.Geocoder"/>
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.GeocoderService.GetPositionFromAddressAsync(System.String)">
+            <summary>
+            Pobierz pozycje z danego adresu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.GeocoderService.GetAddressFromPositionAsync(System.Single,System.Single)">
+            <summary>
+            Pobierz adres z danych współrzędnych.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.GeocoderService.GetAddressFromPositionAsync(Xamarin.Forms.Maps.Position)">
+            <summary>
+            Pobierz adres z danej pozycji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Services.HttpService">
+            <summary>
+            Klasa przechowująca ustawienia <see cref="T:System.Net.Http.HttpClient">klienta http</see> 
+            oraz metody związane z wysyłaniem zapytań http.
+            </summary>
+        </member>
         <member name="M:Urbexer.Services.HttpService.SendApiRequest(System.Net.Http.HttpMethod,System.String,System.String,System.Boolean)">
             <summary>
             Funkcja do wysyłania zapytań do api.
@@ -32,6 +264,90 @@
             True jeżeli autoryzacja już jest lub została dodana. <para/>
             False w przeciwnym wypadku .
             </returns>
+        </member>
+        <member name="T:Urbexer.Services.LocationService">
+            <summary>
+            Klasa służąca do pobierania danych o lokacjach.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.LocationService.GetLocationById(System.Int32)">
+            <summary>
+            Pobierz lokacje.
+            </summary>
+            <param name="id"> Id pobieranej lokacji. </param>
+        </member>
+        <member name="M:Urbexer.Services.LocationService.GetLocationByIdDetailed(System.Int32)">
+            <summary>
+            Pobierz lokacje i jej szczegóły.
+            </summary>
+            <param name="id"> Id pobieranej lokacji. </param>
+        </member>
+        <member name="M:Urbexer.Services.LocationService.GetLocationListAll">
+            <summary>
+            Pobierz wszystkie lokacje z bazy danych
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.LocationService.GetLocationListByIds(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Pobierz liste lokacji.
+            </summary>
+            <param name="idList"> Lista id lokacji do pobrania. </param>
+        </member>
+        <member name="M:Urbexer.Services.LocationService.GetIdListInArea(System.Single,System.Single,System.Single,System.Boolean)">
+            <summary>
+            Pobierz id lokacji w okolicy danej pozycji
+            </summary>
+            <param name="latitude"> Szerokość geograficzna pozycji. </param>
+            <param name="longitude"> Wysokość geograficzna pozycji. </param>
+            <param name="kmRadius"> Promień w jakim będą pobieranie id, w kilometrach. </param>
+            <param name="unvisitedOnly"> Jeśli true to pobierane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika. </param>
+            <returns> Lista id lokacji. </returns>
+        </member>
+        <member name="M:Urbexer.Services.LocationService.GetIdListByCategory(System.Int32)">
+            <summary>
+            Pobierz id lokacji z danej kategorii
+            </summary>
+            <param name="categoryId"> Id kategorii, zdefiniowane w  <see cref="F:Urbexer.Models.Location.CategoryDict"/></param>
+            <returns> Lista id lokacji. </returns>
+        </member>
+        <member name="T:Urbexer.Services.ReviewService">
+            <summary>
+            Klasa służąca do pobierania i wysyłania recenzji oraz kontrolowania stanu odwiedzenia lokacji. <para/>
+            Obecny użytkownik jest przekazywany jako token w headerze zapytania.
+            Szczegóły są opisane w <see cref="T:Urbexer.Services.HttpService"/>.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ReviewService.MarkLocationAsVisited(System.Int32)">
+            <summary>
+            Oznacz lokacje o danym id jako odwiedzoną.
+            </summary>
+            <param name="locationId"></param>
+        </member>
+        <member name="M:Urbexer.Services.ReviewService.IsLocationVisited(System.Int32)">
+            <summary>
+            Sprawdź, czy lokacja o danym id jest odwiedzona.
+            </summary>
+            <returns>
+            True jeżeli obecny użytkownik odwiedził daną lokację. <para/>
+            False w przeciwnym wypadku. 
+            </returns>
+        </member>
+        <member name="M:Urbexer.Services.ReviewService.PostReview(System.Int32,System.Int32,System.String)">
+            <summary>
+            Wystaw recenzję lokacji o danym id
+            </summary>
+            <param name="locationId"></param>
+            <param name="scoreQuality">Wystawiana ocena</param>
+            <param name="reviewMessage">Treść recenzji.</param>
+        </member>
+        <member name="M:Urbexer.Services.ReviewService.GetReviews(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Pobierz recenzje lokacji o danym id
+            </summary>
+            <param name="locationId"></param>
+            <param name="pageNumber">Decyduje którą stronę recenzji z kolei pobierać, poczynając od 1.</param>
+            <param name="pageSize">Decyduje ile recenzji ma mieć pobrana strona.</param>
+            <returns></returns>
         </member>
         <member name="T:Urbexer.GlobalStaticResources">
             <summary>
