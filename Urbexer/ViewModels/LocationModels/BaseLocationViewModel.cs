@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Xamarin.Essentials;
 using Location = Urbexer.Models.Location;
 using Urbexer.ViewModels.LocationModels;
+using System.Linq;
 
 namespace Urbexer.ViewModels.LocationModels {
     internal class BaseLocationViewModel {
@@ -38,7 +39,7 @@ namespace Urbexer.ViewModels.LocationModels {
                 return;
             }
             // Skopiuj lokacje z Locations do LocationsFiltered
-            foreach (var location in Locations) {
+            foreach (var location in Locations.ToList()) {
                 //LocationsFiltered.Add(location);
                 newList.Add(location);
             }
