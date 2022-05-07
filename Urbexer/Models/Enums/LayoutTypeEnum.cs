@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.Models.Enums {
+﻿namespace Urbexer.Models.Enums {
     public enum LayoutTypeEnum {
         Default = 0,
         Fotograf = 1,

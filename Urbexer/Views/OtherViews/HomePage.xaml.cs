@@ -1,9 +1,7 @@
-﻿using Urbexer.Models;
 ﻿using System;
+using Urbexer.Models;
 using Urbexer.ViewModels;
 using Xamarin.Forms;
-using System.Collections.ObjectModel;
-using Xamarin.CommunityToolkit.UI.Views;
 
 namespace Urbexer.Views {
     public partial class HomePage : ContentPage {
@@ -34,7 +32,7 @@ namespace Urbexer.Views {
 
             // Przy pierwszym uruchomienu nie wyświetlają się lokacje jeżeli BindingContext jest ustawiony w xaml albo konstruktorze
             // To rozwiązuje ten problem
-            BindingContext = new HomeViewModel(); 
+            BindingContext = new HomeViewModel();
         }
     }
 

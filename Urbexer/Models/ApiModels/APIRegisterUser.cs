@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.Models.ApiModels {
+﻿namespace Urbexer.Models.ApiModels {
     /// <summary>
     /// Model otrzymywany przez API, wykorzystywany przy rejestracji.
     /// </summary>

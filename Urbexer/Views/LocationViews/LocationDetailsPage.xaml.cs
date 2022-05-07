@@ -53,11 +53,11 @@ namespace Urbexer.Views {
         private async void MarkVisited(object sender, System.EventArgs e) {
             int requiredDistance = 200; // w metrach
             Xamarin.Essentials.Location userLocation = await Geolocation.GetLastKnownLocationAsync().ConfigureAwait(false);
-            
+
             // Sprawdź, czy użytkownik jest w zasięgu pinezki
             double distance = Math.Sqrt(
-                Math.Pow(userLocation.Latitude - location.Position.Latitude,2)
-                + Math.Pow(userLocation.Longitude - location.Position.Longitude,2));
+                Math.Pow(userLocation.Latitude - location.Position.Latitude, 2)
+                + Math.Pow(userLocation.Longitude - location.Position.Longitude, 2));
             if (KmToDegrees(requiredDistance) < distance || true) {
                 // Jeżeli użytkownik jest w zasięgu pinezki oznacz ją jako odwiedzoną
                 await ReviewService.MarkLocationAsVisited(location.Id);
