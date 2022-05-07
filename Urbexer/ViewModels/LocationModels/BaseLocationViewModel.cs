@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -9,25 +11,32 @@ namespace Urbexer.ViewModels.LocationModels {
     /// <summary>
     /// Podstawowy ViewModel do wyświetlania lokacji
     /// </summary>
-    internal class BaseLocationViewModel {
+    internal class BaseLocationViewModel : INotifyPropertyChanged {
         /// <summary>
-        /// Przechowuje wszystkie wczytane lokacje
+        /// Przechowuje wszystkie wczytane lokacje.
         /// </summary>
         protected ObservableRangeCollection<Location> Locations { get; set; }
+        private ObservableRangeCollection<Location> locationsFiltered = new ObservableRangeCollection<Location>();
         /// <summary>
-        /// Przechowuje wyświetlane lokacje. <para/>
-        /// Musi być publiczne dla bindingów.
+        /// Przechowuje wyświetlane lokacje.
         /// </summary>
-        public ObservableRangeCollection<Location> LocationsFiltered { get; set; }
+        public ObservableRangeCollection<Location> LocationsFiltered {
+            get { return locationsFiltered; }
+            set {
+                locationsFiltered = value;
+                OnPropertyChanged(nameof(LocationsFiltered));
+            }
+        }
         /// <summary>
         /// Wywoływana, gdy karta lokacji zostanie kliknięta.
         /// </summary>
         public AsyncCommand<Location> CardSelectedCommand { get; }
         public BaseLocationViewModel() {
-            LocationsFiltered = new ObservableRangeCollection<Location> { };
+            //LocationsFiltered = new ObservableRangeCollection<Location> { };
             Locations = new ObservableRangeCollection<Location> { };
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
         }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Filtrowanie
         // Funkcje i zmienne filtrowania
@@ -81,6 +90,9 @@ namespace Urbexer.ViewModels.LocationModels {
 
             var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";
             await Shell.Current.GoToAsync(route);
+        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

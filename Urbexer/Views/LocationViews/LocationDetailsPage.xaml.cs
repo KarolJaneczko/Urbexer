@@ -39,15 +39,12 @@ namespace Urbexer.Views {
             await location.LoadMoreReviews();
             BindingContext = location;
 
-            // Sprawdź, czy lokacja jest odwiedzona
-            if (await ReviewService.IsLocationVisited(location.Id)) {
-                // Lokacja jest już odwiedzona, pokaż przycisk wstawiania opinii
-                WriteReviewButton.IsVisible = true;
-            }
-            else {
-                // Lokacja nie jest odwiedzona, pokaż przycisk odwiedzenia miejsca
-                MarkVisitedButton.IsVisible = true;
-            }
+            // Sprawdź, czy lokacja jest odwiedzona i dostosuj odpowiednio strone
+            IsVisitedIcon.IsVisible = location.IsVisited;
+            WriteReviewButton.IsVisible = location.IsVisited;
+            MarkVisitedButton.IsVisible = !location.IsVisited;
+            IsNotVisitedIcon.IsVisible = !location.IsVisited;
+            MarkVisitedHintLabel.IsVisible = !location.IsVisited;
 
             // Wyłącz scrollowanie karuzeli jeżeli jest za mało zdjęć
             if (location.ImageLinks.Count <= 1) {
@@ -79,8 +76,9 @@ namespace Urbexer.Views {
                 await ReviewService.MarkLocationAsVisited(location.Id);
                 WriteReviewButton.IsVisible = true;
                 MarkVisitedButton.IsVisible = false;
-                IsVisitedButton.IsVisible = true;
-                IsNotVisitedButton.IsVisible = false;
+                IsVisitedIcon.IsVisible = true;
+                IsNotVisitedIcon.IsVisible = false;
+                MarkVisitedHintLabel.IsVisible = false;
             }
             else {
                 // Wyświetl komunikat, że użytkownik jest za daleko
