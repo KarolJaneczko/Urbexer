@@ -201,11 +201,7 @@ c) przedstawienie okoliczności uzasadniających reklamację.&#10;
                                              CornerRadius="50"/>
                     </Frame>
                 </Grid>
-
             </Frame>
-
-
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>
