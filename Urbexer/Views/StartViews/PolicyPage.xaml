@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             x:Class="Urbexer.Views.PolicyPage">
+
+    <Grid>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Regulamin aplikacji mobilnej Urbexer&#10;
+§1 DEFINICJE&#10;
+1. Usługodawca/Administrator Danych Osobowych – osoba fizyczna, Karol Janeczko zamieszkały w Toruniu (kod-pocztowy 87-100) przy ul. Fryderyka Chopina 12/18, adres email urbexer@outlook.com&#10;
+2. Usługobiorca – osoba fizyczna, posiadająca pełną zdolność do czynności prawnych.&#10;
+3. Aplikacja – aplikacja mobilna Urbexer dostępna nieodpłatnie przeznaczona na urządzenia mobilne z systemem operacyjnym Android, służąca do ułatwiania eksploracji miejskej; formy aktywności polegającej na eksplorowaniu opuszczonych, zrujnowanych, zapomnianych, niedostępnych czy ukrytych budynków i instalacji stworzonych przez człowieka.&#10;
+4. Regulamin – oznacza niniejszy regulamin korzystania z Aplikacji.&#10;
+5. Usługi – usługi świadczone przez Usługodawcę na rzecz Usługobiorcy zgodnie z postanowieniami Regulaminu.&#10;
+6. Konto - prowadzony dla Usługobiorcy przez Usługodawcę pod nazwą Login zbiór danych Usługobiorcy w tym jego działaniach w ramach Aplikacji, którymi Usługobiorca samodzielnie zarządza.&#10;
+7. Login - wybrana podczas rejestracji w Aplikacji unikalna nazwa Usługobiorcy, której Usługobiorca używać będzie podczas uzyskiwania dostępu do Konta. Login nie może zawierać treści wulgarnych, obraźliwych ani sprzecznych z obowiązującym prawem.&#10;
+8. Profil – zbiór danych w ramach Konta prezentujący i opisujący danego Usługobiorcę przekazywanych dobrowolnie i samodzielnie przez Usługobiorcę do Aplikacji, które są udostępniane i prezentowane w Aplikacji.&#10;
+
+§2 POSTANOWIENIA OGÓLNE&#10;
+1. Niniejszy Regulamin definuje normy działania Aplikacji, udostępnionej z racji Usługodawcy na rzecz Usługobiorców.&#10;
+2. Regulamin, o którym mowa w punkcie 1 jest regulaminem w pojmowaniu art. 8 ustawy z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną (Dz.U. z 2019 r. poz. 123) w którym ustalone są specyficzne odmiany i zakres usług świadczonych drogą elektroniczną, warunki świadczenia usług drogą elektroniczną w tym wymagania techniczne niezbędne do korzystania z Aplikacji, warunki zawierania i rozwiązywania umów o świadczenie usług drogą elektroniczną oraz tryb postępowania reklamacyjnego, jak również prawa i obowiązki jego Usługobiorców, oraz zasady odpowiedzialności Usługodawcy i Usługobiorców Aplikacji.&#10;
+3. Usługi są świadczone na zasadach określonych w Regulaminie oraz powszechnie obowiązujących przepisów prawa zaś naruszenie przez Usługobiorcy postanowień Regulaminu powodować będzie skutki wynikające bezpośrednio z treści Regulaminu oraz z w/w przepisów prawa.&#10;
+4. Treść niniejszego Regulaminu przekazywana jest Usługobiorcy nieodpłatnie w Aplikacji w formie która umożliwia jego pobranie, utrwalanie i wydrukowanie.&#10;
+5. Brak akceptacji Regulaminu uniemożliwia korzystanie z Aplikacji.&#10;
+6. Aby móc korzystać z aplikacji, należy wcześniej zapoznać się z Regulaminem oraz zaakceptować jego treść. Oznacza to zawarcie pomiędzy Usługobiorcą a Usługodawcą umowy o świadczenie usług drogą elektroniczną.&#10;
+7. Usługodawca nie ponosi odpowiedzialności za szkody wyrządzone w trakcie bądź w wyniku korzystania z Aplikacji. Przez wtargniecie na cudzą posesję, mieszkanie, lokal, pomieszczenie albo ogrodzony teren bez uprzedniej zgody właściciela popełniasz wykroczenie zgodnie z art. 193 Kodeksu Karnego (Dz.U.2018.0.1600 t.j. - Ustawa z dnia 6 czerwca 1997 r.).&#10;
+
+§3 ZASADY OGÓLNE KORZYSTANIA Z APLIKACJI&#10;
+1. Usługobiorca może:&#10; 
+a) dodać, zmienić lub usunąć dane Usługobiorcy w Profilu za pomocą opcji zawartych w Aplikacji;&#10;
+b) używać Aplikacji i jej funkcjonalności według jej przeznaczenia oraz zgodnie z zasadami Regulaminu.&#10; 
+2. Usługobiorca zobligowany jest do uzyskania stosownych praw i zgód osób uprawnionych na umiejscowienie w Aplikacji jakichkolwiek materiałów, w tym multimediów. Umieszczenie jakichkolwiek materiałów w Aplikacji przez Usługobiorcy jest równoznaczne z oświadczeniem, że Usługobiorca dysponuje w tym zakresie niezbędnymi prawami i zgodami, zgodnie z treścią oświadczeń zawartych w §7 Regulaminu.&#10; 
+3. Usługobiorca jest zobowiązany w szczególności do:&#10; 
+a) powstrzymywania się od jakichkolwiek działań mogących utrudnić lub zakłócić funkcjonowanie Aplikacji oraz od korzystania z Aplikacji i jej funkcjonalności w sposób uciążliwy dla innych Usługobiorców lub Usługodawcy;&#10;
+b) przestrzegania autorskich praw osobistych oraz majątkowych jak również praw wynikających z rejestracji wynalazków, patentów, znaków towarowych, wzorów użytkowych i przemysłowych innych osób;&#10;
+c) powstrzymywania się od jakichkolwiek działań naruszających prywatność użytkowników Aplikacji, w szczególności zbierania, przetwarzania i rozpowszechniania informacji o nich bez ich wyraźnej zgody, chyba że jest to dozwolone przez przepisy prawa i postanowienia niniejszego Regulaminu.&#10; 
+4. Niedozwolone jest wykorzystywanie Aplikacji i jej funkcjonalności do celów innych niż wynika to z charakteru i przedmiotu Aplikacji oraz wynikających z niniejszego Regulaminu, w tym celach innych niż korzystanie z Usług, a w szczególności niedozwolone jest umieszczanie materiałów naruszających obowiązujące prawo, Regulamin, dobre obyczaje, normy moralne lub zasady uczciwej konkurencji, wulgarnych, obrażających godność, szkalujących lub naruszające dobra osobiste innych osób w tym innych Usługobiorców lub Usługodawcy, popierające radykalne postawy społeczne lub głoszące takie poglądy (wszelkiego rodzaju dyskryminacja rasowa, etniczna, ze względu na płeć, wyznanie itp.), treści nieprawdziwych lub wprowadzających w błąd;&#10;
+5. Usługobiorca ponosi pełną odpowiedzialność za korzystanie z Konta i Aplikacji w sposób sprzeczny z Regulaminem lub powszechnie obowiązującym prawem i jego skutki.&#10;
+6. Za nieprzestrzeganie postanowień Regulaminu lub powszechnie obowiązujących przepisów prawa przez Usługobiorcy jego konto może zostać usunięte. O usunięciu konta decyduje Usługodawca.&#10;
+7. Usługodawca, w tym działająca w jego imieniu osoba, może usunąć materiały umieszczone w Aplikacji, w jakikolwiek sposób nie spełniające lub naruszające postanowienia Regulaminu lub powszechnie obowiązujących przepisów prawa, bez uprzedzenia lub powiadomienia Usługobiorcy.&#10;
+
+§4 WYMAGANIA TECHNICZNE&#10; 
+1. Do korzystania z Aplikacji niezbędne jest posiadanie urządzenia mobilnego (w szczególności telefonu komórkowego, tabletu):&#10;
+a) umożliwiającego pobieranie i użytkowanie aplikacji mobilnych,&#10;
+b) umożliwiającego poprawne połączenie się z siecią Internet. Koszty połączenia z Internetem obciążają Usługobiorcy, stosownie do umów zawartych przez użytkownika z operatorem telekomunikacyjnym.&#10;
+c) posiadającego system operacyjny Android 4.1 lub nowszy.&#10;
+2. Usługodawca nie ponosi odpowiedzialności za niedziałanie lub nienależyte działanie Aplikacji na urządzeniu niespełniającym wymagań technicznych określonych w §4 Regulaminu.&#10;
+
+§5 REJESTRACJA W RAMACH APLIKACJI&#10;
+1. Usługobiorcą Aplikacji może być każda osoba fizyczna posiadająca pełną zdolność do czynności prawnych, która zainstalowała Aplikację na urządzeniu mobilnym i zaakceptowała postanowienia Regulaminu oraz podała swoje dane w trakcie procedury rejestracji lub zmiany Usługobiorcy.&#10;
+2. Poprzez zrealizowanie procedury rejestracji w Aplikacji, której skutkiem jest założenie Konta, Usługobiorca zapewnia i oświadcza, iż zapoznał się i zaakceptował treść całego Regulaminu i zobowiązuje się do jego przestrzegania.&#10;
+3. Rejestrując się w Aplikacji Usługobiorca wyraża zgodę na publikowanie jego Loginu, miejsca i czasu aktywności w Aplikacji (np. przy dodanych przez Usługobiorcy materiałach).&#10;
+4. Usługobiorca rejestrując się w Aplikacji wyraża ponadto zgodę na:&#10;
+a) zbieranie przez Usługodawcę danych osobowych Usługobiorcy pozyskanych w trakcie rejestracji i ich przetwarzanie w zakresie wskazanym w §9 Regulaminu.&#10;
+b) lokalizowanie jego urządzenia mobilnego poprzez Aplikację oraz na podawanie informacji o lokalizacji innym Usługobiorcaom Aplikacji.&#10;
+5. Usługobiorca zobowiązany jest do podawania, zarówno w procesie rejestracji jak i w każdym czasie korzystania z Aplikacji, informacji prawdziwych i rzetelnych. Ujawnienie nieprawidłowości wszystkich lub niektórych danych podanych przez Usługobiorcy może skutkować usunięciem Konta.&#10;
+6. Założenie Konta wymaga od Usługobiorcy podania Loginu, adresu email oraz hasła, z którego będzie korzystał używając Aplikacji oraz akceptacji Regulaminu.&#10;
+7. Informacje przekazywane przez Usługobiorcy do Aplikacji podczas procedury rejestracji, edycji Profilu lub korzystania z Aplikacji, mogą być moderowane przez Usługodawcę, w tym Usługodawca może odmówić opublikowania ich w ramach Aplikacji.&#10;
+
+§6 KONTO UŻYTKOWNIKA&#10;
+1. Posiadanie przez Usługobiorcy Konta w ramach Aplikacji, jak również przeglądanie i zmiana danych, dodawanie dozwolonych Regulaminem materiałów jest nieodpłatne.&#10;
+2. Konta nie używane (brak skutecznego logowania) przez okres dłuższy niż 6 miesięcy od ostatniego logowania, mogą zostać usunięte bez uprzedniego powiadomienia.&#10;
+3. W przypadku stwierdzenia naruszenia przez Usługobiorcy zasad Regulaminu lub powszechnie obowiązujących przepisów prawa, Konto może zostać usunięte bez konieczności podania przyczyny i informowania o tym fakcie.&#10;
+4. Usunięcie Konta jest równoznaczna z rozwiązaniu umowy o świadczenie usług drogą elektroniczną.&#10;
+5. Usunięcie Konta wiąże się z usunięciem Profilu Usługobiorcy na stałe i bezpowrotnie.&#10; 
+6. Po usunięciu Konta nie ma możliwości jego przywrócenia, natomiast istnieje możliwość ponownego założenia Konta przez tego samego Usługobiorcę.&#10;
+7. Usługobiorca może w każdej chwili usunąć swoje Konto z Aplikacji przez odpowiednie zgłoszenie na adres urbexer@outlook.com zgłoszenie będzie rozpatrywane w terminie 14 (czternastu) dni od daty zgłoszenia.&#10;
+8. Każde nowo założone Konto jest Kontem aktywnym po ukończeniu procesu rejestracji opisanego w Regulaminie.&#10;
+9. Usługodawca będzie domniemywał, że informacje i oświadczenia wysłane z adresu poczty elektronicznej podanej przez Usługobiorcy pochodzą od Usługobiorcy, oraz że czynności dokonane przez osobę zalogowaną do Aplikacji z pomocą Loginu i hasła Usługobiorcy, zostały dokonane przez Usługobiorcy, chyba że Usługobiorca przedstawi dowód przeciwny.&#10;
+10. Wszelkie informacje umieszczane w Aplikacji muszą być prawdziwe, rzetelne i nie mogą wprowadzać w błąd.&#10; 
+11. Informacje powinny być aktualizowane w miarę potrzeby. Informacje muszą być aktualizowane w przypadku istotnych zmian lub, np. czasowej przerwy w prowadzonej działalności.&#10;
+12. Konto nie zawierające pełnych danych obowiązkowych może zostać usunięte.&#10;
+13. Informacje i inne materiały umieszczane w Aplikacji nie mogą naruszać postanowień Regulaminu.&#10;
+
+§7 OCHRONA WŁASNOŚCI INTELEKTUALNEJ&#10;
+1. Usługobiorca zamieszczając jakiekolwiek materiały w ramach Aplikacji oświadcza, że:&#10;
+a) jest wyłącznym posiadaczem majątkowych praw autorskich lub praw wynikających z odpowiedniej licencji, którymi to prawami może swobodnie rozporządzać i korzystać, w szczególności pozwalające na opublikowanie materiałów w Aplikacji i ich publiczne udostępnienie w ten sposób;&#10;
+b) przysługujące mu autorskie prawa majątkowe nie zagrażają i nie naruszają praw osób trzecich, w szczególności nie naruszają ich majątkowych i osobistych praw autorskich oraz zapewnia, iż zaspokoił, lub zaspokoi do dnia zamieszczenia materiałów w ramach Aplikacji, związane z nimi wszelkie prawa osób trzecich w związku z zawartością tych materiałów,&#10; 
+c) w przypadku wystąpienia przez osobę trzecią z roszczeniami wynikającymi z tytułu naruszenia praw określonych powyżej, zrekompensuje Usługodawcy, jako wyłącznie odpowiedzialny, koszty poniesione w związku ze skierowaniem przeciwko niemu roszczeń odszkodowawczych, zwalniając Usługodawcę od wszelkich zobowiązań, jakie powstaną z tego tytułu.&#10; 
+2. Usługobiorca w momencie zamieszczenia materiałów w ramach Aplikacji, udziela Usługodawcy nieodpłatnej licencji niewyłącznej bez ograniczeń czasowych i terytorialnych w zakresie korzystania z materiałów zamieszczonych w Aplikacji w całości i we fragmentach na wszelkich znanych Usługobiorcy i Usługodawcy w chwili udzielenia licencji polach eksploatacji.&#10;
+3. Jednocześnie Usługobiorca wyraża zgodę na wykonywanie i zezwalanie przez Usługodawcę na wykonywanie autorskich praw zależnych do materiałów oraz upoważnia Usługodawcę do sprawowania nadzoru autorskiego nad sposobem korzystania z materiałów. W zakresie powstałych na podstawie materiałów dzieł zależnych Usługobiorca udziela niniejszym nieodwołalnej zgody na ich wykorzystanie w pełnym zakresie tożsamym z zakresem wykorzystania dzieła podstawowego. Usługodawca ma prawo do przeniesienia swoich uprawnień w całości lub we fragmentach na osoby trzecie (sublicencja).&#10;
+4. Z tytułu udzielenia Usługodawcy powyższej licencji Usługobiorcy nie przysługuje wynagrodzenie.&#10;
+5. Usługobiorca ma prawo zamieścić w Aplikacji nieograniczoną liczbę materiałów z zastrzeżeniem technicznych możliwości Aplikacji oraz z zastrzeżeniem, że nie mogą być to materiały jednakowe.&#10;
+6. Usługodawca może usunąć materiały uznane przez niego za sprzeczne z Regulaminem lub powszechnie obowiązującymi przepisami prawa bez ostrzeżenia i konieczności powiadomienia o tym fakcie. Uporczywe zamieszczanie materiałów naruszających Regulamin lub przepisy prawa może skutkować usunięciem Konta.&#10;
+
+§8 REKLAMACJE&#10;
+1. Reklamacje dotyczące nienależytego działania Aplikacji należy zgłaszać na adres e-mail: urbexer@outlook.com w terminie 14 (czternastu) dni od daty zdarzenia stanowiącego przedmiot reklamacji. Za dzień wniesienia reklamacji przyjmuje się dzień wpływu zgłoszenia.&#10;
+2. Reklamacja powinna zawierać:&#10;
+a) określenie podmiotu dokonującego reklamacji (login Usługobiorcy)&#10;
+b) określenie przedmiotu reklamacji oraz reklamowanego okresu.&#10;
+c) przedstawienie okoliczności uzasadniających reklamację.&#10;
+3. Zgłoszona reklamacja zostanie rozpatrzona w terminie 30 (trzydziestu) dni od daty jej otrzymania przez Usługodawcę.&#10;
+4. Po wyczerpaniu postępowania reklamacyjnego Usługobiorcy przysługuje prawo do dochodzenia nie uwzględnionych roszczeń w sądzie powszechnym według właściwości ogólnej.&#10;
+5. Usługodawca dołoży wszelkich starań, aby Aplikacja oraz wszystkie Usługi udostępniane za jej pośrednictwem działały w sposób ciągły i bez zakłóceń, jednakże Usługodawca nie ponosi odpowiedzialności za zakłócenia spowodowane działaniem siły wyższej, awariami lub niedozwoloną ingerencją Usługobiorców lub osób trzecich, niewystarczającą przepustowością łącza za pomocą którego Usługobiorca korzysta z Aplikacji, naruszeniem warunków Regulaminu przez Usługobiorcy.&#10;
+6. Usługodawca zastrzega sobie prawo do czasowego całkowitego lub częściowego wyłączenia Aplikacji w celu jej ulepszenia, dodawania usług lub przeprowadzania konserwacji, bez wcześniejszego uprzedzania o tym Usługobiorców.&#10;
+7. Usługodawca zastrzega sobie możliwość wdrażania do Aplikacji we wszelkich jej płaszczyznach, rozwiązań funkcjonalnych, identyfikacyjnych lub innych, które okażą się odpowiednie do przedmiotu lub uwarunkowań technicznych Aplikacji, w związku z możliwościami występowania zachowań lub zdarzeń niepożądanych bądź zagrażających prawom lub interesom Usługobiorców, Usługodawcy albo uzasadnionym interesom osób trzecich.&#10;
+
+§9 DANE OSOBOWE&#10;
+1. Administratorem Danych Osobowych Usługobiorcy jest osoba fizyczna, Karol Janeczko zamieszkały w Toruniu (kod-pocztowy 87-100) przy ul. Fryderyka Chopina 12/18, adres email urbexer@outlook.com.&#10;
+2. W sprawach dotyczących przetwarzania danych osobowych Usługobiorca może się z nami skontaktować wysyłając e-mail na adres urbexer@outlook.com.&#10;
+3. Dane użytkownika pozyskane za pośrednictwem aplikacji, będą przetwarzane na podstawie niezbędności ich przetwarzania w celu zawarcia i wykonania umowy o świadczeniu usług drogą elektroniczną. Dane będą również przetwarzane na podstawie konieczności ich przetwarzania do realizacji prawnie uzasadnionego interesu administratora w celu dochodzenia ewentualnych roszczeń związanych z zawartą umową.&#10;
+4. Usługobiorcy przysługuje prawo dostępu do swoich danych osobowych, żądania ich sprostowania, usunięcia lub ograniczenia ich przetwarzania. W zakresie, w jakim przetwarzamy dane użytkownika w oparciu o prawnie uzasadniony interes administratora, użytkownikowi przysługuje prawo sprzeciwu wobec przetwarzania danych osobowych w ten sposób. W zakresie, w jakim przetwarzamy dane osobowe na podstawie zgody, użytkownik ma prawo jej wycofania w dowolnym momencie, wycofanie zgody nie ma wpływu na zgodność z prawem przetwarzania, którego dokonaliśmy na podstawie zgody przed jej wycofaniem. W zakresie, w jakim przetwarzamy dane osobowe w celu zawarcia i wykonania umowy – użytkownikowi przysługuje także prawo do przenoszenia danych osobowych. Usługobiorca prawo wniesienia skargi do organu nadzorczego zajmującego się ochroną danych osobowych, w Polsce jest nim Prezes Urzędu Ochrony Danych Osobowych.&#10;
+5. Geolokalizacyjne dane osobowe przetwarzane są w celu realizacji Usług i funkcjonalności oferowanych w Aplikacji na podstawie niniejszego Regulaminu. Podstawą prawną przetwarzania Danych Osobowych jest wykonanie umowy - art. 6 ust. 1 pkt. b) Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych), której stroną jest osoba, której dane dotyczą (Usługobiorca).&#10;
+6. Dane osobowe nie będą przekazywane do państwa trzeciego (tj. państwa nie należącego do Europejskiego Obszaru Gospodarczego).&#10;
+7. Dane osobowe nie będą przekazywane do organizacji międzynarodowej.&#10;
+8. Dane osobowe będą przechowywane przez okres obowiązywania umowy, tj. przez okres istnienia Konta w Aplikacji, a po tym okresie mogą być przechowywane przez okres przedawnienia ewentualnych roszczeń Usługodawcy wobec Usługobiorcy lub Usługobiorcy wobec Usługodawcy, określony w przepisach powszechnie obowiązującego prawa.&#10;
+9. Podanie danych osobowych (adresu email) jest warunkiem zawarcia i wykonywania umowy. Brak podania danych osobowych lub ich usunięcie bądź złożenie sprzeciwu wobec przetwarzania uniemożliwia zawarcie oraz wykonanie umowy, a tym samym korzystanie z Aplikacji.&#10;
+
+§10 ZMIANY REGULAMINU&#10;
+1. Wszelkie postanowienia Regulaminu mogą być w każdej chwili zmieniane przez Usługodawcę. Każda zmiana Regulaminu zostanie Usługobiorcy zakomunikowana poprzez publikację zmian w postaci ujednoliconego tekstu Regulaminu w Aplikacji wraz z informacją o ich dokonaniu.&#10;
+2. Regulamin może ulec zmianie, jeśli zmienią się obowiązujące przepisy prawa, zmieni się zakres świadczonych usług, w wyniku realizacji obowiązku wynikającego z prawomocnego orzeczenia sądu lub decyzji organów administracji, a także z innych ważnych przyczyn.&#10;
+3. Po ukazaniu się w Aplikacji informacji o zmianach w Regulaminie, Usługobiorca powinien niezwłocznie zapoznać się ze zmianami, gdyż zalogowanie na Konto po wejściu Regulaminu w życie stanowi akceptację nowej treści Regulaminu przez Usługobiorcy.&#10;
+4. Zmieniony Regulamin udostępnimy w aplikacji, w koncie użytkownika, co najmniej na 7 dni przed jego wejściem w życie. O zmianach Regulaminu możemy też informować użytkownika mailowo.&#10;
+5. W przypadku nie zaakceptowania zmian w Regulaminie, Usługobiorca powinien powstrzymać się od zalogowania na Konto i niezwłocznie powiadomić Usługodawcę o takiej decyzji w formie mailowej na adres urbexer@outlook.com&#10;
+6. Jeśli użytkownik nie wyrazi zgody na zmianę Regulaminu, może w terminie 7 dni od dnia otrzymania informacji o zmianach, złożyć oświadczenie o niewyrażaniu zgody na zmianę Regulaminu. Oświadczenie to jest równoznaczne z rezygnacją z korzystania z aplikacji i rozwiązaniem umowy o świadczenie usług drogą elektroniczną. Brak oświadczenia o niewyrażeniu zgody na zmianę Regulaminu w terminie, o którym pisaliśmy w poprzednim zdaniu, jest jednoznaczny z akceptacją przez użytkownika zmian w treści Regulaminu.&#10;
+7. Oświadczenie o nie zaakceptowaniu zmian w Regulaminie, pociąga za sobą usunięcie Konta Usługobiorcy.&#10;
+
+§11 POSTANOWIENIA KOŃCOWE&#10;
+1. Prawem właściwym jest prawo polskie.&#10;
+2. Sądem właściwym do rozpatrywania sporów jest sąd właściwości ogólnej lub sąd właściwy dla miejsca zamieszkania Usługobiorcy, jak też każdy inny sąd, którego właściwość wynika ze stosunku prawnego łączącego Usługobiorcy z Usługodawcą.&#10;
+3. W relacjach z Usługobiorcą używamy języka polskiego.&#10;
+4. Niniejszy Regulamin wchodzi w życie z dniem ogłoszenia i wiąże w tej wersji do dnia jego zmiany lub odwołania.&#10;
+5. Regulamin wchodzi w życie z dniem 05.05.2022 r.&#10;"/>
+                <Grid>
+                    <BoxView BackgroundColor="#B52435"
+                                     HeightRequest="1" 
+                                     Margin="20" 
+                                     HorizontalOptions="CenterAndExpand"
+                                     WidthRequest="120" />
+                    <Frame BackgroundColor="#B52435"
+                                   CornerRadius="50" 
+                                   HorizontalOptions="Center"
+                                   HeightRequest="35" 
+                                   WidthRequest="50" 
+                                   Padding="0" 
+                                   Margin="0">
+                        <ImageButton Source="back_icon.png" 
+                                             Margin="0" 
+                                             WidthRequest="30"
+                                             HeightRequest="30" 
+                                             VerticalOptions="FillAndExpand" 
+                                             Clicked="GoBack" 
+                                             BackgroundColor="Transparent"
+                                             BorderColor="Black" 
+                                             CornerRadius="50"/>
+                    </Frame>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

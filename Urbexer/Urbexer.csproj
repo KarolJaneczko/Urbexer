@@ -56,6 +56,9 @@
     <Compile Update="Views\StartViews\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\StartViews\PolicyPage.xaml.cs">
+      <DependentUpon>PolicyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StartViews\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
