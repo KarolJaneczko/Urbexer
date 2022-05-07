@@ -13,7 +13,7 @@ namespace Urbexer.ViewModels {
         #region Metody
         private List<Onboarding> GetOnboarding() {
             return new List<Onboarding> {
-                new Onboarding {Heading = "Eksploruj opuszczone lokacje", Caption = "Przygoda na całe życie", Image ="background_image1"},
+                new Onboarding {Heading = "Eksploruj opuszczone lokacje", Caption = "Ponad 2000 miejsc na mapie", Image ="background_image1"},
                 new Onboarding {Heading = "Rywalizuj z innymi", Caption = "Zostań najlepszym z eksploatorów", Image ="background_image2"},
                 new Onboarding {Heading = "Odczuj dreszcz emocji", Caption = "Podziel się wrażeniami z innymi", Image ="background_image3"}
             };

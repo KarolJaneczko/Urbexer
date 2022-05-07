@@ -12,8 +12,8 @@
 
     <Grid>
         <ScrollView>
-            <StackLayout>
-                <Label Text="Regulamin aplikacji mobilnej Urbexer&#10;
+            <StackLayout Margin="10">
+                <Label HorizontalOptions="FillAndExpand"  Text="Regulamin aplikacji mobilnej Urbexer&#10; 
 §1 DEFINICJE&#10;
 1. Usługodawca/Administrator Danych Osobowych – osoba fizyczna, Karol Janeczko zamieszkały w Toruniu (kod-pocztowy 87-100) przy ul. Fryderyka Chopina 12/18, adres email urbexer@outlook.com&#10;
 2. Usługobiorca – osoba fizyczna, posiadająca pełną zdolność do czynności prawnych.&#10;
