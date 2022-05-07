@@ -57,7 +57,8 @@ namespace APIpz.Services
                 var odwiedzony = _context.Odwiedzone
                     .Include(o => o.OdwiedzonyUrbex)
                     .Include(o => o.OdwiedzonePrzez)
-                    .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id).Count();
+                    .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id)
+                    .Count();
                 miejsceDto.CzyOdwiedzone = (odwiedzony > 0);
             }
             catch (Exception ex)
@@ -78,13 +79,14 @@ namespace APIpz.Services
             foreach (MiejsceDto i in miejsca)
             {
                 var odwiedzony = _context.Odwiedzone
-                                            .Include(o => o.OdwiedzonyUrbex)
-                                            .Include(o => o.OdwiedzonePrzez)
-                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id);
+                    .Include(o => o.OdwiedzonyUrbex)
+                    .Include(o => o.OdwiedzonePrzez)
+                    .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id)
+                    .Count();
                                                 
                 try
                 {
-                    i.CzyOdwiedzone = Convert.ToBoolean(odwiedzony);
+                    i.CzyOdwiedzone = (odwiedzony > 0);
                 }
                 catch (Exception ex)
                 {
