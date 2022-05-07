@@ -24,7 +24,7 @@ namespace Urbexer.ViewModels.LocationModels {
             get { return locationsFiltered; }
             set {
                 locationsFiltered = value;
-                OnPropertyChanged(nameof(LocationsFiltered));
+                //OnPropertyChanged(nameof(LocationsFiltered));
             }
         }
         /// <summary>
