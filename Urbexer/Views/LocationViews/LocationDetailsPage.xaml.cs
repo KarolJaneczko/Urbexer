@@ -44,6 +44,7 @@ namespace Urbexer.Views {
             WriteReviewButton.IsVisible = location.IsVisited;
             MarkVisitedButton.IsVisible = !location.IsVisited;
             IsNotVisitedIcon.IsVisible = !location.IsVisited;
+            MarkVisitedHintLabel.IsVisible = !location.IsVisited;
 
             // Wyłącz scrollowanie karuzeli jeżeli jest za mało zdjęć
             if (location.ImageLinks.Count <= 1) {
@@ -77,6 +78,7 @@ namespace Urbexer.Views {
                 MarkVisitedButton.IsVisible = false;
                 IsVisitedIcon.IsVisible = true;
                 IsNotVisitedIcon.IsVisible = false;
+                MarkVisitedHintLabel.IsVisible = false;
             }
             else {
                 // Wyświetl komunikat, że użytkownik jest za daleko

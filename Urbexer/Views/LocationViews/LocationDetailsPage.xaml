@@ -236,12 +236,15 @@
                     <!--#endregion-->
                     <!--#region Przyciski odwiedzania/recenzji-->
                     <!--  Przycisk oznaczania odwiedzonych  -->
+                    <Label
+                        x:Name="MarkVisitedHintLabel"
+                        HorizontalOptions="Center"
+                        Text="Oznacz miejsce jako odwiedzone w celu pisania recenzji" />
                     <Frame
                         x:Name="MarkVisitedButton"
                         Margin="50,10,50,0"
                         Padding="0"
-                        CornerRadius="20"
-                        IsVisible="False">
+                        CornerRadius="20">
                         <Button
                             BackgroundColor="#BF0603"
                             FontAttributes="Bold"
@@ -255,8 +258,7 @@
                         x:Name="WriteReviewButton"
                         Margin="50,10,50,0"
                         Padding="0"
-                        CornerRadius="20"
-                        IsVisible="False">
+                        CornerRadius="20">
                         <Button
                             BackgroundColor="#BF0603"
                             FontAttributes="Bold"
