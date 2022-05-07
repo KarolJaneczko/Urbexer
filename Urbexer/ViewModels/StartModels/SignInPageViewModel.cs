@@ -1,9 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
-using Xamarin.Forms;
-using System.ComponentModel;
 using Urbexer.Models.ApiModels;
+using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
     public class SignInPageViewModel : BaseViewModel {

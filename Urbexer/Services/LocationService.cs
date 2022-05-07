@@ -1,12 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
-using Xamarin.Forms.Maps;
 
 namespace Urbexer.Services {
     /// <summary>

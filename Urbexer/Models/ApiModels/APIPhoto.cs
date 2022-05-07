@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.Models.ApiModels {
+﻿namespace Urbexer.Models.ApiModels {
     /// <summary>
     /// Zdjęcie pobrane z bazy <para/>
     /// Ze strony front-endu wykorzystywany jest tylko <see cref="link"/>

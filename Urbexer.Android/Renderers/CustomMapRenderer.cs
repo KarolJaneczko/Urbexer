@@ -1,21 +1,10 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Android.Content;
+using Android.Gms.Maps.Model;
+using Urbexer.Controls;
 using Urbexer.Droid.Renderers;
 using Xamarin.Forms;
-using Urbexer.Controls;
-using Xamarin.Forms.Maps.Android;
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
-using Urbexer.Models;
 using Xamarin.Forms.Maps;
+using Xamarin.Forms.Maps.Android;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace Urbexer.Droid.Renderers {
@@ -30,7 +19,7 @@ namespace Urbexer.Droid.Renderers {
         public Android.Views.View GetInfoWindow(Marker marker) {
             return null;
         }
-        protected override MarkerOptions CreateMarker(Pin pin){
+        protected override MarkerOptions CreateMarker(Pin pin) {
             var marker = new MarkerOptions();
             marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
             marker.SetTitle(pin.Label);
