@@ -22,61 +22,67 @@
             </LinearGradientBrush>
         </ScrollView.Background>
         <StackLayout>
-            <Frame Margin="10,10" Padding="2">
+            <Frame Margin="10,10" Padding="2" BackgroundColor="Transparent">
                 <StackLayout HorizontalOptions="Center">
                     <Label
                         FontSize="Large"
+                         FontAttributes="Bold"
                         Text="Zespół nr 8"
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label
                         FontSize="Medium"
                         Text="Urbexer to aplikacja mobilna skierowana na telefony z systemem Android zrealizowana w ramach przedmiotu Programowanie Zespołowe III roku studiów informatycznych na Uniwersytecie Mikołaja Kopernika w Toruniu."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label />
-                    <Label />
+                  
                     <Label
                         FontSize="Medium"
                         Text="Aplikacja jest skierowana do osób zainteresowanych pozyskaniem informacji o najbliższych miejscach do uprawiania urban exploringu. Korzystanie z aplikacji jest darmowe a twórcy aplikacji nie uzyskują żadnych korzyści finansowych z udostępniania aplikacji."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label />
                     <Label />
                     <Label
                         FontSize="Large"
-                        Text="Skład Zespołu"
-                        TextColor="Black" />
+                        Text="Skład Zespołu:"
+                        FontAttributes="Bold"
+                        TextColor="White" />
+                    <Label />
+                    
                     <Label
                         FontSize="Medium"
                         Text="Michał Burzański - opiekun zespołu."
-                        TextColor="Black" />
+                        TextColor="White" />
+                  
+                    
                     <Label
                         FontSize="Medium"
                         Text="Marcin Woźniak - kierownik zespołu, API."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label
                         FontSize="Medium"
                         Text="Monika Banaszczak - sekretarz zespołu, baza danych."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label
                         FontSize="Medium"
                         Text="Bartosz Jarząb  - front-end, grafiki."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label
                         FontSize="Medium"
                         Text="Bartosz Mierzyński - back-end, Strona WWW"
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label
                         FontSize="Medium"
                         Text="Bartłomiej Płókarz - front-end, back-end."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label
                         FontSize="Medium"
                         Text="Karol Janeczko - front-end, back-end."
-                        TextColor="Black" />
+                        TextColor="White" />
                     <Label />
                 </StackLayout>
             </Frame>
             <!--  Przycisk do pokazania regulaminu aplikacji  -->
-            <Button
+            <!--<Button
                 x:Name="RegulaminPrzycisk"
                 BackgroundColor="#B52435"
                 BorderColor="Black"
@@ -92,7 +98,7 @@
                 CornerRadius="25"
                 FontAttributes="Bold"
                 Text="Napisz do nas!"
-                TextColor="White" />
+                TextColor="White" />-->
         </StackLayout>
     </ScrollView>
 

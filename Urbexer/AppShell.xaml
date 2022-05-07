@@ -139,7 +139,7 @@
     </FlyoutItem>
     
     <!--FAQ-->
-    <FlyoutItem Title="FAQ"
+    <FlyoutItem Title="O Aplikacji"
                 Icon="pytajnik_icon.png" 
                 
                 FlyoutDisplayOptions="AsSingleItem">
