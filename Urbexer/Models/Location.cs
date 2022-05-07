@@ -115,10 +115,8 @@ namespace Urbexer.Models {
             set { }
         }
         #endregion
-
         #region Klasy
         #endregion
-
         #region Konstruktory
         public Location() {
             Id = -1;
@@ -146,7 +144,6 @@ namespace Urbexer.Models {
             }
         }
         #endregion
-
         #region Metody
         /// <summary>
         /// Zmienia <see cref="Distance"/> na odległość z danej pozycji do <see cref="Position"/>.

@@ -1,13 +1,16 @@
 ﻿using System;
 using Urbexer.ViewModels;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
+    /// <summary>
+    /// Klasa reprezentująca ekran rejestracji.
+    /// </summary>
     public partial class RegisterPage : ContentPage {
         #region Konstruktory
         public RegisterPage() {
             Routing.RegisterRoute(nameof(PolicyPage), typeof(PolicyPage));
+            Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
             var vm = new RegisterPageModel();
             BindingContext = vm;
             InitializeComponent();
@@ -24,9 +27,6 @@ namespace Urbexer.Views {
         }
         #endregion
         #region Metody
-        public void GoToSignIn(object sender, EventArgs e) {
-            Shell.Current.GoToAsync(nameof(SignInPage));
-        }
         public void GoBack(object sender, EventArgs e) {
             Shell.Current.GoToAsync("..//");
         }
