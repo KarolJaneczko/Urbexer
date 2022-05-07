@@ -759,6 +759,11 @@
             Wywoływana przy kliknięciu odpowiedniego przycisku na stronie.
             </summary>
         </member>
+        <member name="M:Urbexer.Views.InfoPage.OpenMail(System.Object,System.EventArgs)">
+            <summary>
+            Otwiera klienta poczty i odpala "pisanie maila" do urbexer@onet.pl
+            </summary>
+        </member>
         <member name="T:Urbexer.GlobalStaticResources">
             <summary>
             Contains all the static resources defined for the application
