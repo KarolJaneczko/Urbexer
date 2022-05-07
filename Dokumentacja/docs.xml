@@ -1015,6 +1015,11 @@
             Klasa reprezentująca stronę z wybranymi pytaniami dotyczącymi użytkowania aplikacji lub urbexowania.
             </summary>
         </member>
+        <member name="M:Urbexer.Views.FaqPage.OpenMail(System.Object,System.EventArgs)">
+            <summary>
+            Otwiera klienta poczty i odpala "pisanie maila" do urbexer@onet.pl
+            </summary>
+        </member>
         <member name="T:Urbexer.Views.HomePage">
             <summary>
             Klasa reprezentująca stronę powitalną aplikacji.

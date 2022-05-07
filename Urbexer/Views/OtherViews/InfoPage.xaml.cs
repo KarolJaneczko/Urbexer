@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using Urbexer.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;

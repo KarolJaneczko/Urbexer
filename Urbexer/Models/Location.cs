@@ -11,7 +11,7 @@ namespace Urbexer.Models {
     /// <summary>
     /// Klasa reprezentująca lokacje.
     /// </summary>
-    public class Location : INotifyPropertyChanged{
+    public class Location : INotifyPropertyChanged {
         #region Słowniki
         /// <summary>
         /// Słownik przechowujący id i nazwy kategorii.
