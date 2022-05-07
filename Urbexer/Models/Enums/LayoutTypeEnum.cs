@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.Models.Enums {
+﻿namespace Urbexer.Models.Enums {
     /// <summary>
     /// Enum wykorzystywany przy wyborze "profesji" (zdjęcia profilowego) w oknie edycji profilu.
     /// </summary>

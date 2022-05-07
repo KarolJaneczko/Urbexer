@@ -7,7 +7,7 @@ namespace Urbexer.Models {
     /// <summary>
     /// Lokacja przechowująca dodatkowe informacje wykorzystywane w <see cref="Views.LocationDetailsPage"/>
     /// </summary>
-    public class LocationDetailed : Location{
+    public class LocationDetailed : Location {
         #region Zmienne
         public ObservableRangeCollection<ImageLink> ImageLinks { get; set; }
         /// <summary>
@@ -30,13 +30,13 @@ namespace Urbexer.Models {
         private int currentReviewsPage = 0; // Używane w LoadMoreReviews()
         #endregion
         #region Konstruktory
-        public LocationDetailed() : base(){ }
+        public LocationDetailed() : base() { }
         /// <summary>
         /// Utwórz lokację wzorowaną na danym <see cref="APILocation"/>.
         /// </summary>
         /// <param name="apiLocation">Wzorzec do utworzenia lokacji.</param>
-        public LocationDetailed(APILocation apiLocation) : base(apiLocation){
-            if (!string.IsNullOrEmpty(apiLocation.opis)) 
+        public LocationDetailed(APILocation apiLocation) : base(apiLocation) {
+            if (!string.IsNullOrEmpty(apiLocation.opis))
                 Description = apiLocation.opis;
 
             ImageLinks = new ObservableRangeCollection<ImageLink>();
