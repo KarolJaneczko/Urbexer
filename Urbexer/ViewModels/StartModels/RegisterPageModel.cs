@@ -52,7 +52,7 @@ namespace Urbexer.ViewModels {
                 ValidateEmail(Email.Trim());
                 ValidatePassword(Password);
                 if (string.Equals(password, passwordRepeat)) {
-                    if (await connectionService.Register(new RegisterUser {
+                    if (await connectionService.Register(new APIRegisterUser {
                         email = Email.Trim(),
                         login = Login,
                         potwierdzHaslo = Password,

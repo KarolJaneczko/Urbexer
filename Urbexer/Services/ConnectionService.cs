@@ -21,7 +21,7 @@ namespace Urbexer.Services {
         public ConnectionService() { }
         #endregion
         #region Requesty do API
-        public async Task<bool> Login(Login login, HttpClient httpClient) {
+        public async Task<bool> Login(APILogin login, HttpClient httpClient) {
             var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", SerializeToJson(login));
             ValidateConnectionResult(result, OperationTypeEnum.Logowanie);
             if (result.StatusCode == System.Net.HttpStatusCode.OK) {
@@ -32,7 +32,7 @@ namespace Urbexer.Services {
             else
                 return false;
         }
-        public async Task<bool> Register(RegisterUser registerUser, HttpClient httpClient) {
+        public async Task<bool> Register(APIRegisterUser registerUser, HttpClient httpClient) {
             var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/register/", SerializeToJson(registerUser));
             ValidateConnectionResult(result, OperationTypeEnum.Rejetracja);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -48,7 +48,7 @@ namespace Urbexer.Services {
             else
                 return new ProfileData(JsonConvert.DeserializeObject<APIProfile>(result));
         }
-        public async Task<bool> UpdateProfile(APIedytujProfil request, HttpClient httpClient) {
+        public async Task<bool> UpdateProfile(APIEdytujProfil request, HttpClient httpClient) {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
             var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/profile/edytujProfil", SerializeToJson(request));
             if (result.StatusCode == System.Net.HttpStatusCode.OK)

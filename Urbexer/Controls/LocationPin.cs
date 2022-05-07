@@ -10,7 +10,7 @@ namespace Urbexer.Models {
         /// <summary>
         /// Przekazywane przy klikaniu na karte lokacji
         /// </summary>
-        public int LocationId { get; set; }
+        public int LocationId { get; set; } // Przekazywane przy klikaniu na karte lokacji
         public static readonly BindableProperty LocationIdProperty = BindableProperty.Create(
             nameof(LocationId), typeof(int), typeof(LocationPin), defaultValue: -1,
             propertyChanged: LocationIdPropertyChanged,

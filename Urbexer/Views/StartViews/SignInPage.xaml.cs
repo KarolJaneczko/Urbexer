@@ -25,7 +25,7 @@ namespace Urbexer.Views {
             Shell.Current.GoToAsync(nameof(RegisterPage));
         }
         public void GoBack(object sender, EventArgs e) {
-            Shell.Current.GoToAsync(nameof(WelcomePage));
+            Shell.Current.GoToAsync("..//");
         }
         protected override bool OnBackButtonPressed() {
             return true;
