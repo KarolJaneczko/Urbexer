@@ -9,11 +9,17 @@ using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
     internal class MapViewModel : BaseLocationViewModel {
+        /// <summary>
+        /// ViewModel mapy.
+        /// </summary>
         public MapViewModel() : base() {
             Task.Run(async () => await InitializeLocations());
         }
 
-        // Funkcja do pierwotnego zapełnienia mapy
+        /// <summary>
+        /// Funkcja do pierwotnego zapełnienia mapy. <para/>
+        /// Pobiera wszystkie lokacje w zasięgu 100km.
+        /// </summary>
         protected async Task InitializeLocations() {
             var location = await Geolocation.GetLastKnownLocationAsync();
             int range = 100;

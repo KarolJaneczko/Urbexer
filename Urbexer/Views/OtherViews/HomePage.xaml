@@ -19,7 +19,7 @@
         </ScrollView.Background>
 
 
-        <StackLayout Margin="0,0,20,0">
+        <StackLayout>
             <Grid HeightRequest="100">
                 <Path
                     Aspect="Fill"
@@ -41,7 +41,7 @@
                             HorizontalOptions="End"
                             Text="NAJBLIŻSZE  LOKACJE"
                             TextColor="White"
-                            VerticalOptions="End" />
+                            VerticalOptions="EndAndExpand" />
                         <Image
                             Grid.Row="1"
                             Grid.Column="6"
@@ -89,14 +89,13 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="0,5,15,400" RowDefinitions="470">
-                            
                             <Frame
                                 Margin="1"
                                 Padding="2"
                                 WidthRequest="200"
                                 CornerRadius="20">
                                 <StackLayout x:DataType="models:Location">
-                                    <Frame  
+                                    <Frame CornerRadius="20"
                                             Margin="10"
                                             Padding="0">
                                         <Image  

@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     Title="{Binding Name}"
     Shell.TabBarIsVisible="False">
 
@@ -148,14 +147,28 @@
                             </Grid>
                         </Frame>
                     </Grid>
-                    <!--tu z lewej bedzie jeszcze srednia ocen jak starcyz czasu-->
-                    <Frame CornerRadius="10" Padding="3" HeightRequest="40" HorizontalOptions="End" Margin="0,0,20,0">
+                    <!--  tu z lewej bedzie jeszcze srednia ocen jak starcyz czasu  -->
+                    <Frame
+                        Margin="0,0,20,0"
+                        Padding="3"
+                        CornerRadius="10"
+                        HeightRequest="40"
+                        HorizontalOptions="End">
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="odwiedzone_icon" Margin="-2"/>
-                            <BoxView WidthRequest="1"
-                                                     Color="#363636"/>
-                            <Image Source="true_icon.png" IsVisible="{Binding IsVisited}"/>
-                            <Image Source="false_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                            <Image Margin="-2" Source="odwiedzone_icon" />
+                            <Label
+                                Style="{DynamicResource Cords}"
+                                Text="Odwiedzone"
+                                VerticalOptions="Center" />
+                            <BoxView WidthRequest="1" Color="#363636" />
+                            <Image
+                                x:Name="IsVisitedIcon"
+                                IsVisible="false"
+                                Source="true_icon.png" />
+                            <Image
+                                x:Name="IsNotVisitedIcon"
+                                IsVisible="true"
+                                Source="false_icon.png" />
                         </StackLayout>
                     </Frame>
 
@@ -176,8 +189,8 @@
                             <Label
                                 Grid.Column="1"
                                 FontSize="15"
-                                TextColor="Black"
-                                Text="{Binding Address}" />
+                                Text="{Binding Address}"
+                                TextColor="Black" />
                         </Grid>
                     </Frame>
                     <!--#endregion-->
@@ -197,8 +210,8 @@
                             <Label
                                 Grid.Column="1"
                                 FontSize="15"
-                                TextColor="Black"
-                                Text="{Binding Description}" />
+                                Text="{Binding Description}"
+                                TextColor="Black" />
                         </Grid>
                     </Frame>
                     <!--#endregion-->
@@ -223,12 +236,15 @@
                     <!--#endregion-->
                     <!--#region Przyciski odwiedzania/recenzji-->
                     <!--  Przycisk oznaczania odwiedzonych  -->
+                    <Label
+                        x:Name="MarkVisitedHintLabel"
+                        HorizontalOptions="Center"
+                        Text="Oznacz miejsce jako odwiedzone w celu pisania recenzji" />
                     <Frame
                         x:Name="MarkVisitedButton"
                         Margin="50,10,50,0"
                         Padding="0"
-                        CornerRadius="20"
-                        IsVisible="False">
+                        CornerRadius="20">
                         <Button
                             BackgroundColor="#BF0603"
                             FontAttributes="Bold"
@@ -241,8 +257,8 @@
                     <Frame
                         x:Name="WriteReviewButton"
                         Margin="50,10,50,0"
-                        CornerRadius="20"
-                        IsVisible="False">
+                        Padding="0"
+                        CornerRadius="20">
                         <Button
                             BackgroundColor="#BF0603"
                             FontAttributes="Bold"

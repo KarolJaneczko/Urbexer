@@ -21,15 +21,13 @@
 
         <IndicatorView x:Name="LandingIndicatorBackGround" IndicatorsShape="Square" SelectedIndicatorColor="Transparent"/>
 
-        <Frame Padding="0"
-               HeightRequest="100"
-               WidthRequest="100"
+        <StackLayout Margin="0,70"
+               HeightRequest="120"
+               WidthRequest="120"
                HorizontalOptions="CenterAndExpand"
-               VerticalOptions="CenterAndExpand"
-               BackgroundColor="Transparent"
-               Margin="0,80,0, 600">
+               VerticalOptions="StartAndExpand">
             <Image Source="app_logo.png" Aspect="AspectFill"/>
-        </Frame>
+        </StackLayout>
 
         <BoxView>
             <BoxView.Background>
@@ -67,7 +65,7 @@
                            Grid.Row="1" 
                            IndicatorsShape="Square"
                            IndicatorColor="White" 
-                           SelectedIndicatorColor="#B52435"/>
+                           SelectedIndicatorColor="#BF0603"/>
             <StackLayout x:Name="buttons" 
                          Grid.Row="2"         
                          Orientation="Vertical" 
@@ -78,7 +76,7 @@
                         Clicked="GoToSignInPage"
                         HeightRequest="50" 
                         WidthRequest="200"
-                        BackgroundColor="#B52435"
+                        BackgroundColor="#BF0603"
                         TextColor="White" 
                         CornerRadius="25"
                         FontAttributes="Bold"/>

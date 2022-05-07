@@ -14,14 +14,35 @@ namespace Urbexer.ViewModels {
     /// </summary>
     public class HomeViewModel : BaseViewModel {
         #region Zmienne
+        /// <summary>
+        /// Przechowuje elementy expandera na HomePage.
+        /// </summary>
         public class Question {
+            /// <summary>
+            /// Ścieżka do ikony.
+            /// </summary>
             public string ImageIcon { get; set; }
+            /// <summary>
+            /// Zdjęcie pokazywane nad tekstem w expanderze.
+            /// </summary>
             public string BackgroundSource { get; set; }
+            /// <summary>
+            /// Tytuł zakładki.
+            /// </summary>
             public string Title { get; set; }
+            /// <summary>
+            /// Tekst przechowywany w expanderze.
+            /// </summary>
             public string BodyDescription { get; set; }
         }
         public ICommand GoBackCommand { get; private set; }
+        /// <summary>
+        /// Przechowuje lokacje pobrane używając <see cref="LoadLocations"/>.
+        /// </summary>
         public ObservableRangeCollection<Location> Locations { get; set; }
+        /// <summary>
+        /// Przechowuje faq o urbexach.
+        /// </summary>
         public ObservableRangeCollection<Question> Questions { get; set; }
         #endregion
         #region Konstruktory
@@ -53,6 +74,9 @@ namespace Urbexer.ViewModels {
                 return false;
         }
 
+        /// <summary>
+        /// Pobiera i wyświetla 10 najbliższych nieodwiedzonych lokacji.
+        /// </summary>
         private async Task LoadLocations() {
             int requiredLocationsCount = 10;
             int range = 0;
@@ -63,7 +87,7 @@ namespace Urbexer.ViewModels {
             while (ids.Count < requiredLocationsCount) {
                 range += 30;
                 ids.AddRange(await LocationService.GetIdListInArea(
-                    (float)userPosition.Latitude, (float)userPosition.Longitude, range, unvisitedOnly: false));
+                    (float)userPosition.Latitude, (float)userPosition.Longitude, range, unvisitedOnly: true));
             }
             var newLocations = await LocationService.GetLocationListByIds(ids);
             SortLocationsByDistance(newLocations);
@@ -74,7 +98,6 @@ namespace Urbexer.ViewModels {
             Locations.AddRange(newLocations);
         }
 
-        // Sortuje daną liste lokacji
         private void SortLocationsByDistance(List<Location> locations) {
             if (locations == null) return;
 

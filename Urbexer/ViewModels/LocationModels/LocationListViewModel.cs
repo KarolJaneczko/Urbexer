@@ -11,27 +11,43 @@ using Xamarin.Forms;
 using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// ViewModel listy lokacji.
+    /// </summary>
     internal class LocationListViewModel : BaseLocationViewModel {
+        /// <summary>
+        /// Wczytaj dodatkowe lokacje. <para/>
+        /// Wywoływane, gdy użytkownik zescrolluje na sam dół listy.
+        /// </summary>
         public AsyncCommand LoadMoreCommand { get; }
         private List<int> loadedLocationsIds = new List<int>();
+        /// <summary>
+        /// Obecny zasięg wczytywania.
+        /// </summary>
         private int currentLoadRange = 0;
+        /// <summary>
+        /// Blokuje duplikatowe wywołania <see cref="LoadMore"/>.
+        /// </summary>
         private bool isLoading = false;
-        private bool noInternet = false;
         public LocationListViewModel() : base() {
             LoadMoreCommand = new AsyncCommand(LoadMore);
         }
 
         #region Komendy
+        /// <summary>
+        /// Sortuj lokacje używając <see cref="BaseLocationViewModel.SetFilterByName(string)"/>
+        /// </summary>
         public ICommand FilterLocationsByNameCommand =>
             new Command<string>((string query) => {
                 currentNameFilter = query;
                 ReapplyFilters();
             });
 
-        // Powiększ zasięg wczytywania lokacji i pobierz nowe lokacje
+        /// <summary>
+        /// Powiększ zasięg wczytywania lokacji i pobierz nowe lokacje.
+        /// </summary>
         async Task LoadMore() {
-            if (!CrossConnectivity.Current.IsConnected) noInternet = true;
-            if (noInternet) return;
+            if (!CrossConnectivity.Current.IsConnected) return;
             if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie
             isLoading = true;
 
@@ -53,7 +69,6 @@ namespace Urbexer.ViewModels {
         #endregion Komendy
 
         #region Metody
-        // Sortuje daną liste lokacji
         private void SortLocationsByDistance(List<Location> locations) {
             if (locations == null) return;
 

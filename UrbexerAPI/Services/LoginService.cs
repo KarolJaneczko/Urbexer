@@ -78,8 +78,9 @@ namespace APIpz.Services
             
             _context.SaveChanges();
             var url = $"{host}/api/account/confirm?email={WebUtility.UrlEncode(dto.Email)}&kod={wlasciwykod}";
-            var tresc = $"Aby aktywować konto, kliknij w link: {url}";
-            await _emailSender.SendEmailAsync(newUzytkownik.Email, "Link do potwierdzenia rejestracji", tresc);
+            var dokumentacja = $"{host}/regulamin";
+            var tresc = $"Aby aktywować konto, kliknij w link: {url} \nProsimy o zapoznanie się z regulaminem aplikacji, a także załączamy informację o administracji Państwa danych osobowych.{dokumentacja}";
+            await _emailSender.SendEmailAsync(newUzytkownik.Email, "Link do potwierdzenia rejestracji:", tresc);
         }
         public string GenerateJwt(LoginDto dto)
         {
