@@ -53,9 +53,15 @@ namespace APIpz.Services
             var odwiedzony = _context.Odwiedzone
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .Include(o => o.OdwiedzonePrzez)
-                                            .FirstOrDefault(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
-            if (odwiedzony is null) miejsceDto.CzyOdwiedzone = false;
-            else miejsceDto.CzyOdwiedzone = true;
+                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
+            try
+            {
+                miejsceDto.CzyOdwiedzone = Convert.ToBoolean(odwiedzony);
+            }
+            catch (Exception ex)
+            {
+                miejsceDto.CzyOdwiedzone = false;
+            }
 
             return miejsceDto;
 
@@ -75,9 +81,16 @@ namespace APIpz.Services
                 var odwiedzony = _context.Odwiedzone
                                             .Include(o => o.OdwiedzonyUrbex)
                                             .Include(o => o.OdwiedzonePrzez)
-                                            .FirstOrDefault(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id);
-                if (odwiedzony is null) i.CzyOdwiedzone = false;
-                else i.CzyOdwiedzone = true;
+                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == i.Id);
+                                                
+                try
+                {
+                    i.CzyOdwiedzone = Convert.ToBoolean(odwiedzony);
+                }
+                catch (Exception ex)
+                {
+                    i.CzyOdwiedzone = false;
+                }
             }
 
             return miejsca;
