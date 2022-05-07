@@ -50,13 +50,14 @@ namespace APIpz.Services
                 .FirstOrDefault( m => m.Id == id);
             var miejsceDto = _mapper.Map<MiejsceDto>(miejsce);
 
-            var odwiedzony = _context.Odwiedzone
-                                            .Include(o => o.OdwiedzonyUrbex)
-                                            .Include(o => o.OdwiedzonePrzez)
-                                            .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id);
-            try
+            try 
             {
-                miejsceDto.CzyOdwiedzone = Convert.ToBoolean(odwiedzony);
+                // Jeżeli kombinacja id użytkownika i lokacji pojawia się w tabeli Odwiedzone, to zwróc true.
+                var odwiedzony = _context.Odwiedzone
+                    .Include(o => o.OdwiedzonyUrbex)
+                    .Include(o => o.OdwiedzonePrzez)
+                    .Where(o => o.OdwiedzonePrzez.Id == (int)_userContextService.GetUserId && o.OdwiedzonyUrbex.Id == id).Count();
+                miejsceDto.CzyOdwiedzone = (odwiedzony > 0);
             }
             catch (Exception ex)
             {
@@ -64,9 +65,6 @@ namespace APIpz.Services
             }
 
             return miejsceDto;
-
-                                            
-
         }
         public List<MiejsceDto> PokazMiejscaZListy(PokazMiejscaZListyDto dto)
         {
