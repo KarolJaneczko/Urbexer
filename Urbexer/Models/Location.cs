@@ -133,9 +133,8 @@ namespace Urbexer.Models {
             Id = apiLocation.id;
             CategoryId = apiLocation.kategoriaId;
             ProvinceId = apiLocation.wojewodztwoId;
-            //CategoryIconPath = GetCategoryIconPath(CategoryId);
             IsVisited = apiLocation.czyOdwiedzone;
-            Task.Run(async () => await RecalculateDistance());
+            RecalculateDistance(); // Bez Task.Run(), bo nie aktualizują się odległości na mapie
 
             if (apiLocation.zdjecia == null || apiLocation.zdjecia.Length == 0) {
                 // Wczytaj placeholder
