@@ -76,6 +76,21 @@ namespace Urbexer.Services {
             await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken: true).ConfigureAwait(false);
         }
         /// <summary>
+        /// Pobiera recenzje obecnego użytkownika odpowiadającą danemu id lokacji.
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <returns>
+        /// Jeśli dana recenzja istnieje to ją zwraca. <para/>
+        /// W przeciwnym wypadku zwraca null.
+        /// </returns>
+        public static async Task<Review> GetReview(int locationId) {
+            string path = "/api/urbex/pokazMojaOpinieDoMiejsca";
+            string args = "?id=" + locationId;
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            if (string.IsNullOrEmpty(result)) return null;
+            return new Review(JsonConvert.DeserializeObject<APIReview>(result));
+        }
+        /// <summary>
         /// Pobierz recenzje lokacji o danym id
         /// </summary>
         /// <param name="locationId"></param>

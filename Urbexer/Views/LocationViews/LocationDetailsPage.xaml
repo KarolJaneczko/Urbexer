@@ -162,12 +162,12 @@
                                 VerticalOptions="Center" />
                             <BoxView WidthRequest="1" Color="#363636" />
                             <Image
-                                x:Name="IsVisitedButton"
-                                IsVisible="{Binding IsVisited}"
+                                x:Name="IsVisitedIcon"
+                                IsVisible="false"
                                 Source="true_icon.png" />
                             <Image
-                                x:Name="IsNotVisitedButton"
-                                IsVisible="{Binding IsNotVisited}"
+                                x:Name="IsNotVisitedIcon"
+                                IsVisible="true"
                                 Source="false_icon.png" />
                         </StackLayout>
                     </Frame>
@@ -236,12 +236,15 @@
                     <!--#endregion-->
                     <!--#region Przyciski odwiedzania/recenzji-->
                     <!--  Przycisk oznaczania odwiedzonych  -->
+                    <Label
+                        x:Name="MarkVisitedHintLabel"
+                        HorizontalOptions="Center"
+                        Text="Oznacz miejsce jako odwiedzone w celu pisania recenzji" />
                     <Frame
                         x:Name="MarkVisitedButton"
                         Margin="50,10,50,0"
                         Padding="0"
-                        CornerRadius="20"
-                        IsVisible="False">
+                        CornerRadius="20">
                         <Button
                             BackgroundColor="#BF0603"
                             FontAttributes="Bold"
@@ -254,8 +257,8 @@
                     <Frame
                         x:Name="WriteReviewButton"
                         Margin="50,10,50,0"
-                        CornerRadius="20"
-                        IsVisible="False">
+                        Padding="0"
+                        CornerRadius="20">
                         <Button
                             BackgroundColor="#BF0603"
                             FontAttributes="Bold"
