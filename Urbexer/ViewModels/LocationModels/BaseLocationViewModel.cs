@@ -6,16 +6,26 @@ using Xamarin.Forms;
 using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels.LocationModels {
+    /// <summary>
+    /// Podstawowy ViewModel do wyświetlania lokacji
+    /// </summary>
     internal class BaseLocationViewModel {
-        // Locations rzechowuje wszystkie wczytane lokacje
-        // LocationsFiltered przechowuje wyświetlane lokacje. Musi być publiczne dla bindingów
+        /// <summary>
+        /// Przechowuje wszystkie wczytane lokacje
+        /// </summary>
         protected ObservableRangeCollection<Location> Locations { get; set; }
+        /// <summary>
+        /// Przechowuje wyświetlane lokacje. <para/>
+        /// Musi być publiczne dla bindingów.
+        /// </summary>
         public ObservableRangeCollection<Location> LocationsFiltered { get; set; }
+        /// <summary>
+        /// Wywoływana, gdy karta lokacji zostanie kliknięta.
+        /// </summary>
         public AsyncCommand<Location> CardSelectedCommand { get; }
         public BaseLocationViewModel() {
             LocationsFiltered = new ObservableRangeCollection<Location> { };
             Locations = new ObservableRangeCollection<Location> { };
-
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
         }
 
@@ -24,7 +34,9 @@ namespace Urbexer.ViewModels.LocationModels {
 
         protected string currentNameFilter = "";
 
-        // Usuń filtrowanie lokacji
+        /// <summary>
+        /// Usuń filtrowanie lokacji.
+        /// </summary>
         protected void ClearFilter() {
             //LocationsFiltered.Clear();
             ObservableRangeCollection<Location> newList = new ObservableRangeCollection<Location>();
@@ -39,23 +51,31 @@ namespace Urbexer.ViewModels.LocationModels {
             }
             LocationsFiltered = newList;
         }
-        // Odśwież filtry
+        /// <summary>
+        /// Odśwież filtry
+        /// </summary>
         protected void ReapplyFilters() {
             ClearFilter();
-            SetFilterByName(currentNameFilter);
+            SetNameFilter();
         }
-        // Nie pokazuj lokalizacji, które nie zawierają danego stringa
-        protected void SetFilterByName(string s) {
-            if (string.IsNullOrEmpty(s)) return; // Jeśli string jest pusty to nie filtruj
+        /// <summary>
+        /// Ukrzyj lokacje, które nie zawierają stringa <see cref="currentNameFilter"/>. <para/>
+        /// Jeżeli jest pusty, to lokacje nie są filtrowane.
+        /// </summary>
+        protected void SetNameFilter() {
+            if (string.IsNullOrEmpty(currentNameFilter)) return; // Jeśli string jest pusty to nie filtruj
             foreach (var location in Locations) {
-                if (!location.Name.ToLower().Contains(s.ToLower())) {
+                if (!location.Name.ToLower().Contains(currentNameFilter.ToLower())) {
                     LocationsFiltered.Remove(location);
                 }
             }
         }
         #endregion Filtrowanie
 
-        // Przenosi do strony lokacji o odpowiednim id
+        /// <summary>
+        /// Przenosi do strony szczegółów danej lokacji.
+        /// </summary>
+        /// <param name="location"></param>
         protected async Task CardSelected(Location location) {
             if (location.Id < 0) return; // Id powinno być nieujemne.
 
