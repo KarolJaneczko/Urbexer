@@ -4,6 +4,27 @@
         <name>Urbexer</name>
     </assembly>
     <members>
+        <member name="M:Urbexer.App.CheckConnection">
+            <summary>
+            Metoda sprawdzająca połączenie z internetem podczas korzystania z aplikacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.App.CacheCurrentPosition(System.Object)">
+            <summary>
+            Metoda zapisująca bieżącą lokalizację użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.App.OnPageAppearing(System.Object,Xamarin.Forms.Page)">
+            <summary>
+            Metoda wywoływana przy każdym uruchomieniu aplikacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.AppShell.ClickedLogout(System.Object,System.EventArgs)">
+            <summary>
+            Metoda wywoływana przy wylogowywaniu, usuwamy dane użytkownika metodą wykorzystywaną w <see cref="T:Urbexer.Models.UserInfo">klasie UserInfo</see> 
+            potem nawigujemy do ekranu powitalnego.
+            </summary>
+        </member>
         <member name="T:Urbexer.Controls.CustomMap">
             <summary>
             Mapa służąca do przechowywania LocationPin i wyświetlania customowych grafik pinezek
@@ -355,6 +376,41 @@
             Metoda wywoływana przy wylogowaniu - usuwa wszystkie dane o zalogowanym użytkowniku.
             </summary>
         </member>
+        <member name="M:Urbexer.Services.ConnectionService.Login(Urbexer.Models.ApiModels.APILogin,System.Net.Http.HttpClient)">
+            <summary>
+            Metoda wysyłająca request do bazy danych przy logowaniu do aplikacji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ConnectionService.Register(Urbexer.Models.ApiModels.APIRegisterUser,System.Net.Http.HttpClient)">
+            <summary>
+            Metoda wysyłająca request do bazy danych przy rejestracji użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ConnectionService.GetProfileByLogin(System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Metoda zwracająca dane profilowe, przyjmująca w parametrze login użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ConnectionService.UpdateProfile(Urbexer.Models.ApiModels.APIEdytujProfil,System.Net.Http.HttpClient)">
+            <summary>
+            Metoda wysyłająca aktualizację profilu do bazy danych.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ConnectionService.GetVisitedPlacesCountByLogin(System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Metoda zwracająca liczbę wszystkich, odwiedzonych miejsc przez użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ConnectionService.GetRankingList(System.Int32,System.Net.Http.HttpClient)">
+            <summary>
+            Metoda zwracająca listę rankingową z bazy danych.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ConnectionService.SerializeToJson(System.Object)">
+            <summary>
+            Metoda serializująca obiekt do JSONa przed wysłaniem go w zapytaniu do API.
+            </summary>
+        </member>
         <member name="T:Urbexer.Services.GeocoderService">
             <summary>
             Klasa upraszczająca korzystanie z <see cref="T:Xamarin.Forms.Maps.Geocoder"/>
@@ -387,7 +443,7 @@
             </summary>
             <param name="method"> Typ zapytania jakie zostanie wysłane </param>
             <param name="path">
-            Ścieżka metody z argumentami.
+            Względna ścieżka metody z argumentami.
             <para> Na przykład: "/api/place/pokazMiejscePoId?id=1". </para>
             </param>
             <param name="body"> Ciało zapytania. </param>
@@ -504,6 +560,61 @@
             <param name="pageSize">Decyduje ile recenzji ma mieć pobrana strona.</param>
             <returns></returns>
         </member>
+        <member name="M:Urbexer.Services.ValidatingService.ValidateLogin(System.String)">
+            <summary>
+            Metoda sprawdzająca, czy login jest odpowiedniej długości oraz czy nie zawiera znaków specjalnych.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.ValidateEmail(System.String)">
+            <summary>
+            Metoda sprawdzająca, czy e-mail jest odpowiedniej długości oraz czy jest odpowiedniego formatu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.ValidatePassword(System.String)">
+            <summary>
+            Metoda sprawdzająca, czy hasło jest odpowiedniej długości.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.ValidateLength(System.String,System.String,System.String,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Metoda weryfikująca, czy dane wejściowe mają odpowiednią długość.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.ValidateLink(System.String,System.String)">
+            <summary>
+            Metoda weryfikująca, czy link podany w profilu jest odpowiedniego formatu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.CheckMailFormat(System.String)">
+            <summary>
+            Metoda sprawdzająca format maila.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.CheckNoSpecialCharsExceptUnderscore(System.String)">
+            <summary>
+            Metoda sprawdzająca, czy string posiada znaki specjalne oprócz znaku '_'.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.CheckNoSpecialChars(System.String)">
+            <summary>
+            Metoda sprawdzająca, czy string posiada znaki specjalne.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.CheckForInternetConnection">
+            <summary>
+            Metoda sprawdzająca, czy bieżące urządzenie jest połączone z internetem.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.ValidateConnectionResult(System.Net.Http.HttpResponseMessage,Urbexer.Models.OperationTypeEnum)">
+            <summary>
+            Metoda sprawdzająca, czy odpowiedź od API podczas logowania/rejestracji jest błędna. Jeśli tak, dostosowuje odpowiedni komunikat.
+            </summary>
+        </member>
+        <member name="M:Urbexer.Services.ValidatingService.DisplayError(System.String,System.String)">
+            <summary>
+            Metoda wyświetlająca pop-up na ekranie.
+            </summary>
+        </member>
         <member name="T:Urbexer.ViewModels.LocationModels.BaseLocationViewModel">
             <summary>
             Podstawowy ViewModel do wyświetlania lokacji
@@ -588,6 +699,16 @@
             Pobiera wszystkie lokacje w zasięgu 100km.
             </summary>
         </member>
+        <member name="T:Urbexer.ViewModels.BaseViewModel">
+            <summary>
+            Klasa reprezentująca bazowy model po którym dziedziczą inne modele.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.HomeViewModel">
+            <summary>
+            Klasa implementująca logikę strony HomePage - strony startowej po zalogowaniu lub włączeniu aplikacji będąc zalogowanym.
+            </summary>
+        </member>
         <member name="T:Urbexer.ViewModels.HomeViewModel.Question">
             <summary>
             Przechowuje elementy expandera na HomePage.
@@ -626,6 +747,136 @@
         <member name="M:Urbexer.ViewModels.HomeViewModel.LoadLocations">
             <summary>
             Pobiera i wyświetla 10 najbliższych nieodwiedzonych lokacji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.EditProfileViewModel">
+            <summary>
+            Klasa implementująca logikę strony z edycją profilu obecnie zalogowanego użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.EditProfileViewModel.OnSubmit">
+            <summary>
+            Metoda wywoływana podczas potwierdzenia edycji profilu. Po udanej edycji jesteśmy przenoszeni z powrotem na stronę profilu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.EditProfileViewModel.FillEdit(Urbexer.Models.UserModels.ProfileData)">
+            <summary>
+            Metoda wypełniająca edytowalne dane z profilu które możemy zmienić, bez potrzeby ponownego ich przepisywania z profilu.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.ProfileViewModel">
+            <summary>
+            Klasa implementująca logikę strony ProfilePage - podglądu profilu obecnie zalogowanego użytkownika.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.ProfileViewModel.FillProfile(Urbexer.Models.UserModels.ProfileData)">
+            <summary>
+            Metoda wypełniająca profil danymi, pobranymi z bazy danych.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.ProfileViewModel.RefreshProfile">
+            <summary>
+            Metoda pozwalająca odświeżyć profil poprzez pobranie aktualnych informacji z bazy danych i wypełnianiu ich metodą FillProfile.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.ProfileViewModel.GetLeaderboardPositionByLogin(System.String)">
+            <summary>
+            Metoda wyliczająca miejsce użytkownika w rankingu ogólnym.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.ProfileViewModel.GetAvatarByLayout(System.Int32)">
+            <summary>
+            Metoda przyjmująca numer layoutu i zwracająca odpowiednią nazwę zdjęcia profilowego, wyświetlanego w profilu.
+            </summary>
+        </member>
+        <member name="E:Urbexer.ViewModels.LeaderboardViewModel.PropertyChanged">
+            <summary>
+            Klasa implementująca logikę strony LeaderboardPage - strony z rankingiem danej kategorii.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LeaderboardViewModel.GetRanking">
+            <summary>
+            Metoda pobierająca ranking z bazy danych.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LeaderboardViewModel.GetLeaderboardCategory(System.Int32)">
+            <summary>
+            Metoda pobierająca numeryczny typ rankingu i zwracająca nazwę kategorii.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LeaderboardViewModel.GetMyLeaderboardPlace">
+            <summary>
+            Metoda wyliczająca pozycję w rankingu bieżącego, zalogowanego użytkownika i wyświetlająca ją na stronie rankingu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.LeaderboardViewModel.GetLeaderboardMyCount(System.String)">
+            <summary>
+            Metoda pobierająca liczbę odwiedzonych miejsc z wybranej przez nas kategorii w rankingu i wyświetaljąca ją na stronie rankingu.
+            </summary>
+        </member>
+        <member name="P:Urbexer.ViewModels.Rekord.Login">
+            <summary>
+            Klasa reprezentująca rekord w tabeli rankingowej.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.Rekord.ZmapowanaLista(System.Collections.Generic.List{Urbexer.Models.ApiModels.APIRanking})">
+            <summary>
+            Metoda mapująca listę rankingową, pobraną z bazy danych i mapująca ją na rekordy w tabeli.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.Rekord.GoToProfileClicked">
+            <summary>
+            Metoda wywoływana przy kliknięciu rekordu w tabeli - przenosi użytkownika do podglądu profilu użytkownika.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.RankingProfileViewModel">
+            <summary>
+            Klasa implementująca logikę strony RankingProfile - podglądu profilu ze strony rankingowej.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.RankingProfileViewModel.FillProfile(Urbexer.Models.UserModels.ProfileData)">
+            <summary>
+            Metoda wypełniająca profil który wybraliśmy do podglądu.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.RankingProfileViewModel.GetLeaderboardPositionByLogin(System.String,System.Int32)">
+            <summary>
+            Metody wyliczająca pozycję wybranego użytkownika w rankingu ogólnym.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.RankingProfileViewModel.GetAvatarByLayout(System.Int32)">
+            <summary>
+            Metoda przyjmująca w parametrze numer layoutu i wyznaczająca wyświetlany avatar.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.RankingViewModel">
+            <summary>
+            Klasa implementująca logikę strony RankingPage - wyboru kategorii tabeli rankingowej.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.RegisterPageModel">
+            <summary>
+            Klasa implementująca logikę strony RegisterPage - ekranu rejestracji.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.RegisterPageModel.OnSubmit">
+            <summary>
+            Metoda wywoływana po wciśnięciu przycisku do rejestracji. Po udanej rejestracji wyświetla się komunikat informujący o sukcesie.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.SignInPageViewModel">
+            <summary>
+            Klasa reprezentująca logikę strony logowania.
+            </summary>
+        </member>
+        <member name="M:Urbexer.ViewModels.SignInPageViewModel.OnSubmit">
+            <summary>
+            Metoda wywoływana przy kliknięciu przycisku do logowania. Jeśli wprowadzone dane są prawidłowe, to pobieramy dane dotyczące naszego profilu i przechodzimy do strony startowej.
+            </summary>
+        </member>
+        <member name="T:Urbexer.ViewModels.WelcomeViewModel">
+            <summary>
+            Klasa implementująca logikę strony WelcomePage - strony startowej aplikacji.
             </summary>
         </member>
         <member name="T:Urbexer.Views.LocationDetailsPage">
@@ -759,9 +1010,54 @@
             Wywoływana przy kliknięciu odpowiedniego przycisku na stronie.
             </summary>
         </member>
+        <member name="T:Urbexer.Views.FaqPage">
+            <summary>
+            Klasa reprezentująca stronę z wybranymi pytaniami dotyczącymi użytkowania aplikacji lub urbexowania.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.HomePage">
+            <summary>
+            Klasa reprezentująca stronę powitalną aplikacji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.InfoPage">
+            <summary>
+            Klasa reprezentująca zakładkę z informacją o zespole/aplikacji.
+            </summary>
+        </member>
         <member name="M:Urbexer.Views.InfoPage.OpenMail(System.Object,System.EventArgs)">
             <summary>
             Otwiera klienta poczty i odpala "pisanie maila" do urbexer@onet.pl
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.EditProfilePage">
+            <summary>
+            Klasa reprezentująca widok edycji profilu zalogowanego użytkownika.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.ProfilePage">
+            <summary>
+            Klasa reprezentująca stronę profilu zalogowanego użytkownika.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.LeaderboardPage">
+            <summary>
+            Klasa reprezentująca tabelę rankingową.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.RankingProfile">
+            <summary>
+            Klasa reprezentująca widok profilu po wybraniu rekordu z tabeli rankingowej.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.RegisterPage">
+            <summary>
+            Klasa reprezentująca ekran rejestracji.
+            </summary>
+        </member>
+        <member name="T:Urbexer.Views.SignInPage">
+            <summary>
+            Klasa reprezentująca stronę logowania w aplikacji.
             </summary>
         </member>
         <member name="T:Urbexer.GlobalStaticResources">

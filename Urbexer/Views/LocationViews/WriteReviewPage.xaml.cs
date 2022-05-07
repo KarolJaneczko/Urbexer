@@ -27,7 +27,7 @@ namespace Urbexer.Views.LocationViews {
         }
         protected override void OnAppearing() {
             BindingContext = this;
-            Task.Run(async () => await TryActivateEditMode());
+            Device.InvokeOnMainThreadAsync(async () => await TryActivateEditMode());
         }
 
         /// <summary>

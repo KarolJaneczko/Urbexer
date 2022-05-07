@@ -995,15 +995,21 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = "D:/Projects/Coding/C#/Urbexer/Urbexer/App.xaml" \
-                         "D:/Projects/Coding/C#/Urbexer/Urbexer/App.xaml.cs" \
-                         "D:/Projects/Coding/C#/Urbexer/Urbexer/AppShell.xaml" \
-                         "D:/Projects/Coding/C#/Urbexer/Urbexer/AppShell.xaml.cs" \
-                         "D:/Projects/Coding/C#/Urbexer/Urbexer/AssemblyInfo.cs" \
+EXCLUDE                = "D:/Projects/Coding/C#/Urbexer/Urbexer/AssemblyInfo.cs" \
                          "D:/Projects/Coding/C#/Urbexer/Urbexer/TriggerActions.cs" \
                          "D:/Projects/Coding/C#/Urbexer/Urbexer/Urbexer.csproj" \
                          "D:/Projects/Coding/C#/Urbexer/Urbexer/obj" \
-                         "D:/Projects/Coding/C#/Urbexer/Urbexer/bin"
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/bin" \
+                         "D:/Projects/Coding/C#/Urbexer/UrbexerAPI" \
+                         "D:/Projects/Coding/C#/Urbexer/.gitignore" \
+                         "D:/Projects/Coding/C#/Urbexer/README.md" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer.sln" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/AssemblyInfo.cs" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/TriggerActions.cs" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/Urbexer.csproj" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/bin" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/Fonts" \
+                         "D:/Projects/Coding/C#/Urbexer/Urbexer/obj"
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1019,7 +1025,7 @@ EXCLUDE_SYMLINKS       = NO
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories for example use the pattern */test/*
 
-EXCLUDE_PATTERNS       =
+EXCLUDE_PATTERNS       = *xaml
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
