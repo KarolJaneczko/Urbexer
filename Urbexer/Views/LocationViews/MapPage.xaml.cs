@@ -8,10 +8,19 @@ using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
+    /// <summary>
+    /// Strona mapy.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage {
-        // Pokazuje kartę z informacjami o lokacji w zależności od id. -1 chowa karte.
+        /// <summary>
+        /// Id lokacji, na którą wskazuje ostatnia kliknięta pinezka. <para/>
+        /// -1 oznacza brak wybranej pinezki.
+        /// </summary>
         private int currentPinId = -1;
+        /// <summary>
+        /// Kontroluje wyświetlanie karty lokacji przy klikaniu na pinezki.
+        /// </summary>
         public int CurrentPinId {
             get { return currentPinId; }
             set {
@@ -38,7 +47,10 @@ namespace Urbexer.Views {
             Task.Run(async () => await MoveToUser().ConfigureAwait(false));
         }
 
-        // Spróbuj ustawić pozycje mapy na pozycje użytkownika
+        /// <summary>
+        /// Próbuje ustawić pozycje mapy na pozycje użytkownika. <para/>
+        /// W przypadku niepowodzenia ustawia na domyślną pozycje używając <see cref="DefaultPositionFallback"/>
+        /// </summary>
         private async Task MoveToUser() {
             await DefaultPositionFallback();
             try {
@@ -53,7 +65,10 @@ namespace Urbexer.Views {
                 await DefaultPositionFallback();
             }
         }
-        // Ustaw mapę na środek Polski
+        /// <summary>
+        /// Ustawia mape na domyślną lokacje. <para/>
+        /// Obecnie jest to środek Polski.
+        /// </summary>
         private async Task DefaultPositionFallback() {
             string default_address = "Polska";
             Position default_position = await GeocoderService.GetPositionFromAddressAsync(default_address);
@@ -62,7 +77,10 @@ namespace Urbexer.Views {
             map.MoveToRegion(mapSpan);
         }
 
-        // Zmiana pozycji ekranu bez zmieniania przybliżenia
+        /// <summary>
+        /// Zmienia pozycje mapy bez zmieniania poziomu przybliżenia.
+        /// </summary>
+        /// <param name="position">Nowa pozycja mapy.</param>
         public void MoveToPosition(Position position) {
             if (map == null || map.VisibleRegion == null) return;
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
@@ -74,18 +92,30 @@ namespace Urbexer.Views {
             e.HideInfoWindow = true;
             SetCurrentPin(sender as LocationPin);
         }
-
+        /// <summary>
+        /// Wywoływane przy kliknięciu na karte lokacji. <para/>
+        /// Otwiera stronę danej lokacji.
+        /// </summary>
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
             var route = $"{nameof(LocationDetailsPage)}?LocationId={currentPinId}";
             Shell.Current.GoToAsync(route);
         }
-        // Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
+        /// <summary>
+        /// Jeśli mapa pokazuje karte lokacji to przycisk wstecz ją schowa
+        /// </summary>
         protected override bool OnBackButtonPressed() {
             if (CurrentPinId == -1) return base.OnBackButtonPressed();
             DeselectCurrentPin();
             return true;
         }
 
+        /// <summary>
+        /// Przesuwa mape na pinezke,
+        /// pokazuje zasięg, w którym można oznaczyć lokacje jako odwiedzoną,
+        /// oraz ustawia <see cref="CurrentPinId"/>.<para/>
+        /// Wywoływane przy kliknięciu na pinezke. 
+        /// </summary>
+        /// <param name="pin">Pinezka, która została aktywowana.</param>
         private void SetCurrentPin(LocationPin pin) {
             CurrentPinId = pin.LocationId;
             Map_CurrentPinRange.Center = pin.Position;
