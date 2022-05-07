@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using Windows.System;
+using Xamarin.Essentials;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
@@ -42,6 +44,18 @@ namespace Urbexer.Views {
         #region Metody
         async void MainExpander_Tapped(System.Object sender, System.EventArgs e) {
             var Expcontent = ((Expander)sender).BindingContext as Question;
+        }
+        public async void ShowPolicy(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(PolicyPage));
+        }
+        /// <summary>
+        /// Otwiera klienta poczty i odpala "pisanie maila" do urbexer@onet.pl
+        /// </summary>
+        private void OpenMail(object sender, EventArgs e)
+        {
+            string address = "urbexer@onet.pl";
+            Launcher.OpenAsync(new Uri($"mailto:{address}"));
         }
         #endregion
     }

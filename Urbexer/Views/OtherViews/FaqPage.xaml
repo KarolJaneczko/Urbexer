@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              x:Class="Urbexer.Views.FaqPage"
-             Title="FAQ">
+             Title="O Aplikacji">
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush>
@@ -13,8 +13,14 @@
                 </GradientStopCollection>
             </LinearGradientBrush>
         </ScrollView.Background>
-        <StackLayout  x:Name="MyStackList" VerticalOptions="StartAndExpand" BindableLayout.ItemsSource="{Binding Questions}">
-            
+        <StackLayout>
+        <StackLayout>
+            <Frame BackgroundColor="#BF0603">
+                <Label Text="FAQ" FontSize="Title" TextColor="White" HorizontalOptions="CenterAndExpand" FontFamily="Bebas"/>
+            </Frame>
+        </StackLayout>
+
+        <StackLayout  x:Name="MyStackList" VerticalOptions="Start" BindableLayout.ItemsSource="{Binding Questions}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="10,0" HasShadow="False" CornerRadius="8" BorderColor="Gray"  BackgroundColor="Transparent" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
@@ -53,6 +59,30 @@
                     </Frame>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
+        </StackLayout>
+
+            <StackLayout Margin="10">
+                <Button
+                x:Name="RegulaminPrzycisk"
+                BackgroundColor="#BF0603"
+                BorderColor="Black"
+                Clicked="ShowPolicy"
+                CornerRadius="25"
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Regulamin"
+                TextColor="White" />
+
+                <Button
+                BackgroundColor="#BF0603"
+                BorderColor="Black"
+                Clicked="OpenMail"
+                CornerRadius="25"
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Kontakt"
+                TextColor="White" />
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>
