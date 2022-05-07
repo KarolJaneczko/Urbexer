@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Urbexer.Models {
+﻿namespace Urbexer.Models {
     /// <summary>
     /// Enum wykorzystywany przy dostosowywaniu tytułu okna powiadomienia dla przechwyconego błędu z API.
     /// </summary>

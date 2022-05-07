@@ -1,6 +1,5 @@
 ﻿using System;
 using Urbexer.ViewModels;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
