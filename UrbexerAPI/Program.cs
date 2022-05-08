@@ -108,12 +108,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseFileServer(new FileServerOptions
+/*app.UseFileServer(new FileServerOptions
 {
     FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "Dokumenty")),
     RequestPath = "/Dokumenty",
     EnableDefaultFiles = true
-});
+});*/
 
 app.Run();
