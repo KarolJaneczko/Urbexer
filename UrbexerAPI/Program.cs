@@ -9,6 +9,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
@@ -101,7 +102,13 @@ var app = builder.Build();
 }
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
-
+app.UseFileServer(new FileServerOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Dokumenty")),
+    RequestPath = "/Dokumenty",
+    EnableDefaultFiles = true
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
