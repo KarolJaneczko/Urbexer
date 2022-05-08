@@ -93,7 +93,13 @@ builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 var app = builder.Build();
-
+app.UseFileServer(new FileServerOptions
+{
+FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Dokumenty")),
+RequestPath = "/Dokumenty",
+EnableDefaultFiles = true
+});
 //Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 {
@@ -102,13 +108,7 @@ var app = builder.Build();
 }
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
-/*app.UseFileServer(new FileServerOptions
-{
-    FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "Dokumenty")),
-    RequestPath = "/Dokumenty",
-    EnableDefaultFiles = true
-});*/
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

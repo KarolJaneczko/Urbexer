@@ -78,15 +78,15 @@ namespace APIpz.Services
             
             _context.SaveChanges();
             var url = $"{host}/api/account/confirm?email={WebUtility.UrlEncode(dto.Email)}&kod={wlasciwykod}";
-           // var dokumentacja = $"{host}/Dokumenty/regulamin.pdf";
-            //var RODO = $"{host}/Dokumenty/RODO.pdf";
+            var dokumentacja = $"{host}/Dokumenty/regulamin.pdf";
+            var RODO = $"{host}/Dokumenty/RODO.pdf";
             var tresc = $"Cześć,\n\n" +
                 $"Cieszymy się, że chcesz rozpocząć z nami swoją przygodę z Urban Exploringiem.\n" +
                 $"Aby aktywować konto i móc korzystać z naszej aplikacji, kliknij w link: " +
                 $"\n{url}\n" +
                 $"Prosimy Cię również o zapoznanie się z regulaminem aplikacji, a także załączamy informację o administracji Twoich danych osobowych." +
-               // $"\n{dokumentacja}\n" +
-                //$"{RODO}\n\n" +
+                $"\n{dokumentacja}\n" +
+                $"{RODO}\n\n" +
                 $"Do zobaczenia w terenie :)\n" +
                 $"Zespół twórców aplikacji Urbexer";
             await _emailSender.SendEmailAsync(newUzytkownik.Email, "Aktywacja konta w Urbexer", tresc);
