@@ -102,13 +102,13 @@ var app = builder.Build();
 }
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
-app.UseFileServer(new FileServerOptions
+/*app.UseFileServer(new FileServerOptions
 {
     FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "Dokumenty")),
     RequestPath = "/Dokumenty",
     EnableDefaultFiles = true
-});
+});*/
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
