@@ -4,12 +4,17 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:mapscustom="clr-namespace:Urbexer.Controls"
     xmlns:models="clr-namespace:Urbexer.Models"
-    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels" xmlns:mapscustom="clr-namespace:Urbexer.Controls"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
     Title="Mapa"
     x:DataType="viewmodels:MapViewModel">
 
     <!--  Strona mapy  -->
+
+    <ContentPage.BindingContext>
+        <viewmodels:MapViewModel />
+    </ContentPage.BindingContext>
 
     <AbsoluteLayout>
         <mapscustom:CustomMap
@@ -21,9 +26,6 @@
             ItemsSource="{Binding LocationsFiltered}"
             MapType="Hybrid"
             VerticalOptions="Fill">
-            <maps:Map.BindingContext>
-                <viewmodels:MapViewModel />
-            </maps:Map.BindingContext>
             <!--  Pinezki  -->
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="models:Location">
@@ -43,11 +45,16 @@
                     x:Name="Map_CurrentPinRange"
                     FillColor="#32FF0000"
                     StrokeColor="Red" />
+                <maps:Circle
+                    x:Name="Map_LocationLoadRange"
+                    FillColor="Transparent"
+                    StrokeColor="#1B44A2"
+                    StrokeWidth="10" />
             </maps:Map.MapElements>
         </mapscustom:CustomMap>
         <!--  Karta lokacji, pokazywana po kliknięciu na pinezkę  -->
         <Frame
-            x:Name="LocationInfo"
+            x:Name="LocationCard"
             Padding="10"
             x:DataType="models:Location"
             AbsoluteLayout.LayoutBounds="0.5,0.98,0.96,0.2"
@@ -60,47 +67,54 @@
                 </StackLayout.GestureRecognizers>
                 <!--  Miniaturka  -->
                 <Frame Padding="5" CornerRadius="10">
-                    <Image Aspect="AspectFill"
-                           HeightRequest="100"
-                           HorizontalOptions="Start"
-                           Source="{Binding Thumbnail}"
-                           WidthRequest="100" />
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="100"
+                        HorizontalOptions="Start"
+                        Source="{Binding Thumbnail}"
+                        WidthRequest="100" />
                 </Frame>
                 <StackLayout HorizontalOptions="FillAndExpand">
-                    <Label FontFamily="Bebas"
-                                        FontSize="Medium"
-                                        Text="{Binding Name}"
-                                        TextColor="#BF0603"
-                                        VerticalOptions="Start" />
-                    <BoxView Margin="0,-5,40,0"
-                                        HeightRequest="1"
-                                        HorizontalOptions="FillAndExpand"
-                                        Color="#363636" />
-                    <Label FontFamily="Opis"
-                                        Text="{Binding Address}"
-                                        TextColor="Black"
-                                        VerticalOptions="Start" />
+                    <Label
+                        FontFamily="Bebas"
+                        FontSize="Medium"
+                        Text="{Binding Name}"
+                        TextColor="#BF0603"
+                        VerticalOptions="Start" />
+                    <BoxView
+                        Margin="0,-5,40,0"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Color="#363636" />
+                    <Label
+                        FontFamily="Opis"
+                        Text="{Binding Address}"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
                 </StackLayout>
                 <StackLayout Margin="10,5,10,5">
                     <Label
-                                        FontFamily="Bebas"
-                                        FontSize="Large"
-                                        HorizontalOptions="End"
-                                        MinimumWidthRequest="100"
-                                        Text="{Binding Path=Distance, StringFormat='{0} km'}"
-                                        VerticalOptions="End" />
-                    <Image Margin="0,0,-20,0"
-                                        HeightRequest="35"
-                                        Opacity="0.5"
-                                        Source="{Binding CategoryIconPath}"
-                                        VerticalOptions="EndAndExpand" />
-                    <Frame CornerRadius="10" Padding="3" HeightRequest="20">
+                        FontFamily="Bebas"
+                        FontSize="Large"
+                        HorizontalOptions="End"
+                        MinimumWidthRequest="100"
+                        Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                        VerticalOptions="End" />
+                    <Image
+                        Margin="0,0,-20,0"
+                        HeightRequest="35"
+                        Opacity="0.5"
+                        Source="{Binding CategoryIconPath}"
+                        VerticalOptions="EndAndExpand" />
+                    <Frame
+                        Padding="3"
+                        CornerRadius="10"
+                        HeightRequest="20">
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="odwiedzone_icon" Margin="-2"/>
-                            <BoxView WidthRequest="1"
-                                                     Color="#363636"/>
-                            <Image Source="true_icon.png" IsVisible="{Binding IsVisited}"/>
-                            <Image Source="false_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                            <Image Margin="-2" Source="odwiedzone_icon" />
+                            <BoxView WidthRequest="1" Color="#363636" />
+                            <Image IsVisible="{Binding IsVisited}" Source="true_icon.png" />
+                            <Image IsVisible="{Binding IsNotVisited}" Source="false_icon.png" />
                         </StackLayout>
                     </Frame>
                 </StackLayout>

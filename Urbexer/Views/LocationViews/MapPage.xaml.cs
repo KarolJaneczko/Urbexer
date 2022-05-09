@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Services;
+using Urbexer.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -13,38 +14,57 @@ namespace Urbexer.Views {
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage {
+        private int _currentPinId = -1;
         /// <summary>
         /// Id lokacji, na którą wskazuje ostatnia kliknięta pinezka. <para/>
+        /// Kontroluje wyświetlanie karty lokacji przy klikaniu na pinezki. <para/>
         /// -1 oznacza brak wybranej pinezki.
         /// </summary>
-        private int currentPinId = -1;
-        /// <summary>
-        /// Kontroluje wyświetlanie karty lokacji przy klikaniu na pinezki.
-        /// </summary>
         public int CurrentPinId {
-            get { return currentPinId; }
+            get { return _currentPinId; }
             set {
-                currentPinId = value;
+                _currentPinId = value;
                 if (value <= -1) {
-                    currentPinId = -1;
-                    LocationInfo.IsVisible = false;
+                    _currentPinId = -1;
+                    LocationCard.IsVisible = false;
                     return;
                 }
 
                 // Pokaż odpowiednią karte lokacji
-                LocationInfo.IsVisible = true;
-                Device.InvokeOnMainThreadAsync(async () => await SetPinBinding());
+                LocationCard.IsVisible = true;
+                Device.InvokeOnMainThreadAsync(async () => {
+                    LocationCard.BindingContext = await LocationService.GetLocationById(_currentPinId);
+                });
             }
         }
-        private async Task SetPinBinding() {
-            LocationInfo.BindingContext = await LocationService.GetLocationById(currentPinId);
+        private int _loadRange = 100;
+        /// <summary>
+        /// Zasięg wczytywania lokacji w kilometrach. <para/>
+        /// Zmiana jego wartości aktualizuje wskaźnik zasięgu na mapie
+        /// i odpowiednio pokazuje/ukrywa lokacje.
+        /// </summary>
+        public int LoadRange {
+            get { return _loadRange; }
+            set {
+                _loadRange = Math.Max(value, 0); // Zasięg powinien być nieujemny
+                // Ustaw wskaźnik zasięgu wczytania
+                Device.InvokeOnMainThreadAsync(async () => {
+                    var userPosition = await Geolocation.GetLastKnownLocationAsync().ConfigureAwait(false);
+                    Map_LocationLoadRange.Radius = Distance.FromKilometers(value);
+                    Map_LocationLoadRange.Center = new Position(userPosition.Latitude, userPosition.Longitude);
+                });
+                Task.Run(async () => await ((MapViewModel)BindingContext).LoadLocations(value)); // Wczytaj lokacje
+            }
         }
-
+        /// <summary>
+        /// Ustawia lokacje mapy i wczytuje lokacje.
+        /// </summary>
         public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
+            LoadRange = 100;
 
-            Task.Run(async () => await MoveToUser().ConfigureAwait(false));
+            Task.Run(async () => await MoveToUser().ConfigureAwait(false)); // Ustaw lokacje mapy
         }
 
         /// <summary>
@@ -52,7 +72,7 @@ namespace Urbexer.Views {
         /// W przypadku niepowodzenia ustawia na domyślną pozycje używając <see cref="DefaultPositionFallback"/>
         /// </summary>
         private async Task MoveToUser() {
-            await DefaultPositionFallback();
+            await DefaultPositionFallback(); // Przy zbyt długim oczekiwaniu na geolokacje mapa wskazywała na Rzym
             try {
                 Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
                 if (location != null) {
@@ -62,7 +82,7 @@ namespace Urbexer.Views {
                 }
             }
             catch {
-                await DefaultPositionFallback();
+                //await DefaultPositionFallback();
             }
         }
         /// <summary>
@@ -97,7 +117,7 @@ namespace Urbexer.Views {
         /// Otwiera stronę danej lokacji.
         /// </summary>
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
-            var route = $"{nameof(LocationDetailsPage)}?LocationId={currentPinId}";
+            var route = $"{nameof(LocationDetailsPage)}?LocationId={_currentPinId}";
             Shell.Current.GoToAsync(route);
         }
         /// <summary>
