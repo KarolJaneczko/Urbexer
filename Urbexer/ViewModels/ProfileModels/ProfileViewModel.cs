@@ -8,8 +8,10 @@ using Urbexer.Models.Enums;
 using Urbexer.Models.UserModels;
 using Urbexer.Services;
 using Urbexer.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
     /// <summary>
@@ -68,18 +70,35 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileVisitedPlaces"));
             }
         }
+        private ObservableRangeCollection<Location> _locationsVisited;
+        /// <summary>
+        /// Przechowuje lokacje odwiedzone przez wyświetlanego użytkownika.
+        /// </summary>
+        public ObservableRangeCollection<Location> LocationsVisited {
+            get { return _locationsVisited; }
+            set { _locationsVisited = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("VisitedLocations"));
+            }
+        }
         public ICommand ClickedInstagram { protected set; get; }
         public ICommand ClickedYoutube { protected set; get; }
         public ICommand ClickedFacebook { protected set; get; }
         public ICommand ClickedEdit { protected set; get; }
+        private int currentLocationsPage = 1;
+        private bool isLoading = false;
         #endregion
         #region Konstruktory
         public ProfileViewModel() {
+            LocationsVisited = new ObservableRangeCollection<Location>();
+
             ClickedInstagram = new Command(OnClickedInstagram);
             ClickedYoutube = new Command(OnClickedYoutube);
             ClickedFacebook = new Command(OnClickedFacebook);
             ClickedEdit = new Command(OnClickedEdit);
-            RefreshProfile();
+            LoadMoreLocationsCommand = new Command(async() => await LoadMoreLocations());
+            
+            Task.Run(async () => await LoadMoreLocations());
+            Device.InvokeOnMainThreadAsync(RefreshProfile);
         }
         #endregion
         #region Metody
@@ -87,15 +106,14 @@ namespace Urbexer.ViewModels {
         /// Metoda wypełniająca profil danymi, pobranymi z bazy danych.
         /// </summary>
         public static void FillProfile(ProfileData profileData) {
-            if (profileData != null) {
-                profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
-                profileLogin = profileData.Login;
-                profilePosition = " #" + profileData.LeaderboardPosition.ToString();
-                profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
-                profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
-                profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
-                profileVisitedPlaces = profileData.VisitedPlaces.ToString();
-            }
+            if (profileData == null) return;
+            profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
+            profileLogin = profileData.Login;
+            profilePosition = " #" + profileData.LeaderboardPosition.ToString();
+            profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
+            profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
+            profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
+            profileVisitedPlaces = profileData.VisitedPlaces.ToString();
         }
         public void OnClickedInstagram() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
@@ -165,6 +183,21 @@ namespace Urbexer.ViewModels {
                     break;
             }
             return "";
+        }
+        /// <summary>
+        /// Wczytuje dodatkowe lokacje do listy odwiedzonych.
+        /// </summary>
+        public Command LoadMoreLocationsCommand;
+        private async Task LoadMoreLocations() {
+            if (!Plugin.Connectivity.CrossConnectivity.Current.IsConnected) return;
+            if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie
+            isLoading = true;
+
+            //List<int> locationIds = await LocationService.GetIdListOfUserVisited(ProfileLogin, currentLocationsPage++);
+            List<int> locationIds = await LocationService.GetIdListByCategory(1); // DO TESTOWANIA
+            LocationsVisited.AddRange(await LocationService.GetLocationListByIds(locationIds));
+
+            isLoading = false;
         }
         #endregion
     }
