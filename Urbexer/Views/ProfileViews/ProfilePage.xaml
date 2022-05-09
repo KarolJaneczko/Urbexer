@@ -263,9 +263,11 @@
                     <CollectionView
                         HorizontalOptions="CenterAndExpand"
                         ItemsSource="{Binding LocationsVisited}"
-                        VerticalOptions="StartAndExpand"
                         RemainingItemsThreshold="1"
-                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreLocationsCommand}">
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreLocationsCommand}"
+                        SelectionChanged="CollectionView_SelectionChanged"
+                        SelectionMode="Single"
+                        VerticalOptions="StartAndExpand">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:Location">
                                 <StackLayout Orientation="Horizontal">
