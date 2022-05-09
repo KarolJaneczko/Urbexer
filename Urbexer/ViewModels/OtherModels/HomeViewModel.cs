@@ -82,6 +82,8 @@ namespace Urbexer.ViewModels {
             int requiredLocationsCount = 10;
             int range = 0;
             List<int> ids = new List<int>();
+            if (await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>() != PermissionStatus.Granted)
+                return;
             Xamarin.Essentials.Location userPosition = await Geolocation.GetLastKnownLocationAsync();
 
             // Pobieraj kolejne id lokacji dopóki nie jest ich tyle co wymagane
