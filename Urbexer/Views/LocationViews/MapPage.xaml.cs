@@ -37,15 +37,34 @@ namespace Urbexer.Views {
                 });
             }
         }
+        private int _loadRange = 100;
+        /// <summary>
+        /// Zasięg wczytywania lokacji w kilometrach. <para/>
+        /// Zmiana jego wartości aktualizuje wskaźnik zasięgu na mapie
+        /// i odpowiednio pokazuje/ukrywa lokacje.
+        /// </summary>
+        public int LoadRange {
+            get { return _loadRange; }
+            set {
+                _loadRange = Math.Max(value, 0); // Zasięg powinien być nieujemny
+                // Ustaw wskaźnik zasięgu wczytania
+                Device.InvokeOnMainThreadAsync(async () => {
+                    var userPosition = await Geolocation.GetLastKnownLocationAsync().ConfigureAwait(false);
+                    Map_LocationLoadRange.Radius = Distance.FromKilometers(value);
+                    Map_LocationLoadRange.Center = new Position(userPosition.Latitude, userPosition.Longitude);
+                });
+                Task.Run(async () => await ((MapViewModel)BindingContext).LoadLocations(value)); // Wczytaj lokacje
+            }
+        }
         /// <summary>
         /// Ustawia lokacje mapy i wczytuje lokacje.
         /// </summary>
         public MapPage() {
             InitializeComponent();
             CurrentPinId = -1;
+            LoadRange = 100;
 
             Task.Run(async () => await MoveToUser().ConfigureAwait(false)); // Ustaw lokacje mapy
-            Task.Run(async () => await ((MapViewModel)BindingContext).LoadLocations(100)); // Wczytaj lokacje
         }
 
         /// <summary>

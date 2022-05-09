@@ -12,17 +12,14 @@ namespace Urbexer.ViewModels {
         /// <summary>
         /// ViewModel mapy.
         /// </summary>
-        public MapViewModel() : base() {
-            Task.Run(async () => await InitializeLocations());
-        }
+        public MapViewModel() : base() { }
 
         /// <summary>
-        /// Funkcja do pierwotnego zapełnienia mapy. <para/>
-        /// Pobiera wszystkie lokacje w zasięgu 100km.
+        /// Wczytuje wszystkie lokacje w danym zasięgu. <para/>
+        /// W razie potrzeby pobiera dodatkowe lokacje z bazy.
         /// </summary>
-        protected async Task InitializeLocations() {
+        public async Task LoadLocations(int range) {
             var location = await Geolocation.GetLastKnownLocationAsync();
-            int range = 100;
             List<int> idList = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, range);
             LocationsFiltered.Add(new ObservableRangeCollection<Location>(await LocationService.GetLocationListByIds(idList)));
 
