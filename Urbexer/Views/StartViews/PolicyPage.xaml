@@ -48,7 +48,7 @@
             <ScrollView>
                 <StackLayout Margin="15,15,15,0" Spacing="10">
                     <Label HorizontalOptions="Center"  Text="Regulamin aplikacji mobilnej Urbexer" TextColor="White" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                    <StackLayout Margin="0,20,0,0" Spacing="10">
+                    <StackLayout Margin="0,20,0,80" Spacing="10">
                         <Label HorizontalOptions="CenterAndExpand" Style="{DynamicResource Paragraf}" Text="§1 DEFINICJE" />
                         <Label HorizontalOptions="FillAndExpand" Style="{DynamicResource Podpunkty}"  Text="1. Usługodawca/Administrator Danych Osobowych – osoba fizyczna, Karol Janeczko zamieszkały w Toruniu (kod-pocztowy 87-100) przy ul. Fryderyka Chopina 12/18, adres email urbexer@outlook.com&#10;        
 2. Usługobiorca – osoba fizyczna, posiadająca pełną zdolność do czynności prawnych.&#10;
@@ -170,17 +170,17 @@ c) przedstawienie okoliczności uzasadniających reklamację.&#10;
             </ScrollView>
 
 
-            <Frame Padding="5" CornerRadius="20" VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="5">
+            <Frame Padding="5" CornerRadius="20" VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="5" BackgroundColor="Transparent">
                 <Grid>
-                    <BoxView BackgroundColor="#B52435"
-                                     HeightRequest="1" 
-                                     Margin="20" 
+                    <BoxView BackgroundColor="#BF0603"
+                                     HeightRequest="3" 
+                                     VerticalOptions="Center"
                                      HorizontalOptions="CenterAndExpand"
                                      WidthRequest="150" />
-                    <Frame BackgroundColor="#B52435"
+                    <Frame BackgroundColor="#BF0603"
                                    CornerRadius="50" 
                                    HorizontalOptions="Center"
-                                   HeightRequest="35" 
+                                   HeightRequest="50" 
                                    WidthRequest="50" 
                                    Padding="0" 
                                    Margin="0">

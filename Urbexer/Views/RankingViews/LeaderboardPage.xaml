@@ -128,9 +128,29 @@
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
+            <Frame CornerRadius="5"
+                   Margin="0,0,0,-5"
+                   Grid.Row="1"
+                   Padding="5,10"
+                    BackgroundColor="White">
+                
+                    <Grid ColumnDefinitions="0.25*,Auto,0.8*">
+                    <Label Grid.Column="0" Text="Pozycja" FontSize="Medium" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Grid.Column="1" Text="Użytkownik" FontSize="Medium" VerticalOptions="CenterAndExpand"  FontAttributes="Bold" TextColor="Black"/>
+                    <StackLayout Grid.Column="2" HorizontalOptions="EndAndExpand" Spacing="0">
+                        <Label Text="Odwiedzone" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Miejsca" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+                    </StackLayout>
+                        
+                        <!--<Label Style="{DynamicResource DaneTitle}" Text="ODWIEDZONE MIEJSCA" TextColor="White" FontSize="Title"/>
+                        <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileVisitedPlaces}" TextColor="White"  FontSize="Title"/>-->
+                    </Grid>
+               
+            </Frame>
+
             <!--region Lista Rankingowa-->
             <ListView x:Name="RankingLista"
-                      Grid.Row="1"
+                      Grid.Row="2"
                       RowHeight="75"
                       ItemsSource="{Binding RankingList}" 
                       SeparatorVisibility="None"
@@ -140,9 +160,9 @@
                     <DataTemplate>
                         <ViewCell>
                             <Frame BackgroundColor="White"
-                                   BorderColor="#F0F0F0"
+                                   BorderColor="#363636"
                                    Padding="10,3,5,3"
-                                   Margin="10,3"
+                                   Margin="10,1"
                                    CornerRadius="20"
                                    HasShadow="True">
                                 <Grid  HorizontalOptions="FillAndExpand"
@@ -151,11 +171,11 @@
                                         <TapGestureRecognizer Command="{Binding GoToProfile}"/>
                                     </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="35"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.8*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
@@ -176,18 +196,20 @@
                                             <Image Source="{Binding AvatarSource}"/>
                                         </Frame>
                                     </Frame>
+                                    
                                     <Label Text="{Binding Login}"
                                            Grid.Column="3"
                                            TextColor="#BF0603"
                                            FontAttributes="Bold"
                                            FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"
                                            VerticalOptions="Center" 
                                            Margin="0,0"/>
-                                    <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="End"
-                                                 Grid.Column="5"
-                                                 Spacing="2">
-                                        <Label Text="{Binding LiczbaMiejsc}"
+                                   
+                                        
+
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Spacing="2" Grid.Column="5">
+                                            <Label Text="{Binding LiczbaMiejsc}"
                                                TextColor="Black" 
                                                FontSize="25" 
                                                FontAttributes="Bold" 
@@ -195,6 +217,7 @@
                                         <Image Source="showPassword_icon" 
                                                    HeightRequest="25"/>
                                        
+                                   
                                     </StackLayout>
                                 </Grid>
                             </Frame>
