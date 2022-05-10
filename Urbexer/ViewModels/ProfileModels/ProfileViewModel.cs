@@ -21,9 +21,9 @@ namespace Urbexer.ViewModels {
     public class ProfileViewModel : BaseViewModel, INotifyPropertyChanged {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        private static string profileAvatarSource, profileLogin, profilePosition, profileDescription, profileFirstName, profileLastName, profileVisitedPlaces;
-        private bool isLoading = false;
-        private List<int> locationsVisitedIds;
+        protected static string profileAvatarSource, profileLogin, profilePosition, profileDescription, profileFirstName, profileLastName, profileVisitedPlaces;
+        protected bool isLoading = false;
+        protected List<int> locationsVisitedIds;
         public string ProfileAvatarSource {
             get { return profileAvatarSource; }
             set {
@@ -153,8 +153,8 @@ namespace Urbexer.ViewModels {
         /// <summary>
         /// Metoda wyliczająca miejsce użytkownika w rankingu ogólnym.
         /// </summary>
-        public static int GetLeaderboardPositionByLogin(string login) {
-            var result = connectionService2.GetRankingList(0, httpClient2).Result;
+        public static int GetLeaderboardPositionByLogin(string login, int type = 0) {
+            var result = connectionService2.GetRankingList(type, httpClient2).Result;
             List<string> tempList = new List<string>();
             foreach (var x in result) {
                 tempList.Add(x.login);
@@ -191,7 +191,7 @@ namespace Urbexer.ViewModels {
             }
             return "";
         }
-        private async Task DownloadLocationsVisitedIds() {
+        protected async Task DownloadLocationsVisitedIds() {
             locationsVisitedIds = await LocationService.GetIdListOfUserVisited(ProfileLogin);
             locationsVisitedIds.Reverse(); // To sprawi że id będą w kolejności od najnowszego do najstarszego odwiedzonego
             await Device.InvokeOnMainThreadAsync(() => ProfileVisitedPlaces = Convert.ToString(locationsVisitedIds.Count()));
@@ -199,7 +199,7 @@ namespace Urbexer.ViewModels {
         /// <summary>
         /// Wczytuje dodatkowe lokacje do listy odwiedzonych.
         /// </summary>
-        private async Task LoadMoreLocations(int loadAmount = 10) {
+        protected async Task LoadMoreLocations(int loadAmount = 10) {
             if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie
             isLoading = true;
 

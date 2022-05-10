@@ -2,7 +2,10 @@
 <ContentPage
     x:Class="Urbexer.Views.RankingProfile"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Urbexer.Models"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    x:DataType="viewmodels:RankingProfileViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="DaneTitle" TargetType="Label">
@@ -142,7 +145,7 @@
                         VerticalOptions="Center">
                         <ImageButton
                             BackgroundColor="Transparent"
-                            Command="{Binding ClickedInstagram}"
+                            Command="{Binding ClickedInstagramCommand}"
                             HeightRequest="35"
                             HorizontalOptions="Center"
                             Source="instagram_icon.png" />
@@ -164,7 +167,7 @@
                         Spacing="10">
                         <ImageButton
                             BackgroundColor="Transparent"
-                            Command="{Binding ClickedYoutube}"
+                            Command="{Binding ClickedYoutubeCommand}"
                             HeightRequest="35"
                             HorizontalOptions="Center"
                             Source="youtube_icon.png" />
@@ -188,7 +191,7 @@
                         Spacing="10">
                         <ImageButton
                             BackgroundColor="Transparent"
-                            Command="{Binding ClickedFacebook}"
+                            Command="{Binding ClickedFacebookCommand}"
                             HeightRequest="35"
                             HorizontalOptions="Center"
                             Source="facebook_icon.png" />
@@ -248,6 +251,88 @@
                     </StackLayout>
                 </Frame>
                 <!--  endregion  -->
+                <!--  odwiedzone miejsca  -->
+
+                <Frame
+                    Margin="0,-3,0,0"
+                    Padding="3"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <CollectionView
+                        HorizontalOptions="CenterAndExpand"
+                        ItemsSource="{Binding LocationsVisited}"
+                        RemainingItemsThreshold="1"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreLocationsCommand}"
+                        SelectionChanged="CollectionView_SelectionChanged"
+                        SelectionMode="Single"
+                        VerticalOptions="StartAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Location">
+                                <Frame Padding="0" BorderColor="#363636">
+                                    <StackLayout
+                                        Margin="0,3"
+                                        Padding="2"
+                                        BackgroundColor="White"
+                                        Orientation="Horizontal">
+                                        <Frame Padding="5" CornerRadius="10">
+                                            <Image
+                                                Aspect="AspectFill"
+                                                HeightRequest="100"
+                                                HorizontalOptions="Start"
+                                                Source="{Binding Thumbnail}"
+                                                WidthRequest="100" />
+                                        </Frame>
+                                        <StackLayout HorizontalOptions="FillAndExpand">
+                                            <Label
+                                                FontFamily="Bebas"
+                                                FontSize="Medium"
+                                                Text="{Binding Name}"
+                                                TextColor="#BF0603"
+                                                VerticalOptions="Start" />
+                                            <BoxView
+                                                Margin="0,-5,40,0"
+                                                HeightRequest="1"
+                                                HorizontalOptions="FillAndExpand"
+                                                Color="#363636" />
+                                            <Label
+                                                FontFamily="Opis"
+                                                Text="{Binding Address}"
+                                                TextColor="Black"
+                                                VerticalOptions="Start" />
+                                        </StackLayout>
+                                        <StackLayout Margin="10,5,10,5">
+                                            <!--  Można zastąpić datą odwiedzenia  -->
+                                            <!--<Label
+                        FontFamily="Bebas"
+                        FontSize="Large"
+                        HorizontalOptions="End"
+                        MinimumWidthRequest="100"
+                        Text="{Binding Path=Distance, StringFormat='{0} km'}"
+                        VerticalOptions="End" />-->
+                                            <Image
+                                                HeightRequest="35"
+                                                HorizontalOptions="End"
+                                                Opacity="0.5"
+                                                Source="{Binding CategoryIconPath}"
+                                                VerticalOptions="EndAndExpand" />
+                                            <!--<Frame
+                        Padding="3"
+                        CornerRadius="10"
+                        HeightRequest="20">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Margin="-2" Source="odwiedzone_icon" />
+                                                <BoxView WidthRequest="1" Color="#363636" />
+                                                <Image IsVisible="{Binding IsVisited}" Source="true_icon.png" />
+                                                <Image IsVisible="{Binding IsNotVisited}" Source="false_icon.png" />
+                                            </StackLayout>
+                                        </Frame>-->
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
             </StackLayout>
         </Grid>
     </ScrollView>

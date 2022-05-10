@@ -1,4 +1,5 @@
-﻿using Urbexer.ViewModels;
+﻿using Urbexer.Models;
+using Urbexer.ViewModels;
 using Xamarin.Forms;
 
 namespace Urbexer.Views {
@@ -15,6 +16,18 @@ namespace Urbexer.Views {
         #region Metody
         protected override void OnAppearing() {
             BindingContext = new RankingProfileViewModel();
+        }
+        private void CollectionView_SelectionChanged(CollectionView sender, SelectionChangedEventArgs e) {
+            if (sender.SelectedItem == null)
+                return;
+
+            int locationId = ((Location)sender.SelectedItem).Id;
+            if (locationId < 0) return; // Id powinno być nieujemne.
+
+            var route = $"{nameof(LocationDetailsPage)}?LocationId={locationId}";
+            Shell.Current.GoToAsync(route);
+
+            sender.SelectedItem = null;
         }
         #endregion
     }
