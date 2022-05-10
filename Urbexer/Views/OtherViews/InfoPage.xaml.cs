@@ -10,7 +10,6 @@ namespace Urbexer.Views {
     public partial class InfoPage : ContentPage {
         #region Konstruktory
         public InfoPage() {
-            Routing.RegisterRoute(nameof(PolicyPage), typeof(PolicyPage));
             InitializeComponent();
             BindingContext = new HomeViewModel();
         }

@@ -26,6 +26,7 @@ namespace Urbexer.Views {
         #endregion
         #region Konstruktory
         public FaqPage() {
+            Routing.RegisterRoute(nameof(PolicyPage), typeof(PolicyPage));
             InitializeComponent();
             BindingContext = this;
             Questions = new ObservableCollection<Question>() {
