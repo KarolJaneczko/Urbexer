@@ -11,7 +11,7 @@ namespace APIpz.Services
     {
         void DodajOdwiedzone(int id);
         List<ZwracaneOdwiedzoneDto> PokazMojeOdwiedzone(PokazMojeOdwiedzoneDto dto);
-        List<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
+        IEnumerable<int> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto);
         void DodajOpinie(DodajOpinieDto dto);
         PageResult<OpiniaDto> PokazOpinieDoMiejsca(PokazOpinieDoMiejscaDto dto);
         int IluLudziOdwiedziloMiejsce(IluLudziOdwiedziloMiejsceDto dto);
@@ -87,7 +87,7 @@ namespace APIpz.Services
             return odwiedzoneDtos;
 
         }
-        public List<ZwracaneOdwiedzoneDto> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto)
+        public IEnumerable<int> PokazCzyjesOdwiedzone(PokazCzyjesOdwiedzoneDto dto)
         {
             var zapytanie = _context.Odwiedzone
                                             .Where(o => o.OdwiedzonePrzez.Login == dto.Login)
@@ -104,10 +104,11 @@ namespace APIpz.Services
             //    .ToList();
 
             //var totalitemsCount = zapytanie.Count();
-            var odwiedzoneDtos = _mapper.Map<List<ZwracaneOdwiedzoneDto>>(zapytanie);
+            //var odwiedzoneDtos = _mapper.Map<List<ZwracaneOdwiedzoneDto>>(zapytanie);
+            var odwiedzoneDtosId = zapytanie.Select(o => o.OdwiedzonyUrbex.Id);
             //var result = new PageResult<ZwracaneOdwiedzoneDto>(odwiedzoneDtos, totalitemsCount, dto.PageSize, dto.PageNumber);
 
-            return odwiedzoneDtos;
+            return odwiedzoneDtosId;
             //return ListaOdwiedzonych;
 
         }
