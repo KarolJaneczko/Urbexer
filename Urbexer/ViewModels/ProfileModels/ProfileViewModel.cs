@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Urbexer.Models;
@@ -193,6 +194,7 @@ namespace Urbexer.ViewModels {
         private async Task DownloadLocationsVisitedIds() {
             locationsVisitedIds = await LocationService.GetIdListOfUserVisited(ProfileLogin);
             locationsVisitedIds.Reverse(); // To sprawi że id będą w kolejności od najnowszego do najstarszego odwiedzonego
+            await Device.InvokeOnMainThreadAsync(() => ProfileVisitedPlaces = Convert.ToString(locationsVisitedIds.Count()));
         }
         /// <summary>
         /// Wczytuje dodatkowe lokacje do listy odwiedzonych.

@@ -102,7 +102,7 @@
                             Margin="5"
                             Padding="6"
                             BackgroundColor="#BF0603"
-                            Command="{Binding ClickedEdit}"
+                            Command="{Binding ClickedEditCommand}"
                             CornerRadius="50"
                             HeightRequest="50"
                             Opacity="0.9"
@@ -151,7 +151,7 @@
                         VerticalOptions="Center">
                         <ImageButton
                             BackgroundColor="Transparent"
-                            Command="{Binding ClickedInstagram}"
+                            Command="{Binding ClickedInstagramCommand}"
                             HeightRequest="35"
                             HorizontalOptions="Center"
                             Source="instagram_icon.png" />
@@ -173,7 +173,7 @@
                         Spacing="10">
                         <ImageButton
                             BackgroundColor="Transparent"
-                            Command="{Binding ClickedYoutube}"
+                            Command="{Binding ClickedYoutubeCommand}"
                             HeightRequest="35"
                             HorizontalOptions="Center"
                             Source="youtube_icon.png" />
@@ -197,7 +197,7 @@
                         Spacing="10">
                         <ImageButton
                             BackgroundColor="Transparent"
-                            Command="{Binding ClickedFacebook}"
+                            Command="{Binding ClickedFacebookCommand}"
                             HeightRequest="35"
                             HorizontalOptions="Center"
                             Source="facebook_icon.png" />
