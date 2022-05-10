@@ -192,18 +192,22 @@ namespace Urbexer.ViewModels {
         }
         private async Task DownloadLocationsVisitedIds() {
             locationsVisitedIds = await LocationService.GetIdListOfUserVisited(ProfileLogin);
+            locationsVisitedIds.Reverse(); // To sprawi że id będą w kolejności od najnowszego do najstarszego odwiedzonego
         }
         /// <summary>
         /// Wczytuje dodatkowe lokacje do listy odwiedzonych.
         /// </summary>
-        private async Task LoadMoreLocations() {
-            if (!Plugin.Connectivity.CrossConnectivity.Current.IsConnected) return;
+        private async Task LoadMoreLocations(int loadAmount = 10) {
             if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie
             isLoading = true;
 
-            //List<int> locationIds = await LocationService.GetIdListOfUserVisited(ProfileLogin, currentLocationsPage++);
-            List<int> locationIds = await LocationService.GetIdListByCategory(1); // DO TESTOWANIA
-            LocationsVisited.AddRange(await LocationService.GetLocationListByIds(locationIds));
+            if (locationsVisitedIds == null)
+                await DownloadLocationsVisitedIds();
+
+            int remainingLocations = locationsVisitedIds.Count - LocationsVisited.Count;
+            List<int> ids = locationsVisitedIds.GetRange(LocationsVisited.Count, Math.Min(remainingLocations, loadAmount));
+            LocationsVisited.AddRange(await LocationService.GetLocationListByIds(ids));
+
 
             isLoading = false;
         }
