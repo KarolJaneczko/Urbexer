@@ -70,5 +70,11 @@ namespace APIpz.Controllers
             var wynik = _urbexService.PokazMojaOpinieDoMiejsca(id);
             return Ok(wynik);
         }
+        [HttpGet("ileLokacjiDanejKategoriUzytkownikOdwiedzil")]
+        public ActionResult<int> IleLokacjiDanejKategoriUzytkownikOdwiedzil([FromQuery] IleLokacjiDanejKategoriUzytkownikOdwiedziDto dto)
+        {
+            var wynik = _urbexService.IleLokacjiDanejKategoriUzytkownikOdwiedzil(dto);
+            return Ok(wynik);
+        }
     }
 }

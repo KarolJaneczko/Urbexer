@@ -17,6 +17,7 @@ namespace APIpz.Services
         int IluLudziOdwiedziloMiejsce(IluLudziOdwiedziloMiejsceDto dto);
         bool CzyUzytkownikBylWMiejscu(int id);
         OpiniaDto PokazMojaOpinieDoMiejsca(int id);
+        int IleLokacjiDanejKategoriUzytkownikOdwiedzil(IleLokacjiDanejKategoriUzytkownikOdwiedziDto dto);
 
     }
     public class UrbexService : IUrbexService
@@ -189,6 +190,16 @@ namespace APIpz.Services
             var opiniaDto = _mapper.Map<OpiniaDto>(opinia);
             return opiniaDto;
 
+        }
+        public int IleLokacjiDanejKategoriUzytkownikOdwiedzil(IleLokacjiDanejKategoriUzytkownikOdwiedziDto dto)
+        {
+            var zapytanie = _context.Odwiedzone
+                .Include(o => o.OdwiedzonyUrbex)
+                .ThenInclude(o => o.Miejsce_Kategoria)
+                .Include(o => o.OdwiedzonePrzez)
+                .Where(i => i.OdwiedzonyUrbex.Miejsce_Kategoria.Id == dto.KategoriaId && i.OdwiedzonePrzez.Login == dto.Login).Count();
+
+            return zapytanie;
         }
     }
 }
