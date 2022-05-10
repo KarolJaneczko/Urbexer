@@ -9,15 +9,15 @@
     x:DataType="locationviews:WriteReviewPage"
     Shell.TabBarIsVisible="False">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout.Background>
+        <ScrollView>
+            <ScrollView.Background>
                 <LinearGradientBrush>
                     <GradientStopCollection>
                         <GradientStop Offset="0" Color="#161616" />
                         <GradientStop Offset="1" Color="#363636" />
                     </GradientStopCollection>
                 </LinearGradientBrush>
-            </StackLayout.Background>
+            </ScrollView.Background>
             <StackLayout
                 Margin="10,0,10,0"
                 Padding="0,0,0,10"
@@ -80,6 +80,7 @@
                             AutoSize="TextChanges"
                             IsSpellCheckEnabled="True"
                             Keyboard="Text"
+                            TextColor="Black"
                             MaxLength="300"
                             Placeholder="Podziel się swoją opinią"
                             VerticalOptions="StartAndExpand" />
@@ -96,6 +97,6 @@
                     Text="Opublikuj"
                     VerticalOptions="End" />
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

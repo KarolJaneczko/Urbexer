@@ -1,6 +1,8 @@
 ﻿using Plugin.Connectivity;
 using System;
+using System.Threading.Tasks;
 using Urbexer.Models;
+using Urbexer.Services;
 using Urbexer.ViewModels;
 using Urbexer.Views;
 using Xamarin.Essentials;
@@ -26,7 +28,7 @@ namespace Urbexer {
         protected override void OnStart() {
             if (UserInfo.IsLoggedIn) {
                 UserInfo.CheckedInternetConnection = false;
-                ProfileViewModel.RefreshProfile();
+                Task.Run(async () => { UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login); });
                 System.Threading.Thread.Sleep(5);
                 Shell.Current.GoToAsync("..//HomePage");
             }

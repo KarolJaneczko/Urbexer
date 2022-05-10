@@ -9,7 +9,6 @@ namespace Urbexer.Views {
         #region Konstruktory
         public LeaderboardPage() {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(RankingProfile), typeof(RankingProfile));
             BindingContext = new LeaderboardViewModel();
         }
         #endregion

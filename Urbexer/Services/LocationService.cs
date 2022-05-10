@@ -72,7 +72,6 @@ namespace Urbexer.Services {
         /// <param name="longitude"> Wysokość geograficzna pozycji. </param>
         /// <param name="kmRadius"> Promień w jakim będą pobieranie id, w kilometrach. </param>
         /// <param name="unvisitedOnly"> Jeśli true to pobierane są tylko id lokacji nieodwiedzonych przez obecnego użytkownika. </param>
-        /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListInArea(float latitude, float longitude, float kmRadius, bool unvisitedOnly = false) {
             float deg = KmToDegrees(kmRadius);
             string path = "/api/place/pokazMiejscaWPoblizu";
@@ -96,15 +95,28 @@ namespace Urbexer.Services {
             return output;
         }
         /// <summary>
-        /// Pobierz id lokacji z danej kategorii
+        /// Pobierz id lokacji z danej kategorii.
         /// </summary>
         /// <param name="categoryId"> Id kategorii, zdefiniowane w  <see cref="Location.CategoryDict"/></param>
-        /// <returns> Lista id lokacji. </returns>
         public static async Task<List<int>> GetIdListByCategory(int categoryId) {
             string path = "/api/place/pokazMiejscaZKategorii";
             string args = "?id=" + categoryId;
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
-            if (result == null)
+            if (string.IsNullOrEmpty(result))
+                return new List<int>();
+            return JsonConvert.DeserializeObject<List<int>>(result);
+        }
+        /// <summary>
+        /// Pobierz id lokacji odwiedzonych przez danego użytkownika.
+        /// </summary>
+        /// <param name="userLogin">Login użytkownika, którego lokacje zostaną pobrane.</param>
+        /// <param name="pageNumber">Numer strony, poczynając od 1.</param>
+        /// <param name="pageSize">Ilość wyników na strone. <para/> Domyślnie 5000, co praktycznie gwarantuje wszystkie lokacje.</param>
+        public static async Task<List<int>> GetIdListOfUserVisited(string userLogin, int pageNumber = 1, int pageSize = 5000) {
+            string path = "/api/urbex/pokazCzyjesOdwiedzone";
+            string args = $"?Login={userLogin}&PageNumber={pageNumber}&PageSize={pageSize}";
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);
+            if (string.IsNullOrEmpty(result))
                 return new List<int>();
             return JsonConvert.DeserializeObject<List<int>>(result);
         }

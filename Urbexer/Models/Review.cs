@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using Urbexer.Models.ApiModels;
 
 namespace Urbexer.Models {
@@ -26,7 +27,7 @@ namespace Urbexer.Models {
         public Review(APIReview apiReview) {
             UserName = apiReview.ktoOdwiedzil;
             Score = Math.Clamp(apiReview.ocena, 1, 5);
-            Message = apiReview.tekst;
+            Message = HttpUtility.UrlDecode(apiReview.tekst);
         }
     }
 }

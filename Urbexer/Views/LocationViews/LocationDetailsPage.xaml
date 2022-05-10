@@ -148,6 +148,19 @@
                         </Frame>
                     </Grid>
                     <!--  tu z lewej bedzie jeszcze srednia ocen jak starcyz czasu  -->
+                     <Frame
+                        x:Name="MarkVisitedButton"
+                        Margin="50,10,50,0"
+                        Padding="0"
+                        CornerRadius="20">
+                        <Button
+                            BackgroundColor="#BF0603"
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Pressed="MarkVisited"
+                            Text="Oznacz miejsce jako odwiedzone"
+                            TextColor="White" />
+                    </Frame>
                     <Frame
                         Margin="0,0,20,0"
                         Padding="10,5"
@@ -155,11 +168,13 @@
                         CornerRadius="20"
                         HeightRequest="40"
                         HorizontalOptions="Center">
+                        
                         <StackLayout Orientation="Horizontal" >
-                            <Image Margin="-2" Source="odwiedzone_icon" />
+                            <!--<Image Margin="-2" Source="odwiedzone_icon" />-->
+                            
                             <Label
                                 Style="{DynamicResource Cords}"
-                                Text="Odwiedzone"
+                                Text="Odwiedzono?"
                                 VerticalOptions="Center" />
                             <BoxView WidthRequest="1" Color="#363636" />
                             <Image
@@ -239,21 +254,14 @@
                     <!--  Przycisk oznaczania odwiedzonych  -->
                     <Label
                         x:Name="MarkVisitedHintLabel"
-                        HorizontalOptions="Center"
-                        Text="Oznacz miejsce jako odwiedzone w celu pisania recenzji" />
-                    <Frame
-                        x:Name="MarkVisitedButton"
-                        Margin="50,10,50,0"
-                        Padding="0"
-                        CornerRadius="20">
-                        <Button
-                            BackgroundColor="#BF0603"
-                            FontAttributes="Bold"
-                            FontSize="17"
-                            Pressed="MarkVisited"
-                            Text="Oznacz miejsce jako odwiedzone"
-                            TextColor="White" />
-                    </Frame>
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        
+                        FontSize="Large"
+                        TextColor="Black"
+                        Text="! Oznacz miejsce jako odwiedzone w celu pisania recenzji !" />
+                   
                     <!--  Przycisk pisania recenzji  -->
                     <Frame
                         x:Name="WriteReviewButton"
@@ -283,6 +291,7 @@
                                 Grid.Column="1"
                                 FontAttributes="Bold"
                                 FontSize="16"
+                                TextColor="Black"
                                 Text="RECENZJE UŻYTKOWNIKÓW"
                                 VerticalOptions="Center" />
                         </Grid>

@@ -35,7 +35,7 @@ namespace Urbexer.ViewModels {
 
         #region Komendy
         /// <summary>
-        /// Sortuj lokacje używając <see cref="BaseLocationViewModel.SetFilterByName(string)"/>
+        /// Sortuj lokacje używając <see cref="BaseLocationViewModel.SetNameFilter()"/>
         /// </summary>
         public ICommand FilterLocationsByNameCommand =>
             new Command<string>((string query) => {

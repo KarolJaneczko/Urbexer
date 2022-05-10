@@ -59,7 +59,7 @@ namespace Urbexer.ViewModels {
             get { return editLayout; }
             set {
                 editLayout = value;
-                profileAvatarSource = RankingProfileViewModel.GetAvatarByLayout(ProfileData.GetLayoutNumberFromName(editLayout));
+                profileAvatarSource = ProfileViewModel.GetAvatarByLayout(ProfileData.GetLayoutNumberFromName(editLayout));
                 PropertyChanged(this, new PropertyChangedEventArgs("EditLayout"));
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileAvatarSource"));
             }
@@ -93,7 +93,6 @@ namespace Urbexer.ViewModels {
                 var layout = ProfileData.GetLayoutNumberFromName(EditLayout);
                 if (await connectionService.UpdateProfile(new Models.ApiModels.APIEdytujProfil(UserInfo.Login, EditFirstName,
                     EditLastName, EditDescription, EditFacebook, EditInstagram, EditYoutube, layout), httpClient)) {
-                    await ProfileViewModel.RefreshProfile();
                     await Shell.Current.GoToAsync("..");
                 }
                 else {
@@ -118,7 +117,7 @@ namespace Urbexer.ViewModels {
             editYoutube = myProfile.YoutubeLink;
             editInstagram = myProfile.InstagramLink;
             editLayout = ProfileData.GetLayoutNameFromNumber(myProfile.ProfileLayout);
-            profileAvatarSource = RankingProfileViewModel.GetAvatarByLayout(myProfile.ProfileLayout);
+            profileAvatarSource = ProfileViewModel.GetAvatarByLayout(myProfile.ProfileLayout);
         }
         #endregion
     }
