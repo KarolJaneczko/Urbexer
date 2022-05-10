@@ -202,7 +202,7 @@ namespace Urbexer.ViewModels {
         public async void GoToProfileClicked() {
             ProfileData profileData = await ConnectionService.GetProfileByLogin(Login, httpClient);
             profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login, 0);
-            profileData.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(profileData.Login, httpClient);
+            profileData.VisitedPlaces = (await LocationService.GetIdListOfUserVisited(profileData.Login)).Count();
             RankingProfileViewModel.FillProfile(profileData);
             await Shell.Current.GoToAsync(nameof(RankingProfile));
         }

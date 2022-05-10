@@ -69,15 +69,6 @@ namespace Urbexer.Services {
                 return false;
         }
         /// <summary>
-        /// Metoda zwracająca liczbę wszystkich, odwiedzonych miejsc przez użytkownika.
-        /// </summary>
-        public static async Task<int> GetVisitedPlacesCountByLogin(string login, HttpClient httpClient) {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
-            var result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/urbex/pokazCzyjesOdwiedzone?Login=" + login + "&PageNumber=1&PageSize=" + sizeof(int)).Result.Content.ReadAsStringAsync();
-            var resultList = JsonConvert.DeserializeObject<List<APICzyjesOdwiedzone>>(result);
-            return resultList.Count;
-        }
-        /// <summary>
         /// Metoda zwracająca listę rankingową z bazy danych.
         /// </summary>
         public async Task<List<APIRanking>> GetRankingList(int type, HttpClient httpClient) {
