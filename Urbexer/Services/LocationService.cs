@@ -110,7 +110,9 @@ namespace Urbexer.Services {
         /// Pobierz id lokacji odwiedzonych przez danego użytkownika.
         /// </summary>
         /// <param name="userLogin">Login użytkownika, którego lokacje zostaną pobrane.</param>
-        public static async Task<List<int>> GetIdListOfUserVisited(string userLogin, int pageNumber, int pageSize = 50) {
+        /// <param name="pageNumber">Numer strony, poczynając od 1.</param>
+        /// <param name="pageSize">Ilość wyników na strone. <para/> Domyślnie 5000, co praktycznie gwarantuje wszystkie lokacje.</param>
+        public static async Task<List<int>> GetIdListOfUserVisited(string userLogin, int pageNumber = 1, int pageSize = 5000) {
             string path = "/api/urbex/pokazCzyjesOdwiedzone";
             string args = $"?Login={userLogin}&PageNumber={pageNumber}&PageSize={pageSize}";
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path + args).ConfigureAwait(false);

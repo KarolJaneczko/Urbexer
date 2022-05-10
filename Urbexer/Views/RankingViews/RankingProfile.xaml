@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"     
-             x:Class="Urbexer.Views.RankingProfile">
+<ContentPage
+    x:Class="Urbexer.Views.RankingProfile"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="DaneTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="TextColor" Value="black" />
                 <Setter Property="FontFamily" Value="Bebas" />
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Margin" Value="10,0,0,0" />
             </Style>
@@ -32,164 +33,221 @@
         <ScrollView.Background>
             <LinearGradientBrush>
                 <GradientStopCollection>
-                    <GradientStop Color="#161616" Offset="0"/>
-                    <GradientStop Color="#363636" Offset="1"/>
+                    <GradientStop Offset="0" Color="#161616" />
+                    <GradientStop Offset="1" Color="#363636" />
                 </GradientStopCollection>
             </LinearGradientBrush>
         </ScrollView.Background>
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Image Source="overlay.png" Aspect="Fill" HeightRequest="300" VerticalOptions="StartAndExpand"/>
-            <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="20,50"/>
-            <StackLayout Orientation="Vertical" Margin="0,20" HorizontalOptions="Center" VerticalOptions="Center">
+            <Image
+                Aspect="Fill"
+                HeightRequest="300"
+                Source="overlay.png"
+                VerticalOptions="StartAndExpand" />
+            <StackLayout
+                Margin="20,50"
+                HorizontalOptions="Start"
+                Orientation="Horizontal"
+                Spacing="0"
+                VerticalOptions="Start" />
+            <StackLayout
+                Margin="0,20"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                VerticalOptions="Center">
                 <Grid ColumnDefinitions="*,auto,Auto,auto,*">
-                    <StackLayout Grid.Column="2" VerticalOptions="Start" HorizontalOptions="Center" Margin="0,-50,0,0" >
-                        <Frame CornerRadius="100" Padding="5" BackgroundColor="#363636">
+                    <StackLayout
+                        Grid.Column="2"
+                        Margin="0,-50,0,0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start">
+                        <Frame
+                            Padding="5"
+                            BackgroundColor="#363636"
+                            CornerRadius="100">
                             <Frame Padding="2" CornerRadius="100">
-                                <Image Source="{Binding ProfileAvatarSource}"
-                                   HeightRequest="150" 
-                                   WidthRequest="150"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
+                                <Image
+                                    HeightRequest="150"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding ProfileAvatarSource}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="150" />
                             </Frame>
                         </Frame>
                     </StackLayout>
-                    <!--<Frame Grid.Column="4" 
+                    <!--<Frame Grid.Column="4"
                            Margin="0,0,50,0"
-                           WidthRequest="60" 
-                           Padding="-3" 
-                           CornerRadius="50" 
-                           BackgroundColor="#c4dfce" 
-                           HeightRequest="60" 
+                           WidthRequest="60"
+                           Padding="-3"
+                           CornerRadius="50"
+                           BackgroundColor="#c4dfce"
+                           HeightRequest="60"
                            VerticalOptions="Start"
                            HorizontalOptions="Start">
                         <ImageButton Source="editprofile_icon"
                                      HeightRequest="50"
-                                     WidthRequest="50"  
-                                     Padding="6" 
+                                     WidthRequest="50"
+                                     Padding="6"
                                      Margin="5"
                                      CornerRadius="50"
                                      Opacity="0.9"
-                                     Command="{Binding ClickedEdit}" 
+                                     Command="{Binding ClickedEdit}"
                                      BackgroundColor="#BF0603"/>
                     </Frame>-->
                 </Grid>
-                <!--Login-->
-                <Label Text="{Binding ProfileLogin}"  TextColor="Gold" FontAttributes="Bold" FontSize="26" HorizontalOptions="Center" Margin="-10"/>
-                <!--Pozycja w rankingu-->
-                <Label Text="{Binding Path=ProfilePosition, StringFormat='TOP {0}'}"
-                       FontFamily="Bebas"
-                       TextColor="White"
-                       FontSize="37"
-                       HorizontalOptions="Center"
-                       />
+                <!--  Login  -->
+                <Label
+                    Margin="-10"
+                    FontAttributes="Bold"
+                    FontSize="26"
+                    HorizontalOptions="Center"
+                    Text="{Binding ProfileLogin}"
+                    TextColor="Gold" />
+                <!--  Pozycja w rankingu  -->
+                <Label
+                    FontFamily="Bebas"
+                    FontSize="37"
+                    HorizontalOptions="Center"
+                    Text="{Binding Path=ProfilePosition, StringFormat='TOP {0}'}"
+                    TextColor="White" />
             </StackLayout>
-            <Frame Grid.Row="1"
-                   HasShadow="True"
-                   CornerRadius="10" 
-                   Margin="20,-60,20,0"
-                   Padding="0"
-                   HeightRequest="100"
-                   VerticalOptions="Center"
-                   BackgroundColor="#F4F1DE"
-                   BorderColor="silver">
-                <Grid HorizontalOptions="FillAndExpand"
-                      VerticalOptions="CenterAndExpand"
-                      RowDefinitions="*,Auto,*"
-                      ColumnDefinitions="*,Auto,*,Auto">
-                    <!--Link do Instagrama-->
-                    <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
-                        <ImageButton Source="instagram_icon.png"
-                                     HeightRequest="35"
-                                     HorizontalOptions="Center"
-                                     BackgroundColor="Transparent"
-                                     Command="{Binding ClickedInstagram}"/>
-                        <Label Text="Instagram" 
-                               Style="{DynamicResource SocialMedia}"/>
+            <Frame
+                Grid.Row="1"
+                Margin="20,-60,20,0"
+                Padding="0"
+                BackgroundColor="#F4F1DE"
+                BorderColor="silver"
+                CornerRadius="10"
+                HasShadow="True"
+                HeightRequest="100"
+                VerticalOptions="Center">
+                <Grid
+                    ColumnDefinitions="*,Auto,*,Auto"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="*,Auto,*"
+                    VerticalOptions="CenterAndExpand">
+                    <!--  Link do Instagrama  -->
+                    <StackLayout
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        Orientation="Vertical"
+                        Spacing="10"
+                        VerticalOptions="Center">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding ClickedInstagram}"
+                            HeightRequest="35"
+                            HorizontalOptions="Center"
+                            Source="instagram_icon.png" />
+                        <Label Style="{DynamicResource SocialMedia}" Text="Instagram" />
                     </StackLayout>
-                    <BoxView Grid.Column="1" Grid.RowSpan="3" HeightRequest="55" WidthRequest="2" Color="#363636" VerticalOptions="Center"/>
-                    <!--Link do kanału YouTube-->
-                    <StackLayout Grid.Column="2" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
-                        <ImageButton Source="youtube_icon.png"
-                                     HeightRequest="35"
-                                     HorizontalOptions="Center"
-                                     BackgroundColor="Transparent"
-                                     Command="{Binding ClickedYoutube}"/>
+                    <BoxView
+                        Grid.RowSpan="3"
+                        Grid.Column="1"
+                        HeightRequest="55"
+                        VerticalOptions="Center"
+                        WidthRequest="2"
+                        Color="#363636" />
+                    <!--  Link do kanału YouTube  -->
+                    <StackLayout
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Vertical"
+                        Spacing="10">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding ClickedYoutube}"
+                            HeightRequest="35"
+                            HorizontalOptions="Center"
+                            Source="youtube_icon.png" />
 
-                        <Label Text="Youtube"
-                               Style="{DynamicResource SocialMedia}"/>
+                        <Label Style="{DynamicResource SocialMedia}" Text="Youtube" />
 
                     </StackLayout>
-                    <BoxView Grid.Column="3" Grid.RowSpan="3" HeightRequest="55" WidthRequest="2" Color="#363636" VerticalOptions="Center"/>
-                    <!--Link do profilu na Facebooku-->
-                    <StackLayout Grid.Column="4" Grid.Row="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
-                        <ImageButton Source="facebook_icon.png" 
-                                     HeightRequest="35"
-                                     HorizontalOptions="Center"
-                                     BackgroundColor="Transparent"
-                                     Command="{Binding ClickedFacebook}"/>
-                        <Label Text="Facebook"
-                               Style="{DynamicResource SocialMedia}"/>
+                    <BoxView
+                        Grid.RowSpan="3"
+                        Grid.Column="3"
+                        HeightRequest="55"
+                        VerticalOptions="Center"
+                        WidthRequest="2"
+                        Color="#363636" />
+                    <!--  Link do profilu na Facebooku  -->
+                    <StackLayout
+                        Grid.Row="1"
+                        Grid.Column="4"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Vertical"
+                        Spacing="10">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding ClickedFacebook}"
+                            HeightRequest="35"
+                            HorizontalOptions="Center"
+                            Source="facebook_icon.png" />
+                        <Label Style="{DynamicResource SocialMedia}" Text="Facebook" />
                     </StackLayout>
                 </Grid>
             </Frame>
-            <!--region  opis profilu-->
-            <StackLayout Grid.Row="2"
-                         Spacing="1"
-                         Margin="10,0">
-                <Frame Margin="0,2"
-                       Grid.Row="2"  
-                       Padding="8">
+            <!--  region  opis profilu  -->
+            <StackLayout
+                Grid.Row="2"
+                Margin="10,0"
+                Spacing="1">
+                <Frame
+                    Grid.Row="2"
+                    Margin="0,2"
+                    Padding="8">
                     <StackLayout>
-                        <Label Text="Biogram"
-                               Margin="0,0"
-                               Style="{DynamicResource DaneTitle}"/>
-                        <BoxView Color="Gray"
-                             HeightRequest="1"
-                             HorizontalOptions="Fill"
-                             Margin="0,0,140,0"/>
-                        <Label Text="{Binding ProfileDescription}"
-                           Margin="5,0,5,0"/>
+                        <Label
+                            Margin="0,0"
+                            Style="{DynamicResource DaneTitle}"
+                            Text="Biogram" />
+                        <BoxView
+                            Margin="0,0,140,0"
+                            HeightRequest="1"
+                            HorizontalOptions="Fill"
+                            Color="Gray" />
+                        <Label Margin="5,0,5,0" Text="{Binding ProfileDescription}" />
                     </StackLayout>
                 </Frame>
-                <!--endregion-->
-                <!--region Dane usera-->
-                <Frame BackgroundColor="White" 
-                       Padding="3"
-                       HeightRequest="50">
+                <!--  endregion  -->
+                <!--  region Dane usera  -->
+                <Frame
+                    Padding="3"
+                    BackgroundColor="White"
+                    HeightRequest="50">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="IMIĘ"
-                               Style="{DynamicResource DaneTitle}"/>
-                        <Label Text="{Binding ProfileFirstName}"
-                               Style="{DynamicResource DaneInfo}"/>
+                        <Label Style="{DynamicResource DaneTitle}" Text="IMIĘ" />
+                        <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileFirstName}" />
                     </StackLayout>
                 </Frame>
-                <Frame BackgroundColor="White" 
-                       Padding="3"
-                       HeightRequest="50">
+                <Frame
+                    Padding="3"
+                    BackgroundColor="White"
+                    HeightRequest="50">
                     <StackLayout Orientation="Horizontal">
-                        <Label  Text="NAZWISKO" 
-                                Style="{DynamicResource DaneTitle}"/>
-                        <Label  Text="{Binding ProfileLastName}"
-                               Style="{DynamicResource DaneInfo}"/>
+                        <Label Style="{DynamicResource DaneTitle}" Text="NAZWISKO" />
+                        <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileLastName}" />
                     </StackLayout>
                 </Frame>
-                <Frame BackgroundColor="White" 
-                       Padding="3"
-                       HeightRequest="50">
+                <Frame
+                    Padding="3"
+                    BackgroundColor="White"
+                    HeightRequest="50">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="ODWIEDZONE MIEJSCA" 
-                               Style="{DynamicResource DaneTitle}"/>
-                        <Label Text="{Binding ProfileVisitedPlaces}"
-                              Style="{DynamicResource DaneInfo}"/>
+                        <Label Style="{DynamicResource DaneTitle}" Text="ODWIEDZONE MIEJSCA" />
+                        <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileVisitedPlaces}" />
                     </StackLayout>
                 </Frame>
-                <!--endregion-->
+                <!--  endregion  -->
             </StackLayout>
         </Grid>
     </ScrollView>

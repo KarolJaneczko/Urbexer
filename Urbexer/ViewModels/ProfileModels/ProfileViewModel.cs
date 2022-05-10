@@ -21,6 +21,8 @@ namespace Urbexer.ViewModels {
         #region Zmienne
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private static string profileAvatarSource, profileLogin, profilePosition, profileDescription, profileFirstName, profileLastName, profileVisitedPlaces;
+        private bool isLoading = false;
+        private List<int> locationsVisitedIds;
         public string ProfileAvatarSource {
             get { return profileAvatarSource; }
             set {
@@ -80,21 +82,22 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("VisitedLocations"));
             }
         }
-        public ICommand ClickedInstagram { protected set; get; }
-        public ICommand ClickedYoutube { protected set; get; }
-        public ICommand ClickedFacebook { protected set; get; }
-        public ICommand ClickedEdit { protected set; get; }
-        private int currentLocationsPage = 1;
-        private bool isLoading = false;
-        #endregion
+        #region Komendy
+        public ICommand ClickedInstagramCommand { protected set; get; }
+        public ICommand ClickedYoutubeCommand { protected set; get; }
+        public ICommand ClickedFacebookCommand { protected set; get; }
+        public ICommand ClickedEditCommand { protected set; get; }
+        public ICommand LoadMoreLocationsCommand { protected set; get; }
+        #endregion Komendy
+        #endregion Zmienne
         #region Konstruktory
         public ProfileViewModel() {
             LocationsVisited = new ObservableRangeCollection<Location>();
 
-            ClickedInstagram = new Command(OnClickedInstagram);
-            ClickedYoutube = new Command(OnClickedYoutube);
-            ClickedFacebook = new Command(OnClickedFacebook);
-            ClickedEdit = new Command(OnClickedEdit);
+            ClickedInstagramCommand = new Command(OnClickedInstagram);
+            ClickedYoutubeCommand = new Command(OnClickedYoutube);
+            ClickedFacebookCommand = new Command(OnClickedFacebook);
+            ClickedEditCommand = new Command(OnClickedEdit);
             LoadMoreLocationsCommand = new Command(async() => await LoadMoreLocations());
             
             Task.Run(async () => await LoadMoreLocations());
@@ -115,6 +118,7 @@ namespace Urbexer.ViewModels {
             profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
             profileVisitedPlaces = profileData.VisitedPlaces.ToString();
         }
+        #region Przyciski
         public void OnClickedInstagram() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
                 Browser.OpenAsync(new Uri(UserInfo.yourProfile.InstagramLink));
@@ -134,13 +138,15 @@ namespace Urbexer.ViewModels {
             EditProfileViewModel.FillEdit(UserInfo.yourProfile);
             Shell.Current.GoToAsync(nameof(EditProfilePage));
         }
+        #endregion Przyciski
         /// <summary>
         /// Metoda pozwalająca odświeżyć profil poprzez pobranie aktualnych informacji z bazy danych i wypełnianiu ich metodą FillProfile.
         /// </summary>
         public static async Task RefreshProfile() {
             UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
             UserInfo.yourProfile.LeaderboardPosition = GetLeaderboardPositionByLogin(UserInfo.Login);
-            UserInfo.yourProfile.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
+            //UserInfo.yourProfile.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
+            UserInfo.yourProfile.VisitedPlaces = 0;
             FillProfile(UserInfo.yourProfile);
         }
         /// <summary>
@@ -184,10 +190,12 @@ namespace Urbexer.ViewModels {
             }
             return "";
         }
+        private async Task DownloadLocationsVisitedIds() {
+            locationsVisitedIds = await LocationService.GetIdListOfUserVisited(ProfileLogin);
+        }
         /// <summary>
         /// Wczytuje dodatkowe lokacje do listy odwiedzonych.
         /// </summary>
-        public Command LoadMoreLocationsCommand;
         private async Task LoadMoreLocations() {
             if (!Plugin.Connectivity.CrossConnectivity.Current.IsConnected) return;
             if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie
