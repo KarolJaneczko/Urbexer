@@ -39,7 +39,7 @@ namespace APIpz.Controllers
             return Ok(wynik);
         }
         [HttpGet("pokazCzyjesOdwiedzone")]
-        public ActionResult<PageResult<ZwracaneOdwiedzoneDto>> PokazCzyjesOdwiedzone([FromQuery] PokazCzyjesOdwiedzoneDto dto)
+        public ActionResult<IEnumerable<int>> PokazCzyjesOdwiedzone([FromQuery] PokazCzyjesOdwiedzoneDto dto)
         {
             var wynik = _urbexService.PokazCzyjesOdwiedzone(dto);
             return Ok(wynik);
