@@ -130,7 +130,13 @@
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:RankingPage}"/>
     </FlyoutItem>
-
+    
+    <!--Wyszukaj użytkownika-->
+    <MenuItem Text="Wyszukaj użytkownika"
+              IconImageSource="preview_icon.png"
+              Clicked="ClickedSearch">
+    </MenuItem>
+    
     <!--O nas-->
     <FlyoutItem Title="O nas" 
                 Icon="info_icon.png" 
@@ -145,12 +151,6 @@
                 FlyoutDisplayOptions="AsSingleItem">
         <ShellContent ContentTemplate="{DataTemplate local:FaqPage}"/>
     </FlyoutItem> 
-    <!--kontakt  mozna wcisnac do nas -->
-    <!--<FlyoutItem Title="Kontakt"
-                Icon="email_icon.png"
-                FlyoutDisplayOptions="AsSingleItem">
-        <ShellContent ContentTemplate="{DataTemplate local:InfoPage}"/>
-    </FlyoutItem>-->
 
     <!--Wylogowanie-->
     <MenuItem

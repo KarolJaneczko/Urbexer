@@ -1,5 +1,6 @@
 ﻿using System;
 using Urbexer.Models;
+using Urbexer.Services;
 using Urbexer.Views;
 using Urbexer.Views.LocationViews;
 using Xamarin.Forms;
@@ -24,6 +25,18 @@ namespace Urbexer {
         private async void ClickedLogout(object sender, EventArgs e) {
             UserInfo.Logout();
             await Current.GoToAsync(nameof(WelcomePage));
+        }
+        private async void ClickedSearch(object sender, EventArgs e) {
+            var login = await Application.Current.MainPage.DisplayPromptAsync("Wyszukaj użytkownika", "Proszę podać login użytkownika");
+            if (login != null) {
+                if (await ConnectionService.GetProfileByLogin(login) != null) {
+                    var route = $"{nameof(ProfilePage)}?UserLogin={login}";
+                    await Current.GoToAsync(route);
+                }
+                else {
+                    await Application.Current.MainPage.DisplayAlert("Błąd", "Nie ma użytkownika o loginie \"" + login + "\"", "OK");
+                }
+            }
         }
         #endregion
     }
