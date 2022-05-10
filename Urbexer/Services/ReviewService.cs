@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
 
@@ -72,7 +73,7 @@ namespace Urbexer.Services {
                 "\"tekst\":\"{2}\"}}",
                 locationId,
                 scoreQuality,
-                reviewMessage);
+                HttpUtility.UrlEncode(reviewMessage));
             await HttpService.SendApiRequest(HttpMethod.Put, path, json, requiresToken: true).ConfigureAwait(false);
         }
         /// <summary>
