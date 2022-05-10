@@ -49,13 +49,12 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda zwracająca dane profilowe, przyjmująca w parametrze login użytkownika.
         /// </summary>
-        public static async Task<ProfileData> GetProfileByLogin(string login, HttpClient httpClient) {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
-            var result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/profile/pokazProfil?login=" + login).Result.Content.ReadAsStringAsync();
-            if (result == null)
-                return null;
-            else
-                return new ProfileData(JsonConvert.DeserializeObject<APIProfile>(result));
+        public static async Task<ProfileData> GetProfileByLogin(string login) {
+            string path = "/api/profile/pokazProfil";
+            string args = $"?login={login}";
+            var result = await HttpService.SendApiRequest(HttpMethod.Get, path + args);
+            if (result == null) return null;
+            return new ProfileData(JsonConvert.DeserializeObject<APIProfile>(result));
         }
         /// <summary>
         /// Metoda wysyłająca aktualizację profilu do bazy danych.

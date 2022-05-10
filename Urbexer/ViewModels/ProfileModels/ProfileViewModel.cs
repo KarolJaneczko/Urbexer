@@ -52,6 +52,9 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileDescription"));
             }
         }
+        /// <summary>
+        /// Imię użytkownika.
+        /// </summary>
         public string ProfileFirstName {
             get { return profileFirstName; }
             set {
@@ -59,6 +62,9 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileFirstName"));
             }
         }
+        /// <summary>
+        /// Nazwisko użytkownika.
+        /// </summary>
         public string ProfileLastName {
             get { return profileLastName; }
             set {
@@ -66,6 +72,9 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileLastName"));
             }
         }
+        /// <summary>
+        /// Pokazuje liczbe odwiedzonych miejsc przez danego użytkownika.
+        /// </summary>
         public string ProfileVisitedPlaces {
             get { return profileVisitedPlaces; }
             set {
@@ -79,8 +88,9 @@ namespace Urbexer.ViewModels {
         /// </summary>
         public ObservableRangeCollection<Location> LocationsVisited {
             get { return _locationsVisited; }
-            set { _locationsVisited = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("VisitedLocations"));
+            set { 
+                _locationsVisited = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LocationsVisited"));
             }
         }
         #region Komendy
@@ -100,25 +110,12 @@ namespace Urbexer.ViewModels {
             ClickedFacebookCommand = new Command(OnClickedFacebook);
             ClickedEditCommand = new Command(OnClickedEdit);
             LoadMoreLocationsCommand = new Command(async() => await LoadMoreLocations());
-            
-            Task.Run(async () => await LoadMoreLocations());
-            Device.InvokeOnMainThreadAsync(RefreshProfile);
+        }
+        public ProfileViewModel(string userLogin) : this(){
+            Device.InvokeOnMainThreadAsync(async () => { await LoadProfile(userLogin); });
         }
         #endregion
         #region Metody
-        /// <summary>
-        /// Metoda wypełniająca profil danymi, pobranymi z bazy danych.
-        /// </summary>
-        public static void FillProfile(ProfileData profileData) {
-            if (profileData == null) return;
-            profileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
-            profileLogin = profileData.Login;
-            profilePosition = " #" + profileData.LeaderboardPosition.ToString();
-            profileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
-            profileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
-            profileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
-            profileVisitedPlaces = profileData.VisitedPlaces.ToString();
-        }
         #region Przyciski
         public void OnClickedInstagram() {
             if (!string.IsNullOrEmpty(UserInfo.yourProfile.InstagramLink)) {
@@ -143,12 +140,25 @@ namespace Urbexer.ViewModels {
         /// <summary>
         /// Metoda pozwalająca odświeżyć profil poprzez pobranie aktualnych informacji z bazy danych i wypełnianiu ich metodą FillProfile.
         /// </summary>
-        public static async Task RefreshProfile() {
-            UserInfo.yourProfile = await ConnectionService.GetProfileByLogin(UserInfo.Login, ConnectionService.httpClient2);
-            UserInfo.yourProfile.LeaderboardPosition = GetLeaderboardPositionByLogin(UserInfo.Login);
-            //UserInfo.yourProfile.VisitedPlaces = await ConnectionService.GetVisitedPlacesCountByLogin(UserInfo.Login, httpClient2);
-            UserInfo.yourProfile.VisitedPlaces = 0;
-            FillProfile(UserInfo.yourProfile);
+        public async Task LoadProfile(string userLogin = null) {
+            if (string.IsNullOrEmpty(userLogin)) userLogin = UserInfo.Login;
+            ProfileData profileData = await ConnectionService.GetProfileByLogin(userLogin);
+            profileData.LeaderboardPosition = GetLeaderboardPositionByLogin(userLogin);
+            FillProfile(profileData);
+            await LoadMoreLocations();
+        }
+        /// <summary>
+        /// Metoda wypełniająca profil danymi, pobranymi z bazy danych.
+        /// </summary>
+        public void FillProfile(ProfileData profileData) {
+            if (profileData == null) return;
+            ProfileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
+            ProfileLogin = profileData.Login;
+            ProfilePosition = " #" + profileData.LeaderboardPosition.ToString();
+            ProfileDescription = string.IsNullOrEmpty(profileData.Description) ? "Opis jest pusty." : profileData.Description;
+            ProfileFirstName = string.IsNullOrEmpty(profileData.FirstName) ? "-" : profileData.FirstName;
+            ProfileLastName = string.IsNullOrEmpty(profileData.LastName) ? "-" : profileData.LastName;
+            ProfileVisitedPlaces = profileData.VisitedPlaces.ToString();
         }
         /// <summary>
         /// Metoda wyliczająca miejsce użytkownika w rankingu ogólnym.
@@ -191,13 +201,16 @@ namespace Urbexer.ViewModels {
             }
             return "";
         }
+        /// <summary>
+        /// Pobierz id lokacji odwiedzonych przez użytkownika.
+        /// </summary>
         protected async Task DownloadLocationsVisitedIds() {
             locationsVisitedIds = await LocationService.GetIdListOfUserVisited(ProfileLogin);
             locationsVisitedIds.Reverse(); // To sprawi że id będą w kolejności od najnowszego do najstarszego odwiedzonego
             await Device.InvokeOnMainThreadAsync(() => ProfileVisitedPlaces = Convert.ToString(locationsVisitedIds.Count()));
         }
         /// <summary>
-        /// Wczytuje dodatkowe lokacje do listy odwiedzonych.
+        /// Wczytaj dodatkowe lokacje do listy odwiedzonych.
         /// </summary>
         protected async Task LoadMoreLocations(int loadAmount = 10) {
             if (isLoading) return; // Nie powzól na więcej niż jeden task LoadMore jednocześnie

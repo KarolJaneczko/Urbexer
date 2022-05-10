@@ -170,16 +170,16 @@ namespace Urbexer.ViewModels {
         public int LiczbaMiejsc { get; set; }
         public string AvatarSource { get; set; }
         public int Miejsce { get; set; }
-        public ICommand GoToProfile { protected set; get; }
+        public Command<string> GoToProfileCommand { protected set; get; }
         public System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient(ConnectionService.clientHandler);
         #endregion
         #region Konstruktory
         public Rekord(string login, int liczbaMiejsc, int layout) {
             Login = login;
             LiczbaMiejsc = liczbaMiejsc;
-            GoToProfile = new Command(GoToProfileClicked);
+            GoToProfileCommand = new Command<string>(GoToProfile);
             AvatarSource = ProfileViewModel.GetAvatarByLayout(layout);
-            Miejsce = RankingProfileViewModel.GetLeaderboardPositionByLogin(Login, LeaderboardViewModel.RankingType);
+            Miejsce = ProfileViewModel.GetLeaderboardPositionByLogin(Login, LeaderboardViewModel.RankingType);
         }
         #endregion
         #region Metody
@@ -199,12 +199,9 @@ namespace Urbexer.ViewModels {
         /// <summary>
         /// Metoda wywoływana przy kliknięciu rekordu w tabeli - przenosi użytkownika do podglądu profilu użytkownika.
         /// </summary>
-        public async void GoToProfileClicked() {
-            ProfileData profileData = await ConnectionService.GetProfileByLogin(Login, httpClient);
-            profileData.LeaderboardPosition = RankingProfileViewModel.GetLeaderboardPositionByLogin(profileData.Login, 0);
-            profileData.VisitedPlaces = (await LocationService.GetIdListOfUserVisited(profileData.Login)).Count();
-            RankingProfileViewModel.FillProfile(profileData);
-            await Shell.Current.GoToAsync(nameof(RankingProfile));
+        public async void GoToProfile(string login) {
+            var route = $"{nameof(ProfilePage)}?UserLogin={login}";
+            await Shell.Current.GoToAsync(route);
         }
 
         #endregion

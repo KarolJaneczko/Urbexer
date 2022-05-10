@@ -4,12 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
-    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels">
-
-    <ContentPage.BindingContext>
-        <viewmodels:ProfileViewModel />
-    </ContentPage.BindingContext>
-
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    x:DataType="viewmodels:ProfileViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="DaneTitle" TargetType="Label">
@@ -89,6 +85,7 @@
                         </Frame>
                     </StackLayout>
                     <Frame
+                        x:Name="EditProfileButton"
                         Grid.Column="4"
                         Margin="0,0,50,0"
                         Padding="-3"
@@ -247,24 +244,31 @@
                         <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileLastName}" />
                     </StackLayout>
                 </Frame>
-                <Frame Margin="-11,10,-11,0"
-                     BackgroundColor="#BF0603">
-                    
-                <StackLayout Orientation="Horizontal">
-                        <Label Style="{DynamicResource DaneTitle}" Text="ODWIEDZONE MIEJSCA" TextColor="White" FontSize="Title"/>
-                        <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileVisitedPlaces}" TextColor="White"  FontSize="Title"/>
+                <Frame Margin="-11,10,-11,0" BackgroundColor="#BF0603">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            FontSize="Title"
+                            Style="{DynamicResource DaneTitle}"
+                            Text="ODWIEDZONE MIEJSCA"
+                            TextColor="White" />
+                        <Label
+                            FontSize="Title"
+                            Style="{DynamicResource DaneInfo}"
+                            Text="{Binding ProfileVisitedPlaces}"
+                            TextColor="White" />
                     </StackLayout>
                 </Frame>
                 <!--  endregion  -->
-                
-                <!--odwiedzone miejsca-->
-                
-                <Frame Margin="0,-3,0,0"
-                       
+
+                <!--  odwiedzone miejsca  -->
+
+                <Frame
+                    Margin="0,-3,0,0"
                     Padding="3"
                     BackgroundColor="Transparent"
                     VerticalOptions="CenterAndExpand">
-                    <CollectionView 
+                    <CollectionView
                         HorizontalOptions="CenterAndExpand"
                         ItemsSource="{Binding LocationsVisited}"
                         RemainingItemsThreshold="1"
@@ -275,35 +279,39 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:Location">
                                 <Frame Padding="0" BorderColor="#363636">
-                                <StackLayout Orientation="Horizontal"  Margin="0,3" BackgroundColor="White" Padding="2">
-                                    <Frame Padding="5" CornerRadius="10">
-                                        <Image
-                        Aspect="AspectFill"
-                        HeightRequest="100"
-                        HorizontalOptions="Start"
-                        Source="{Binding Thumbnail}"
-                        WidthRequest="100" />
-                                    </Frame>
-                                    <StackLayout HorizontalOptions="FillAndExpand">
-                                        <Label
-                        FontFamily="Bebas"
-                        FontSize="Medium"
-                        Text="{Binding Name}"
-                        TextColor="#BF0603"
-                        VerticalOptions="Start" />
-                                        <BoxView
-                        Margin="0,-5,40,0"
-                        HeightRequest="1"
-                        HorizontalOptions="FillAndExpand"
-                        Color="#363636" />
-                                        <Label
-                        FontFamily="Opis"
-                        Text="{Binding Address}"
-                        TextColor="Black"
-                        VerticalOptions="Start" />
-                                    </StackLayout>
+                                    <StackLayout
+                                        Margin="0,3"
+                                        Padding="2"
+                                        BackgroundColor="White"
+                                        Orientation="Horizontal">
+                                        <Frame Padding="5" CornerRadius="10">
+                                            <Image
+                                                Aspect="AspectFill"
+                                                HeightRequest="100"
+                                                HorizontalOptions="Start"
+                                                Source="{Binding Thumbnail}"
+                                                WidthRequest="100" />
+                                        </Frame>
+                                        <StackLayout HorizontalOptions="FillAndExpand">
+                                            <Label
+                                                FontFamily="Bebas"
+                                                FontSize="Medium"
+                                                Text="{Binding Name}"
+                                                TextColor="#BF0603"
+                                                VerticalOptions="Start" />
+                                            <BoxView
+                                                Margin="0,-5,40,0"
+                                                HeightRequest="1"
+                                                HorizontalOptions="FillAndExpand"
+                                                Color="#363636" />
+                                            <Label
+                                                FontFamily="Opis"
+                                                Text="{Binding Address}"
+                                                TextColor="Black"
+                                                VerticalOptions="Start" />
+                                        </StackLayout>
                                         <StackLayout Margin="10,5,10,5">
-                                            <!--Można zastąpić datą odwiedzenia-->
+                                            <!--  Można zastąpić datą odwiedzenia  -->
                                             <!--<Label
                         FontFamily="Bebas"
                         FontSize="Large"
@@ -312,11 +320,11 @@
                         Text="{Binding Path=Distance, StringFormat='{0} km'}"
                         VerticalOptions="End" />-->
                                             <Image
-                        HorizontalOptions="End"
-                        HeightRequest="35"
-                        Opacity="0.5"
-                        Source="{Binding CategoryIconPath}"
-                        VerticalOptions="EndAndExpand" />
+                                                HeightRequest="35"
+                                                HorizontalOptions="End"
+                                                Opacity="0.5"
+                                                Source="{Binding CategoryIconPath}"
+                                                VerticalOptions="EndAndExpand" />
                                             <!--<Frame
                         Padding="3"
                         CornerRadius="10"
@@ -335,7 +343,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Frame>
-               
+
             </StackLayout>
         </Grid>
     </ScrollView>

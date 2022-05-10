@@ -50,9 +50,6 @@
     <Compile Update="Views\RankingViews\LeaderboardPage.xaml.cs">
       <DependentUpon>LeaderboardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\RankingViews\RankingProfile.xaml.cs">
-      <DependentUpon>RankingProfile.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\StartViews\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
