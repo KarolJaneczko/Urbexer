@@ -28,11 +28,14 @@ namespace Urbexer {
         }
         private async void ClickedSearch(object sender, EventArgs e) {
             var login = await Application.Current.MainPage.DisplayPromptAsync("Wyszukaj użytkownika", "Proszę podać login użytkownika");
-            if (await ConnectionService.GetProfileByLogin(login) != null) {
-                var route = $"{nameof(ProfilePage)}?UserLogin={login}";
-                await Current.GoToAsync(route);
-            } else {
-                await Application.Current.MainPage.DisplayAlert("Błąd", "Nie ma użytkownika o loginie " + login, "OK");
+            if (login != null) {
+                if (await ConnectionService.GetProfileByLogin(login) != null) {
+                    var route = $"{nameof(ProfilePage)}?UserLogin={login}";
+                    await Current.GoToAsync(route);
+                }
+                else {
+                    await Application.Current.MainPage.DisplayAlert("Błąd", "Nie ma użytkownika o loginie \"" + login + "\"", "OK");
+                }
             }
         }
         #endregion
