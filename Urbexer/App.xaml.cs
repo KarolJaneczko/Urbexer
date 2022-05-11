@@ -3,7 +3,6 @@ using System;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Services;
-using Urbexer.ViewModels;
 using Urbexer.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;

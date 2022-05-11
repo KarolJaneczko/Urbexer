@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
-using Urbexer.Models.UserModels;
 using Urbexer.Services;
 using Urbexer.Views;
 using Xamarin.Forms;

@@ -88,7 +88,7 @@ namespace Urbexer.ViewModels {
         /// </summary>
         public ObservableRangeCollection<Location> LocationsVisited {
             get { return _locationsVisited; }
-            set { 
+            set {
                 _locationsVisited = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("LocationsVisited"));
             }
@@ -109,9 +109,9 @@ namespace Urbexer.ViewModels {
             ClickedYoutubeCommand = new Command(OnClickedYoutube);
             ClickedFacebookCommand = new Command(OnClickedFacebook);
             ClickedEditCommand = new Command(OnClickedEdit);
-            LoadMoreLocationsCommand = new Command(async() => await LoadMoreLocations());
+            LoadMoreLocationsCommand = new Command(async () => await LoadMoreLocations());
         }
-        public ProfileViewModel(string userLogin) : this(){
+        public ProfileViewModel(string userLogin) : this() {
             Device.InvokeOnMainThreadAsync(async () => { await LoadProfile(userLogin); });
         }
         #endregion
