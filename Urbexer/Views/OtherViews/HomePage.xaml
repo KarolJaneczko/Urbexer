@@ -6,7 +6,7 @@
     xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
-    Title="Strona Główna">
+    Title="Strona główna">
 
     <ScrollView>
         <ScrollView.Background>
