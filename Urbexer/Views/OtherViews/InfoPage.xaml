@@ -3,7 +3,7 @@
     x:Class="Urbexer.Views.InfoPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="O Nas">
+    Title="O nas">
 
 
     <ContentPage.Resources>
@@ -50,7 +50,7 @@
                     
                     <Label
                         FontSize="Medium"
-                        Text="Michał Burzański - opiekun zespołu."
+                        Text="mgr. Michał Burzański - opiekun zespołu."
                         TextColor="White" />
                   
                     
@@ -68,7 +68,7 @@
                         TextColor="White" />
                     <Label
                         FontSize="Medium"
-                        Text="Bartosz Mierzyński - back-end, Strona WWW"
+                        Text="Bartosz Mierzyński - back-end, strona WWW"
                         TextColor="White" />
                     <Label
                         FontSize="Medium"
