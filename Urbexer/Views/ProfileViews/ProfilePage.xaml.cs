@@ -1,6 +1,9 @@
 ﻿using Urbexer.Models;
 using Urbexer.ViewModels;
 using Xamarin.Forms;
+using System;
+using Urbexer.Services;
+
 
 namespace Urbexer.Views {
     /// <summary>
@@ -34,6 +37,22 @@ namespace Urbexer.Views {
             Shell.Current.GoToAsync(route);
 
             sender.SelectedItem = null;
+        }
+        private async void ClickedSearch(object sender, EventArgs e)
+        {
+            var login = await Application.Current.MainPage.DisplayPromptAsync("Wyszukaj użytkownika", "Proszę podać nick użytkownika");
+            if (login != null)
+            {
+                if (await ConnectionService.GetProfileByLogin(login) != null)
+                {
+                    var route = $"{nameof(ProfilePage)}?UserLogin={login}";
+                    await Shell.Current.GoToAsync(route);  
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Błąd", "Nie ma użytkownika o nicku \"" + login + "\"", "OK");
+                }
+            }
         }
     }
 }

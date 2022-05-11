@@ -32,7 +32,8 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
+    <Grid>
+        <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush>
                 <GradientStopCollection>
@@ -41,6 +42,7 @@
                 </GradientStopCollection>
             </LinearGradientBrush>
         </ScrollView.Background>
+       
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -345,6 +347,16 @@
                 </Frame>
 
             </StackLayout>
+            
         </Grid>
+          
+        
     </ScrollView>
+        <Frame Padding="2" BackgroundColor="#363636"  HeightRequest="45" WidthRequest="45" HorizontalOptions="End" VerticalOptions="End" CornerRadius="50" Margin="0,0,5,20" >
+            <Frame Padding="0" BackgroundColor="#BF0603"  HeightRequest="50" WidthRequest="50" HorizontalOptions="End" VerticalOptions="End" CornerRadius="50" >
+                <ImageButton Source="preview_icon" BackgroundColor="Transparent" Margin="5" Clicked="ClickedSearch"/>
+            </Frame>
+        </Frame>
+    </Grid>
+   
 </ContentPage>
