@@ -132,10 +132,10 @@
     </FlyoutItem>
     
     <!--Wyszukaj użytkownika-->
-    <MenuItem Text="Wyszukaj użytkownika"
+    <!--<MenuItem Text="Wyszukaj użytkownika"
               IconImageSource="preview_icon.png"
               Clicked="ClickedSearch">
-    </MenuItem>
+    </MenuItem>-->
     
     <!--O nas-->
     <FlyoutItem Title="O nas" 
