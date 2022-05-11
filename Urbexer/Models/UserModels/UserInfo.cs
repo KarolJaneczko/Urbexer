@@ -1,6 +1,8 @@
 ﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System.Threading.Tasks;
 using Urbexer.Models.UserModels;
+using Urbexer.Services;
 using Xamarin.Forms.Maps;
 
 namespace Urbexer.Models {
@@ -14,7 +16,10 @@ namespace Urbexer.Models {
         /// </summary>
         public static string Login {
             get => AppSettings.GetValueOrDefault(nameof(Login), null);
-            set => AppSettings.AddOrUpdateValue(nameof(Login), value);
+            set {
+                AppSettings.AddOrUpdateValue(nameof(Login), value);
+                Task.Run(async () => yourProfile = await ConnectionService.GetProfileByLogin(value));
+            }
         }
         /// <summary>
         /// Zmienna typu string, przechowująca token wykorzystywany przy wysyłaniu requestów do API.

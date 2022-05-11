@@ -7,6 +7,10 @@
     Title="{Binding Path=LeaderboardCategory, StringFormat=' Lista Rankingowa - {0} '}"
     x:DataType="viewmodels:LeaderboardViewModel">
 
+    <ContentPage.BindingContext>
+        <viewmodels:LeaderboardViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleLabelStyle" TargetType="Label">

@@ -1,5 +1,4 @@
-﻿using Urbexer.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Urbexer.Views {
     /// <summary>
@@ -9,12 +8,6 @@ namespace Urbexer.Views {
         #region Konstruktory
         public LeaderboardPage() {
             InitializeComponent();
-            BindingContext = new LeaderboardViewModel();
-        }
-        #endregion
-        #region Metody
-        protected override void OnAppearing() {
-            BindingContext = new LeaderboardViewModel();
         }
         #endregion
     }

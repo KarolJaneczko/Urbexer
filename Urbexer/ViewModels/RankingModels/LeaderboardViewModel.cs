@@ -16,8 +16,8 @@ namespace Urbexer.ViewModels {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public List<Rekord> RankingList { get => GetRanking(); }
         public static int RankingType;
-        public int leaderboardMyCount;
-        public string leaderboardMyAvatar, leaderboardMyLogin, leaderboardMyPlace, leaderboardCategory;
+        private int leaderboardMyCount;
+        private string leaderboardMyAvatar, leaderboardMyLogin, leaderboardMyPlace, leaderboardCategory;
         public int LeaderboardMyCount {
             get { return leaderboardMyCount; }
             set {
@@ -56,11 +56,11 @@ namespace Urbexer.ViewModels {
         #endregion
         #region Konstruktory
         public LeaderboardViewModel() {
-            leaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
-            leaderboardMyLogin = UserInfo.Login;
-            leaderboardMyPlace = GetMyLeaderboardPlace();
-            leaderboardCategory = GetLeaderboardCategory(RankingType);
-            leaderboardMyCount = GetLeaderboardMyCount(UserInfo.Login);
+            LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
+            LeaderboardMyLogin = UserInfo.Login;
+            LeaderboardMyPlace = GetMyLeaderboardPlace();
+            LeaderboardCategory = GetLeaderboardCategory(RankingType);
+            LeaderboardMyCount = GetLeaderboardMyCount(UserInfo.Login);
         }
         #endregion
         #region Metody
