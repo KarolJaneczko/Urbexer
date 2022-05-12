@@ -28,6 +28,7 @@ namespace Urbexer.ViewModels {
                 PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
+        bool isBusy = false;
         public ICommand SubmitCommand { protected set; get; }
         #endregion
         #region Konstruktory
@@ -40,6 +41,9 @@ namespace Urbexer.ViewModels {
         /// Metoda wywoływana przy kliknięciu przycisku do logowania. Jeśli wprowadzone dane są prawidłowe, to pobieramy dane dotyczące naszego profilu i przechodzimy do strony startowej.
         /// </summary>
         public async void OnSubmit() {
+            if (isBusy) return;
+            isBusy = true;
+
             try {
                 ValidateLogin(login);
                 ValidatePassword(password);
@@ -58,6 +62,9 @@ namespace Urbexer.ViewModels {
             }
             catch (Exception exception) {
                 DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
+            }
+            finally {
+                isBusy = false;
             }
         }
         #endregion
