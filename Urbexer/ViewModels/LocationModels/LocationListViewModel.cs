@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Urbexer.Services;
 using Urbexer.ViewModels.LocationModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
@@ -20,9 +18,9 @@ namespace Urbexer.ViewModels {
         /// Wywoływane, gdy użytkownik zescrolluje na sam dół listy.
         /// </summary>
         public AsyncCommand LoadMoreCommand { get; }
-        private List<int> loadedLocationsIds = new List<int>();
+        private readonly List<int> loadedLocationsIds = new List<int>();
         /// <summary>
-        /// Obecny zasięg wczytywania.
+        /// Obecny zasięg wczytywania lokacji.
         /// </summary>
         private int currentLoadRange = 0;
         /// <summary>
@@ -34,15 +32,6 @@ namespace Urbexer.ViewModels {
         }
 
         #region Komendy
-        /// <summary>
-        /// Sortuj lokacje używając <see cref="BaseLocationViewModel.SetNameFilter()"/>
-        /// </summary>
-        public ICommand FilterLocationsByNameCommand =>
-            new Command<string>((string query) => {
-                currentNameFilter = query;
-                ReapplyFilters();
-            });
-
         /// <summary>
         /// Powiększ zasięg wczytywania lokacji i pobierz nowe lokacje.
         /// </summary>
@@ -59,10 +48,11 @@ namespace Urbexer.ViewModels {
                     (float)location.Latitude, (float)location.Longitude, currentLoadRange).ConfigureAwait(false);
                 newIds = newIds.Except(loadedLocationsIds).ToList();
             }
+            loadedLocationsIds.AddRange(newIds);
+
             var newLocations = await LocationService.GetLocationListByIds(newIds).ConfigureAwait(false);
             SortLocationsByDistance(newLocations);
-            LocationsFiltered.AddRange(newLocations);
-            loadedLocationsIds.AddRange(newIds);
+            AddLocations(newLocations);
 
             isLoading = false;
         }
