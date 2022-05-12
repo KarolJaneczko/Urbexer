@@ -35,6 +35,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ClickedSearch" IconImageSource="preview_icon" />
     </ContentPage.ToolbarItems>
+
     <Grid>
         <ScrollView>
             <ScrollView.Background>
@@ -45,7 +46,6 @@
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </ScrollView.Background>
-
             <Grid VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -234,7 +234,8 @@
                     <Frame
                         Padding="3"
                         BackgroundColor="White"
-                        HeightRequest="50">
+                        HeightRequest="50"
+                        IsVisible="false">
                         <StackLayout Orientation="Horizontal">
                             <Label Style="{DynamicResource DaneTitle}" Text="IMIĘ" />
                             <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileFirstName}" />
@@ -243,7 +244,8 @@
                     <Frame
                         Padding="3"
                         BackgroundColor="White"
-                        HeightRequest="50">
+                        HeightRequest="50"
+                        IsVisible="false">
                         <StackLayout Orientation="Horizontal">
                             <Label Style="{DynamicResource DaneTitle}" Text="NAZWISKO" />
                             <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileLastName}" />
