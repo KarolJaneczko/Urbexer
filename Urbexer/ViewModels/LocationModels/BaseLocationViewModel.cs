@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -12,19 +13,28 @@ namespace Urbexer.ViewModels.LocationModels {
     /// Podstawowy ViewModel do wyświetlania lokacji
     /// </summary>
     internal class BaseLocationViewModel : INotifyPropertyChanged {
+        private readonly ObservableRangeCollection<Location> _locations = new ObservableRangeCollection<Location>();
         /// <summary>
         /// Przechowuje wszystkie wczytane lokacje.
+        /// Dodawanie lokacji powinno byc robione przy pomocy <see cref="AddLocations(List{Location})"/>.
         /// </summary>
-        protected ObservableRangeCollection<Location> Locations { get; set; }
-        private ObservableRangeCollection<Location> locationsFiltered = new ObservableRangeCollection<Location>();
+        protected ObservableRangeCollection<Location> Locations { get => _locations; }
+        private readonly ObservableRangeCollection<Location> _locationsFiltered = new ObservableRangeCollection<Location>();
         /// <summary>
-        /// Przechowuje wyświetlane lokacje.
+        /// Przechowuje wyświetlane lokacje. <para/>
+        /// Dodawanie lokacji powinno byc robione przy pomocy <see cref="AddLocations(List{Location})"/>.
         /// </summary>
-        public ObservableRangeCollection<Location> LocationsFiltered {
-            get { return locationsFiltered; }
+        public ObservableRangeCollection<Location> LocationsFiltered { get => _locationsFiltered; }
+        private string currentNameFilter = "";
+        public string CurrentNameFilter {
+            get { return currentNameFilter; }
             set {
-                locationsFiltered = value;
-                //OnPropertyChanged(nameof(LocationsFiltered));
+                // Jeżeli długość filtra się skróciła to przywróc usunięte lokacje
+                if (currentNameFilter.Length > value.Length)
+                    ClearFilter();
+                currentNameFilter = value;
+                FilterLocationsByName();
+                OnPropertyChanged(nameof(CurrentNameFilter));
             }
         }
         /// <summary>
@@ -32,67 +42,59 @@ namespace Urbexer.ViewModels.LocationModels {
         /// </summary>
         public AsyncCommand<Location> CardSelectedCommand { get; }
         public BaseLocationViewModel() {
-            //LocationsFiltered = new ObservableRangeCollection<Location> { };
-            Locations = new ObservableRangeCollection<Location> { };
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
         }
         public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        /// <summary>
+        /// Dodaje nowe lokacje i od razu je filtruje na podstawie obecnych filtrów.
+        /// </summary>
+        protected void AddLocations(List<Location> newLocations) {
+            if (newLocations == null || newLocations.Count() == 0) return;
+
+            Locations.AddRange(newLocations);
+
+            if (string.IsNullOrEmpty(CurrentNameFilter)) {
+                LocationsFiltered.AddRange(newLocations);
+            }
+            else {
+                var newLocationsFiltered = newLocations.ToList()
+                    .Where(loc => loc.Name.Contains(CurrentNameFilter) || loc.Address.Contains(CurrentNameFilter));
+                LocationsFiltered.AddRange(newLocationsFiltered);
+            }
+        }
 
         #region Filtrowanie
-        // Funkcje i zmienne filtrowania
-
-        protected string currentNameFilter = "";
-
         /// <summary>
         /// Usuń filtrowanie lokacji.
         /// </summary>
         protected void ClearFilter() {
-            //LocationsFiltered.Clear();
-            ObservableRangeCollection<Location> newList = new ObservableRangeCollection<Location>();
-            if (Locations == null) {
-                LocationsFiltered.Clear();
-                return;
-            }
-            // Skopiuj lokacje z Locations do LocationsFiltered
-            foreach (var location in Locations.ToList()) {
-                //LocationsFiltered.Add(location);
-                newList.Add(location);
-            }
-            LocationsFiltered = newList;
+            LocationsFiltered.Clear();
+            LocationsFiltered.AddRange(Locations.ToList());
         }
         /// <summary>
-        /// Odśwież filtry
-        /// </summary>
-        protected void ReapplyFilters() {
-            ClearFilter();
-            SetNameFilter();
-        }
-        /// <summary>
-        /// Ukrzyj lokacje, które nie zawierają stringa <see cref="currentNameFilter"/>. <para/>
+        /// Ukrzyj lokacje, które nie zawierają stringa <see cref="CurrentNameFilter"/>. <para/>
         /// Jeżeli jest pusty, to lokacje nie są filtrowane.
         /// </summary>
-        protected void SetNameFilter() {
-            if (string.IsNullOrEmpty(currentNameFilter)) return; // Jeśli string jest pusty to nie filtruj
-            foreach (var location in Locations) {
-                if (!location.Name.ToLower().Contains(currentNameFilter.ToLower())) {
-                    LocationsFiltered.Remove(location);
-                }
-            }
+        protected void FilterLocationsByName() {
+            if (string.IsNullOrEmpty(CurrentNameFilter)) return; // Jeśli string jest pusty to nie filtruj
+            var locationsToRemove = LocationsFiltered.ToList().Where(
+                loc => !loc.Name.ToLower().Contains(CurrentNameFilter.ToLower())
+                && !loc.Address.ToLower().Contains(CurrentNameFilter.ToLower()));
+            LocationsFiltered.RemoveRange(locationsToRemove);
         }
         #endregion Filtrowanie
 
         /// <summary>
         /// Przenosi do strony szczegółów danej lokacji.
         /// </summary>
-        /// <param name="location"></param>
         protected async Task CardSelected(Location location) {
             if (location.Id < 0) return; // Id powinno być nieujemne.
 
             var route = $"{nameof(LocationDetailsPage)}?LocationId={location.Id}";
             await Shell.Current.GoToAsync(route);
-        }
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

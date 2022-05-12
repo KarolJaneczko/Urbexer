@@ -30,13 +30,11 @@
             Margin="5"
             Background="White"
             HorizontalOptions="Fill"
-            IsVisible="false"
-            SearchCommand="{Binding FilterLocationsByNameCommand}"
-            SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}" />
+            Text="{Binding CurrentNameFilter, Mode=TwoWay}" />
         <CollectionView
             x:Name="CollectionView"
             BackgroundColor="LightGray"
-            EmptyView="Wczytywanie lokacji"
+            EmptyView="Nie znaleziono lokacji."
             HorizontalOptions="End"
             ItemsSource="{Binding LocationsFiltered}"
             RemainingItemsThreshold="5"
@@ -79,8 +77,6 @@
                                         Text="{Binding Address}"
                                         TextColor="Black"
                                         VerticalOptions="Start" />
-                                    
-                                    
                                 </StackLayout>
                                 <StackLayout Margin="10,5,10,5">
                                     <Label
@@ -90,18 +86,21 @@
                                         MinimumWidthRequest="100"
                                         Text="{Binding Path=Distance, StringFormat='{0} km'}"
                                         VerticalOptions="End" />
-                                    <Image Margin="0,0,-20,0"
+                                    <Image
+                                        Margin="0,0,-20,0"
                                         HeightRequest="35"
                                         Opacity="0.5"
                                         Source="{Binding CategoryIconPath}"
                                         VerticalOptions="EndAndExpand" />
-                                    <Frame CornerRadius="10" Padding="3" HeightRequest="20">
+                                    <Frame
+                                        Padding="3"
+                                        CornerRadius="10"
+                                        HeightRequest="20">
                                         <StackLayout Orientation="Horizontal">
-                                            <Image Source="odwiedzone_icon" Margin="-2"/>
-                                            <BoxView WidthRequest="1"
-                                                     Color="#363636"/>
-                                            <Image Source="true_icon.png" IsVisible="{Binding IsVisited}"/>
-                                            <Image Source="false_icon.png" IsVisible="{Binding IsNotVisited}"/>
+                                            <Image Margin="-2" Source="odwiedzone_icon" />
+                                            <BoxView WidthRequest="1" Color="#363636" />
+                                            <Image IsVisible="{Binding IsVisited}" Source="true_icon.png" />
+                                            <Image IsVisible="{Binding IsNotVisited}" Source="false_icon.png" />
                                         </StackLayout>
                                     </Frame>
                                 </StackLayout>

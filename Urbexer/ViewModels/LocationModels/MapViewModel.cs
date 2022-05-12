@@ -2,10 +2,7 @@
 using System.Threading.Tasks;
 using Urbexer.Services;
 using Urbexer.ViewModels.LocationModels;
-using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Essentials;
-using Xamarin.Forms;
-using Location = Urbexer.Models.Location;
 
 namespace Urbexer.ViewModels {
     internal class MapViewModel : BaseLocationViewModel {
@@ -21,7 +18,7 @@ namespace Urbexer.ViewModels {
         public async Task LoadLocations(int range) {
             var location = await Geolocation.GetLastKnownLocationAsync();
             List<int> idList = await LocationService.GetIdListInArea((float)location.Latitude, (float)location.Longitude, range);
-            LocationsFiltered.Add(new ObservableRangeCollection<Location>(await LocationService.GetLocationListByIds(idList)));
+            AddLocations(await LocationService.GetLocationListByIds(idList));
 
             ClearFilter();
         }
