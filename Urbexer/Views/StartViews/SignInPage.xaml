@@ -1,18 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:Urbexer"
-             mc:Ignorable="d"
-             Shell.FlyoutItemIsVisible="False"
-             Shell.TabBarIsVisible="False"
-             Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False"
-             x:Class="Urbexer.Views.SignInPage">
+<ContentPage
+    x:Class="Urbexer.Views.SignInPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:Urbexer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    x:DataType="viewmodels:SignInPageViewModel"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutItemIsVisible="False"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    mc:Ignorable="d">
 
 
-    <!--region Style-->
+    <!--  region Style  -->
     <ContentPage.Resources>
         <ResourceDictionary>
 
@@ -40,91 +43,121 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <!--endregion-->
+        <!--  endregion  -->
 
         <Grid>
-            <Image Source="background_image4" Aspect="AspectFill"/>
+            <Image Aspect="AspectFill" Source="background_image4" />
 
-            <!--<Frame Padding="0"
+            <!--
+            <Frame Padding="0"
                HeightRequest="100"
                WidthRequest="100"
                HorizontalOptions="CenterAndExpand"
                VerticalOptions="CenterAndExpand"
                BackgroundColor="Transparent"
                Margin="0,80,0, 600">
-            <Image Source="app_logo.png" Aspect="AspectFill"/>
-        </Frame>-->
+                <Image Source="app_logo.png" Aspect="AspectFill"/>
+            </Frame>
+            -->
 
             <BoxView>
                 <BoxView.Background>
                     <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                        <GradientStop Color="Transparent" Offset="0"/>
-                        <GradientStop Color="black" Offset="0.8"/>
-                        <GradientStop Color="black" Offset="1.6"/>
+                        <GradientStop Offset="0" Color="Transparent" />
+                        <GradientStop Offset="0.8" Color="black" />
+                        <GradientStop Offset="1.6" Color="black" />
                     </LinearGradientBrush>
                 </BoxView.Background>
             </BoxView>
 
-            <StackLayout VerticalOptions="CenterAndExpand" Margin="30,0">
-                <Frame BackgroundColor="#cfffffff"
-                  
-                   CornerRadius="25"
-                   HorizontalOptions="FillAndExpand"
-                   HasShadow="True"
-                   BorderColor="black">
+            <StackLayout Margin="30,0" VerticalOptions="CenterAndExpand">
+                <Frame
+                    BackgroundColor="#cfffffff"
+                    BorderColor="black"
+                    CornerRadius="25"
+                    HasShadow="True"
+                    HorizontalOptions="FillAndExpand">
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Frame BackgroundColor="#BF0603"
-                                   CornerRadius="50" 
-                                   HorizontalOptions="Start"
-                                   HeightRequest="35" 
-                                   WidthRequest="35"   
-                                   Padding="0" 
-                                   Margin="0">
-                                <ImageButton Source="back_icon.png" 
-                                             Margin="0" 
-                                             WidthRequest="30"
-                                             HeightRequest="30" 
-                                             VerticalOptions="FillAndExpand" 
-                                             Clicked="GoBack" 
-                                             BackgroundColor="Transparent"
-                                             BorderColor="Black" 
-                                             CornerRadius="50"/>
+                            <Frame
+                                Margin="0"
+                                Padding="0"
+                                BackgroundColor="#BF0603"
+                                CornerRadius="50"
+                                HeightRequest="35"
+                                HorizontalOptions="Start"
+                                WidthRequest="35">
+                                <ImageButton
+                                    Margin="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="Black"
+                                    Clicked="GoBack"
+                                    CornerRadius="50"
+                                    HeightRequest="30"
+                                    Source="back_icon.png"
+                                    VerticalOptions="FillAndExpand"
+                                    WidthRequest="30" />
                             </Frame>
-                            <Label Text="LOGOWANIE" 
-                                   Margin="-20,0,0,0"
-                           TextColor="Black" 
-                           FontSize="Title" 
-                           FontAttributes="Bold"
-                           VerticalOptions="FillAndExpand"
-                           HorizontalOptions="CenterAndExpand"/>
+                            <Label
+                                Margin="-20,0,0,0"
+                                FontAttributes="Bold"
+                                FontSize="Title"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="LOGOWANIE"
+                                TextColor="Black"
+                                VerticalOptions="FillAndExpand" />
                         </StackLayout>
-                        
+
 
                         <StackLayout Margin="0,20" Spacing="0">
-                            <Label Text="Login"/>
+                            <Label Text="Login" />
                             <Frame Style="{DynamicResource EntryFrame}">
                                 <StackLayout Orientation="Horizontal">
                                     <Frame Style="{DynamicResource iconFrame}">
-                                        <Image Source="profile_icon.png" Aspect="AspectFill"   Margin="5"/>
+                                        <Image
+                                            Margin="5"
+                                            Aspect="AspectFill"
+                                            Source="profile_icon.png" />
                                     </Frame>
-                                    <Entry x:Name="Login" Text="{Binding Login}" 
-                                           Placeholder="Login" 
-                                           Style="{DynamicResource EntryStyle}"/>
+                                    <Entry
+                                        x:Name="Login"
+                                        Placeholder="Login"
+                                        Style="{DynamicResource EntryStyle}"
+                                        Text="{Binding Login}" />
                                 </StackLayout>
                             </Frame>
-                            <Label Text="Hasło"/>
-                            <Frame Style="{DynamicResource EntryFrame}"  Padding="0">
+                            <Label Text="Hasło" />
+                            <Frame Padding="0" Style="{DynamicResource EntryFrame}">
                                 <StackLayout Orientation="Horizontal">
                                     <Frame Style="{DynamicResource iconFrame}">
-                                        <Image Source="password_icon.png" Aspect="AspectFill" Margin="0"/>
+                                        <Image
+                                            Margin="0"
+                                            Aspect="AspectFill"
+                                            Source="password_icon.png" />
                                     </Frame>
-                                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Hasło" PlaceholderColor="#BF0603" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"  Style="{DynamicResource EntryStyle}" HorizontalOptions="FillAndExpand" /> 
-                                    <ImageButton BackgroundColor="Transparent" Source="showPassword_icon.png" Margin="0,0,10,0" WidthRequest="35" HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" >
+                                    <Entry
+                                        x:Name="Password"
+                                        HorizontalOptions="FillAndExpand"
+                                        IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"
+                                        Placeholder="Hasło"
+                                        PlaceholderColor="#BF0603"
+                                        Style="{DynamicResource EntryStyle}"
+                                        Text="{Binding Password}" />
+                                    <ImageButton
+                                        Margin="0,0,10,0"
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="35"
+                                        HorizontalOptions="End"
+                                        Source="showPassword_icon.png"
+                                        VerticalOptions="Center"
+                                        WidthRequest="35">
                                         <ImageButton.Triggers>
                                             <EventTrigger Event="Clicked">
-                                                <local:TriggerActions ShowIcon="hidePassword_icon.png" HideIcon="showPassword_icon.png" x:Name="ShowPasswordActualTrigger"/>
+                                                <local:TriggerActions
+                                                    x:Name="ShowPasswordActualTrigger"
+                                                    HideIcon="showPassword_icon.png"
+                                                    ShowIcon="hidePassword_icon.png" />
                                             </EventTrigger>
                                         </ImageButton.Triggers>
                                     </ImageButton>
@@ -132,18 +165,27 @@
                             </Frame>
                         </StackLayout>
 
-                        <Button Command="{Binding SubmitCommand}"                                      
-                            Text="ZALOGUJ"                                                       
-                            BorderColor="Black"                           
+                        <Button
                             BackgroundColor="#BF0603"
-                            TextColor="White" 
-                            CornerRadius="25" 
-                            TextTransform="None"
+                            BorderColor="Black"
+                            Command="{Binding SubmitCommand}"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
                             FontSize="Medium"
-                            FontAttributes="Bold"/>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            <Label Text="Nie masz jeszcze konta?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                            <Button  Text="Zarejestruj się" TextColor="#BF0603" BackgroundColor="Transparent" FontAttributes="Bold"  Clicked="GoToSignUp"/>
+                            Text="ZALOGUJ"
+                            TextColor="White"
+                            TextTransform="None" />
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Text="Nie masz jeszcze konta?"
+                                VerticalTextAlignment="Center" />
+                            <Button
+                                BackgroundColor="Transparent"
+                                Clicked="GoToSignUp"
+                                FontAttributes="Bold"
+                                Text="Zarejestruj się"
+                                TextColor="#BF0603" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>

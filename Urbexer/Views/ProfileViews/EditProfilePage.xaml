@@ -1,116 +1,129 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Urbexer.Views.EditProfilePage"
-             Title="Edycja profilu"
-             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="Urbexer.Views.EditProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    Title="Edycja profilu">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="UserInfoStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="White"/>
-                <Setter Property="Padding" Value="10"/>
-                <Setter Property="HasShadow" Value="True"/>
-                <Setter Property="Margin" Value="30,-10,30,0"/>
-                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Margin" Value="30,-10,30,0" />
+                <Setter Property="CornerRadius" Value="5" />
             </Style>
             <Style x:Key="ramkaGlowna" TargetType="Frame">
-                <Setter Property="Margin" Value="15,0,15,0"/>
-                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Margin" Value="15,0,15,0" />
+                <Setter Property="CornerRadius" Value="20" />
             </Style>
             <Style x:Key="SocialIcon" TargetType="Image">
-                <Setter Property="HeightRequest" Value="35"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="End"/>
-                <Setter Property="Grid.Row" Value="1"/>
-                <Setter Property="Grid.Column" Value="2"/>
+                <Setter Property="HeightRequest" Value="35" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="2" />
             </Style>
             <Style x:Key="ikonaNaglowka" TargetType="Image">
-                <Setter Property="Aspect" Value="AspectFill"/>
-                <Setter Property="HeightRequest" Value="35"/>
-                <Setter Property="WidthRequest" Value="35"/>
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="HeightRequest" Value="35" />
+                <Setter Property="WidthRequest" Value="35" />
             </Style>
             <Style x:Key="ramkaIkonyNaglowka" TargetType="Frame">
-                <Setter Property="Padding" Value="5"/>
-                <Setter Property="BackgroundColor"  Value="#BF0603"/>
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="BackgroundColor" Value="#BF0603" />
             </Style>
             <Style x:Key="GridUserInfo" TargetType="Grid">
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
             </Style>
             <Style x:Key="GridSocial" TargetType="Grid">
-                <Setter Property="ColumnDefinitions" Value="*,Auto"/>
-                <Setter Property="RowDefinitions" Value="Auto,Auto"/>
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="ColumnDefinitions" Value="*,Auto" />
+                <Setter Property="RowDefinitions" Value="Auto,Auto" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
             </Style>
             <Style x:Key="EntrySocial" TargetType="Entry">
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Keyboard" Value="Default"/>
-                <Setter Property="Grid.Row" Value="1"/>
-                <Setter Property="Grid.Column" Value="0"/>
-                <Setter Property="Grid.ColumnSpan" Value="2"/>
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Keyboard" Value="Default" />
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="0" />
+                <Setter Property="Grid.ColumnSpan" Value="2" />
             </Style>
             <Style x:Key="naglowek" TargetType="Label">
-                <Setter Property="Grid.Column" Value="1"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Grid.Column" Value="1" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="gridSocial" TargetType="Grid">
-                <Setter Property="Grid.ColumnDefinitions" Value="*,*,Auto"/>
-                <Setter Property="Grid.RowDefinitions" Value="Auto"/>
-            
+                <Setter Property="Grid.ColumnDefinitions" Value="*,*,Auto" />
+                <Setter Property="Grid.RowDefinitions" Value="Auto" />
+
             </Style>
-            
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush>
                 <GradientStopCollection>
-                    <GradientStop Color="#161616" Offset="0"/>
-                    <GradientStop Color="#363636" Offset="1"/>
+                    <GradientStop Offset="0" Color="#161616" />
+                    <GradientStop Offset="1" Color="#363636" />
                 </GradientStopCollection>
             </LinearGradientBrush>
         </ScrollView.Background>
         <StackLayout Margin="0,0,0,0">
             <Grid>
-                <Path Data="M0,0H375V129.651s-9.025,2.382-55.426-5.3-70.141-41.09-130.3-41.176-83.544,33.5-130.893,41.176S0,129.651,0,129.651Z"
-                  Aspect="Fill" Fill="#BF0603"/>
-                <StackLayout Orientation="Horizontal" Margin="10" Spacing="10" VerticalOptions="Center">
-                    <Grid HorizontalOptions="Center">
-                    </Grid>
+                <Path
+                    Aspect="Fill"
+                    Data="M0,0H375V129.651s-9.025,2.382-55.426-5.3-70.141-41.09-130.3-41.176-83.544,33.5-130.893,41.176S0,129.651,0,129.651Z"
+                    Fill="#BF0603" />
+                <StackLayout
+                    Margin="10"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    VerticalOptions="Center">
+                    <Grid HorizontalOptions="Center" />
                 </StackLayout>
             </Grid>
-            <StackLayout HorizontalOptions="Center" Margin="0,-110,0,50">
-                <Grid HeightRequest="150" WidthRequest="150" HorizontalOptions="End">
+            <StackLayout Margin="0,-110,0,50" HorizontalOptions="Center">
+                <Grid
+                    HeightRequest="150"
+                    HorizontalOptions="End"
+                    WidthRequest="150">
                     <Frame Padding="0" CornerRadius="100">
-                        <Image Source="{Binding ProfileAvatarSource}" HeightRequest="150" 
-                               WidthRequest="150"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
+                        <Image
+                            HeightRequest="150"
+                            HorizontalOptions="Center"
+                            Source="{Binding ProfileAvatarSource}"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
                     </Frame>
                 </Grid>
             </StackLayout>
-            
-            <!--region avatar picker-->
+
+            <!--  region avatar picker  -->
             <Frame Style="{StaticResource ramkaGlowna}">
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
                     <Frame Style="{StaticResource ramkaIkonyNaglowka}">
-                        <Image Source="profile_icon" 
-                               Style="{StaticResource ikonaNaglowka}"/>
+                        <Image Source="profile_icon" Style="{StaticResource ikonaNaglowka}" />
                     </Frame>
-                    <Label Text="PROFESJA" 
-                           Style="{DynamicResource naglowek}"/>
-                    <Frame Grid.Column="3" Padding="2" HorizontalOptions="FillAndExpand">
-                        <Picker Title="Profesja" 
-                                FontAttributes="Bold"
-                                TextColor="#363636" 
-                                HorizontalTextAlignment="Center"
-                                TitleColor="Black"               
-                                SelectedItem="{Binding EditLayout}" 
-                                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                    <Label Style="{DynamicResource naglowek}" Text="PROFESJA" />
+                    <Frame
+                        Grid.Column="3"
+                        Padding="2"
+                        HorizontalOptions="FillAndExpand">
+                        <Picker
+                            Title="Profesja"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                            SelectedItem="{Binding EditLayout}"
+                            TextColor="#363636"
+                            TitleColor="Black">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Domyślny</x:String>
@@ -126,127 +139,125 @@
                     </Frame>
                 </Grid>
             </Frame>
-<!--endregion-->
+            <!--  endregion  -->
 
-            <!--region opis-->
+            <!--  region opis  -->
             <Frame Style="{StaticResource ramkaGlowna}">
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
                     <Frame Style="{StaticResource ramkaIkonyNaglowka}">
-                        <Image Source="desc_icon" 
-                               Style="{StaticResource ikonaNaglowka}"/>
+                        <Image Source="desc_icon" Style="{StaticResource ikonaNaglowka}" />
                     </Frame>
-                    <Label Text="OPIS" 
-                           Style="{DynamicResource naglowek}"/>
+                    <Label Style="{DynamicResource naglowek}" Text="OPIS" />
                 </Grid>
             </Frame>
             <StackLayout>
                 <Frame Style="{StaticResource UserInfoStyle}">
                     <Grid Style="{StaticResource GridUserInfo}">
                         <StackLayout>
-                            <Editor x:Name="opisEditor"  
-                                    Placeholder="Opis"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    AutoSize="TextChanges"
-                                    MaxLength="255"
-                                    Text="{Binding EditDescription}"/>
+                            <Editor
+                                x:Name="opisEditor"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                AutoSize="TextChanges"
+                                MaxLength="255"
+                                Placeholder="Opis"
+                                Text="{Binding EditDescription}" />
                         </StackLayout>
                     </Grid>
                 </Frame>
-             </StackLayout>
-                   <!--endregion-->
+            </StackLayout>
+            <!--  endregion  -->
 
-            <!--region Dane Osobowe-->
-            <Frame Style="{StaticResource ramkaGlowna}">
+            <!--  region Dane Osobowe  -->
+            <Frame IsVisible="false" Style="{StaticResource ramkaGlowna}">
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
                     <Frame Style="{StaticResource ramkaIkonyNaglowka}">
-                        <Image Source="profiledetails_icon" 
-                               Style="{StaticResource ikonaNaglowka}"/>
+                        <Image Source="profiledetails_icon" Style="{StaticResource ikonaNaglowka}" />
                     </Frame>
-                    <Label Text="DANE OSOBOWE" 
-                           Style="{DynamicResource naglowek}"/>
+                    <Label Style="{DynamicResource naglowek}" Text="DANE OSOBOWE" />
                 </Grid>
             </Frame>
-            <StackLayout>
-                  <Frame Style="{StaticResource UserInfoStyle}">
+            <StackLayout IsVisible="false">
+                <Frame Style="{StaticResource UserInfoStyle}">
                     <StackLayout>
-                        <Label Text="Imię" Margin="0,0,0,-12"/>
-                        <Entry x:Name="entryName"
-                               Text="{Binding EditFirstName}"
-                               Placeholder="Imię"
-                               FontSize="20"
-                               Style="{StaticResource EntrySocial}"/>
-                        <Label Text="Nazwisko" Margin="0,0,0,-12"/>
-                        <Entry x:Name="entrySurname"
-                           Text="{Binding EditLastName}"
-                           FontSize="20"
-                           Placeholder="Nazwisko"
-                           Style="{StaticResource EntrySocial}"/>
-                        </StackLayout>
-                  </Frame>
-             </StackLayout>
-<!--endregion-->
+                        <Label Margin="0,0,0,-12" Text="Imię" />
+                        <Entry
+                            x:Name="entryName"
+                            FontSize="20"
+                            Placeholder="Imię"
+                            Style="{StaticResource EntrySocial}"
+                            Text="{Binding EditFirstName}" />
+                        <Label Margin="0,0,0,-12" Text="Nazwisko" />
+                        <Entry
+                            x:Name="entrySurname"
+                            FontSize="20"
+                            Placeholder="Nazwisko"
+                            Style="{StaticResource EntrySocial}"
+                            Text="{Binding EditLastName}" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <!--  endregion  -->
 
-            <!--region Sociale-->
+            <!--  region Sociale  -->
             <Frame Style="{StaticResource ramkaGlowna}">
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
                     <Frame Style="{StaticResource ramkaIkonyNaglowka}">
-                        <Image Source="socjal_icon" 
-                               Style="{StaticResource ikonaNaglowka}"/>
+                        <Image Source="socjal_icon" Style="{StaticResource ikonaNaglowka}" />
                     </Frame>
-                    <Label Text="SOCIAL MEDIA" 
-                           Style="{DynamicResource naglowek}"/>
+                    <Label Style="{DynamicResource naglowek}" Text="SOCIAL MEDIA" />
                 </Grid>
             </Frame>
 
             <Frame Style="{StaticResource UserInfoStyle}">
                 <StackLayout>
                     <Grid Style="{DynamicResource gridSocial}">
-                        <Entry x:Name="entryInstagramLink" 
-                                           Grid.Column="0" 
-                                           Grid.Row="1"  
-                                           Grid.ColumnSpan="2"
-                                           Placeholder="http://www.instagram.com"
-                                           Text="{Binding EditInstagram}"
-                                           Style="{StaticResource EntrySocial}"/>
-                        <Image Source="instagram_icon" 
-                               Style="{StaticResource SocialIcon}"/>
+                        <Entry
+                            x:Name="entryInstagramLink"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Placeholder="http://www.instagram.com"
+                            Style="{StaticResource EntrySocial}"
+                            Text="{Binding EditInstagram}" />
+                        <Image Source="instagram_icon" Style="{StaticResource SocialIcon}" />
                     </Grid>
                     <Grid Style="{DynamicResource gridSocial}">
-                        <Entry x:Name="entryFacebookLink" 
-                                           Grid.Column="0" 
-                                           Grid.Row="1"  
-                                           Grid.ColumnSpan="2"
-                                           Placeholder="http://www.facebook.com"
-                                           Text="{Binding EditFacebook}"
-                                           Style="{StaticResource EntrySocial}"/>
-                        <Image Source="facebook_icon" 
-                               Style="{StaticResource SocialIcon}"/>
+                        <Entry
+                            x:Name="entryFacebookLink"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Placeholder="http://www.facebook.com"
+                            Style="{StaticResource EntrySocial}"
+                            Text="{Binding EditFacebook}" />
+                        <Image Source="facebook_icon" Style="{StaticResource SocialIcon}" />
                     </Grid>
 
                     <Grid Style="{DynamicResource gridSocial}">
-                        <Entry x:Name="entryYoutubeLink" 
-                                           Grid.Column="0" 
-                                           Grid.Row="1"  
-                                           Grid.ColumnSpan="2"
-                                           Placeholder="http://www.youtube.com"
-                                           Text="{Binding EditYoutube}"
-                                           Style="{StaticResource EntrySocial}"/>
-                        <Image Source="youtube_icon" 
-                               Style="{StaticResource SocialIcon}"/>
+                        <Entry
+                            x:Name="entryYoutubeLink"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Placeholder="http://www.youtube.com"
+                            Style="{StaticResource EntrySocial}"
+                            Text="{Binding EditYoutube}" />
+                        <Image Source="youtube_icon" Style="{StaticResource SocialIcon}" />
                     </Grid>
                 </StackLayout>
             </Frame>
-            <!--endregion-->
-            
-            <Button Text="ZAPISZ PROFIL" 
-                    Command="{Binding SubmitEdit}"
-                    IsEnabled="True" 
-                    BackgroundColor="#BF0603"
-                    FontAttributes="Bold"
-                    Margin="30" 
-                    CornerRadius="25"
-                    FontSize="20"/>
+            <!--  endregion  -->
+
+            <Button
+                Margin="30"
+                BackgroundColor="#BF0603"
+                Command="{Binding SubmitEdit}"
+                CornerRadius="25"
+                FontAttributes="Bold"
+                FontSize="20"
+                IsEnabled="True"
+                Text="ZAPISZ PROFIL" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
