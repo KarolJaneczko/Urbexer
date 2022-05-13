@@ -159,12 +159,12 @@
                 BackgroundColor="White"
                 CornerRadius="5">
 
-                <Grid ColumnDefinitions="0.25*,Auto,0.8*">
+                <Grid ColumnDefinitions="*,*,*">
                     <Label
                         Grid.Column="0"
                         FontAttributes="Bold"
                         FontSize="Medium"
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="StartAndExpand"
                         Text="Pozycja"
                         TextColor="Black"
                         VerticalOptions="CenterAndExpand" />
