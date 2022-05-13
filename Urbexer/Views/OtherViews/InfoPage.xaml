@@ -31,7 +31,7 @@
                         TextColor="White" />
                     <Label
                         FontSize="Medium"
-                        Text="Urbexer to aplikacja mobilna skierowana na telefony z systemem Android zrealizowana w ramach przedmiotu Programowanie Zespołowe III roku studiów informatycznych na Uniwersytecie Mikołaja Kopernika w Toruniu."
+                        Text="Urbexer to aplikacja mobilna na urządzenia z systemem Android zrealizowana w ramach przedmiotu Programowanie Zespołowe III roku studiów informatycznych na Uniwersytecie Mikołaja Kopernika w Toruniu."
                         TextColor="White" />
                     <Label />
                   

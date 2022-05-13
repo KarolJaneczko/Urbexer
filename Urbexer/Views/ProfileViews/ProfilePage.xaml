@@ -197,12 +197,15 @@
                             HorizontalOptions="CenterAndExpand"
                             Orientation="Vertical"
                             Spacing="10">
+                            
                             <ImageButton
                                 BackgroundColor="Transparent"
+                                WidthRequest="35"
                                 Command="{Binding ClickedFacebookCommand}"
                                 HeightRequest="35"
                                 HorizontalOptions="Center"
                                 Source="facebook_icon.png" />
+                            
                             <Label Style="{DynamicResource SocialMedia}" Text="Facebook" />
                         </StackLayout>
                     </Grid>
