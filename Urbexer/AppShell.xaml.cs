@@ -1,6 +1,5 @@
 ﻿using System;
 using Urbexer.Models;
-using Urbexer.Services;
 using Urbexer.Views;
 using Urbexer.Views.LocationViews;
 using Xamarin.Forms;

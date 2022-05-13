@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Urbexer.Models;
 
 namespace Urbexer.Services {
-    public abstract class ValidatingService {
+    public static class ValidatingService {
         /// <summary>
         /// Klasa abstrakcyjna, zawierająca metody sprawdzające format wpisywanych danych przez użytkownika.
         /// </summary>
@@ -13,7 +13,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda sprawdzająca, czy login jest odpowiedniej długości oraz czy nie zawiera znaków specjalnych.
         /// </summary>
-        public void ValidateLogin(string login) {
+        public static void ValidateLogin(string login) {
             if (string.IsNullOrEmpty(login)) {
                 throw new AppException("Login nie może być pusty.", AppExceptionTypeEnum.EmptyField);
             }
@@ -30,7 +30,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda sprawdzająca, czy e-mail jest odpowiedniej długości oraz czy jest odpowiedniego formatu.
         /// </summary>
-        public void ValidateEmail(string email) {
+        public static void ValidateEmail(string email) {
             if (string.IsNullOrEmpty(email)) {
                 throw new AppException("Email nie może być pusty.", AppExceptionTypeEnum.EmptyField);
             }
@@ -47,7 +47,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda sprawdzająca, czy hasło jest odpowiedniej długości.
         /// </summary>
-        public void ValidatePassword(string password) {
+        public static void ValidatePassword(string password) {
             if (string.IsNullOrEmpty(password)) {
                 throw new AppException("Hasło nie może być puste.", AppExceptionTypeEnum.EmptyField);
             }
@@ -61,7 +61,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda weryfikująca, czy dane wejściowe mają odpowiednią długość.
         /// </summary>
-        public void ValidateLength(string word, string field, string suffix, int max, int? min = null) {
+        public static void ValidateLength(string word, string field, string suffix, int max, int? min = null) {
             if (word.Length > max) {
                 throw new AppException(field + " nie może być dłuższ" + suffix + " niż " + max + " znaków.", AppExceptionTypeEnum.InvalidLength);
             }
@@ -74,7 +74,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda weryfikująca, czy link podany w profilu jest odpowiedniego formatu.
         /// </summary>
-        public void ValidateLink(string site, string link) {
+        public static void ValidateLink(string site, string link) {
             if (!string.IsNullOrEmpty(link)) {
                 Regex regex = new Regex(@"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
                 Match match = regex.Match(link);
@@ -135,7 +135,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda sprawdzająca, czy odpowiedź od API podczas logowania/rejestracji jest błędna. Jeśli tak, dostosowuje odpowiedni komunikat.
         /// </summary>
-        public async void ValidateConnectionResult(HttpResponseMessage result, OperationTypeEnum operation) {
+        public static async void ValidateConnectionResult(HttpResponseMessage result, OperationTypeEnum operation) {
             try {
                 AppExceptionTypeEnum exceptionType = AppExceptionTypeEnum.UnspecifiedError;
                 var message = string.Empty;
@@ -178,7 +178,7 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda wyświetlająca pop-up na ekranie.
         /// </summary>
-        public async void DisplayError(string title, string message) {
+        public static async void DisplayError(string title, string message) {
             await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, message, "OK");
         }
         #endregion

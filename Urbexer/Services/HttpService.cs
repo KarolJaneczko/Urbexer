@@ -79,5 +79,12 @@ namespace Urbexer.Services {
             }
             return false; // Token autoryzacji nie jest ustawiony
         }
+        /// <summary>
+        /// Zwraca <see cref="HttpClient"/> używany przez <see cref="HttpService"/>. <para/>
+        /// Używane jako hack. Powinno się kożystać z <see cref="SendApiRequest"/>.
+        /// </summary>
+        public static HttpClient EmergencyClientAccess() {
+            return httpClient;
+        }
     }
 }

@@ -138,18 +138,19 @@ namespace Urbexer.ViewModels {
         }
         #endregion Przyciski
         /// <summary>
-        /// Metoda pozwalająca odświeżyć profil poprzez pobranie aktualnych informacji z bazy danych i wypełnianiu ich metodą FillProfile.
+        /// Odświeża profil poprzez pobranie aktualnych informacji z bazy danych i wypełnianiu ich metodą <see cref="FillProfile(ProfileData)"/>.
         /// </summary>
         public async Task LoadProfile(string userLogin = null) {
             if (string.IsNullOrEmpty(userLogin)) userLogin = UserInfo.Login;
             ProfileData profileData = await ConnectionService.GetProfileByLogin(userLogin);
-            profileData.LeaderboardPosition = GetLeaderboardPositionByLogin(userLogin);
+            profileData.LeaderboardPosition = await GetLeaderboardPositionByLoginAsync(userLogin);
             FillProfile(profileData);
             await LoadMoreLocations();
         }
         /// <summary>
-        /// Metoda wypełniająca profil danymi, pobranymi z bazy danych.
+        /// Metoda wypełniająca profil danymi
         /// </summary>
+        /// <param name="profileData">Dane do wypełnienia profilu.</param>
         public void FillProfile(ProfileData profileData) {
             if (profileData == null) return;
             ProfileAvatarSource = GetAvatarByLayout(profileData.ProfileLayout);
@@ -163,19 +164,13 @@ namespace Urbexer.ViewModels {
         /// <summary>
         /// Metoda wyliczająca miejsce użytkownika w rankingu ogólnym.
         /// </summary>
-        public static int GetLeaderboardPositionByLogin(string login, int type = 0) {
-            var result = connectionService2.GetRankingList(type, httpClient2).Result;
-            List<string> tempList = new List<string>();
-            foreach (var x in result) {
-                tempList.Add(x.login);
-            }
-            var index = tempList.IndexOf(login);
-            if (index != -1) {
-                return index + 1;
-            }
-            else {
-                return 0;
-            }
+        /// <returns>
+        /// Pozycje w rankingu.<para/>
+        /// Jeżeli nie znaleziono to zwraca 0.
+        /// </returns>
+        private static async Task<int> GetLeaderboardPositionByLoginAsync(string login, int category = 0) {
+            List<LeaderboardRecord> records = await ConnectionService.GetRankingList(category);
+            return records.FindIndex(r => r.Login == login) + 1;
         }
         /// <summary>
         /// Metoda przyjmująca numer layoutu i zwracająca odpowiednią nazwę zdjęcia profilowego, wyświetlanego w profilu.
@@ -222,7 +217,6 @@ namespace Urbexer.ViewModels {
             int remainingLocations = locationsVisitedIds.Count - LocationsVisited.Count;
             List<int> ids = locationsVisitedIds.GetRange(LocationsVisited.Count, Math.Min(remainingLocations, loadAmount));
             LocationsVisited.AddRange(await LocationService.GetLocationListByIds(ids));
-
 
             isLoading = false;
         }

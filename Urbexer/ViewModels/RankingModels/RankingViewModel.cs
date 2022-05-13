@@ -87,8 +87,8 @@ namespace Urbexer.ViewModels {
             GoToRanking(0);
         }
         public async void GoToRanking(int type) {
-            LeaderboardViewModel.RankingType = type;
-            await Shell.Current.GoToAsync(nameof(LeaderboardPage));
+            string path = $"{nameof(LeaderboardPage)}?RankingCategory={type}";
+            await Shell.Current.GoToAsync(path);
         }
         #endregion
     }

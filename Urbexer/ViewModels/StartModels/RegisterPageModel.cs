@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
+using Urbexer.Services;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -54,17 +55,17 @@ namespace Urbexer.ViewModels {
         /// </summary>
         public async void OnSubmit() {
             try {
-                ValidateLogin(Login);
-                ValidateEmail(Email.Trim());
-                ValidatePassword(Password);
+                ValidatingService.ValidateLogin(Login);
+                ValidatingService.ValidateEmail(Email.Trim());
+                ValidatingService.ValidatePassword(Password);
                 if (string.Equals(password, passwordRepeat)) {
-                    if (await connectionService.Register(new APIRegisterUser {
+                    if (await ConnectionService.Register(new APIRegisterUser {
                         email = Email.Trim(),
                         login = Login,
                         potwierdzHaslo = Password,
                         hasloHash = PasswordRepeat,
                         czyAdmin = false
-                    }, httpClient) == true) {
+                    })) {
                         await Application.Current.MainPage.DisplayAlert("Sukces", "Na podany adres mailowy otrzymasz link potwierdzający aktywację konta.", "OK");
                     }
                 }
@@ -72,13 +73,13 @@ namespace Urbexer.ViewModels {
                     throw new AppException("Hasła się nie zgadzają.", AppExceptionTypeEnum.StringsDontMatch);
             }
             catch (System.Net.Http.HttpRequestException exception) {
-                DisplayError("Błąd", "Brak połączenia z internetem");
+                ValidatingService.DisplayError("Błąd", "Brak połączenia z internetem");
             }
             catch (AppException exception) {
-                DisplayError(exception.title, exception.message);
+                ValidatingService.DisplayError(exception.title, exception.message);
             }
             catch (Exception exception) {
-                DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
+                ValidatingService.DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
         }
         #endregion
