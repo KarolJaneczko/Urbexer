@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Urbexer.Models;
 using Urbexer.Models.ApiModels;
+using Urbexer.Services;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -45,23 +46,23 @@ namespace Urbexer.ViewModels {
             isBusy = true;
 
             try {
-                ValidateLogin(login);
-                ValidatePassword(password);
-                if (await connectionService.Login(new APILogin {
+                ValidatingService.ValidateLogin(login);
+                ValidatingService.ValidatePassword(password);
+                if (await ConnectionService.Login(new APILogin {
                     login = login,
                     password = password
-                }, httpClient) == true) {
+                })) {
                     await Shell.Current.GoToAsync("../../..///HomePage");
                 }
             }
             catch (System.Net.Http.HttpRequestException exception) {
-                DisplayError("Błąd", "Brak połączenia z internetem");
+                ValidatingService.DisplayError("Błąd", "Brak połączenia z internetem");
             }
             catch (AppException exception) {
-                DisplayError(exception.title, exception.message);
+                ValidatingService.DisplayError(exception.title, exception.message);
             }
             catch (Exception exception) {
-                DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
+                ValidatingService.DisplayError("Wystąpił nieoczekiwany błąd.", exception.Message.ToString());
             }
             finally {
                 isBusy = false;

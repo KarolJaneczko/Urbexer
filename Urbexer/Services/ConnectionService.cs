@@ -9,24 +9,14 @@ using Urbexer.Models.ApiModels;
 using Urbexer.Models.UserModels;
 
 namespace Urbexer.Services {
-    public class ConnectionService : ValidatingService {
-        #region Zmienne
-        public static HttpClientHandler clientHandler = new HttpClientHandler {
-            UseProxy = false,
-        };
-        public HttpClient httpClient = new HttpClient(clientHandler);
-        public static HttpClient httpClient2 = new HttpClient(clientHandler);
-        #endregion
-        #region Konstruktory
-        public ConnectionService() { }
-        #endregion
+    public static class ConnectionService {
         #region Requesty do API
         /// <summary>
         /// Metoda wysyłająca request do bazy danych przy logowaniu do aplikacji.
         /// </summary>
-        public async Task<bool> Login(APILogin login, HttpClient httpClient) {
-            var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", SerializeToJson(login));
-            ValidateConnectionResult(result, OperationTypeEnum.Logowanie);
+        public static async Task<bool> Login(APILogin login) {
+            var result = await HttpService.EmergencyClientAccess().PostAsync("https://urbexerapi.azurewebsites.net/api/account/login/", SerializeToJson(login));
+            ValidatingService.ValidateConnectionResult(result, OperationTypeEnum.Logowanie);
             if (result.StatusCode == System.Net.HttpStatusCode.OK) {
                 var resultContent = await result.Content.ReadAsStringAsync();
                 UserInfo.SetLoginCredentials(login.login, resultContent);
@@ -38,9 +28,9 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda wysyłająca request do bazy danych przy rejestracji użytkownika.
         /// </summary>
-        public async Task<bool> Register(APIRegisterUser registerUser, HttpClient httpClient) {
-            var result = await httpClient.PostAsync("https://urbexerapi.azurewebsites.net/api/account/register/", SerializeToJson(registerUser));
-            ValidateConnectionResult(result, OperationTypeEnum.Rejetracja);
+        public static async Task<bool> Register(APIRegisterUser registerUser) {
+            var result = await HttpService.EmergencyClientAccess().PostAsync("https://urbexerapi.azurewebsites.net/api/account/register/", SerializeToJson(registerUser));
+            ValidatingService.ValidateConnectionResult(result, OperationTypeEnum.Rejetracja);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
             else
@@ -59,9 +49,9 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda wysyłająca aktualizację profilu do bazy danych.
         /// </summary>
-        public async Task<bool> UpdateProfile(APIEdytujProfil request, HttpClient httpClient) {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
-            var result = await httpClient.PutAsync("https://urbexerapi.azurewebsites.net/api/profile/edytujProfil", SerializeToJson(request));
+        public static async Task<bool> UpdateProfile(APIEdytujProfil request) {
+            //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
+            var result = await HttpService.EmergencyClientAccess().PutAsync("https://urbexerapi.azurewebsites.net/api/profile/edytujProfil", SerializeToJson(request));
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
             else
@@ -70,28 +60,39 @@ namespace Urbexer.Services {
         /// <summary>
         /// Metoda zwracająca listę rankingową z bazy danych.
         /// </summary>
-        public async Task<List<APIRanking>> GetRankingList(int type, HttpClient httpClient) {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
-            string result;
-            if (type == 0) {
-                result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/").Result.Content.ReadAsStringAsync();
-            }
-            else {
-                result = await httpClient.GetAsync("https://urbexerapi.azurewebsites.net/api/ranking/WedlugKategorii?kategoriaId=" + type).Result.Content.ReadAsStringAsync();
-            }
-            var resultList = JsonConvert.DeserializeObject<List<APIRanking>>(result);
-            return resultList;
+        public static async Task<List<LeaderboardRecord>> GetRankingList(int type) {
+            string path = "/api/ranking";
+            if (type != 0) 
+                path += $"/WedlugKategorii?kategoriaId={type}";
+            string result = await HttpService.SendApiRequest(HttpMethod.Get, path);
+            List<APIRanking> list = JsonConvert.DeserializeObject<List<APIRanking>>(result);
+            return APIRecordsToRecords(list, type);
         }
         #endregion
         #region Pomocnicze metody
         /// <summary>
         /// Metoda serializująca obiekt do JSONa przed wysłaniem go w zapytaniu do API.
         /// </summary>
-        public StringContent SerializeToJson(object obj) {
+        public static StringContent SerializeToJson(object obj) {
             if (obj is null)
                 throw new System.ArgumentNullException(nameof(obj));
             var myJson = JsonConvert.SerializeObject(obj);
             return new StringContent(myJson, Encoding.UTF8, "application/json");
+        }
+        /// <summary>
+        /// Metoda mapująca listę rankingową, pobraną z bazy danych i mapująca ją na rekordy w tabeli.
+        /// </summary>
+        public static List<LeaderboardRecord> APIRecordsToRecords(List<APIRanking> list, int type) {
+            List<LeaderboardRecord> result = new List<LeaderboardRecord>();
+            int place = 1;
+            foreach (APIRanking record in list) {
+                if (!record.layout.HasValue)
+                    record.layout = 0;
+                LeaderboardRecord item = new LeaderboardRecord(record.login, (int)record.liczbaMiejsc, (int)record.layout, place++);
+                result.Add(item);
+                //place++;
+            }
+            return result;
         }
         #endregion
     }
