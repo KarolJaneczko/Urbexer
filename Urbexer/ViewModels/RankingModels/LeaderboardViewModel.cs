@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.Threading.Tasks;
 using Urbexer.Models;
-using Urbexer.Models.ApiModels;
 using Urbexer.Services;
-using Urbexer.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
@@ -13,65 +12,62 @@ namespace Urbexer.ViewModels {
         /// Klasa implementująca logikę strony LeaderboardPage - strony z rankingiem danej kategorii.
         /// </summary>
         #region Zmienne
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        public List<Rekord> RankingList { get => GetRanking(); }
-        public static int RankingType;
-        private int leaderboardMyCount;
-        private string leaderboardMyAvatar, leaderboardMyLogin, leaderboardMyPlace, leaderboardCategory;
+        public ObservableRangeCollection<LeaderboardRecord> _recordsCollection = new ObservableRangeCollection<LeaderboardRecord>();
+        public ObservableRangeCollection<LeaderboardRecord> RecordsCollection {
+            get { return _recordsCollection; }
+            set {
+                _recordsCollection = value;
+                OnPropertyChanged("RecordsCollection");
+            }
+        }
+        private int _leaderboardMyCount;
         public int LeaderboardMyCount {
-            get { return leaderboardMyCount; }
+            get { return _leaderboardMyCount; }
             set {
-                leaderboardMyCount = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyCount"));
+                _leaderboardMyCount = value;
+                OnPropertyChanged("LeaderboardMyCount");
             }
         }
+        private string _leaderboardMyAvatar;
         public string LeaderboardMyAvatar {
-            get { return leaderboardMyAvatar; }
+            get { return _leaderboardMyAvatar; }
             set {
-                leaderboardMyAvatar = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyAvatar"));
+                _leaderboardMyAvatar = value;
+                OnPropertyChanged("LeaderboardMyAvatar");
             }
         }
+        private string _leaderboardMyLogin;
         public string LeaderboardMyLogin {
-            get { return leaderboardMyLogin; }
+            get { return _leaderboardMyLogin; }
             set {
-                leaderboardMyLogin = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyLogin"));
+                _leaderboardMyLogin = value;
+                OnPropertyChanged("LeaderboardMyLogin");
             }
         }
+        private string _leaderboardMyPlace;
         public string LeaderboardMyPlace {
-            get { return leaderboardMyPlace; }
+            get { return _leaderboardMyPlace; }
             set {
-                leaderboardMyPlace = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardMyPlace"));
+                _leaderboardMyPlace = value;
+                OnPropertyChanged("LeaderboardMyPlace");
             }
         }
+        private string _leaderboardCategory;
         public string LeaderboardCategory {
-            get { return leaderboardCategory; }
+            get { return _leaderboardCategory; }
             set {
-                leaderboardCategory = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("LeaderboardCategory"));
+                _leaderboardCategory = value;
+                OnPropertyChanged("LeaderboardCategory");
             }
         }
         #endregion
         #region Konstruktory
-        public LeaderboardViewModel() {
-            LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
-            LeaderboardMyLogin = UserInfo.Login;
-            LeaderboardMyPlace = GetMyLeaderboardPlace();
-            LeaderboardCategory = GetLeaderboardCategory(RankingType);
-            LeaderboardMyCount = GetLeaderboardMyCount(UserInfo.Login);
+        public LeaderboardViewModel(int category) {
+            Task.Run(async () => await FillRecords(category));
         }
         #endregion
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         #region Metody
-        /// <summary>
-        /// Metoda pobierająca ranking z bazy danych.
-        /// </summary>
-        public List<Rekord> GetRanking() {
-            var result = connectionService.GetRankingList(RankingType, httpClient).Result;
-            var tempList = Rekord.ZmapowanaLista(result);
-            return tempList;
-        }
         /// <summary>
         /// Metoda pobierająca numeryczny typ rankingu i zwracająca nazwę kategorii.
         /// </summary>
@@ -123,85 +119,18 @@ namespace Urbexer.ViewModels {
             }
             return temp;
         }
-        /// <summary>
-        /// Metoda wyliczająca pozycję w rankingu bieżącego, zalogowanego użytkownika i wyświetlająca ją na stronie rankingu.
-        /// </summary>
-        private string GetMyLeaderboardPlace() {
-            string temp = string.Empty;
-            var tempList = GetRanking();
-            if (tempList.Count == 0) {
-                temp += "brak danych";
-            }
-            else if (tempList.FindIndex(x => x.Login == UserInfo.Login) == -1) {
-                temp += "brak danych";
-            }
-            else {
-                temp += (tempList.FindIndex(x => x.Login == UserInfo.Login) + 1).ToString();
-            }
-            return temp;
-        }
-        /// <summary>
-        /// Metoda pobierająca liczbę odwiedzonych miejsc z wybranej przez nas kategorii w rankingu i wyświetaljąca ją na stronie rankingu.
-        /// </summary>
-        private int GetLeaderboardMyCount(string login) {
-            int temp = 0;
-            var tempList = GetRanking();
-            if (tempList.Count == 0) {
-                return temp;
-            }
-            else if (tempList.FindIndex(x => x.Login == login) == -1) {
-                return temp;
-            }
-            else {
-                temp = (tempList.FirstOrDefault(x => x.Login == login).LiczbaMiejsc);
-            }
-            return temp;
-        }
-        #endregion
-    }
-    public class Rekord {
-        /// <summary>
-        /// Klasa reprezentująca rekord w tabeli rankingowej.
-        /// </summary>
-        #region Zmienne
-        public string Login { get; set; }
-        public int LiczbaMiejsc { get; set; }
-        public string AvatarSource { get; set; }
-        public int Miejsce { get; set; }
-        public Command<string> GoToProfileCommand { protected set; get; }
-        public System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient(ConnectionService.clientHandler);
-        #endregion
-        #region Konstruktory
-        public Rekord(string login, int liczbaMiejsc, int layout) {
-            Login = login;
-            LiczbaMiejsc = liczbaMiejsc;
-            GoToProfileCommand = new Command<string>(GoToProfile);
-            AvatarSource = ProfileViewModel.GetAvatarByLayout(layout);
-            Miejsce = ProfileViewModel.GetLeaderboardPositionByLogin(Login, LeaderboardViewModel.RankingType);
-        }
-        #endregion
-        #region Metody
-        /// <summary>
-        /// Metoda mapująca listę rankingową, pobraną z bazy danych i mapująca ją na rekordy w tabeli.
-        /// </summary>
-        public static List<Rekord> ZmapowanaLista(List<APIRanking> list) {
-            var result = new List<Rekord>();
-            foreach (var x in list) {
-                if (!x.layout.HasValue)
-                    x.layout = 0;
-                var item = new Rekord(x.login, (int)x.liczbaMiejsc, (int)x.layout);
-                result.Add(item);
-            }
-            return result;
-        }
-        /// <summary>
-        /// Metoda wywoływana przy kliknięciu rekordu w tabeli - przenosi użytkownika do podglądu profilu użytkownika.
-        /// </summary>
-        public async void GoToProfile(string login) {
-            var route = $"{nameof(ProfilePage)}?UserLogin={login}";
-            await Shell.Current.GoToAsync(route);
-        }
+        private async Task FillRecords(int category) {
+            List<LeaderboardRecord> records = await ConnectionService.GetRankingList(category);
+            RecordsCollection.AddRange(records);
 
+            await Device.InvokeOnMainThreadAsync(() => {
+                LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
+                LeaderboardMyLogin = UserInfo.Login;
+                LeaderboardMyPlace = (records.FindIndex(r => r.Login == UserInfo.Login) + 1).ToString();
+                LeaderboardCategory = GetLeaderboardCategory(category);
+                LeaderboardMyCount = records.Find(r => r.Login == UserInfo.Login).LiczbaMiejsc;
+            });
+        }
         #endregion
     }
 }

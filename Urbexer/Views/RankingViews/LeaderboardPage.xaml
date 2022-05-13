@@ -4,13 +4,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:viewmodels1="clr-namespace:Urbexer.Models"
     Title="{Binding Path=LeaderboardCategory, StringFormat=' Lista rankingowa - {0} '}"
     x:DataType="viewmodels:LeaderboardViewModel">
 
-    <ContentPage.BindingContext>
-        <viewmodels:LeaderboardViewModel/>
-    </ContentPage.BindingContext>
-    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleLabelStyle" TargetType="Label">
@@ -204,12 +201,12 @@
                 x:Name="RankingLista"
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
-                ItemsSource="{Binding RankingList}"
+                ItemsSource="{Binding RecordsCollection}"
                 RowHeight="75"
                 SeparatorVisibility="None"
                 VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="viewmodels:Rekord">
+                    <DataTemplate x:DataType="viewmodels1:LeaderboardRecord">
                         <ViewCell>
                             <Frame
                                 Margin="10,1"

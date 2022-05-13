@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Urbexer.Models;
@@ -62,7 +61,7 @@ namespace Urbexer.Services {
         /// </summary>
         public static async Task<List<LeaderboardRecord>> GetRankingList(int type) {
             string path = "/api/ranking";
-            if (type != 0) 
+            if (type != 0)
                 path += $"/WedlugKategorii?kategoriaId={type}";
             string result = await HttpService.SendApiRequest(HttpMethod.Get, path);
             List<APIRanking> list = JsonConvert.DeserializeObject<List<APIRanking>>(result);
