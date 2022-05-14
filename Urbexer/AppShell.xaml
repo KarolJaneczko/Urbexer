@@ -128,7 +128,7 @@
     <FlyoutItem Title="Ranking" 
                 Icon="cup_icon.png" 
                 FlyoutDisplayOptions="AsSingleItem">
-        <ShellContent ContentTemplate="{DataTemplate local:RankingPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate local:CategorySelectPage}"/>
     </FlyoutItem>
     
     <!--Wyszukaj użytkownika-->

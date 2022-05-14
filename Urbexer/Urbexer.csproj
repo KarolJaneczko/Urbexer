@@ -50,6 +50,9 @@
     <Compile Update="Views\RankingViews\LeaderboardPage.xaml.cs">
       <DependentUpon>LeaderboardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\RankingViews\CategorySelectPage.xaml.cs">
+      <DependentUpon>CategorySelectPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StartViews\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
@@ -81,7 +84,7 @@
     <EmbeddedResource Update="Views\LocationViews\MapPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\RankingViews\RankingPage.xaml">
+    <EmbeddedResource Update="Views\RankingViews\CategorySelectPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
