@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Urbexer.Views;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -43,10 +41,6 @@ namespace Urbexer.ViewModels.LocationModels {
         public AsyncCommand<Location> CardSelectedCommand { get; }
         public BaseLocationViewModel() {
             CardSelectedCommand = new AsyncCommand<Location>(CardSelected);
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         /// <summary>
         /// Dodaje nowe lokacje i od razu je filtruje na podstawie obecnych filtrów.

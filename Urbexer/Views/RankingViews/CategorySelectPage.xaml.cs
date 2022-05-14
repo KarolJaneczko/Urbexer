@@ -1,5 +1,4 @@
-﻿using Urbexer.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Urbexer.Views {
@@ -12,7 +11,6 @@ namespace Urbexer.Views {
         public CategorySelectPage() {
             Routing.RegisterRoute(nameof(LeaderboardPage), typeof(LeaderboardPage));
             InitializeComponent();
-            BindingContext = new CategorySelectViewModel();
         }
         #endregion
     }

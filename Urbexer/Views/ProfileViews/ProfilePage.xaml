@@ -32,9 +32,12 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <!--
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ClickedSearch" IconImageSource="preview_icon" />
+        <ToolbarItem Clicked="ClickedSearch" IconImageSource="preview_icon"/>
     </ContentPage.ToolbarItems>
+    -->
 
     <Grid>
         <ScrollView>
@@ -197,15 +200,15 @@
                             HorizontalOptions="CenterAndExpand"
                             Orientation="Vertical"
                             Spacing="10">
-                            
+
                             <ImageButton
                                 BackgroundColor="Transparent"
-                                WidthRequest="35"
                                 Command="{Binding ClickedFacebookCommand}"
                                 HeightRequest="35"
                                 HorizontalOptions="Center"
-                                Source="facebook_icon.png" />
-                            
+                                Source="facebook_icon.png"
+                                WidthRequest="35" />
+
                             <Label Style="{DynamicResource SocialMedia}" Text="Facebook" />
                         </StackLayout>
                     </Grid>
