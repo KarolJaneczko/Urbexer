@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Urbexer.Models;
@@ -8,19 +7,15 @@ using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace Urbexer.ViewModels {
+    /// <summary>
+    /// ViewModel strony rankingu.
+    /// </summary>
     internal class LeaderboardViewModel : BaseViewModel {
-        /// <summary>
-        /// Klasa implementująca logikę strony LeaderboardPage - strony z rankingiem danej kategorii.
-        /// </summary>
         #region Zmienne
-        public ObservableRangeCollection<LeaderboardRecord> _recordsCollection = new ObservableRangeCollection<LeaderboardRecord>();
-        public ObservableRangeCollection<LeaderboardRecord> RecordsCollection {
-            get { return _recordsCollection; }
-            set {
-                _recordsCollection = value;
-                OnPropertyChanged("RecordsCollection");
-            }
-        }
+        private readonly ObservableRangeCollection<LeaderboardRecord> _records = new ObservableRangeCollection<LeaderboardRecord>();
+        public ObservableRangeCollection<LeaderboardRecord> Records { get => _records; }
+        private readonly ObservableRangeCollection<LeaderboardRecord> _recordsFiltered = new ObservableRangeCollection<LeaderboardRecord>();
+        public ObservableRangeCollection<LeaderboardRecord> RecordsFiltered { get => _recordsFiltered; }
         private int _leaderboardMyCount;
         public int LeaderboardMyCount {
             get { return _leaderboardMyCount; }
@@ -61,13 +56,25 @@ namespace Urbexer.ViewModels {
                 OnPropertyChanged("LeaderboardCategory");
             }
         }
+        private string _searchFilter = "";
+        public string SearchFilter {
+            get { return _searchFilter; }
+            set {
+                if (_searchFilter.Length > value.Length) {
+                    RecordsFiltered.Clear();
+                    RecordsFiltered.AddRange(Records.ToList());
+                }
+                _searchFilter = value;
+                FilterRecords();
+                OnPropertyChanged(nameof(SearchFilter));
+            }
+        }
         #endregion
         #region Konstruktory
         public LeaderboardViewModel(int category) {
             Device.InvokeOnMainThreadAsync(async () => await FillRecords(category));
         }
         #endregion
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         #region Metody
         /// <summary>
         /// Metoda pobierająca numeryczny typ rankingu i zwracająca nazwę kategorii.
@@ -125,7 +132,8 @@ namespace Urbexer.ViewModels {
             List<LeaderboardRecord> records = (await ConnectionService.GetRankingList(category))
                 .Where(r => r.LiczbaMiejsc > 0)
                 .ToList();
-            RecordsCollection.AddRange(records);
+            RecordsFiltered.AddRange(records);
+            Records.AddRange(records);
 
             // Znajdź rekord obecnego użytkownika i odpowiendio ustaw dane na górze strony.
             LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
@@ -134,6 +142,12 @@ namespace Urbexer.ViewModels {
             LeaderboardMyPlace = (myPlace == 0 ? records.Count() + 1 : myPlace).ToString();
             LeaderboardCategory = GetLeaderboardCategory(category);
             LeaderboardMyCount = records.Find(r => r.Login == UserInfo.Login).LiczbaMiejsc;
+        }
+        private void FilterRecords() {
+            if (string.IsNullOrEmpty(SearchFilter))
+                return;
+            RecordsFiltered.RemoveRange(RecordsFiltered.ToList()
+                .Where(r => !r.Login.ToLower().Contains(SearchFilter.ToLower())));
         }
         #endregion
     }

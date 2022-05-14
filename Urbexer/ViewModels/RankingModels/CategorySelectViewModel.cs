@@ -6,7 +6,7 @@ namespace Urbexer.ViewModels {
     /// <summary>
     /// ViewModel strony wyboru kategorii rankingu.
     /// </summary>
-    public class RankingViewModel : BaseViewModel {
+    public class CategorySelectViewModel : BaseViewModel {
         #region Zmienne
         /// <summary>
         /// Mapuje nazwy kategorii do id.
@@ -30,7 +30,7 @@ namespace Urbexer.ViewModels {
         public Command GoToRankingCommand { get; set; }
         #endregion
         #region Konstruktory
-        public RankingViewModel() {
+        public CategorySelectViewModel() {
             GoToRankingCommand = new Command<string>(GoToRanking);
         }
         #endregion

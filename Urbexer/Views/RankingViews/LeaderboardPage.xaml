@@ -51,7 +51,6 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush>
@@ -61,8 +60,6 @@
                 </GradientStopCollection>
             </LinearGradientBrush>
         </ScrollView.Background>
-
-
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -75,6 +72,7 @@
                 Source="overlayranking"
                 VerticalOptions="StartAndExpand" />
             <StackLayout VerticalOptions="Center">
+
                 <StackLayout
                     Margin="0,10"
                     HorizontalOptions="Fill"
@@ -148,6 +146,11 @@
                             VerticalOptions="End" />
                     </StackLayout>
                 </StackLayout>
+                <SearchBar
+                    BackgroundColor="Wheat"
+                    HeightRequest="50"
+                    Text="{Binding SearchFilter, Mode=TwoWay}" />
+
             </StackLayout>
             <Frame
                 Grid.Row="1"
@@ -196,12 +199,13 @@
 
             </Frame>
 
+
             <!--  region Lista Rankingowa  -->
             <ListView
                 x:Name="RankingLista"
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
-                ItemsSource="{Binding RecordsCollection}"
+                ItemsSource="{Binding RecordsFiltered}"
                 RowHeight="75"
                 SeparatorVisibility="None"
                 VerticalOptions="FillAndExpand">
