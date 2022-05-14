@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Services;
@@ -63,7 +64,7 @@ namespace Urbexer.ViewModels {
         #endregion
         #region Konstruktory
         public LeaderboardViewModel(int category) {
-            Task.Run(async () => await FillRecords(category));
+            Device.InvokeOnMainThreadAsync(async () => await FillRecords(category));
         }
         #endregion
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -120,16 +121,19 @@ namespace Urbexer.ViewModels {
             return temp;
         }
         private async Task FillRecords(int category) {
-            List<LeaderboardRecord> records = await ConnectionService.GetRankingList(category);
+            // Pobierze rekordy i usuń te, które nie mają odwiedzonych miejsc w tej kategorii
+            List<LeaderboardRecord> records = (await ConnectionService.GetRankingList(category))
+                .Where(r => r.LiczbaMiejsc > 0)
+                .ToList();
             RecordsCollection.AddRange(records);
 
-            await Device.InvokeOnMainThreadAsync(() => {
-                LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
-                LeaderboardMyLogin = UserInfo.Login;
-                LeaderboardMyPlace = (records.FindIndex(r => r.Login == UserInfo.Login) + 1).ToString();
-                LeaderboardCategory = GetLeaderboardCategory(category);
-                LeaderboardMyCount = records.Find(r => r.Login == UserInfo.Login).LiczbaMiejsc;
-            });
+            // Znajdź rekord obecnego użytkownika i odpowiendio ustaw dane na górze strony.
+            LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
+            LeaderboardMyLogin = UserInfo.Login;
+            int myPlace = records.FindIndex(r => r.Login == UserInfo.Login) + 1;
+            LeaderboardMyPlace = (myPlace == 0 ? records.Count() + 1 : myPlace).ToString();
+            LeaderboardCategory = GetLeaderboardCategory(category);
+            LeaderboardMyCount = records.Find(r => r.Login == UserInfo.Login).LiczbaMiejsc;
         }
         #endregion
     }

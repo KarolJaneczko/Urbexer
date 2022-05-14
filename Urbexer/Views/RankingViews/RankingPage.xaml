@@ -88,7 +88,8 @@
                         </StackLayout>
                         <ImageButton
                             Padding="0,-30,0,25"
-                            Command="{Binding GoKolejowe}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Kolejowe"
                             Source="railway_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -103,7 +104,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoHotele}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Hotele"
                             Source="hotel_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -118,7 +120,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoDomy}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Domy"
                             Source="house_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -133,7 +136,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoIndustrialne}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Industrialne"
                             Source="industrial_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -148,7 +152,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoRestauracje}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Industrialne"
                             Source="restaurant_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -163,7 +168,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoRolnicze}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Rolnicze"
                             Source="farm_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -178,7 +184,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoZamki}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Zamki"
                             Source="castle_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -193,7 +200,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoPodziemia}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Podziemia"
                             Source="underground_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -208,7 +216,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoBiurowce}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Biurowce"
                             Source="office_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -223,7 +232,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoMilitarne}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Militarne"
                             Source="military_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -238,7 +248,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoSzpitale}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Szpitale"
                             Source="hospital_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -253,7 +264,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoTunele}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Tunele"
                             Source="tunnel_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -268,7 +280,8 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoInne}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Inne"
                             Source="other_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
@@ -283,11 +296,11 @@
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Command="{Binding GoWszystkie}"
+                            Command="{Binding GoToRankingCommand}"
+                            CommandParameter="Wszystkie"
                             Source="summary_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
-
                 </Grid>
             </Frame>
         </ScrollView>

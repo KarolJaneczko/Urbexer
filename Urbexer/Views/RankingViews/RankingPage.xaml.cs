@@ -10,9 +10,9 @@ namespace Urbexer.Views {
     public partial class RankingPage : ContentPage {
         #region Konstruktory
         public RankingPage() {
+            Routing.RegisterRoute(nameof(LeaderboardPage), typeof(LeaderboardPage));
             InitializeComponent();
             BindingContext = new RankingViewModel();
-            Routing.RegisterRoute(nameof(LeaderboardPage), typeof(LeaderboardPage));
         }
         #endregion
     }
