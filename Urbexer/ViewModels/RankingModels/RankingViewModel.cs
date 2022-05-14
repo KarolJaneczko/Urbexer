@@ -44,51 +44,23 @@ namespace Urbexer.ViewModels {
         }
         #endregion
         #region Metody
-        public void Go_Kolejowe() {
-            GoToRanking(1);
-        }
-        public void Go_Hotele() {
-            GoToRanking(2);
-        }
-        public void Go_Domy() {
-            GoToRanking(3);
-        }
-        public void Go_Industrialne() {
-            GoToRanking(4);
-        }
-        public void Go_Restauracje() {
-            GoToRanking(5);
-        }
-        public void Go_Rolnicze() {
-            GoToRanking(6);
-        }
-        public void Go_Zamki() {
-            GoToRanking(7);
-        }
-        public void Go_Podziemia() {
-            GoToRanking(8);
-        }
-        public void Go_Biurowce() {
-            GoToRanking(9);
-        }
-        public void Go_Militarne() {
-            GoToRanking(10);
-        }
-        public void Go_Szpitale() {
-            GoToRanking(11);
-        }
-        public void Go_Tunele() {
-            GoToRanking(12);
-        }
-        public void Go_Inne() {
-            GoToRanking(13);
-        }
-        public void Go_Wszystkie() {
-            GoToRanking(0);
-        }
-        public async void GoToRanking(int type) {
-            string path = $"{nameof(LeaderboardPage)}?RankingCategory={type}";
-            await Shell.Current.GoToAsync(path);
+        public void Go_Kolejowe() => GoToRanking(1);
+        public void Go_Hotele() => GoToRanking(2);
+        public void Go_Domy() => GoToRanking(3);
+        public void Go_Industrialne() => GoToRanking(4);
+        public void Go_Restauracje() => GoToRanking(5);
+        public void Go_Rolnicze() => GoToRanking(6);
+        public void Go_Zamki() => GoToRanking(7);
+        public void Go_Podziemia() => GoToRanking(8);
+        public void Go_Biurowce() => GoToRanking(9);
+        public void Go_Militarne() => GoToRanking(10);
+        public void Go_Szpitale() => GoToRanking(11);
+        public void Go_Tunele() => GoToRanking(12);
+        public void Go_Inne() => GoToRanking(13);
+        public void Go_Wszystkie() => GoToRanking(0);
+        public void GoToRanking(int type) {
+            var route = $"{nameof(LeaderboardPage)}?category={type}";
+            Shell.Current.GoToAsync(route);
         }
         #endregion
     }

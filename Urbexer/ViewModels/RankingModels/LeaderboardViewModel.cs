@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Urbexer.Models;
 using Urbexer.Services;
@@ -64,6 +65,7 @@ namespace Urbexer.ViewModels {
         #region Konstruktory
         public LeaderboardViewModel(int category) {
             Task.Run(async () => await FillRecords(category));
+            //Device.InvokeOnMainThreadAsync(async () => await FillRecords(category));
         }
         #endregion
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -121,9 +123,13 @@ namespace Urbexer.ViewModels {
         }
         private async Task FillRecords(int category) {
             List<LeaderboardRecord> records = await ConnectionService.GetRankingList(category);
-            RecordsCollection.AddRange(records);
 
-            await Device.InvokeOnMainThreadAsync(() => {
+            // Dodaj tylko te rekordy, które mają jakieś odwiedzenia w danej kategorii
+            RecordsCollection.AddRange(records.Where(r => r.LiczbaMiejsc > 0));
+            //RecordsCollection.AddRange(records);
+
+            // Znajdź rekord obecnego użytkownika i odpowiendio ustaw dane na górze strony.
+            Device.BeginInvokeOnMainThread(() => {
                 LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
                 LeaderboardMyLogin = UserInfo.Login;
                 LeaderboardMyPlace = (records.FindIndex(r => r.Login == UserInfo.Login) + 1).ToString();
