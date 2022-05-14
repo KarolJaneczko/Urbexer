@@ -12,7 +12,7 @@ namespace Urbexer.ViewModels.LocationModels {
     /// <summary>
     /// Podstawowy ViewModel do wyświetlania lokacji
     /// </summary>
-    internal class BaseLocationViewModel : INotifyPropertyChanged {
+    internal class BaseLocationViewModel : BaseViewModel {
         private readonly ObservableRangeCollection<Location> _locations = new ObservableRangeCollection<Location>();
         /// <summary>
         /// Przechowuje wszystkie wczytane lokacje.
