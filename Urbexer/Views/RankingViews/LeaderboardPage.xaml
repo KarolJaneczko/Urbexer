@@ -164,24 +164,27 @@
                 Grid.Row="1"
                 Margin="0,0,0,-7"
                 Padding="10,2"
-                BackgroundColor="White"
+                BackgroundColor="#BF0603"
                 CornerRadius="0">
 
                 <Grid ColumnDefinitions="*,*,*">
                     <Label
                         Grid.Column="0"
                         FontAttributes="Bold"
+                        TextColor="White"
+                        FontFamily="Bebas"
                         FontSize="Medium"
                         HorizontalOptions="StartAndExpand"
                         Text="Pozycja"
-                        TextColor="Black"
+                        
                         VerticalOptions="CenterAndExpand" />
                     <Label
                         Grid.Column="1"
                         FontAttributes="Bold"
                         FontSize="Medium"
                         Text="Użytkownik"
-                        TextColor="Black"
+                        TextColor="White"
+                        FontFamily="Bebas"
                         VerticalOptions="CenterAndExpand" />
                     <StackLayout
                         Grid.Column="2"
@@ -190,15 +193,17 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="Medium"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="CenterAndExpand"
                             Text="Odwiedzone"
-                            TextColor="Black" />
+                            TextColor="White"
+                        FontFamily="Bebas" />
                         <Label
                             FontAttributes="Bold"
                             FontSize="Medium"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="CenterAndExpand"
                             Text="Miejsca"
-                            TextColor="Black" />
+                           TextColor="White"
+                        FontFamily="Bebas" />
                     </StackLayout>
 
                     <!--<Label Style="{DynamicResource DaneTitle}" Text="ODWIEDZONE MIEJSCA" TextColor="White" FontSize="Title"/>
@@ -213,10 +218,11 @@
                 x:Name="RankingLista"
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
+                SelectionMode="Single"
                 ItemsSource="{Binding RecordsFiltered}"
-                RowHeight="75"
+                RowHeight="65"
                 SeparatorVisibility="None"
-                VerticalOptions="FillAndExpand">
+                VerticalOptions="StartAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels1:LeaderboardRecord">
                         <ViewCell>
@@ -225,7 +231,7 @@
                                 Padding="10,3,5,3"
                                 BackgroundColor="White"
                                 BorderColor="#363636"
-                                CornerRadius="20"
+                                CornerRadius="0"
                                 HasShadow="True">
                                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                     <Grid.GestureRecognizers>
@@ -253,7 +259,7 @@
                                         Margin="0,-5"
                                         BackgroundColor="#363636"
                                         WidthRequest="2" />
-                                    <Frame
+                                    <Frame Margin="0,0"
                                         Grid.Column="2"
                                         Padding="2"
                                         BackgroundColor="#BF0603"
