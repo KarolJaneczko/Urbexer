@@ -167,24 +167,27 @@
                 Grid.Row="1"
                 Margin="0,0,0,-7"
                 Padding="10,2"
-                BackgroundColor="White"
+                BackgroundColor="#BF0603"
                 CornerRadius="0">
 
                 <Grid ColumnDefinitions="*,*,*">
                     <Label
                         Grid.Column="0"
                         FontAttributes="Bold"
+                        TextColor="White"
+                        FontFamily="Bebas"
                         FontSize="Medium"
                         HorizontalOptions="StartAndExpand"
                         Text="Pozycja"
-                        TextColor="Black"
+                        
                         VerticalOptions="CenterAndExpand" />
                     <Label
                         Grid.Column="1"
                         FontAttributes="Bold"
                         FontSize="Medium"
                         Text="Użytkownik"
-                        TextColor="Black"
+                        TextColor="White"
+                        FontFamily="Bebas"
                         VerticalOptions="CenterAndExpand" />
                     <StackLayout
                         Grid.Column="2"
@@ -193,15 +196,17 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="Medium"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="CenterAndExpand"
                             Text="Odwiedzone"
-                            TextColor="Black" />
+                            TextColor="White"
+                        FontFamily="Bebas" />
                         <Label
                             FontAttributes="Bold"
                             FontSize="Medium"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="CenterAndExpand"
                             Text="Miejsca"
-                            TextColor="Black" />
+                           TextColor="White"
+                        FontFamily="Bebas" />
                     </StackLayout>
                 </Grid>
 
@@ -212,6 +217,7 @@
                 x:Name="RankingLista"
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
+                SelectionMode="Single"
                 ItemsSource="{Binding RecordsFiltered}"
                 VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
@@ -223,7 +229,7 @@
                             BorderColor="#363636"
                             CornerRadius="20"
                             HasShadow="True"
-                            HeightRequest="75">
+                            HeightRequest="65">
                             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding GoToProfileCommand}" CommandParameter="{Binding Login}" />
