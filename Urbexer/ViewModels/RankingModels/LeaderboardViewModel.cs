@@ -129,11 +129,12 @@ namespace Urbexer.ViewModels {
         }
         private async Task FillRecords(int category) {
             // Pobierze rekordy i usuń te, które nie mają odwiedzonych miejsc w tej kategorii
-            List<LeaderboardRecord> records = (await ConnectionService.GetRankingList(category))
+            var recordsAll = await ConnectionService.GetRankingList(category); // Wszystkie rekordy z kategori
+            List<LeaderboardRecord> records = recordsAll // Tylko rekordy gdzie użytkownicy mają więcej niż 0 odwiedzin
                 .Where(r => r.LiczbaMiejsc > 0)
                 .ToList();
-            RecordsFiltered.AddRange(records);
-            Records.AddRange(records);
+            RecordsFiltered.AddRange(recordsAll);
+            Records.AddRange(recordsAll);
 
             // Znajdź rekord obecnego użytkownika i odpowiendio ustaw dane na górze strony.
             LeaderboardMyAvatar = ProfileViewModel.GetAvatarByLayout(UserInfo.yourProfile.ProfileLayout);
