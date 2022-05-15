@@ -20,7 +20,7 @@
 
 
         <Grid RowDefinitions="Auto,480,Auto,Auto">
-            <Grid HeightRequest="100" Grid.Row="0">
+            <Grid Grid.Row="0" HeightRequest="100">
                 <Path
                     Aspect="Fill"
                     Data="M0,0H375V129.651s-9.025,2.382-55.426-5.3-70.141-41.09-130.3-41.176-83.544,33.5-130.893,41.176S0,129.651,0,129.651Z"
@@ -52,12 +52,14 @@
                             WidthRequest="50" />
                     </Grid>
                 </StackLayout>
-                <Grid Margin="0,0,0,0"
+                <Grid
+                    Margin="0,0,0,0"
                     HeightRequest="90"
-                    VerticalOptions="Center"
                     HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     WidthRequest="90">
-                    <Ellipse Margin="10"
+                    <Ellipse
+                        Margin="10"
                         Aspect="Fill"
                         Stroke="White"
                         StrokeThickness="2" />
@@ -69,34 +71,44 @@
                         WidthRequest="55" />
                 </Grid>
             </Grid>
-            <CollectionView Grid.Row="1" 
+            <CollectionView
+                Grid.Row="1"
                 Margin="0,0,0,0"
                 FlowDirection="LeftToRight"
-                
                 HorizontalOptions="Start"
                 ItemsLayout="HorizontalList"
                 ItemsSource="{Binding Locations}"
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single"
                 VerticalOptions="StartAndExpand">
+                <CollectionView.EmptyView>
+                    <Frame BackgroundColor="White" CornerRadius="25">
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="Wczytywanie lokacji..." />
+                            <ActivityIndicator HeightRequest="100" IsRunning="True" Color="Black"/>
+                        </StackLayout>
+                    </Frame>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Frame VerticalOptions="StartAndExpand"
-                                   HeightRequest="500"
+                            <Frame
                                 Margin="10,0"
                                 Padding="2"
-                                WidthRequest="200"
-                                CornerRadius="20">
-                                <StackLayout x:DataType="models:Location" >
-                                    <Frame CornerRadius="20"
-                                            Margin="10"
-                                            Padding="0">
-                                        <Image  
-                                            VerticalOptions="Center"
+                                CornerRadius="20"
+                                HeightRequest="500"
+                                VerticalOptions="StartAndExpand"
+                                WidthRequest="200">
+                                <StackLayout x:DataType="models:Location">
+                                    <Frame
+                                        Margin="10"
+                                        Padding="0"
+                                        CornerRadius="20">
+                                        <Image
                                             Aspect="AspectFill"
                                             HeightRequest="170"
-                                            Source="{Binding Thumbnail}"/>
+                                            Source="{Binding Thumbnail}"
+                                            VerticalOptions="Center" />
                                     </Frame>
                                     <Label
                                         Margin="5,0,0,0"
@@ -163,17 +175,21 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Frame BackgroundColor="#BF0603" Grid.Row="2">
-                <Label Text="Baza wiedzy" FontSize="Title" TextColor="White" HorizontalOptions="CenterAndExpand" FontFamily="Bebas"/>
+            <Frame Grid.Row="2" BackgroundColor="#BF0603">
+                <Label
+                    FontFamily="Bebas"
+                    FontSize="Title"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Baza wiedzy"
+                    TextColor="White" />
             </Frame>
-            
 
-
-            <StackLayout Grid.Row="3"
-                         Spacing="3"
-                Margin="0,10,0,70"
+            <StackLayout
                 x:Name="MyStackList"
+                Grid.Row="3"
+                Margin="0,10,0,70"
                 BindableLayout.ItemsSource="{Binding Questions}"
+                Spacing="3"
                 VerticalOptions="FillAndExpand">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
@@ -200,9 +216,9 @@
                                                 FontAttributes="Bold"
                                                 FontFamily="Bebas"
                                                 FontSize="Large"
-                                                TextColor="Black"
                                                 HorizontalOptions="FillAndExpand"
                                                 Text="{Binding Title}"
+                                                TextColor="Black"
                                                 VerticalOptions="Center" />
                                             <Image
                                                 Grid.Column="3"
@@ -244,8 +260,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-            
-        </Grid>
 
+        </Grid>
     </ScrollView>
 </ContentPage>
