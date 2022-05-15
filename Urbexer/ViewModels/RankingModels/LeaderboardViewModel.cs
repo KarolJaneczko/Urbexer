@@ -15,13 +15,7 @@ namespace Urbexer.ViewModels {
         private readonly ObservableRangeCollection<LeaderboardRecord> _records = new ObservableRangeCollection<LeaderboardRecord>();
         public ObservableRangeCollection<LeaderboardRecord> Records { get => _records; }
         private ObservableRangeCollection<LeaderboardRecord> _recordsFiltered = new ObservableRangeCollection<LeaderboardRecord>();
-        public ObservableRangeCollection<LeaderboardRecord> RecordsFiltered { 
-            get => _recordsFiltered; 
-            set {
-                _recordsFiltered = value;
-                OnPropertyChanged(nameof(RecordsFiltered));
-            }
-        }
+        public ObservableRangeCollection<LeaderboardRecord> RecordsFiltered { get => _recordsFiltered; }
         private int _leaderboardMyCount;
         public int LeaderboardMyCount {
             get { return _leaderboardMyCount; }
