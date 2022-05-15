@@ -51,6 +51,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush>
@@ -72,13 +73,11 @@
                 Source="overlayranking"
                 VerticalOptions="StartAndExpand" />
             <StackLayout VerticalOptions="Center">
-
                 <StackLayout
                     Margin="0,10"
                     HorizontalOptions="Fill"
                     Orientation="Horizontal"
                     VerticalOptions="Center">
-
                     <StackLayout
                         HorizontalOptions="Start"
                         Orientation="Vertical"
@@ -146,17 +145,21 @@
                             VerticalOptions="End" />
                     </StackLayout>
                 </StackLayout>
-                <Frame Padding="0" Margin="0,0,0,-10" CornerRadius="0">
-                <SearchBar  Placeholder="Wyszukaj użytkownika..."                       
-                            CancelButtonColor="#BF0603"
-                            PlaceholderColor="#363636"
-                            TextColor="#BF0603"
-                            HorizontalTextAlignment="Center"
-                            FontSize="Medium"
-                            FontAttributes="Italic" 
-                            BackgroundColor="White"
-                            HeightRequest="50"
-                            Text="{Binding SearchFilter, Mode=TwoWay}" />
+                <Frame
+                    Margin="0,0,0,-10"
+                    Padding="0"
+                    CornerRadius="0">
+                    <SearchBar
+                        BackgroundColor="White"
+                        CancelButtonColor="#BF0603"
+                        FontAttributes="Italic"
+                        FontSize="Medium"
+                        HeightRequest="50"
+                        HorizontalTextAlignment="Center"
+                        Placeholder="Wyszukaj użytkownika..."
+                        PlaceholderColor="#363636"
+                        Text="{Binding SearchFilter, Mode=TwoWay}"
+                        TextColor="#BF0603" />
                 </Frame>
 
             </StackLayout>
@@ -205,98 +208,90 @@
                            TextColor="White"
                         FontFamily="Bebas" />
                     </StackLayout>
-
-                    <!--<Label Style="{DynamicResource DaneTitle}" Text="ODWIEDZONE MIEJSCA" TextColor="White" FontSize="Title"/>
-                        <Label Style="{DynamicResource DaneInfo}" Text="{Binding ProfileVisitedPlaces}" TextColor="White"  FontSize="Title"/>-->
                 </Grid>
 
             </Frame>
 
-
             <!--  region Lista Rankingowa  -->
-            <ListView
+            <CollectionView
                 x:Name="RankingLista"
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
                 SelectionMode="Single"
                 ItemsSource="{Binding RecordsFiltered}"
-                RowHeight="65"
-                SeparatorVisibility="None"
-                VerticalOptions="StartAndExpand">
-                <ListView.ItemTemplate>
+                VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels1:LeaderboardRecord">
-                        <ViewCell>
-                            <Frame
-                                Margin="0,1"
-                                Padding="10,3,5,3"
-                                BackgroundColor="White"
-                                BorderColor="#363636"
-                                CornerRadius="0"
-                                HasShadow="True">
-                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding GoToProfileCommand}" CommandParameter="{Binding Login}" />
-                                    </Grid.GestureRecognizers>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="0.6*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
+                        <Frame
+                            Margin="0,1"
+                            Padding="10,3,5,3"
+                            BackgroundColor="White"
+                            BorderColor="#363636"
+                            CornerRadius="20"
+                            HasShadow="True"
+                            HeightRequest="65">
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToProfileCommand}" CommandParameter="{Binding Login}" />
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.6*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Margin="-5,0"
+                                    FontFamily="Bebas"
+                                    FontSize="40"
+                                    Text="{Binding Miejsce}"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+                                <BoxView
+                                    Grid.Column="1"
+                                    Margin="0,-5"
+                                    BackgroundColor="#363636"
+                                    WidthRequest="2" />
+                                <Frame
+                                    Grid.Column="2"
+                                    Padding="2"
+                                    BackgroundColor="#BF0603"
+                                    CornerRadius="50">
+                                    <Frame Padding="0" CornerRadius="50">
+                                        <Image Source="{Binding AvatarSource}" />
+                                    </Frame>
+                                </Frame>
+                                <Label
+                                    Grid.Column="3"
+                                    Margin="0,0"
+                                    FontAttributes="Bold"
+                                    FontSize="15"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Login}"
+                                    TextColor="#BF0603"
+                                    VerticalOptions="Center" />
+                                <StackLayout
+                                    Grid.Column="5"
+                                    HorizontalOptions="EndAndExpand"
+                                    Orientation="Horizontal"
+                                    Spacing="2">
                                     <Label
-                                        Margin="-5,0"
-                                        FontFamily="Bebas"
-                                        FontSize="40"
-                                        Text="{Binding Miejsce}"
+                                        FontAttributes="Bold"
+                                        FontSize="25"
+                                        Text="{Binding LiczbaMiejsc}"
                                         TextColor="Black"
                                         VerticalOptions="Center" />
-                                    <BoxView
-                                        Grid.Column="1"
-                                        Margin="0,-5"
-                                        BackgroundColor="#363636"
-                                        WidthRequest="2" />
-                                    <Frame Margin="0,0"
-                                        Grid.Column="2"
-                                        Padding="2"
-                                        BackgroundColor="#BF0603"
-                                        CornerRadius="50">
-                                        <Frame Padding="0" CornerRadius="50">
-                                            <Image Source="{Binding AvatarSource}" />
-                                        </Frame>
-                                    </Frame>
-                                    <Label
-                                        Grid.Column="3"
-                                        Margin="0,0"
-                                        FontAttributes="Bold"
-                                        FontSize="15"
-                                        HorizontalOptions="CenterAndExpand"
-                                        Text="{Binding Login}"
-                                        TextColor="#BF0603"
-                                        VerticalOptions="Center" />
-                                    <StackLayout
-                                        Grid.Column="5"
-                                        HorizontalOptions="EndAndExpand"
-                                        Orientation="Horizontal"
-                                        Spacing="2">
-                                        <Label
-                                            FontAttributes="Bold"
-                                            FontSize="25"
-                                            Text="{Binding LiczbaMiejsc}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center" />
-                                        <Image HeightRequest="25" Source="showPassword_icon" />
-                                    </StackLayout>
-                                </Grid>
-                            </Frame>
-
-                        </ViewCell>
+                                    <Image HeightRequest="25" Source="showPassword_icon" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <!--  endregion  -->
         </Grid>
     </ScrollView>
