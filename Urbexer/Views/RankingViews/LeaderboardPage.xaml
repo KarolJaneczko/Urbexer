@@ -146,18 +146,26 @@
                             VerticalOptions="End" />
                     </StackLayout>
                 </StackLayout>
-                <SearchBar
-                    BackgroundColor="Wheat"
-                    HeightRequest="50"
-                    Text="{Binding SearchFilter, Mode=TwoWay}" />
+                <Frame Padding="0" Margin="0,0,0,-10" CornerRadius="0">
+                <SearchBar  Placeholder="Wyszukaj użytkownika..."                       
+                            CancelButtonColor="#BF0603"
+                            PlaceholderColor="#363636"
+                            TextColor="#BF0603"
+                            HorizontalTextAlignment="Center"
+                            FontSize="Medium"
+                            FontAttributes="Italic" 
+                            BackgroundColor="White"
+                            HeightRequest="50"
+                            Text="{Binding SearchFilter, Mode=TwoWay}" />
+                </Frame>
 
             </StackLayout>
             <Frame
                 Grid.Row="1"
-                Margin="0,0,0,-5"
-                Padding="5,10"
+                Margin="0,0,0,-7"
+                Padding="10,2"
                 BackgroundColor="White"
-                CornerRadius="5">
+                CornerRadius="0">
 
                 <Grid ColumnDefinitions="*,*,*">
                     <Label
@@ -213,7 +221,7 @@
                     <DataTemplate x:DataType="viewmodels1:LeaderboardRecord">
                         <ViewCell>
                             <Frame
-                                Margin="10,1"
+                                Margin="0,1"
                                 Padding="10,3,5,3"
                                 BackgroundColor="White"
                                 BorderColor="#363636"
@@ -224,11 +232,11 @@
                                         <TapGestureRecognizer Command="{Binding GoToProfileCommand}" CommandParameter="{Binding Login}" />
                                     </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="0.8*" />
+                                        <ColumnDefinition Width="0.6*" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />

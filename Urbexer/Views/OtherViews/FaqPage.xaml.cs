@@ -36,7 +36,7 @@ namespace Urbexer.Views {
                 new Question{Id = 4 , Title= "Jakie kategorie rankingowe znajdą się w aplikacji?",BodyDescription = "Ranking jest podzielony na 12 głównych kategorii, jedną przydzieloną dla pozostałych oraz jedną przeznaczoną na sumaryczny wynik odwiedzonych miejsc."},
                 new Question{Id = 5 , Title= "Czy można dodać swoje lokacje?", BodyDescription = "Jeśli ktoś chce dodać miejsce, które jest warte odwiedzenia wystarczy zgłosić je na adres urbexer@outlook.com"},
                 new Question{Id = 6 , Title= "Jak zgłosić błąd w Aplikacji",BodyDescription = "Wystarczy wybrać w menu po lewej stronie aplikacji opcję KONTAKT. Po kliknięciu w polu tekstowym można opisać problem. Alternatywnie można się skontaktować bezpośrednio na adres mailowy: urbexer@outlook.com "},
-                new Question{Id = 7 , Title= "Na jakich urządzeniach jest dostępna aplikacja?",BodyDescription = "Aplikacja jest dostępna, tylko i wyłącznie, na urządzenia z sytemem Android w wersji 4.1 oraz nowszych."},
+                new Question{Id = 7 , Title= "Na jakich urządzeniach jest dostępna aplikacja?",BodyDescription = "Aplikacja jest dostępna, tylko i wyłącznie, na urządzenia z sytemem Android."},
 
             };
         }

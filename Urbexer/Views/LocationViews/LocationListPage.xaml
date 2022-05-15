@@ -26,11 +26,20 @@
 
     <StackLayout>
         <SearchBar
-            x:Name="SearchBar"
-            Margin="5"
-            Background="White"
-            HorizontalOptions="Fill"
-            Text="{Binding CurrentNameFilter, Mode=TwoWay}" />
+              Placeholder="Wyszukaj lokację..."                       
+              CancelButtonColor="#BF0603"
+              PlaceholderColor="#363636"
+              TextColor="#BF0603"
+              HorizontalTextAlignment="Start"
+              FontSize="Medium"
+              FontAttributes="Italic" 
+              BackgroundColor="White"
+              HeightRequest="50"                        
+              x:Name="SearchBar"
+              Margin="5"
+              Background="White"
+              HorizontalOptions="Fill"
+              Text="{Binding CurrentNameFilter, Mode=TwoWay}" />
         <CollectionView
             x:Name="CollectionView"
             BackgroundColor="LightGray"
