@@ -86,14 +86,13 @@
                         </Grid.RowDefinitions>
                         <StackLayout VerticalOptions="End">
                             <Frame Style="{StaticResource CategoryFrame}">
-                                <Label Style="{StaticResource CategoryName}" Text="Kolejowe" />
+                                <Label Style="{StaticResource CategoryName}" Text="Wszystkie" />
                             </Frame>
                         </StackLayout>
                         <ImageButton
-                            Padding="0,-30,0,25"
                             Command="{Binding GoToRankingCommand}"
-                            CommandParameter="Kolejowe"
-                            Source="railway_icon"
+                            CommandParameter="Wszystkie"
+                            Source="summary_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
 
@@ -279,13 +278,14 @@
                         </Grid.RowDefinitions>
                         <StackLayout VerticalOptions="End">
                             <Frame Style="{StaticResource CategoryFrame}">
-                                <Label Style="{StaticResource CategoryName}" Text="Inne" />
+                                <Label Style="{StaticResource CategoryName}" Text="Kolejowe" />
                             </Frame>
                         </StackLayout>
                         <ImageButton
+                            Padding="0,-30,0,25"
                             Command="{Binding GoToRankingCommand}"
-                            CommandParameter="Inne"
-                            Source="other_icon"
+                            CommandParameter="Kolejowe"
+                            Source="railway_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
 
@@ -295,13 +295,13 @@
                         </Grid.RowDefinitions>
                         <StackLayout VerticalOptions="End">
                             <Frame Style="{StaticResource CategoryFrame}">
-                                <Label Style="{StaticResource CategoryName}" Text="Wszystkie" />
+                                <Label Style="{StaticResource CategoryName}" Text="Inne" />
                             </Frame>
                         </StackLayout>
                         <ImageButton
                             Command="{Binding GoToRankingCommand}"
-                            CommandParameter="Wszystkie"
-                            Source="summary_icon"
+                            CommandParameter="Inne"
+                            Source="other_icon"
                             Style="{StaticResource CategoryIcon}" />
                     </Grid>
                 </Grid>
