@@ -27,6 +27,9 @@ namespace Urbexer.ViewModels {
         /// Blokuje duplikatowe wywołania <see cref="LoadMore"/>.
         /// </summary>
         private bool isLoading = false;
+        public bool IsFiltering {
+            get => !string.IsNullOrEmpty(CurrentNameFilter);
+        }
         public LocationListViewModel() : base() {
             LoadMoreCommand = new AsyncCommand(LoadMore);
         }

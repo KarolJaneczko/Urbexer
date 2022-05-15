@@ -5,20 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Urbexer.Models"
     xmlns:viewmodels="clr-namespace:Urbexer.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="Lista pobliskich lokacji"
     x:DataType="viewmodels:LocationListViewModel">
 
     <!--  Strona wyświetlające karty lokacji w liście.  -->
 
-    <!--  Nieudane próby wsadzenia pola wyszukiwania do paska nawigacji  -->
-    <NavigationPage.TitleView>
-        <StackLayout
-            HeightRequest="100"
-            Orientation="Horizontal"
-            WidthRequest="100">
-            <Slider HeightRequest="100" WidthRequest="300" />
-        </StackLayout>
-    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <viewmodels:LocationListViewModel />
@@ -26,24 +23,23 @@
 
     <StackLayout>
         <SearchBar
-              Placeholder="Wyszukaj lokację..."                       
-              CancelButtonColor="#BF0603"
-              PlaceholderColor="#363636"
-              TextColor="#BF0603"
-              HorizontalTextAlignment="Start"
-              FontSize="Medium"
-              FontAttributes="Italic" 
-              BackgroundColor="White"
-              HeightRequest="50"                        
-              x:Name="SearchBar"
-              Margin="5"
-              Background="White"
-              HorizontalOptions="Fill"
-              Text="{Binding CurrentNameFilter, Mode=TwoWay}" />
+            x:Name="SearchBar"
+            Margin="5"
+            Background="White"
+            BackgroundColor="White"
+            CancelButtonColor="#BF0603"
+            FontAttributes="Italic"
+            FontSize="Medium"
+            HeightRequest="50"
+            HorizontalOptions="Fill"
+            HorizontalTextAlignment="Start"
+            Placeholder="Wyszukaj lokację..."
+            PlaceholderColor="#363636"
+            Text="{Binding CurrentNameFilter, Mode=TwoWay}"
+            TextColor="#BF0603" />
         <CollectionView
             x:Name="CollectionView"
             BackgroundColor="LightGray"
-            EmptyView="Nie znaleziono lokacji."
             HorizontalOptions="End"
             ItemsSource="{Binding LocationsFiltered}"
             RemainingItemsThreshold="5"
@@ -51,6 +47,20 @@
             SelectionChanged="CollectionView_SelectionChanged"
             SelectionMode="Single"
             VerticalOptions="FillAndExpand">
+            <CollectionView.EmptyView>
+                <Frame>
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+                        <Label
+                            x:Name="EmptyView_NoLocationsFoundLabel"
+                            IsVisible="{Binding IsFiltering}"
+                            Text="Nie znaleziono lokacji." />
+                        <StackLayout x:Name="EmptyView_LoadingView" IsVisible="{Binding IsFiltering, Converter={StaticResource InvertedBoolConverter}}">
+                            <Label Text="Wczytywanie lokacji..." />
+                            <ActivityIndicator IsRunning="True" Color="Black" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
