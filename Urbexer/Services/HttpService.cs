@@ -20,7 +20,6 @@ namespace Urbexer.Services {
                 BaseAddress = new Uri("https://urbexerapi.azurewebsites.net"),
             };
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            TryAddAuthorization();
         }
 
 
@@ -44,8 +43,6 @@ namespace Urbexer.Services {
         /// </returns>
         public static async Task<string> SendApiRequest(HttpMethod method, string path, string body = "", bool requiresToken = true) {
             if (!CrossConnectivity.Current.IsConnected) return null;
-            // Niektóre metody nie działają bez tokena. Upewnij się że token jest dodany
-            if (requiresToken && !TryAddAuthorization()) return null;
 
             // Utwórz zapytanie
             var request = new HttpRequestMessage {
@@ -64,20 +61,8 @@ namespace Urbexer.Services {
         /// <summary>
         /// Dodaj token autoryzacji
         /// </summary>
-        /// <returns>
-        /// True jeżeli autoryzacja już jest lub została dodana. <para/>
-        /// False w przeciwnym wypadku .
-        /// </returns>
-        static private bool TryAddAuthorization() {
-            if (httpClient.DefaultRequestHeaders.Authorization != null
-                && httpClient.DefaultRequestHeaders.Authorization.Scheme != null
-                && httpClient.DefaultRequestHeaders.Authorization.Parameter != null)
-                return true; // Token autoryzacji już jest ustawiony
-            if (UserInfo.LoginToken != null) {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken);
-                return true; // Token autoryzacji został poprawnie ustawiony
-            }
-            return false; // Token autoryzacji nie jest ustawiony
+        static public void SetAuthorization(AuthenticationHeaderValue auth) {
+            httpClient.DefaultRequestHeaders.Authorization = auth;
         }
         /// <summary>
         /// Zwraca <see cref="HttpClient"/> używany przez <see cref="HttpService"/>. <para/>
