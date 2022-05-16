@@ -20,6 +20,8 @@ namespace Urbexer.Services {
                 BaseAddress = new Uri("https://urbexerapi.azurewebsites.net"),
             };
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            if (httpClient.DefaultRequestHeaders.Authorization == null)
+                SetAuthorization(new AuthenticationHeaderValue("Bearer", UserInfo.LoginToken));
         }
 
 
