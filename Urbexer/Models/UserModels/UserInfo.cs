@@ -1,5 +1,6 @@
 ﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Urbexer.Models.UserModels;
 using Urbexer.Services;
@@ -26,7 +27,11 @@ namespace Urbexer.Models {
         /// </summary>
         public static string LoginToken {
             get => AppSettings.GetValueOrDefault(nameof(LoginToken), null);
-            set => AppSettings.AddOrUpdateValue(nameof(LoginToken), value);
+            set {
+                AppSettings.AddOrUpdateValue(nameof(LoginToken), value);
+                HttpService.SetAuthorization(
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", value));
+            }
         }
         public static bool IsAdmin { get; set; }
         /// <summary>
