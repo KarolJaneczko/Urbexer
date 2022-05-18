@@ -26,6 +26,21 @@
             ItemsSource="{Binding LocationsFiltered}"
             MapType="Hybrid"
             VerticalOptions="Fill">
+            <!--  Konstruktor do ustawiania mapy na środek Polski, żeby nie defaultowało na Rzym  -->
+            <x:Arguments>
+                <maps:MapSpan>
+                    <x:Arguments>
+                        <maps:Position>
+                            <x:Arguments>
+                                <x:Double>51.9194</x:Double>
+                                <x:Double>19.1451</x:Double>
+                            </x:Arguments>
+                        </maps:Position>
+                        <x:Double>5.5</x:Double>
+                        <x:Double>10</x:Double>
+                    </x:Arguments>
+                </maps:MapSpan>
+            </x:Arguments>
             <!--  Pinezki  -->
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="models:Location">
