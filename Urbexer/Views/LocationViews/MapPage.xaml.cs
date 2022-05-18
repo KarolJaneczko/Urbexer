@@ -64,7 +64,7 @@ namespace Urbexer.Views {
             CurrentPinId = -1;
             LoadRange = 100;
 
-            Task.Run(async () => await MoveToUser().ConfigureAwait(false)); // Ustaw lokacje mapy
+            Device.BeginInvokeOnMainThread(async () => await MoveToUser().ConfigureAwait(false)); // Ustaw lokacje mapy
         }
 
         /// <summary>
@@ -72,7 +72,6 @@ namespace Urbexer.Views {
         /// W przypadku niepowodzenia ustawia na domyślną pozycje używając <see cref="DefaultPositionFallback"/>
         /// </summary>
         private async Task MoveToUser() {
-            await DefaultPositionFallback(); // Przy zbyt długim oczekiwaniu na geolokacje mapa wskazywała na Rzym
             try {
                 Xamarin.Essentials.Location location = await Geolocation.GetLastKnownLocationAsync();
                 if (location != null) {
@@ -81,20 +80,7 @@ namespace Urbexer.Views {
                     map.MoveToRegion(mapSpan);
                 }
             }
-            catch {
-                //await DefaultPositionFallback();
-            }
-        }
-        /// <summary>
-        /// Ustawia mape na domyślną lokacje. <para/>
-        /// Obecnie jest to środek Polski.
-        /// </summary>
-        private async Task DefaultPositionFallback() {
-            string default_address = "Polska";
-            Position default_position = await GeocoderService.GetPositionFromAddressAsync(default_address);
-            // 350km to mw. połowa szerokości Polski
-            MapSpan mapSpan = MapSpan.FromCenterAndRadius(default_position, Distance.FromKilometers(350));
-            map.MoveToRegion(mapSpan);
+            catch { }
         }
 
         /// <summary>
