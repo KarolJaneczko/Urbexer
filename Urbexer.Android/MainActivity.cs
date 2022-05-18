@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using AndroidX.AppCompat.App;
 
 namespace Urbexer.Droid {
     [Activity(Label = "Urbexer",
@@ -21,6 +22,7 @@ namespace Urbexer.Droid {
 
             Window.SetStatusBarColor(Android.Graphics.Color.Black);
             Window.SetNavigationBarColor(Android.Graphics.Color.Black);
+            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults) {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
